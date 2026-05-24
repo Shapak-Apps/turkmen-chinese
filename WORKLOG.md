@@ -2,6 +2,228 @@
 
 ---
 
+## 2026-05-16 (Сессия 8) — Геймификация: XP, Streak, Profile, Bookmarks, Onboarding
+
+### Контекст
+После большого редизайна в сессии 7 (14.05) приложение стало визуально хорошим, но «не живым». Решили добавить геймификационные механики по плану из `ROADMAP.md` (4 этапа).
+
+### Этап 1 — Фундамент (XP + Streak)
+
+**`lib/xp.ts`** — новый модуль:
+- `getTotalXP()`, `addXP(amount)`, `useXP()` хук
+- AsyncStorage ключ `total_xp`
+- Константы: +10 XP за правильный ответ, +500 XP за завершение урока, +100 XP бонус за 100% accuracy
+
+**`lib/streak.ts`** — новый модуль:
+- Хранит `{lastActiveDate, currentStreak, longestStreak}`
+- `markActiveDay()` вызывается при первом правильном ответе за день
+- `checkAndResetIfNeeded()` вызывается на старте приложения в `app/_layout.tsx`
+- Streak сбрасывается до 0 если разрыв больше 1 дня
+- `longestStreak` сохраняется отдельно
+
+**Интеграция:**
+- `components/lesson/LessonContent.tsx` — `addXP` + `markActiveDay` в onAnswer колбэках для всех 8 типов упражнений + в useEffect для аудио-типов
+- `components/lesson/LessonCompleteScreen.tsx` — XP-карта с разбивкой: `N×10 dogry jogap +180 / Sapak tamamlandy +500 / 100% bonus +100`
+
+### Этап 2 — Маскот Aman
+
+Aman (PNG-аватарка в `assets/characters/aman.png`) теперь появляется на ключевых экранах:
+- **Главный экран** — большая аватарка слева + speech-bubble с приветствием по времени + dynamic подзаголовок «N/30 bap geçildi»
+- **LessonComplete** — Aman в круге с трофеем-бейджем (вместо просто Ionicons trophy)
+- **Practise placeholder** и **Chapter-test placeholder** — Aman вместо серой иконки
+- **Welcome screen** — интро «Salam! Men Aman 👋»
+
+### Этап 2.2 — Hero-секция
+
+В `app/(tabs)/lessons.tsx` старый header (greeting + 3 stats chips) заменён на:
+- Aman avatar + speech bubble (с хвостиком-треугольником)
+- Compact XP/Streak чипы под ним с подписями «XP» и «gün»
+- Кликабельные → ведут в Profile-таб
+
+### Этап 3.1 — Bookmarks глав
+
+**`lib/bookmarks.ts`** — новый модуль с `useBookmarks` хуком, AsyncStorage ключ `bookmarked_chapters`.
+
+**UI:**
+- Chapter-detail header — кнопка-bookmark справа (контурная/заполненная)
+- Chapters list — красная иконка-bookmark на заложенных карточках
+- Фильтр-чип «Saýlanan (N)» — появляется только если есть закладки; toggle показывает только заложенные
+
+### Этап 3.2 — Closed captions
+
+В `app/theory.tsx` → DialoguePage добавлена sticky-карточка внизу:
+- Появляется только во время auto-play
+- Тёмный фон, бейдж с hanzi-именем спикера красный (阿曼 / 李老师)
+- Большой пиньинь текущей реплики (22px bold)
+- Hanzi-subtitle (14px medium)
+- Padding ScrollView увеличивается на 130px чтобы последняя реплика не пряталась
+
+### Этап 4 — Onboarding
+
+**`lib/onboarding.ts`** — `hasOnboarded()`, `markOnboarded()`, `resetOnboarding()`, AsyncStorage ключ `has_onboarded`.
+
+**`app/onboarding.tsx`** — 4 экрана swipe:
+1. «Salam! Men Aman 👋» — большой Aman + waving emoji-бейдж
+2. «Sapaklar 3 bölekden» — 3 цветные карты со стрелками: Teoriýa → Gönükmeler → Bap synagy
+3. «XP we Streak» — 2 карты рядом: 🏆 «+10 XP / jogap» и 🔥 «Streak / her gün»
+4. «Başlaýalyň!» — Aman с зелёным rocket-бейджем
+
+**Логика:**
+- `app/index.tsx` теперь делает async-проверку `hasOnboarded()` → Redirect либо в `/onboarding`, либо в `/(tabs)/lessons`
+- В Settings добавлена опция «Tanyşlygy täzeden görkez» (сбрасывает флаг и запускает onboarding снова)
+
+### Profile-таб раскрыт
+
+**`app/(tabs)/_layout.tsx`** — заменён Stack обратно на Tabs (после фикса white-screen в сессии 7). Видна нижняя tab-полоса с 2 табами: Esasy (home) + Profil (person). Conversations скрыт через `href: null`.
+
+**`app/(tabs)/profile.tsx`** — полный редизайн (был с английским и старыми классами):
+- Aman avatar в красном круге сверху
+- XP-карта (жёлтая) с большим числом
+- Streak-карта (currentStreak + longestStreak)
+- Stats-сетка: главы (X/30 с progress-bar) + слова (X/~600)
+- Меню: Sazlamalar / Programma hakynda / Hytaý dili hakynda
+
+### Изменённые/новые файлы
+
+**Новые:**
+- `lib/xp.ts`, `lib/streak.ts`, `lib/bookmarks.ts`, `lib/onboarding.ts`
+- `app/onboarding.tsx`
+- `ROADMAP.md` (документ с планом, выполнен)
+
+**Изменённые:**
+- `app/_layout.tsx` — checkAndResetIfNeeded на старте
+- `app/index.tsx` — async проверка hasOnboarded
+- `app/(tabs)/_layout.tsx` — Tabs с двумя видимыми табами
+- `app/(tabs)/lessons.tsx` — Hero с Aman, XP/Streak chips
+- `app/(tabs)/profile.tsx` — полная переделка
+- `app/chapter-detail.tsx` — bookmark toggle в header
+- `app/chapters.tsx` — bookmark indicator + filter chip
+- `app/theory.tsx` — closed captions в DialoguePage
+- `app/welcome.tsx` — Aman intro
+- `app/practise.tsx`, `app/chapter-test.tsx` — Aman в placeholder
+- `app/settings.tsx` — опция «Tanyşlygy täzeden görkez»
+- `components/lesson/LessonContent.tsx` — XP/streak интеграция
+- `components/lesson/LessonCompleteScreen.tsx` — Aman + XP breakdown карта
+
+### Git
+- 2026-05-16 — `git init` + первый commit (`dcab977` «Initial commit: v1.0 with full gamification»). Ветка `main`. До этого проект был без version control.
+
+### Что осталось
+- Тестирование release APK на устройстве (в процессе)
+- Сжать аватарки PNG через tinypng.com
+- Подпись APK для Play Store
+
+---
+
+## 2026-05-14 (Сессия 7) — Большой редизайн + персонажи + интерактивность
+
+### Цель
+Изначальный визуал был «дефолтный Expo» — оранжевый акцент, тяжёлые 2px бордеры, системный шрифт. Решили полностью переделать тему под бренд-цвета (флаги Туркменистана/Китая) + добавить интерактивность.
+
+### Дизайн-система
+
+**Палитра:**
+- 🔴 Primary `#B91C1C` — китайский (hanzi, главные кнопки, акценты)
+- 🟢 Success `#00853E` — туркменский (правильный ответ, completion, badges)
+- ⚪ White + slate-50/100/200 — фон, поверхности
+- Семантические токены в `constants/theme.ts`: primaryAccentBg/Strong, successBg/Strong, surfacePrimary/Secondary/Tertiary, divider, borderColorStrong, textPrimary/Secondary, etc.
+
+**Типографика:**
+- Inter (Google Fonts через `@expo-google-fonts/inter`) — 4 веса: 400/500/600/700
+- Подключён через `expo-font` useFonts в `app/_layout.tsx`
+- Шкала `Type` в theme.ts: h1/h2/h3/title/subtitle/body/label/caption/button
+
+**Радиусы/spacing/shadow** — выделены в токены (`Radius`, `Spacing`, `Shadow`).
+
+### Иллюстрации глав
+
+31 SVG-эмодзи из Twemoji (jdecked/twemoji CDN) — по теме каждой главы:
+- 👋 для главы 1 «Salam», 🌍 для 2 «Haýsy ýurtly», 📖 для 3 «Kitap», ❄ для 11 «Pekin gyşy», 🎉 для 30 «Baýramçylyk» и т.д.
+- Установлен `react-native-svg-transformer` + `metro.config.js` для импорта SVG как React-компонентов
+- `constants/ChapterIllustrations.ts` — мэппинг chapterId → SVG
+
+### Персонажи (аватарки)
+
+6 аватарок персонажей:
+1. Aman (главный герой, туркменский студент) — генерируется/предоставляется пользователем
+2. Guli (канадская студентка)
+3. Zhang Wei (китайский одногруппник)
+4. Li mugallym (учительница)
+5. Wang mugallym (учитель)
+6. Generic (для misc-персонажей)
+
+Сначала использовался DiceBear Personas (через CDN), пользователь не одобрил → перешли на AI-генерированные PNG. Промпты под flat-style portraits сохранены в обсуждении.
+
+**`constants/CharacterAvatars.ts`** — мэппинг + per-chapter speaker mapping (A/B → персонаж для каждой из 30 глав).
+
+### Диалоги — чат-bubbles
+
+`app/theory.tsx` → DialoguePage переделана:
+- Спикер A — слева (зелёный фон, аватарка слева)
+- Спикер B — справа (красный фон, аватарка справа)
+- Кнопка «▶ Diňle» — последовательный auto-play всех реплик через TTS, текущая bubble подсвечивается оранжевой рамкой, кнопка превращается в красную «Dur»
+- Tap на bubble = озвучка одной реплики
+- Character chips сверху: аватарка + имя hanzi/pinyin
+- Per-chapter character mapping через `getChapterSpeakers(chapterId)`
+
+### Интерактивность
+
+**`lib/haptics.ts`** — обёртка над expo-haptics: `tap()`, `select()`, `success()`, `error()`, `heavy()`.
+
+**Подключение:**
+- Все TouchableOpacity/Pressable на навигационных кнопках — `haptics.tap()`
+- Все 7 типов упражнений на правильный ответ — `haptics.success()`, на неправильный — `haptics.error()`
+- LessonComplete — `haptics.success()` + `heavy()` для confetti
+- ConfettiCannon — 250 частиц (было 150), бренд-цвета (red+green+gold+amber+pink+light-green), помедленнее
+
+**`components/ui/AnimatedPressable.tsx`** — wrap Pressable со spring-scale на press (scale 1→0.97→1).
+
+**`components/ui/AnimatedCounter.tsx`** — анимированный счётчик чисел (от 0 до value за 800мс с ease-out). Используется в:
+- Stats на главном (bap/söz/galdy)
+- XP-карта в Profile
+- Streak counter
+
+**Wiggle на неправильный ответ** — в FlashcardMode и FillBlankMode добавлена sequence-анимация (translateX: -10/10/-8/8/0 за 300мс).
+
+### Главный экран
+
+`app/(tabs)/lessons.tsx` — полностью переделан:
+- Greeting по времени дня (Salam ertir / günortan / agşam / gije)
+- Stats-полоса (bap/söz/galdy)
+- Hero «Dowam et» — большая красная карта с огромным иероглифом следующей главы, кнопка «Başla/Dowam et»
+- 3 квадратные карты quick-row (Sapaklar / Hoş geldiňiz / Sazlamalar)
+- Progress bar внизу с %
+- Watermark 学 справа сверху (4% opacity)
+
+### Список глав
+
+`app/chapters.tsx` — полностью переделан:
+- Группировка по 6 Unit'ам Boya с подзаголовками (Tanyşlyk / Wagt / Gündelik durmuş / etc) и счётчиком N/5
+- Каждая карточка: бейдж номера, бейдж «Indiki» для текущей, ✓ для пройденной, hanzi-emoji справа
+- Состояния: текущая (красный border + жирный shadow), пройденная (приглушённая)
+
+### Экран деталей главы
+
+`app/chapter-detail.tsx` — переделан:
+- Bölüm-чип сверху
+- Большой hanzi-заголовок (你好 красным 44px)
+- Пиньинь под ним (nǐ hǎo)
+- Перевод (Hello)
+- Иллюстрация главы 80×80 справа
+- Stats-сетка 4 колонки: söz/grammatika/dialog/gönükme
+- Word-preview chips (первые 4 слова главы)
+- 3 action-карты с галочкой если пройдено
+
+### Исправленные баги
+
+**White screen** — несколько часов отлаживали почему Stack + Tabs + tabBarStyle:none даёт пустой экран на Android. Решение: использовать видимую tab-bar (для onboarding Tabs нужны), либо Stack без mention'ов через Stack.Screen + sibling Views.
+
+### Все экраны редизайн
+
+11 экранов + 18 lesson-компонентов + 3 общих компонента — все прошли через дизайн-токены. Заменены hardcoded `#fff`/`#999`/`#34C759`/`#ef4444` на семантические Colors.*. `fontWeight: "700"` → `fontFamily: FontFamily.bold`. Borders 2px → 1px, shadow → лёгкий.
+
+---
+
 ## 2026-04-29 (Сессия 5, часть 2) — copyright cleanup перед релизом
 
 ### Проблема

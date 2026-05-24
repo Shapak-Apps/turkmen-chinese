@@ -194,12 +194,12 @@
 
 ---
 
-## Этап 5: Локализация 🔄 В ПРОЦЕССЕ
+## Этап 5: Локализация ✅ ГОТОВО
 
 UI элементов:
 - [x] Главный экран (Hytaý dilini öwreniň / Hoş geldiňiz / Sapaklar / Sazlamalar)
 - [x] Welcome экран (Hoş geldiňiz)
-- [x] About the App (Programma hakynda)
+- [x] About the App (Programma hakynda) — 8 страниц контента (2026-05)
 - [x] About Chinese Language (Hytaý dili hakynda)
 - [x] Chapter Detail (N-NJI BAP, Teoriýa, Maşklar, Bap synagy)
 - [x] Chapters list (Y maşk)
@@ -208,20 +208,22 @@ UI элементов:
 - [x] LessonCompleteScreen — русский (Урок пройден! Продолжить, Повторить ошибки)
 - [x] FillBlankMode — русский (Подсказка, Дальше)
 - [x] MultipleChoiceMode — русский (Выбери ответ)
-- [ ] Profile экран (мало приоритет)
-- [ ] `english` поля в course_content.json содержат русский текст (пока используем поле как есть)
+- [x] Profile экран (2026-05-16 — раскрыт как 2-й таб, перерисован на туркменский)
 
 Принцип: UI туркменский, объяснения учебного материала — русский (т.к. пользователь туркменоязычный с русским вторым). Китайский (hanzi + pinyin) остаётся без изменений.
 
 ---
 
-## Этап 6: Сборка APK
+## Этап 6: Сборка APK 🔄 В ПРОЦЕССЕ
 
 - [x] Настроить app.json
 - [x] Собрать release APK (assembleRelease)
-- [ ] Тестировать на реальном устройстве
-- [ ] Исправить баги
+- [x] Установить на реальное устройство (2026-05-16)
+- [ ] Завершить ручное тестирование на устройстве
+- [ ] Исправить найденные баги
+- [ ] Сжать аватарки PNG через tinypng.com
 - [ ] Собрать финальный release APK
+- [ ] Подписать APK для Play Store (нужен release keystore)
 
 ---
 
@@ -259,10 +261,84 @@ UI элементов:
 
 ## Этап 9: AI-фичи (позже)
 
-- [ ] Conversation Mode
-- [ ] Произношение — оценка произношения
+- [ ] Conversation Mode (код уже есть в `components/conversation/`, скрыт через `href: null`)
+- [ ] Произношение — оценка произношения (`@react-native-voice/voice` рассматривается)
 - [ ] Генерация упражнений
 - [ ] Объяснения ошибок
+
+---
+
+## Этап 10: Дизайн-система ✅ ГОТОВО (2026-05-14)
+
+Полный редизайн с переходом на бренд-палитру:
+
+- [x] Палитра: 🔴 #B91C1C (китайский) + 🟢 #00853E (туркменский) + ⚪ #FFFFFF + slate-серые
+- [x] Семантические токены в `constants/theme.ts`: primaryAccent*, success*, surface*, text*, divider, borderColorStrong
+- [x] Радиусы/spacing/shadow выделены в Radius/Spacing/Shadow
+- [x] Шрифт Inter через `@expo-google-fonts/inter` (4 веса: 400/500/600/700)
+- [x] Типографическая шкала Type (h1/h2/h3/title/subtitle/body/label/caption/button)
+- [x] 11 экранов + 18 lesson-компонентов + 3 общих компонента переделаны
+- [x] Заменены hardcoded `#fff`/`#999`/etc на семантические токены
+- [x] Borders 2px → 1px, тяжёлые тени → лёгкие
+
+---
+
+## Этап 11: Иллюстрации и персонажи ✅ ГОТОВО (2026-05-14, 16)
+
+- [x] 31 SVG-иллюстрация глав (Twemoji через jdecked/twemoji CDN) — `assets/illustrations/ch0-30.svg`
+- [x] `react-native-svg-transformer` + `metro.config.js` для импорта SVG как React-компонентов
+- [x] `constants/ChapterIllustrations.ts` — мэппинг chapterId → SVG
+- [x] 6 PNG-аватарок персонажей (Aman/Guli/Zhang Wei/Li-mug/Wang-mug/Generic) — `assets/characters/*.png`
+- [x] `constants/CharacterAvatars.ts` — мэппинг + per-chapter speaker mapping (A/B → персонаж)
+- [x] Aman-маскот появляется на: главном экране, LessonComplete, welcome, пустых состояниях
+
+---
+
+## Этап 12: Интерактивность ✅ ГОТОВО (2026-05-14)
+
+- [x] Хаптик-фидбек через `lib/haptics.ts` (`tap/select/success/error/heavy`) — везде в навигации и упражнениях
+- [x] `components/ui/AnimatedPressable.tsx` — Spring-scale на нажатие
+- [x] `components/ui/AnimatedCounter.tsx` — анимированные числа (ease-out от 0)
+- [x] Wiggle-анимация на неправильный ответ (FlashcardMode, FillBlankMode)
+- [x] Confetti на завершение урока с бренд-цветами (250 частиц)
+- [x] Chat-bubbles диалогов с auto-play TTS + character mapping + closed captions
+
+---
+
+## Этап 13: Геймификация ✅ ГОТОВО (2026-05-16)
+
+**Базируется на `ROADMAP.md`. Все 4 фазы выполнены.**
+
+### XP-система
+- [x] `lib/xp.ts` — getTotalXP/addXP/useXP + AsyncStorage
+- [x] +10 XP за правильный ответ, +500 за урок, +100 бонус за 100%
+- [x] XP-карта в LessonComplete с разбивкой
+- [x] XP-чип на главном + большая XP-карта в Profile
+
+### Streak
+- [x] `lib/streak.ts` — markActiveDay/checkAndResetIfNeeded + currentStreak/longestStreak
+- [x] Activate by 1 correct answer per day
+- [x] Reset if last active > 1 day ago (вызывается на старте в `_layout.tsx`)
+- [x] 🔥 chip на главном + отдельная карта в Profile
+
+### Profile-таб
+- [x] Tabs восстановлены с двумя видимыми табами: Esasy + Profil
+- [x] `app/(tabs)/profile.tsx` полностью перерисован: Aman avatar, XP/Streak карты, stats grid, menu
+
+### Bookmarks
+- [x] `lib/bookmarks.ts` — useBookmarks хук
+- [x] Toggle в chapter-detail header
+- [x] Indicator + filter-chip «Saýlanan» в chapters list
+
+### Closed captions
+- [x] Sticky-карточка снизу DialoguePage во время auto-play
+- [x] Hanzi-имя спикера + большой пиньинь + hanzi-subtitle
+
+### Onboarding
+- [x] `lib/onboarding.ts` + `app/onboarding.tsx`
+- [x] 4 swipe-экрана: Salam → Sapaklar 3 bölekden → XP we Streak → Başlaýalyň
+- [x] `app/index.tsx` — async проверка hasOnboarded → редирект
+- [x] Опция «Tanyşlygy täzeden görkez» в Settings
 
 ---
 
@@ -274,9 +350,15 @@ UI элементов:
 | Expo 54 | Сборка, dev tools |
 | Expo Router 6 | Навигация (file-based) |
 | TypeScript 5.9 | Типизация |
-| AsyncStorage | Локальное хранение прогресса |
+| AsyncStorage | Локальное хранение прогресса/XP/Streak/Bookmarks |
+| Inter (Google Fonts) | UI шрифт |
+| Twemoji SVG | Иллюстрации глав |
+| react-native-svg + svg-transformer | SVG как компоненты |
+| react-native-reanimated | Анимации (wiggle, scale, fade) |
+| expo-haptics | Тактильный фидбек |
+| react-native-confetti-cannon | Celebration на завершение урока |
 | expo-speech | TTS (озвучка китайского) |
-| expo-av | Аудио (запись/воспроизведение) |
+| expo-av | Аудио (запись/воспроизведение, deprecated в SDK54) |
 | @jamsch/react-native-hanzi-writer | Анимация написания иероглифов |
 
 ---
@@ -338,9 +420,13 @@ turkmen-chinese/
 Этап 3.5: Редизайн навигации ────────► ✅ ГОТОВО
 Этап 4: По учебнику Boya Chinese ────► ✅ 4.1-4.7 ГОТОВО
   └─ 31 глава теории + 600 упражнений (30 × 20) + 767 оффлайн-иероглифов
-Этап 5: Локализация ─────────────────► 🔄 UI туркменский, About the App пустой
-Этап 6: Сборка APK ──────────────────► 🔄 Release APK собран, финальный + тест ⬜
+Этап 5: Локализация ─────────────────► ✅ ГОТОВО (включая Profile)
+Этап 6: Сборка APK ──────────────────► 🔄 APK установлен на устройство, идёт ручное тестирование
 Этап 7: Написание иероглифов ────────► ✅ Анимация в теории + stroke_order квиз
-Этап 8: Bap synagy (полноценный тест) ► ⏸ ОТЛОЖЕНО до v2 (сейчас работает как обычные упражнения)
+Этап 8: Bap synagy (полноценный тест) ► ⏸ ОТЛОЖЕНО до v2 (сейчас 15 случайных упражнений)
 Этап 9: AI-фичи ─────────────────────► ⬜ Conversation, произношение
+Этап 10: Дизайн-система ─────────────► ✅ ГОТОВО (red/green/white + Inter)
+Этап 11: Иллюстрации/персонажи ──────► ✅ ГОТОВО (Twemoji + 6 PNG-аватарок)
+Этап 12: Интерактивность ────────────► ✅ ГОТОВО (хаптик, spring, confetti, wiggle)
+Этап 13: Геймификация ───────────────► ✅ ГОТОВО (XP + Streak + Profile + Bookmarks + Onboarding)
 ```
