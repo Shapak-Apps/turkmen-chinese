@@ -1,0 +1,290 @@
+import HANZI_DATA from "@/assets/data/hanzi_data.json";
+import { Colors, FontFamily } from "@/constants/theme";
+import {
+  HanziWriter,
+  useHanziWriter,
+} from "@jamsch/react-native-hanzi-writer";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { useState } from "react";
+import {
+  ActivityIndicator,
+  Modal,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+
+interface CharacterJson {
+  strokes: string[];
+  medians: number[][][];
+}
+
+async function loadCharacterData(char: string): Promise<CharacterJson> {
+  const data = (HANZI_DATA as Record<string, CharacterJson>)[char];
+  if (!data) {
+    throw new Error(`No stroke data for ${char}`);
+  }
+  return data;
+}
+
+function CharacterView({ char }: { char: string }) {
+  const writer = useHanziWriter({
+    character: char,
+    loader: loadCharacterData,
+  });
+
+  return (
+    <View style={styles.charContainer}>
+      <Text style={styles.charTitle}>{char}</Text>
+
+      <View style={styles.writerWrapper}>
+        <HanziWriter
+          writer={writer}
+          style={styles.writer}
+          loading={
+            <View style={styles.loadingBox}>
+              <ActivityIndicator size="large" color={Colors.primaryAccentColor} />
+              <Text style={styles.loadingText}>Ýüklenýär...</Text>
+            </View>
+          }
+          error={
+            <View style={styles.loadingBox}>
+              <Ionicons name="alert-circle-outline" size={36} color={Colors.borderColorStrong} />
+              <Text style={styles.errorText}>Bu hiýeroglif üçin maglumat ýok</Text>
+            </View>
+          }
+        >
+          <HanziWriter.GridLines color={Colors.borderColor} width={1} />
+          <HanziWriter.Svg>
+            <HanziWriter.Outline color={Colors.surfaceTertiary} />
+            <HanziWriter.Character color={Colors.primaryAccentColor} />
+          </HanziWriter.Svg>
+        </HanziWriter>
+      </View>
+
+      <View style={styles.buttonRow}>
+        <Pressable
+          style={({ pressed }) => [
+            styles.animateButton,
+            pressed && styles.pressed,
+          ]}
+          onPress={() =>
+            writer.animator.animateCharacter({
+              strokeDuration: 600,
+              delayBetweenStrokes: 300,
+            })
+          }
+        >
+          <Ionicons name="play" size={18} color={Colors.textInverse} />
+          <Text style={styles.animateButtonText}>Ýazylyşy</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
+}
+
+interface StrokeOrderModalProps {
+  visible: boolean;
+  characters: string[];
+  onClose: () => void;
+}
+
+export default function StrokeOrderModal({
+  visible,
+  characters,
+  onClose,
+}: StrokeOrderModalProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const char = characters[currentIndex];
+  const hasMultiple = characters.length > 1;
+
+  const goNext = () => {
+    if (currentIndex < characters.length - 1) setCurrentIndex(currentIndex + 1);
+  };
+  const goPrev = () => {
+    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+  };
+
+  return (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+      <View style={styles.overlay}>
+        <View style={styles.modal}>
+          <Pressable
+            style={styles.closeButton}
+            onPress={() => {
+              setCurrentIndex(0);
+              onClose();
+            }}
+            hitSlop={10}
+          >
+            <Ionicons name="close" size={20} color={Colors.textPrimary} />
+          </Pressable>
+
+          {char && <CharacterView key={char} char={char} />}
+
+          {hasMultiple && (
+            <View style={styles.charNav}>
+              <Pressable
+                style={[
+                  styles.charNavButton,
+                  currentIndex === 0 && styles.charNavButtonDisabled,
+                ]}
+                onPress={goPrev}
+                disabled={currentIndex === 0}
+              >
+                <Ionicons
+                  name="chevron-back"
+                  size={20}
+                  color={
+                    currentIndex === 0
+                      ? Colors.borderColorStrong
+                      : Colors.primaryAccentColor
+                  }
+                />
+              </Pressable>
+
+              <Text style={styles.charNavText}>
+                {currentIndex + 1} / {characters.length}
+              </Text>
+
+              <Pressable
+                style={[
+                  styles.charNavButton,
+                  currentIndex === characters.length - 1 &&
+                    styles.charNavButtonDisabled,
+                ]}
+                onPress={goNext}
+                disabled={currentIndex === characters.length - 1}
+              >
+                <Ionicons
+                  name="chevron-forward"
+                  size={20}
+                  color={
+                    currentIndex === characters.length - 1
+                      ? Colors.borderColorStrong
+                      : Colors.primaryAccentColor
+                  }
+                />
+              </Pressable>
+            </View>
+          )}
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
+const styles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(15, 23, 42, 0.6)",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 28,
+  },
+  modal: {
+    backgroundColor: Colors.surfacePrimary,
+    borderRadius: 20,
+    padding: 24,
+    width: "100%",
+    maxWidth: 360,
+    alignItems: "center",
+  },
+  closeButton: {
+    position: "absolute",
+    top: 12,
+    right: 12,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: Colors.surfaceTertiary,
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 10,
+  },
+  charContainer: {
+    alignItems: "center",
+    width: "100%",
+  },
+  charTitle: {
+    fontFamily: FontFamily.bold,
+    fontSize: 36,
+    color: Colors.primaryAccentColor,
+    marginBottom: 12,
+    marginTop: 8,
+  },
+  writerWrapper: {
+    borderWidth: 1,
+    borderColor: Colors.borderColor,
+    borderRadius: 14,
+    overflow: "hidden",
+    backgroundColor: Colors.surfaceSecondary,
+  },
+  writer: {
+    width: 280,
+    height: 280,
+  },
+  loadingBox: {
+    width: 280,
+    height: 280,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+  },
+  loadingText: {
+    fontFamily: FontFamily.medium,
+    fontSize: 13,
+    color: Colors.subduedTextColor,
+  },
+  errorText: {
+    fontFamily: FontFamily.regular,
+    fontSize: 13,
+    color: Colors.subduedTextColor,
+    textAlign: "center",
+    paddingHorizontal: 20,
+  },
+  buttonRow: {
+    flexDirection: "row",
+    gap: 12,
+    marginTop: 16,
+  },
+  animateButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    backgroundColor: Colors.primaryAccentColor,
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+    borderRadius: 12,
+  },
+  pressed: { opacity: 0.85 },
+  animateButtonText: {
+    fontFamily: FontFamily.semibold,
+    color: Colors.textInverse,
+    fontSize: 15,
+  },
+  charNav: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+    marginTop: 16,
+  },
+  charNavButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: Colors.surfaceTertiary,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  charNavButtonDisabled: {
+    opacity: 0.4,
+  },
+  charNavText: {
+    fontFamily: FontFamily.semibold,
+    fontSize: 13,
+    color: Colors.textSecondary,
+  },
+});
