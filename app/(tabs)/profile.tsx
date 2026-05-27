@@ -213,6 +213,12 @@ export default function ProfileScreen() {
               title="Hytaý dili hakynda"
               subtitle="Mandarin, tonlar, pinýin"
               onPress={() => router.push("/about-chinese")}
+            />
+            <MenuItem
+              icon="person-circle-outline"
+              title="Awtor we wersiýa"
+              subtitle="Programma barada maglumat"
+              onPress={() => router.push("/about")}
               isLast
             />
           </View>
