@@ -6,15 +6,18 @@ import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
 import { getAllProgress } from "@/lib/lessonProgress";
 import { useStreak } from "@/lib/streak";
+import { useUserName } from "@/lib/user";
 import { useXP } from "@/lib/xp";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
 import {
   Image,
+  Modal,
   Pressable,
   ScrollView,
   StyleSheet,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -23,15 +26,36 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function ProfileScreen() {
   const { xp, refresh: refreshXP } = useXP();
   const streak = useStreak();
+  const { name, refresh: refreshName, save: saveName } = useUserName();
   const [progress, setProgress] = useState<Record<string, number>>({});
+  const [renameOpen, setRenameOpen] = useState(false);
+  const [nameDraft, setNameDraft] = useState("");
 
   useFocusEffect(
     useCallback(() => {
       refreshXP();
       streak.refresh();
+      refreshName();
       getAllProgress().then(setProgress);
-    }, [refreshXP, streak]),
+    }, [refreshXP, streak, refreshName]),
   );
+
+  const openRename = () => {
+    haptics.tap();
+    setNameDraft(name ?? "");
+    setRenameOpen(true);
+  };
+
+  const confirmRename = async () => {
+    const trimmed = nameDraft.trim();
+    if (trimmed.length === 0) {
+      setRenameOpen(false);
+      return;
+    }
+    haptics.success();
+    await saveName(trimmed);
+    setRenameOpen(false);
+  };
 
   const completedChapterIds = new Set<number>();
   Object.entries(progress).forEach(([key, count]) => {
@@ -61,7 +85,20 @@ export default function ProfileScreen() {
               />
             </View>
           </View>
-          <ThemedText style={styles.heroName}>Aman</ThemedText>
+          <Pressable
+            onPress={openRename}
+            hitSlop={8}
+            style={styles.heroNameRow}
+          >
+            <ThemedText style={styles.heroName}>
+              {name ?? "Öwreniji"}
+            </ThemedText>
+            <Ionicons
+              name="pencil"
+              size={16}
+              color={Colors.subduedTextColor}
+            />
+          </Pressable>
           <ThemedText style={styles.heroSubtitle}>
             Hytaý dilini öwrenýär
           </ThemedText>
@@ -181,6 +218,51 @@ export default function ProfileScreen() {
           </View>
         </View>
       </ScrollView>
+
+      <Modal
+        visible={renameOpen}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setRenameOpen(false)}
+      >
+        <Pressable
+          style={styles.modalBackdrop}
+          onPress={() => setRenameOpen(false)}
+        >
+          <Pressable
+            style={styles.modalCard}
+            onPress={(e) => e.stopPropagation()}
+          >
+            <ThemedText style={styles.modalTitle}>Adyňy üýtget</ThemedText>
+            <TextInput
+              style={styles.modalInput}
+              value={nameDraft}
+              onChangeText={setNameDraft}
+              autoFocus
+              maxLength={20}
+              autoCapitalize="words"
+              returnKeyType="done"
+              onSubmitEditing={confirmRename}
+              placeholder="Adyňy ýaz..."
+              placeholderTextColor={Colors.subduedTextColor}
+            />
+            <View style={styles.modalActions}>
+              <Pressable
+                style={[styles.modalBtn, styles.modalBtnSecondary]}
+                onPress={() => setRenameOpen(false)}
+              >
+                <ThemedText style={styles.modalBtnSecondaryText}>Goý</ThemedText>
+              </Pressable>
+              <Pressable
+                style={[styles.modalBtn, styles.modalBtnPrimary]}
+                onPress={confirmRename}
+              >
+                <ThemedText style={styles.modalBtnPrimaryText}>Sakla</ThemedText>
+              </Pressable>
+            </View>
+          </Pressable>
+        </Pressable>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -249,6 +331,11 @@ const styles = StyleSheet.create({
     borderColor: Colors.primaryAccentColor,
   },
   avatarImg: { width: "100%", height: "100%", resizeMode: "cover" },
+  heroNameRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
   heroName: {
     fontFamily: FontFamily.bold,
     fontSize: 26,
@@ -459,5 +546,57 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: Colors.subduedTextColor,
     marginTop: 2,
+  },
+
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: "rgba(15, 23, 42, 0.5)",
+    justifyContent: "center",
+    padding: 24,
+  },
+  modalCard: {
+    backgroundColor: Colors.surfacePrimary,
+    borderRadius: Radius.lg,
+    padding: 20,
+  },
+  modalTitle: {
+    fontFamily: FontFamily.bold,
+    fontSize: 18,
+    color: Colors.textPrimary,
+    marginBottom: 14,
+  },
+  modalInput: {
+    fontFamily: FontFamily.semibold,
+    fontSize: 17,
+    color: Colors.textPrimary,
+    backgroundColor: Colors.surfaceSecondary,
+    borderRadius: Radius.md,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    borderWidth: 2,
+    borderColor: Colors.borderColor,
+  },
+  modalActions: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    gap: 10,
+    marginTop: 18,
+  },
+  modalBtn: {
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: Radius.md,
+  },
+  modalBtnSecondary: { backgroundColor: Colors.surfaceTertiary },
+  modalBtnSecondaryText: {
+    fontFamily: FontFamily.semibold,
+    fontSize: 14,
+    color: Colors.textPrimary,
+  },
+  modalBtnPrimary: { backgroundColor: Colors.primaryAccentColor },
+  modalBtnPrimaryText: {
+    fontFamily: FontFamily.semibold,
+    fontSize: 14,
+    color: Colors.textInverse,
   },
 });

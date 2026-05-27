@@ -3,6 +3,7 @@ import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
 import { markOnboarded } from "@/lib/onboarding";
+import { setUserName } from "@/lib/user";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
 import { useCallback, useRef, useState } from "react";
@@ -10,8 +11,10 @@ import {
   Dimensions,
   FlatList,
   Image,
+  Keyboard,
   Pressable,
   StyleSheet,
+  TextInput,
   View,
   type ViewToken,
 } from "react-native";
@@ -119,15 +122,16 @@ const SLIDES: SlideData[] = [
     illustration: <GamificationIllustration />,
   },
   {
-    key: "ready",
-    title: "Başlaýalyň!",
-    subtitle: "Esasy ekrandan dowam et düwmesini bas — sapak garaşýar.",
+    key: "name",
+    title: "Adyňy ýaz",
+    subtitle: "Aman saňa şahsy ýüzlenmek üçin adyňy bilmeli",
     illustration: <ReadyIllustration />,
   },
 ];
 
 export default function OnboardingScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [nameInput, setNameInput] = useState("");
   const flatListRef = useRef<FlatList>(null);
   const insets = useSafeAreaInsets();
 
@@ -146,7 +150,12 @@ export default function OnboardingScreen() {
 
   const finish = async () => {
     haptics.success();
+    const trimmed = nameInput.trim();
+    if (trimmed.length > 0) {
+      await setUserName(trimmed);
+    }
     await markOnboarded();
+    Keyboard.dismiss();
     router.replace("/(tabs)/lessons");
   };
 
@@ -168,6 +177,7 @@ export default function OnboardingScreen() {
   };
 
   const isLast = currentIndex === SLIDES.length - 1;
+  const canProceed = !isLast || nameInput.trim().length > 0;
 
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
@@ -199,6 +209,23 @@ export default function OnboardingScreen() {
             <View style={styles.illustrationWrap}>{item.illustration}</View>
             <ThemedText style={styles.slideTitle}>{item.title}</ThemedText>
             <ThemedText style={styles.slideSubtitle}>{item.subtitle}</ThemedText>
+            {item.key === "name" && (
+              <View style={styles.nameInputWrap}>
+                <TextInput
+                  style={styles.nameInput}
+                  placeholder="Adyňy ýaz..."
+                  placeholderTextColor={Colors.subduedTextColor}
+                  value={nameInput}
+                  onChangeText={setNameInput}
+                  autoCapitalize="words"
+                  maxLength={20}
+                  returnKeyType="done"
+                  onSubmitEditing={() => {
+                    if (nameInput.trim().length > 0) void finish();
+                  }}
+                />
+              </View>
+            )}
           </View>
         )}
         onViewableItemsChanged={onViewableItemsChanged}
@@ -208,6 +235,7 @@ export default function OnboardingScreen() {
           offset: SCREEN_WIDTH * index,
           index,
         })}
+        keyboardShouldPersistTaps="handled"
       />
 
       {/* Bottom CTA */}
@@ -215,9 +243,11 @@ export default function OnboardingScreen() {
         <Pressable
           style={({ pressed }) => [
             styles.ctaBtn,
-            pressed && styles.ctaPressed,
+            !canProceed && styles.ctaBtnDisabled,
+            pressed && canProceed && styles.ctaPressed,
           ]}
-          onPress={next}
+          onPress={canProceed ? next : undefined}
+          disabled={!canProceed}
         >
           <ThemedText style={styles.ctaText}>
             {isLast ? "Başla" : "Dowam et"}
@@ -312,10 +342,29 @@ const styles = StyleSheet.create({
     ...Shadow.md,
   },
   ctaPressed: { opacity: 0.85, transform: [{ scale: 0.98 }] },
+  ctaBtnDisabled: { opacity: 0.4 },
   ctaText: {
     fontFamily: FontFamily.semibold,
     fontSize: 17,
     color: Colors.textInverse,
+  },
+
+  nameInputWrap: {
+    width: "100%",
+    paddingHorizontal: 8,
+    marginTop: 20,
+  },
+  nameInput: {
+    fontFamily: FontFamily.semibold,
+    fontSize: 18,
+    color: Colors.textPrimary,
+    backgroundColor: Colors.surfaceSecondary,
+    borderRadius: Radius.lg,
+    paddingHorizontal: 18,
+    paddingVertical: 16,
+    borderWidth: 2,
+    borderColor: Colors.borderColor,
+    textAlign: "center",
   },
 
   /* Welcome / Ready illustrations */

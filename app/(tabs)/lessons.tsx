@@ -7,6 +7,7 @@ import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
 import { getAllProgress } from "@/lib/lessonProgress";
 import { useStreak } from "@/lib/streak";
+import { useUserName } from "@/lib/user";
 import { useXP } from "@/lib/xp";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useFocusEffect } from "expo-router";
@@ -21,12 +22,9 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-function getGreeting(): string {
-  const hour = new Date().getHours();
-  if (hour >= 4 && hour < 11) return "Salam ertir";
-  if (hour >= 11 && hour < 17) return "Salam günortan";
-  if (hour >= 17 && hour < 22) return "Salam agşam";
-  return "Salam gije";
+function getGreeting(name: string | null): string {
+  const display = name && name.trim().length > 0 ? name : "öwreniji";
+  return `Salam ${display}`;
 }
 
 function getNextChapter(completedIds: Set<number>): { id: number; title: string; hanzi: string } {
@@ -53,13 +51,15 @@ export default function LessonsContent() {
   const [progress, setProgress] = useState<Record<string, number>>({});
   const { xp, refresh: refreshXP } = useXP();
   const streak = useStreak();
+  const { name, refresh: refreshName } = useUserName();
 
   useFocusEffect(
     useCallback(() => {
       getAllProgress().then(setProgress);
       refreshXP();
       streak.refresh();
-    }, [refreshXP, streak]),
+      refreshName();
+    }, [refreshXP, streak, refreshName]),
   );
 
   const completedChapterIds = new Set<number>();
@@ -75,7 +75,7 @@ export default function LessonsContent() {
   }, 0);
 
   const next = getNextChapter(completedChapterIds);
-  const greeting = getGreeting();
+  const greeting = getGreeting(name);
   const isStarting = completedChapterIds.size === 0;
 
   return (
@@ -99,9 +99,7 @@ export default function LessonsContent() {
               <View style={styles.bubbleTail} />
               <ThemedText style={styles.greeting}>{greeting}!</ThemedText>
               <ThemedText style={styles.subtitle}>
-                {isStarting
-                  ? "Şu gün başlaýarys"
-                  : `${completedChapterIds.size}/30 bap geçildi`}
+                Okuwy dowam edýäris!
               </ThemedText>
             </View>
           </View>
