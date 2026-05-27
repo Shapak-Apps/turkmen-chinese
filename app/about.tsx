@@ -4,11 +4,14 @@ import { haptics } from "@/lib/haptics";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Constants from "expo-constants";
 import { router } from "expo-router";
+import { useState } from "react";
 import {
   Linking,
+  Modal,
   Pressable,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -16,45 +19,25 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const APP_VERSION =
   Constants.expoConfig?.version ?? Constants.manifest?.version ?? "1.0.0";
 
-const AUTHOR_NAME = "Seydi Charyev";
-const AUTHOR_EMAIL = "seydi.charyev@gmail.com";
+const APP_NAME = "Şapak — Hytaý dili";
+const TEAM_EMAIL = "shapak.app@gmail.com";
 const YEAR = new Date().getFullYear();
 
-interface Credit {
-  label: string;
-  source: string;
-  license: string;
-}
-
-const CREDITS: Credit[] = [
-  {
-    label: "Boya Chinese Elementary I",
-    source: "Peking University Press",
-    license: "Mazmun çeşmesi",
-  },
-  {
-    label: "Twemoji",
-    source: "Twitter / jdecked",
-    license: "CC-BY 4.0",
-  },
-  {
-    label: "Hanzi Writer",
-    source: "jamsch / nieldlr",
-    license: "MIT",
-  },
-  {
-    label: "Inter",
-    source: "Rasmus Andersson",
-    license: "SIL Open Font License",
-  },
-];
+type ModalType = "authors" | "series" | null;
 
 export default function AboutScreen() {
-  const handleEmailPress = () => {
+  const [activeModal, setActiveModal] = useState<ModalType>(null);
+
+  const openModal = (type: ModalType) => {
     haptics.tap();
-    Linking.openURL(
-      `mailto:${AUTHOR_EMAIL}?subject=TurkmenLearn Chinese — feedback`,
-    ).catch(() => {});
+    setActiveModal(type);
+  };
+
+  const closeModal = () => setActiveModal(null);
+
+  const openEmail = () => {
+    haptics.tap();
+    Linking.openURL(`mailto:${TEAM_EMAIL}?subject=${APP_NAME}`).catch(() => {});
   };
 
   return (
@@ -64,7 +47,7 @@ export default function AboutScreen() {
           <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
         </Pressable>
         <View style={styles.headerTitleContainer}>
-          <ThemedText style={styles.headerTitle}>Awtor we wersiýa</ThemedText>
+          <ThemedText style={styles.headerTitle}>Programma barada</ThemedText>
         </View>
         <View style={{ width: 40 }} />
       </View>
@@ -74,101 +57,301 @@ export default function AboutScreen() {
         showsVerticalScrollIndicator={false}
       >
         {/* App identity */}
-        <View style={styles.appBlock}>
+        <View style={styles.logoContainer}>
           <View style={styles.appBadge}>
             <ThemedText style={styles.appBadgeText}>汉</ThemedText>
           </View>
-          <ThemedText style={styles.appName}>TurkmenLearn Chinese</ThemedText>
-          <ThemedText style={styles.appTagline}>
-            Türkmen dilinde hytaý dilini öwretmek
-          </ThemedText>
+          <ThemedText style={styles.appName}>{APP_NAME}</ThemedText>
           <View style={styles.versionPill}>
-            <ThemedText style={styles.versionPillText}>v{APP_VERSION}</ThemedText>
+            <ThemedText style={styles.versionPillText}>
+              Wersiýa {APP_VERSION}
+            </ThemedText>
           </View>
         </View>
 
-        {/* Author */}
-        <ThemedText style={styles.sectionLabel}>AWTOR</ThemedText>
-        <View style={styles.card}>
-          <View style={styles.row}>
-            <View style={styles.rowIcon}>
-              <Ionicons name="person-outline" size={20} color={Colors.primaryAccentColor} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <ThemedText style={styles.rowLabel}>Awtor</ThemedText>
-              <ThemedText style={styles.rowValue}>{AUTHOR_NAME}</ThemedText>
-            </View>
-          </View>
-
-          <View style={styles.divider} />
-
-          <Pressable
-            style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
-            onPress={handleEmailPress}
+        {/* Menu */}
+        <View style={styles.menuContainer}>
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => openModal("authors")}
+            activeOpacity={0.7}
           >
-            <View style={styles.rowIcon}>
-              <Ionicons name="mail-outline" size={20} color={Colors.primaryAccentColor} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <ThemedText style={styles.rowLabel}>Aragatnaşyk</ThemedText>
-              <ThemedText style={styles.rowValueLink}>{AUTHOR_EMAIL}</ThemedText>
-            </View>
-            <Ionicons name="open-outline" size={16} color={Colors.subduedTextColor} />
-          </Pressable>
-
-          <View style={styles.divider} />
-
-          <View style={styles.row}>
-            <View style={styles.rowIcon}>
-              <Ionicons name="document-text-outline" size={20} color={Colors.primaryAccentColor} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <ThemedText style={styles.rowLabel}>Lisenziýa</ThemedText>
-              <ThemedText style={styles.rowValue}>MIT License</ThemedText>
-            </View>
-          </View>
-        </View>
-
-        {/* Credits */}
-        <ThemedText style={styles.sectionLabel}>MINNETDARLYK</ThemedText>
-        <ThemedText style={styles.sectionHint}>
-          Programmanyň döredilmegine kömek eden çeşmeler:
-        </ThemedText>
-        <View style={styles.card}>
-          {CREDITS.map((credit, idx) => (
-            <View key={credit.label}>
-              <View style={styles.creditRow}>
-                <View style={{ flex: 1 }}>
-                  <ThemedText style={styles.creditLabel}>{credit.label}</ThemedText>
-                  <ThemedText style={styles.creditSource}>{credit.source}</ThemedText>
-                </View>
-                <View style={styles.creditBadge}>
-                  <ThemedText style={styles.creditBadgeText}>
-                    {credit.license}
-                  </ThemedText>
-                </View>
+            <View style={styles.menuLeft}>
+              <View
+                style={[
+                  styles.menuIcon,
+                  { backgroundColor: Colors.primaryAccentBg },
+                ]}
+              >
+                <Ionicons name="people" size={22} color={Colors.primaryAccentColor} />
               </View>
-              {idx < CREDITS.length - 1 && <View style={styles.divider} />}
+              <View style={styles.menuText}>
+                <ThemedText style={styles.menuTitle}>Awtorlar barada</ThemedText>
+                <ThemedText style={styles.menuSubtitle}>Kim döretdi</ThemedText>
+              </View>
             </View>
-          ))}
+            <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
+          </TouchableOpacity>
+
+          <View style={styles.menuDivider} />
+
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => openModal("series")}
+            activeOpacity={0.7}
+          >
+            <View style={styles.menuLeft}>
+              <View
+                style={[
+                  styles.menuIcon,
+                  { backgroundColor: Colors.successBg },
+                ]}
+              >
+                <Ionicons name="apps" size={22} color={Colors.successColor} />
+              </View>
+              <View style={styles.menuText}>
+                <ThemedText style={styles.menuTitle}>
+                  Şapak programmalar toplumy
+                </ThemedText>
+                <ThemedText style={styles.menuSubtitle}>
+                  Beýleki programmalar
+                </ThemedText>
+              </View>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
+          </TouchableOpacity>
         </View>
 
-        <ThemedText style={styles.footer}>
-          © {YEAR} {AUTHOR_NAME}{"\n"}
-          Made with ❤ for türkmen students learning 汉语
-        </ThemedText>
+        <View style={styles.footer}>
+          <ThemedText style={styles.footerText}>
+            © {YEAR} Şapak Apps
+          </ThemedText>
+        </View>
       </ScrollView>
+
+      {/* Modals */}
+      <Modal
+        visible={activeModal === "authors"}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={closeModal}
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Pressable onPress={closeModal} hitSlop={12} style={styles.modalClose}>
+              <Ionicons name="close" size={24} color={Colors.textPrimary} />
+            </Pressable>
+            <ThemedText style={styles.modalTitle}>Awtorlar barada</ThemedText>
+            <View style={{ width: 40 }} />
+          </View>
+
+          <ScrollView
+            contentContainerStyle={styles.modalScroll}
+            showsVerticalScrollIndicator={false}
+          >
+            {/* Mission */}
+            <Section icon="flag" color={Colors.successColor} title="Wezipe">
+              <ThemedText style={styles.sectionText}>
+                Şapak — Türkmenistanyň Mary welaýaty, Mary şäherinde ýerleşýän
+                döredijiler topary tarapyndan döredildi.
+                {"\n\n"}
+                Biziň maksadymyz — Türkmenistanyň ilatyna daşary ýurt dillerini
+                öwrenmegi has aňsat we elýeterli etmekdir. Bu programma serimiziň
+                ikinji programmasy bolup, hytaý diline bagyşlanan.
+              </ThemedText>
+            </Section>
+
+            {/* Features */}
+            <Section icon="apps" color={Colors.warningColor} title="Mümkinçilikler">
+              <FeatureRow icon="book" text="Boya Chinese kitaby boýunça 31 bap" />
+              <FeatureRow icon="checkbox" text="600+ gönükme (8 dürli görnüş)" />
+              <FeatureRow icon="brush" text="Hiýeroglif ýazuwy (768 oflaýn)" />
+              <FeatureRow icon="volume-high" text="1632 pinýin ses faýly" />
+              <FeatureRow icon="chatbubbles" text="Auto-play dialoglar" />
+              <FeatureRow icon="trophy" text="XP we Streak sistemasy" />
+            </Section>
+
+            {/* Contact */}
+            <Section icon="mail" color="#8B5CF6" title="Habarlaşmak">
+              <Pressable style={styles.emailBtn} onPress={openEmail}>
+                <Ionicons
+                  name="mail-outline"
+                  size={18}
+                  color={Colors.primaryAccentColor}
+                />
+                <ThemedText style={styles.emailText}>{TEAM_EMAIL}</ThemedText>
+                <Ionicons
+                  name="arrow-forward"
+                  size={14}
+                  color={Colors.primaryAccentColor}
+                />
+              </Pressable>
+              <ThemedText style={styles.sectionHint}>
+                Teklipler, ýalňyşlyklar ýa-da soraglar üçin ýazyň.
+              </ThemedText>
+            </Section>
+
+            {/* License */}
+            <Section
+              icon="document-text"
+              color={Colors.subduedTextColor}
+              title="Lisenziýa"
+            >
+              <ThemedText style={styles.sectionText}>
+                Programma MIT lisenziýasy bilen açyk çeşmäni esas alýar.
+                {"\n\n"}
+                Mazmun çeşmeleri: Boya Chinese Elementary I (Peking University
+                Press), Twemoji (CC-BY 4.0), Hanzi Writer (MIT), Inter şrift (OFL).
+              </ThemedText>
+            </Section>
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
+
+      <Modal
+        visible={activeModal === "series"}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={closeModal}
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Pressable onPress={closeModal} hitSlop={12} style={styles.modalClose}>
+              <Ionicons name="close" size={24} color={Colors.textPrimary} />
+            </Pressable>
+            <ThemedText style={styles.modalTitle}>Şapak Apps</ThemedText>
+            <View style={{ width: 40 }} />
+          </View>
+
+          <ScrollView
+            contentContainerStyle={styles.modalScroll}
+            showsVerticalScrollIndicator={false}
+          >
+            {/* Brand block */}
+            <View style={styles.seriesHero}>
+              <View style={styles.seriesBadge}>
+                <ThemedText style={styles.seriesBadgeText}>Ş</ThemedText>
+              </View>
+              <ThemedText style={styles.seriesName}>Şapak Apps</ThemedText>
+              <ThemedText style={styles.seriesTagline}>
+                Türkmen dilinde — daşary ýurt dillerini öwretmek üçin programmalar toplumy
+              </ThemedText>
+            </View>
+
+            {/* About series */}
+            <Section
+              icon="information-circle"
+              color={Colors.primaryAccentColor}
+              title="Toplum barada"
+            >
+              <ThemedText style={styles.sectionText}>
+                Şapak Apps — Türkmenistanyň ilatyna daşary ýurt dillerini
+                öwrenmegi has aňsat we elýeterli etmek üçin döredilen programmalar
+                toplumy.
+                {"\n\n"}
+                Programmalar türkmen ulanyjylar üçin niýetlense-de, dünýäniň
+                islendik künjeginden ulanmak mümkin.
+              </ThemedText>
+            </Section>
+
+            {/* App 1 — Ykjam Terjime */}
+            <Section
+              icon="globe"
+              color={Colors.successColor}
+              title="Şapak — Ykjam Terjime"
+              badge="1-nji programma"
+            >
+              <ThemedText style={styles.sectionText}>
+                Toplumyň ilkinji programmasy — 31 dilli gepleşik kitaby, tekst
+                we sesli terjimeçi, AI kömekçileri.
+              </ThemedText>
+            </Section>
+
+            {/* App 2 — This one */}
+            <Section
+              icon="school"
+              color={Colors.primaryAccentColor}
+              title={APP_NAME}
+              badge="2-nji programma"
+              highlight
+            >
+              <ThemedText style={styles.sectionText}>
+                Häzirki programma — hytaý dilini öwretmek üçin doly kurs. Boya
+                Chinese kitaby boýunça 31 bap, 600+ gönükme, hiýeroglif ýazuwy,
+                pinýin sesleri.
+              </ThemedText>
+            </Section>
+
+            {/* Coming soon */}
+            <Section icon="rocket" color={Colors.warningColor} title="Indiki">
+              <ThemedText style={styles.sectionText}>
+                Toplumyň beýleki programmalary işjeň döredilýär. Iňlis dili,
+                rus dili we beýleki diller boýunça programmalara garaşyň.
+              </ThemedText>
+            </Section>
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
     </SafeAreaView>
   );
 }
 
+function Section({
+  icon,
+  color,
+  title,
+  badge,
+  highlight,
+  children,
+}: {
+  icon: keyof typeof Ionicons.glyphMap;
+  color: string;
+  title: string;
+  badge?: string;
+  highlight?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <View style={[styles.sectionCard, highlight && styles.sectionCardHighlight]}>
+      <View style={styles.sectionHeader}>
+        <Ionicons name={icon} size={20} color={color} />
+        <ThemedText style={styles.sectionTitle}>{title}</ThemedText>
+        {badge && (
+          <View style={styles.sectionBadge}>
+            <ThemedText style={styles.sectionBadgeText}>{badge}</ThemedText>
+          </View>
+        )}
+      </View>
+      {children}
+    </View>
+  );
+}
+
+function FeatureRow({
+  icon,
+  text,
+}: {
+  icon: keyof typeof Ionicons.glyphMap;
+  text: string;
+}) {
+  return (
+    <View style={styles.featureRow}>
+      <View style={styles.featureIconBox}>
+        <Ionicons name={icon} size={16} color={Colors.primaryAccentColor} />
+      </View>
+      <ThemedText style={styles.featureText}>{text}</ThemedText>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.surfacePrimary },
+  container: { flex: 1, backgroundColor: Colors.surfaceSecondary },
   header: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: Spacing.lg,
     paddingVertical: 12,
+    backgroundColor: Colors.surfacePrimary,
     borderBottomWidth: 1,
     borderBottomColor: Colors.divider,
   },
@@ -185,20 +368,20 @@ const styles = StyleSheet.create({
     color: Colors.textPrimary,
   },
   scrollContent: {
-    paddingHorizontal: Spacing["2xl"],
+    paddingHorizontal: Spacing.lg,
     paddingTop: 24,
-    paddingBottom: 40,
+    paddingBottom: 32,
   },
 
-  appBlock: {
+  logoContainer: {
     alignItems: "center",
-    paddingVertical: 12,
-    marginBottom: 28,
+    paddingVertical: 16,
+    marginBottom: 24,
   },
   appBadge: {
-    width: 88,
-    height: 88,
-    borderRadius: 22,
+    width: 96,
+    height: 96,
+    borderRadius: 24,
     backgroundColor: Colors.primaryAccentColor,
     alignItems: "center",
     justifyContent: "center",
@@ -207,8 +390,8 @@ const styles = StyleSheet.create({
   },
   appBadgeText: {
     fontFamily: FontFamily.bold,
-    fontSize: 48,
-    lineHeight: 56,
+    fontSize: 52,
+    lineHeight: 60,
     color: Colors.textInverse,
   },
   appName: {
@@ -218,130 +401,225 @@ const styles = StyleSheet.create({
     letterSpacing: -0.4,
     textAlign: "center",
   },
-  appTagline: {
-    fontFamily: FontFamily.regular,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
-    textAlign: "center",
-    marginTop: 4,
-  },
   versionPill: {
-    marginTop: 12,
+    marginTop: 10,
     backgroundColor: Colors.primaryAccentBg,
-    paddingHorizontal: 12,
+    paddingHorizontal: 14,
     paddingVertical: 6,
     borderRadius: Radius.pill,
   },
   versionPillText: {
-    fontFamily: FontFamily.bold,
-    fontSize: 13,
-    color: Colors.primaryAccentColor,
-    letterSpacing: 0.5,
-  },
-
-  sectionLabel: {
     fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-    textTransform: "uppercase",
-    letterSpacing: 1.2,
-    marginBottom: 10,
-  },
-  sectionHint: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-    marginTop: -4,
-    marginBottom: 10,
+    fontSize: 12,
+    color: Colors.primaryAccentColor,
+    letterSpacing: 0.3,
   },
 
-  card: {
+  menuContainer: {
     backgroundColor: Colors.surfacePrimary,
+    borderRadius: Radius.lg,
     borderWidth: 1,
     borderColor: Colors.borderColor,
-    borderRadius: Radius.lg,
     marginBottom: 24,
     overflow: "hidden",
     ...Shadow.sm,
   },
-  row: {
+  menuItem: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 12,
+    justifyContent: "space-between",
+    paddingVertical: 14,
     paddingHorizontal: 14,
-    gap: 12,
   },
-  rowPressed: { backgroundColor: Colors.surfaceSecondary },
-  rowIcon: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: Colors.primaryAccentBg,
+  menuLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    flex: 1,
+  },
+  menuIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     alignItems: "center",
     justifyContent: "center",
   },
-  rowLabel: {
-    fontFamily: FontFamily.medium,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-    textTransform: "uppercase",
-    letterSpacing: 0.8,
-  },
-  rowValue: {
+  menuText: { flex: 1 },
+  menuTitle: {
     fontFamily: FontFamily.semibold,
     fontSize: 15,
     color: Colors.textPrimary,
-    marginTop: 1,
   },
-  rowValueLink: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.primaryAccentColor,
-    marginTop: 1,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: Colors.divider,
-    marginLeft: 60,
-  },
-
-  creditRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    gap: 12,
-  },
-  creditLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.textPrimary,
-  },
-  creditSource: {
+  menuSubtitle: {
     fontFamily: FontFamily.regular,
     fontSize: 12,
     color: Colors.subduedTextColor,
     marginTop: 2,
   },
-  creditBadge: {
-    backgroundColor: Colors.surfaceSecondary,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: Radius.sm,
-  },
-  creditBadgeText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 10,
-    color: Colors.textSecondary,
-    letterSpacing: 0.3,
+  menuDivider: {
+    height: 1,
+    backgroundColor: Colors.divider,
+    marginLeft: 70,
   },
 
   footer: {
+    alignItems: "center",
+    paddingVertical: 16,
+  },
+  footerText: {
     fontFamily: FontFamily.regular,
     fontSize: 12,
     color: Colors.subduedTextColor,
+  },
+
+  // Modals
+  modalContainer: { flex: 1, backgroundColor: Colors.surfaceSecondary },
+  modalHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: Spacing.lg,
+    paddingVertical: 14,
+    backgroundColor: Colors.surfacePrimary,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.divider,
+  },
+  modalClose: {
+    width: 40,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalTitle: {
+    flex: 1,
+    fontFamily: FontFamily.bold,
+    fontSize: 17,
+    color: Colors.textPrimary,
     textAlign: "center",
+  },
+  modalScroll: {
+    paddingHorizontal: Spacing.lg,
+    paddingTop: 16,
+    paddingBottom: 32,
+  },
+
+  seriesHero: {
+    alignItems: "center",
+    paddingVertical: 12,
+    marginBottom: 16,
+  },
+  seriesBadge: {
+    width: 76,
+    height: 76,
+    borderRadius: 38,
+    backgroundColor: Colors.primaryAccentColor,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
+    ...Shadow.md,
+  },
+  seriesBadgeText: {
+    fontFamily: FontFamily.bold,
+    fontSize: 42,
+    lineHeight: 50,
+    color: Colors.textInverse,
+  },
+  seriesName: {
+    fontFamily: FontFamily.bold,
+    fontSize: 22,
+    color: Colors.textPrimary,
+  },
+  seriesTagline: {
+    fontFamily: FontFamily.regular,
+    fontSize: 13,
+    color: Colors.subduedTextColor,
+    textAlign: "center",
+    marginTop: 6,
+    paddingHorizontal: 12,
     lineHeight: 18,
-    marginTop: 8,
+  },
+
+  sectionCard: {
+    backgroundColor: Colors.surfacePrimary,
+    borderRadius: Radius.lg,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: Colors.borderColor,
+  },
+  sectionCardHighlight: {
+    borderColor: Colors.primaryAccentColor,
+    borderWidth: 2,
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 12,
+  },
+  sectionTitle: {
+    flex: 1,
+    fontFamily: FontFamily.bold,
+    fontSize: 15,
+    color: Colors.textPrimary,
+  },
+  sectionBadge: {
+    backgroundColor: Colors.primaryAccentBg,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: Radius.sm,
+  },
+  sectionBadgeText: {
+    fontFamily: FontFamily.semibold,
+    fontSize: 10,
+    color: Colors.primaryAccentColor,
+  },
+  sectionText: {
+    fontFamily: FontFamily.regular,
+    fontSize: 14,
+    lineHeight: 21,
+    color: Colors.textSecondary,
+  },
+  sectionHint: {
+    fontFamily: FontFamily.regular,
+    fontSize: 12,
+    color: Colors.subduedTextColor,
+    marginTop: 10,
+  },
+
+  featureRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    paddingVertical: 6,
+  },
+  featureIconBox: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: Colors.primaryAccentBg,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  featureText: {
+    flex: 1,
+    fontFamily: FontFamily.medium,
+    fontSize: 14,
+    color: Colors.textPrimary,
+  },
+
+  emailBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: Colors.primaryAccentBg,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    borderRadius: Radius.md,
+  },
+  emailText: {
+    flex: 1,
+    fontFamily: FontFamily.semibold,
+    fontSize: 14,
+    color: Colors.primaryAccentColor,
   },
 });
