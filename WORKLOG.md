@@ -2,7 +2,85 @@
 
 ---
 
-## 2026-05-16 (Сессия 8) — Геймификация: XP, Streak, Profile, Bookmarks, Onboarding
+## 2026-05-27 (Сессия 8 — продолжение) — Имя пользователя + About экран в стиле Şapak
+
+### Имя пользователя в приветствии
+
+Раньше главный экран показывал «Salam günortan! Şu gün başlaýarys» — звучало неестественно. Решили персонализировать.
+
+**`lib/user.ts`** — новый модуль:
+- `getUserName()` / `setUserName(name)` / `clearUserName()`
+- `useUserName()` хук
+- AsyncStorage ключ `user_name`
+
+**Onboarding (`app/onboarding.tsx`):**
+- 4-й экран «Başlaýalyň!» заменён на «Adyňy ýaz» с TextInput
+- Кнопка «Başla» disabled пока имя не введено (минимум 1 символ)
+- При нажатии — имя сохраняется + `markOnboarded()` + редирект на главный
+
+**Главный экран (`app/(tabs)/lessons.tsx`):**
+- Приветствие: `getGreeting(name)` → `Salam {имя}!`
+- Подзаголовок: «Okuwy dowam edýäris!»
+- Fallback «Salam öwreniji» если имя пустое
+
+**Profile (`app/(tabs)/profile.tsx`):**
+- Имя теперь динамическое через `useUserName()`, не хардкод «Aman»
+- Рядом с именем pencil-иконка → тап = модалка «Adyňy üýtget»
+- Модалка с TextInput, кнопками «Goý» (отмена) и красная «Sakla»
+
+### About экран (Awtor we wersiýa)
+
+Полный редизайн под формат sibling-приложения `Şapak — Ykjam Terjime`.
+
+**`app/about.tsx`** (полностью переписан):
+- Главный экран: иконка приложения + имя «Şapak — Hytaý dili» + версия + 2 пункта меню → footer «© 2026 Şapak Apps»
+- **Модал «Awtorlar barada»** — секции с цветными иконками:
+  - 🚩 Wezipe (Mission) — команда Şapak из Mary, Türkmenistan
+  - ▦ Mümkinçilikler (Features) — 6 фич с иконками
+  - ✉ Habarlaşmak (Contact) — кликабельный shapak.app@gmail.com (mailto)
+  - 📄 Lisenziýa — MIT + источники (Boya, Twemoji, Hanzi Writer, Inter)
+- **Модал «Şapak Apps»** — серия приложений:
+  - Hero с большим логотипом Şapak
+  - ℹ Toplum barada — описание серии
+  - 🌐 Şapak — Ykjam Terjime (бейдж «1-nji programma»)
+  - 🏫 Şapak — Hytaý dili (бейдж «2-nji programma», подсвечен красной рамкой как текущий)
+  - 🚀 Indiki — планы (английский, русский и т.д.)
+
+**Брендинг:**
+- Email сменён с `seydi.charyev@gmail.com` (личного) на `shapak.app@gmail.com` (команда)
+- Название приложения в About: «Şapak — Hytaý dili» (соответствует формату Şapak — Ykjam Terjime)
+- Только туркменский (без мульти-языка)
+
+### Ассеты
+
+**`assets/images/shapak_logo.png`** — скопирован из `turkmen-phrasebook/assets/shapak_logo.png` (CC- логотип бренда «şapak.» с солнечной вспышкой на чёрном фоне).
+
+Используется:
+- В пункте меню «Şapak programmalar toplumy» (маленькая иконка в чёрном квадратике)
+- В hero модалки «Şapak Apps» (полноразмерный логотип)
+
+Главный About-экран — используется наш реальный app icon (`assets/images/icon.png`, оранжевый 文A на бежевом).
+
+### Новые/изменённые файлы
+- **Новый:** `lib/user.ts`
+- **Полностью переписан:** `app/about.tsx`
+- **Обновлены:** `app/onboarding.tsx` (4-й экран с name input), `app/(tabs)/lessons.tsx` (greeting), `app/(tabs)/profile.tsx` (rename modal)
+
+### Git
+4 коммита сегодня:
+- `f017a0a` feat: personalized greeting with user name
+- `1acab62` feat: About screen with author, version, credits
+- `461d8b9` feat: About screen redesigned with Şapak Apps branding
+- `79ea08e` feat: use real app icon + Şapak brand logo in About
+
+### Что осталось / завтра
+- Финальное тестирование APK на телефоне
+- Сжать аватарки PNG (~6 МБ → ~1 МБ через tinypng)
+- Возможно: переименовать app.json `name` с «TurkmenLearn: Chinese» на «Şapak — Hytaý dili» (но это меняет имя на главном экране Android — обсудить)
+
+---
+
+## 2026-05-27 (Сессия 8) — Геймификация: XP, Streak, Profile, Bookmarks, Onboarding
 
 ### Контекст
 После большого редизайна в сессии 7 (14.05) приложение стало визуально хорошим, но «не живым». Решили добавить геймификационные механики по плану из `ROADMAP.md` (4 этапа).
