@@ -6,6 +6,7 @@ import Constants from "expo-constants";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
+  Image,
   Linking,
   Modal,
   Pressable,
@@ -15,6 +16,9 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+const APP_ICON = require("../assets/images/icon.png");
+const SHAPAK_LOGO = require("../assets/images/shapak_logo.png");
 
 const APP_VERSION =
   Constants.expoConfig?.version ?? Constants.manifest?.version ?? "1.0.0";
@@ -59,7 +63,7 @@ export default function AboutScreen() {
         {/* App identity */}
         <View style={styles.logoContainer}>
           <View style={styles.appBadge}>
-            <ThemedText style={styles.appBadgeText}>汉</ThemedText>
+            <Image source={APP_ICON} style={styles.appIconImg} />
           </View>
           <ThemedText style={styles.appName}>{APP_NAME}</ThemedText>
           <View style={styles.versionPill}>
@@ -101,13 +105,8 @@ export default function AboutScreen() {
             activeOpacity={0.7}
           >
             <View style={styles.menuLeft}>
-              <View
-                style={[
-                  styles.menuIcon,
-                  { backgroundColor: Colors.successBg },
-                ]}
-              >
-                <Ionicons name="apps" size={22} color={Colors.successColor} />
+              <View style={[styles.menuIcon, styles.menuIconShapak]}>
+                <Image source={SHAPAK_LOGO} style={styles.menuShapakImg} />
               </View>
               <View style={styles.menuText}>
                 <ThemedText style={styles.menuTitle}>
@@ -229,10 +228,7 @@ export default function AboutScreen() {
           >
             {/* Brand block */}
             <View style={styles.seriesHero}>
-              <View style={styles.seriesBadge}>
-                <ThemedText style={styles.seriesBadgeText}>Ş</ThemedText>
-              </View>
-              <ThemedText style={styles.seriesName}>Şapak Apps</ThemedText>
+              <Image source={SHAPAK_LOGO} style={styles.seriesLogo} />
               <ThemedText style={styles.seriesTagline}>
                 Türkmen dilinde — daşary ýurt dillerini öwretmek üçin programmalar toplumy
               </ThemedText>
@@ -382,17 +378,14 @@ const styles = StyleSheet.create({
     width: 96,
     height: 96,
     borderRadius: 24,
-    backgroundColor: Colors.primaryAccentColor,
-    alignItems: "center",
-    justifyContent: "center",
+    overflow: "hidden",
     marginBottom: 14,
     ...Shadow.md,
   },
-  appBadgeText: {
-    fontFamily: FontFamily.bold,
-    fontSize: 52,
-    lineHeight: 60,
-    color: Colors.textInverse,
+  appIconImg: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
   appName: {
     fontFamily: FontFamily.bold,
@@ -443,6 +436,15 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     alignItems: "center",
     justifyContent: "center",
+  },
+  menuIconShapak: {
+    backgroundColor: "#000000",
+    overflow: "hidden",
+  },
+  menuShapakImg: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
   },
   menuText: { flex: 1 },
   menuTitle: {
@@ -507,26 +509,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     marginBottom: 16,
   },
-  seriesBadge: {
-    width: 76,
-    height: 76,
-    borderRadius: 38,
-    backgroundColor: Colors.primaryAccentColor,
-    alignItems: "center",
-    justifyContent: "center",
+  seriesLogo: {
+    width: 240,
+    height: 80,
+    resizeMode: "contain",
     marginBottom: 10,
-    ...Shadow.md,
-  },
-  seriesBadgeText: {
-    fontFamily: FontFamily.bold,
-    fontSize: 42,
-    lineHeight: 50,
-    color: Colors.textInverse,
-  },
-  seriesName: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    color: Colors.textPrimary,
   },
   seriesTagline: {
     fontFamily: FontFamily.regular,
