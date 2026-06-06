@@ -9,7 +9,7 @@ import { getAllProgress } from "@/lib/lessonProgress";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -29,6 +29,7 @@ function getUnit(chapterId: number) {
 export default function ChapterDetailScreen() {
   const { chapterId } = useLocalSearchParams<{ chapterId: string }>();
   const id = chapterId != null ? Number(chapterId) : 1;
+  const isPronunciation = id === 0;
   const [progress, setProgress] = useState<Record<string, number>>({});
   const { bookmarks, toggle: toggleBookmark } = useBookmarks();
   const isBookmarked = bookmarks.has(id);
@@ -39,7 +40,18 @@ export default function ChapterDetailScreen() {
     }, []),
   );
 
+  // Chapter 0 (Pronunciation) is theory-only — redirect to the theory screen.
+  useEffect(() => {
+    if (isPronunciation) {
+      router.replace({ pathname: "/theory", params: { chapterId: "0" } });
+    }
+  }, [isPronunciation]);
+
   const chapter = COURSE_DATA.chapters.find((ch) => ch.id === id);
+
+  if (isPronunciation) {
+    return null; // redirecting via the effect above
+  }
 
   if (!chapter) {
     return (
@@ -53,12 +65,6 @@ export default function ChapterDetailScreen() {
     (sum, lesson) => sum + lesson.questions.length,
     0,
   );
-
-  const isPronunciation = id === 0;
-  if (isPronunciation) {
-    router.replace({ pathname: "/theory", params: { chapterId: "0" } });
-    return null;
-  }
 
   const theory = THEORY_DATA[id];
   const keyWord = theory?.vocabulary?.[0];
