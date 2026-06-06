@@ -8,7 +8,6 @@
     {
       "id": 1,
       "title": "你好 — Hello",
-      "titleChinese": "你好",
       "description": "Приветствие, знакомство, глагол 是 и частица 吗.",
       "lessons": [
         {
@@ -891,7 +890,6 @@
     {
       "id": 2,
       "title": "你是哪国人 — What's Your Nationality?",
-      "titleChinese": "谢谢你",
       "description": "Polite expressions and remaining pinyin sounds.",
       "lessons": [
         {
@@ -1876,7 +1874,6 @@
     {
       "id": 3,
       "title": "那是你的书吗 — Is That Your Book?",
-      "titleChinese": "你叫什么名字",
       "description": "Introducing yourself, question words.",
       "lessons": [
         {
@@ -2848,7 +2845,6 @@
     {
       "id": 4,
       "title": "图书馆在哪儿 — Where Is the Library?",
-      "titleChinese": "她是我的汉语老师",
       "description": "The verb 是, the particle 的, negation with 不.",
       "lessons": [
         {
@@ -3810,7 +3806,6 @@
     {
       "id": 5,
       "title": "在北京大学的东边 — East of Peking University",
-      "titleChinese": "她女儿今年二十岁",
       "description": "Numbers 1–100, age, 几 vs 多少.",
       "lessons": [
         {
@@ -4772,7 +4767,6 @@
     {
       "id": 6,
       "title": "现在几点 — What Time Is It?",
-      "titleChinese": "我会说汉语",
       "description": "会 (skill), 能 (ability), countries & languages.",
       "lessons": [
         {
@@ -5694,7 +5688,6 @@
     {
       "id": 7,
       "title": "明天你有课吗 — Do You Have Class Tomorrow?",
-      "titleChinese": "今天几号",
       "description": "Dates, days of the week, time order.",
       "lessons": [
         {
@@ -6646,7 +6639,6 @@
     {
       "id": 8,
       "title": "你的电话号码是多少 — What's Your Phone Number?",
-      "titleChinese": "我想喝茶",
       "description": "想 (want), 吗 yes/no questions, 呢, food vocabulary.",
       "lessons": [
         {
@@ -7618,7 +7610,6 @@
     {
       "id": 9,
       "title": "多少钱一瓶 — How Much per Bottle?",
-      "titleChinese": "你儿子在哪儿工作",
       "description": "在 (at/in), 哪儿 (where), places, family & work.",
       "lessons": [
         {
@@ -8519,7 +8510,6 @@
     {
       "id": 10,
       "title": "你家有几口人 — How Many in Your Family?",
-      "titleChinese": "我能坐这儿吗",
       "description": "Position words, 这/那, 有, measure words.",
       "lessons": [
         {
@@ -9401,7 +9391,6 @@
     {
       "id": 11,
       "title": "北京的冬天比较冷 — Beijing Winter Is Cold",
-      "titleChinese": "现在几点",
       "description": "Telling time, 半, SVO word order.",
       "lessons": [
         {
@@ -10298,7 +10287,6 @@
     {
       "id": 12,
       "title": "你在干什么呢 — What Are You Doing?",
-      "titleChinese": "明天天气怎么样",
       "description": "怎么样, 太…了, 很, weather vocabulary.",
       "lessons": [
         {
@@ -11185,7 +11173,6 @@
     {
       "id": 13,
       "title": "我去图书馆借书 — I'm Going to the Library",
-      "titleChinese": "他在学做中国菜呢",
       "description": "在…呢 progressive, verb chains, common verbs, going places.",
       "lessons": [
         {
@@ -12077,7 +12064,6 @@
     {
       "id": 14,
       "title": "我喜欢淡颜色的 — I Like Light Colors",
-      "titleChinese": "她买了不少衣服",
       "description": "了 (completion), 不 vs 没, shopping & clothes.",
       "lessons": [
         {
@@ -12979,7 +12965,6 @@
     {
       "id": 15,
       "title": "明天是我朋友的生日 — Tomorrow Is My Friend's Birthday",
-      "titleChinese": "我是坐飞机来的",
       "description": "是…的 (emphasis), transport, HSK1 review.",
       "lessons": [
         {
@@ -13881,7 +13866,6 @@
     {
       "id": 16,
       "title": "周末你干什么 — What Do You Do on Weekends?",
-      "titleChinese": "九月去北京旅游最好",
       "description": "最 (superlative), 的时候 (when), approximate numbers.",
       "lessons": [
         {
@@ -14773,7 +14757,6 @@
     {
       "id": 17,
       "title": "做客（一）— Visiting (Part 1)",
-      "titleChinese": "我每天六点起床",
       "description": "每 (every), 都 (all), daily routines.",
       "lessons": [
         {
@@ -15655,7 +15638,6 @@
     {
       "id": 18,
       "title": "做客（二）— Visiting (Part 2)",
-      "titleChinese": "左边那个红色的是我的",
       "description": "Colors, left/right/beside, 的 nominalization.",
       "lessons": [
         {
@@ -16542,7 +16524,6 @@
     {
       "id": 19,
       "title": "现在习惯了 — I'm Used to It Now",
-      "titleChinese": "这个工作是他帮我介绍的",
       "description": "是…的 review, 帮 (help), 就 (then/just), extended family.",
       "lessons": [
         {
@@ -17429,7 +17410,6 @@
     {
       "id": 20,
       "title": "看病人 — Visiting a Patient",
-      "titleChinese": "就买这件吧",
       "description": "吧 (suggestion), 件 measure word, 一下, new measure words.",
       "lessons": [
         {
@@ -18311,7 +18291,6 @@
     {
       "id": 21,
       "title": "我喝了半斤白酒 — I Drank Half a Jin of Baijiu",
-      "titleChinese": "你怎么不吃了",
       "description": "怎么 (why), 了 state change, 还/也, already.",
       "lessons": [
         {
@@ -19193,7 +19172,6 @@
     {
       "id": 22,
       "title": "他感冒了 — He Caught a Cold",
-      "titleChinese": "你家离公司远吗",
       "description": "离 (distance), 从…到, far/near, new places.",
       "lessons": [
         {
@@ -20080,7 +20058,6 @@
     {
       "id": 23,
       "title": "你学了多长时间汉语 — How Long Have You Studied Chinese?",
-      "titleChinese": "让我想想再告诉你",
       "description": "让 (let), verb doubling, 再 (again later), still & again.",
       "lessons": [
         {
@@ -20957,7 +20934,6 @@
     {
       "id": 24,
       "title": "你吃了早饭来找我 — Come Find Me After Breakfast",
-      "titleChinese": "题太多，我没做完",
       "description": "Result complements (做完, 看见, 听懂), can/cannot.",
       "lessons": [
         {
@@ -21829,7 +21805,6 @@
     {
       "id": 25,
       "title": "你得多锻炼锻炼了 — You Need More Exercise",
-      "titleChinese": "别找了，手机在桌子上呢",
       "description": "别/不要 (don't), 着 state, 正在…呢, action verbs.",
       "lessons": [
         {
@@ -22706,7 +22681,6 @@
     {
       "id": 26,
       "title": "快考试了 — Exam Is Coming",
-      "titleChinese": "他比我大三岁",
       "description": "比 comparison, A比B + adj, opposites.",
       "lessons": [
         {
@@ -23583,7 +23557,6 @@
     {
       "id": 27,
       "title": "爸爸妈妈让我回家 — Mom and Dad Want Me Home",
-      "titleChinese": "你穿得太少了",
       "description": "得 degree complement, Verb+得+evaluation, how well.",
       "lessons": [
         {
@@ -24450,7 +24423,6 @@
     {
       "id": 28,
       "title": "考得怎么样 — How Did the Exam Go?",
-      "titleChinese": "门开着呢",
       "description": "着 continuous state, 因为…所以, 虽然…但是.",
       "lessons": [
         {
@@ -25327,7 +25299,6 @@
     {
       "id": 29,
       "title": "我们已经买好票了 — We Already Bought Tickets",
-      "titleChinese": "你看过那个电影吗",
       "description": "过 (experience), 过 vs 了, duration & frequency, body & hobbies.",
       "lessons": [
         {
@@ -26199,7 +26170,6 @@
     {
       "id": 30,
       "title": "我要参加联欢会 — I'm Going to the Party",
-      "titleChinese": "新年就要到了",
       "description": "就要/快要…了, A不A questions, direction complements, HSK2 review.",
       "lessons": [
         {

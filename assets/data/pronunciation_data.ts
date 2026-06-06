@@ -129,62 +129,6 @@ export const INITIALS: InitialGroup[] = [
 // ============================================================
 export const FINALS: FinalGroup[] = [
   {
-    name: "单韵母", nameEn: "Simple Finals",
-    finals: [
-      { final: "a", audio: "a1" },
-      { final: "o", audio: "o1" },
-      { final: "e", audio: "e1" },
-      { final: "i", audio: "yi1" },
-      { final: "u", audio: "wu1" },
-      { final: "ü", audio: "lv4" },
-    ],
-  },
-  {
-    name: "复韵母", nameEn: "Compound Finals",
-    finals: [
-      { final: "ai", audio: "ai1" },
-      { final: "ao", audio: "ao1" },
-      { final: "ou", audio: "ou1" },
-      { final: "ei", audio: "ei1" },
-      { final: "ia", audio: "ya1" },
-      { final: "ie", audio: "ye1" },
-      { final: "iao", audio: "yao1" },
-      { final: "iou(iu)", audio: "you1" },
-      { final: "ua", audio: "wa1" },
-      { final: "uo", audio: "wo1" },
-      { final: "uai", audio: "wai1" },
-      { final: "uei(ui)", audio: "wei1" },
-      { final: "üe", audio: "yue1" },
-    ],
-  },
-  {
-    name: "鼻韵母", nameEn: "Nasal Finals",
-    finals: [
-      { final: "an", audio: "an1" },
-      { final: "en", audio: "en1" },
-      { final: "in", audio: "yin1" },
-      { final: "ian", audio: "yan1" },
-      { final: "uan", audio: "wan1" },
-      { final: "uen(un)", audio: "wen1" },
-      { final: "üan", audio: "yuan1" },
-      { final: "ang", audio: "ang1" },
-      { final: "eng", audio: "eng1" },
-      { final: "ing", audio: "ying1" },
-      { final: "iang", audio: "yang1" },
-      { final: "iong", audio: "yong1" },
-      { final: "uang", audio: "wang1" },
-      { final: "ong", audio: "dong1" },
-      { final: "ueng", audio: "weng1" },
-      { final: "tion", audio: "dun1" },
-      { final: "uan", audio: "wan1" },
-      { final: "üan", audio: "yuan1" },
-    ],
-  },
-];
-
-// Remove duplicates from nasal finals — clean version
-export const FINALS_CLEAN: FinalGroup[] = [
-  {
     name: "单韵母", nameEn: "Simple Finals (6)",
     finals: [
       { final: "a", audio: "a1" },
@@ -401,8 +345,8 @@ export const STROKES: StrokeItem[] = [
   { stroke: "㇏", name: "捺", pinyin: "nà" },
   { stroke: "㇀", name: "提", pinyin: "tí" },
   { stroke: "丶一", name: "撇点", pinyin: "piědiǎn" },
-  { stroke: "㇊", name: "竖弯", pinyin: "shùzhé" },
-  { stroke: "乛", name: "横折弯", pinyin: "héngzhé" },
+  { stroke: "㇊", name: "竖弯", pinyin: "shùwān" },
+  { stroke: "乛", name: "横折弯", pinyin: "héngzhéwān" },
   { stroke: "亅", name: "弯钩", pinyin: "wāngōu" },
   { stroke: "𠃌", name: "竖钩", pinyin: "shùgōu" },
   { stroke: "乚", name: "斜钩", pinyin: "xiégōu" },

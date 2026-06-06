@@ -3,7 +3,7 @@ import { Colors, FontFamily } from "@/constants/theme";
 import {
   INTRO_TEXT,
   INITIALS,
-  FINALS_CLEAN,
+  FINALS,
   TONES,
   TONES_DESCRIPTION,
   SOUND_CHANGES,
@@ -123,7 +123,7 @@ function FinalsPage() {
   return (
     <PageWrapper label="韵母" title="38 финалей">
       <Body text="Финаль — гласная часть слога. Нажмите чтобы услышать." />
-      {FINALS_CLEAN.map((group) => (
+      {FINALS.map((group) => (
         <View key={group.name} style={s.groupBlock}>
           <ThemedText style={s.groupName}>
             {group.name} — {group.nameEn}
