@@ -21,13 +21,13 @@
 **Что держит балл:** красивая оболочка, но (а) строки UI вперемешку на туркменском/русском/английском в одной сессии, (б) полное отсутствие доступности, (в) дизайн-система не enforced.
 
 ### Обязательно для 7/10
-- [ ] 🔴 **M — Единый слой строк UI.** Вынести все hardcoded-строки чрома в один `lib/strings.ts` (туркменский) и прогнать через него:
+- [x] 🔴 **M — Единый слой строк UI.** Вынести все hardcoded-строки чрома в один `lib/strings.ts` (туркменский) и прогнать через него:
   - `components/lesson/FeedbackView.tsx` — «Great job!/Not quite» (46-49), «Try Again/Skip/Continue/Next Question» (125,133,146), «Expected:/You said:» (67,73)
   - `components/lesson/LessonCompleteScreen.tsx` — «Урок пройден!» (95), оценки (64-67), «Повторить/Продолжить/Повторить ошибки» (165,209,226)
   - `components/lesson/GrammarMode.tsx` (91-163), `FillBlankMode.tsx` («Подсказка/Дальше» 98,160), `MultipleChoiceMode.tsx` («Выбери ответ» 26), `MatchPairsMode.tsx` (148), `FlashcardMode.tsx` (153)
   - Alert-диалоги в `LessonContent.tsx` (294,328,396,406), «Chapter not found» в `theory.tsx:46` и `chapter-detail.tsx:47`
 - [ ] 🟠 **S — Базовая доступность.** Добавить `accessibilityLabel` + `accessibilityRole="button"` на icon-only кнопки: back (все хедеры), audio-спикеры (`theory.tsx:64`, `FlashcardMode.tsx:104`), bookmark (`chapter-detail.tsx:87`), brush/close. Это снимает «нулевую» доступность.
-- [ ] 🟡 **S — Единая терминология.** Выбрать одно слово: «Teoriýa» vs «Nazaryýet» (`theory.tsx:516,548` vs `onboarding.tsx:50`, `chapter-detail.tsx:194`).
+- [x] 🟡 **S — Единая терминология.** Выбрать одно слово: «Teoriýa» vs «Nazaryýet» (`theory.tsx:516,548` vs `onboarding.tsx:50`, `chapter-detail.tsx:194`).
 - [ ] 🟡 **S — Тёмная тема: решить.** Либо подключить (`_layout.tsx:51` хардкодит `DefaultTheme`), либо убрать мёртвые токены `Colors.dark` и шаблонные `themed-text`/`themed-view`/`collapsible`/`icon-symbol`.
 
 ### Стретч (к 8+)
@@ -49,8 +49,8 @@
 - [ ] 🔴 **S — Починить ложное «оффлайн».** Сейчас аудио произношения стримится с чужого GitHub (`PronunciationTheory.tsx:42-43`), а 1632 бандленных mp3 (35 МБ) не используются. Выбрать:
   - (а) подключить локальные mp3 через статический `require`-маппинг (реально оффлайн), **или**
   - (б) убрать 35 МБ, оставить стрим+TTS-фолбэк, и **исправить текст** `about-app.tsx:82` («все звуки на телефоне» — сейчас неправда).
-- [ ] 🟠 **S — Рассинхрон `titleChinese`.** В `course_content.json` китайский заголовок каждой главы принадлежит другому уроку (ч2: title «你是哪国人», titleChinese «谢谢你»). Либо пересинхронить, либо удалить поле, если оно нигде не рендерится.
-- [ ] 🟡 **S — Убрать баги данных.** `pronunciation_data.ts:178` — фейковая финаль `"tion"` + дубли `uan`/`üan` (179-180) в мёртвом `FINALS` (UI использует `FINALS_CLEAN`). Удалить мёртвый `FINALS`. Поправить названия черт `:404-405` (竖弯→shùwān, 横折弯→héngzhéwān).
+- [x] 🟠 **S — Рассинхрон `titleChinese`.** В `course_content.json` китайский заголовок каждой главы принадлежит другому уроку (ч2: title «你是哪国人», titleChinese «谢谢你»). Либо пересинхронить, либо удалить поле, если оно нигде не рендерится.
+- [x] 🟡 **S — Убрать баги данных.** `pronunciation_data.ts:178` — фейковая финаль `"tion"` + дубли `uan`/`üan` (179-180) в мёртвом `FINALS` (UI использует `FINALS_CLEAN`). Удалить мёртвый `FINALS`. Поправить названия черт `:404-405` (竖弯→shùwān, 横折弯→héngzhéwān).
 ### Плановая фаза переводчиков (НЕ текущая задача — после готовности приложения)
 - [ ] **L — Туркменизация всего контента** (объяснения, упражнения) силами команды переводчиков → реализует заявленный ров «через туркменский». Сейчас русский — placeholder by design.
 - [ ] **L — Адаптация диалогов** при туркменизации (заодно отвязка от исходного учебника). Копирайт как риск снят решением владельца.
@@ -92,7 +92,7 @@
   - Неиспользуемые deps: `@supabase/supabase-js`*, `expo-auth-session`, `expo-secure-store`, `aes-js`, `expo-crypto` (*supabase оставить, если идём на бэкап в п.3).
   - `assets/data/course_content_backup.json` (1.16 МБ), `illustrations.excalidraw` (1.16 МБ), `assets/videos/broll.mp4` (10 МБ) — убрать из репо/в LFS.
   - 35 МБ неиспользуемого `assets/audio/` — решить вместе с Content п.1.
-- [ ] 🟠 **S — `router.replace` в рендере.** `chapter-detail.tsx:57-60` — перенести навигацию в `useEffect` (сейчас сайд-эффект в теле render).
+- [x] 🟠 **S — `router.replace` в рендере.** `chapter-detail.tsx:57-60` — перенести навигацию в `useEffect` (сейчас сайд-эффект в теле render).
 - [ ] 🔴 **S — Фейковое упражнение на произношение.** `LessonContent.tsx:400-402` скармливает ожидаемую строку как «сказанную» → всегда «верно» + XP. Либо честно пометить как заглушку/убрать мик, либо реализовать реальную оценку.
 
 ### Стретч (к 8+)
