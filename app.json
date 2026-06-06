@@ -10,10 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.turkmenlearn.chinese",
-      "infoPlist": {
-        "NSMicrophoneUsageDescription": "This app needs microphone access for pronunciation practice."
-      }
+      "bundleIdentifier": "com.turkmenlearn.chinese"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,7 +20,7 @@
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.turkmenlearn.chinese",
-      "permissions": ["android.permission.RECORD_AUDIO"]
+      "permissions": []
     },
     "web": {
       "output": "static",
@@ -40,12 +37,7 @@
           "backgroundColor": "#ffffcc"
         }
       ],
-      [
-        "expo-av",
-        {
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone for pronunciation practice"
-        }
-      ]
+      "expo-av"
     ],
     "experiments": {
       "typedRoutes": true,
