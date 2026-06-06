@@ -79,7 +79,7 @@ function WelcomePage() {
         Bu programma türkmen dilinde gepleýänler üçin hytaý dilini öwretmek üçin döredildi. Maksadymyz — sada we düşnükli ýol bilen başlangyç derejäni özleşdirmek.
       </ThemedText>
       <ThemedText style={styles.body}>
-        Programma doly oflaýn işleýär — internet gerek däl. Ähli sözlükler, grammatika, sesler we hiýeroglifler telefonyňyzda saklanýar.
+        Programma esasan oflaýn işleýär — sözlükler, grammatika, gönükmeler we hiýeroglifler telefonyňyzda saklanýar. Diňe aýdylyş seslerini diňlemek üçin internet gerek bolup biler.
       </ThemedText>
       <View style={styles.statsRow}>
         <View style={styles.statBox}>
