@@ -19,6 +19,7 @@ interface Unit {
 }
 
 const UNITS: Unit[] = [
+  { range: [0, 0], title: "Başlangyç", subtitle: "Aýdylyş · 语音" },
   { range: [1, 5], title: "Bölüm 1", subtitle: "Tanyşlyk we ýer" },
   { range: [6, 10], title: "Bölüm 2", subtitle: "Wagt we sanlar" },
   { range: [11, 15], title: "Bölüm 3", subtitle: "Gündelik durmuş" },
@@ -123,6 +124,8 @@ export default function ChaptersScreen() {
             completedChapterIds.has(ch.id),
           ).length;
 
+          const isIntroUnit = unit.range[0] === 0;
+
           return (
             <View key={unit.title} style={styles.unitSection}>
               <View style={styles.unitHeader}>
@@ -132,11 +135,13 @@ export default function ChaptersScreen() {
                     {unit.subtitle}
                   </ThemedText>
                 </View>
-                <View style={styles.unitProgress}>
-                  <ThemedText style={styles.unitProgressText}>
-                    {completedInUnit}/{chaptersInUnit.length}
-                  </ThemedText>
-                </View>
+                {!isIntroUnit && (
+                  <View style={styles.unitProgress}>
+                    <ThemedText style={styles.unitProgressText}>
+                      {completedInUnit}/{chaptersInUnit.length}
+                    </ThemedText>
+                  </View>
+                )}
               </View>
 
               {chaptersInUnit.map((chapter) => {
@@ -164,7 +169,7 @@ export default function ChaptersScreen() {
                     onPress={() => {
                       haptics.tap();
                       router.push({
-                        pathname: "/chapter-detail",
+                        pathname: chapter.id === 0 ? "/theory" : "/chapter-detail",
                         params: { chapterId: String(chapter.id) },
                       });
                     }}
