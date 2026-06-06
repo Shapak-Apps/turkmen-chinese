@@ -1,6 +1,7 @@
 import { SpeakingOption } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
+import { T } from "@/lib/strings";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { ThemedText } from "../themed-text";
 
@@ -23,7 +24,7 @@ export default function MultipleChoiceMode({
     <View style={{ flex: 1 }}>
       <View style={styles.promptContainer}>
         <ThemedText style={styles.sectionTitle}>
-          {instruction || "Выбери ответ:"}
+          {instruction || T.practice.chooseAnswer}
         </ThemedText>
       </View>
       <ScrollView

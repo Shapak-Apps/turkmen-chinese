@@ -1,6 +1,7 @@
 import { FlashcardOption } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
+import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
 import { useEffect, useState } from "react";
@@ -150,7 +151,7 @@ export default function FlashcardMode({
             { color: selectedId === null ? Colors.subduedTextColor : Colors.textInverse },
           ]}
         >
-          {answered ? "Continue" : "Check"}
+          {answered ? T.common.continue : T.common.check}
         </ThemedText>
       </TouchableOpacity>
     </View>

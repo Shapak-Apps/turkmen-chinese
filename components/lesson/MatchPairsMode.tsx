@@ -1,6 +1,7 @@
 import { MatchPair } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
+import { T } from "@/lib/strings";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Animated,
@@ -145,7 +146,7 @@ export default function MatchPairsMode({
 
       <View style={styles.progressContainer}>
         <ThemedText style={styles.progressText}>
-          {matchedIds.size} / {pairs.length} matched
+          {T.practice.matched(matchedIds.size, pairs.length)}
         </ThemedText>
       </View>
     </View>

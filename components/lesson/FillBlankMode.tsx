@@ -1,5 +1,6 @@
 import { Colors, FontFamily } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
+import { T } from "@/lib/strings";
 import * as Speech from "expo-speech";
 import { useEffect, useState } from "react";
 import {
@@ -95,7 +96,7 @@ export default function FillBlankMode({
 
       {hint && (
         <View style={styles.hintContainer}>
-          <ThemedText style={styles.hintText}>Подсказка: {hint}</ThemedText>
+          <ThemedText style={styles.hintText}>{T.practice.hintLabel}: {hint}</ThemedText>
         </View>
       )}
 
@@ -157,7 +158,7 @@ export default function FillBlankMode({
             { color: answered ? Colors.textInverse : Colors.subduedTextColor },
           ]}
         >
-          Дальше
+          {T.common.continue}
         </ThemedText>
       </TouchableOpacity>
     </View>

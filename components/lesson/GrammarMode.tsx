@@ -3,6 +3,7 @@ import {
   GrammarPractice,
 } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
+import { T } from "@/lib/strings";
 import { useState } from "react";
 import {
   Pressable,
@@ -88,7 +89,7 @@ export default function GrammarMode({
 
           {rule.examples.length > 0 && (
             <View style={styles.examplesSection}>
-              <ThemedText style={styles.examplesLabel}>Examples</ThemedText>
+              <ThemedText style={styles.examplesLabel}>{T.practice.examples}</ThemedText>
               {rule.examples.map((example, idx) => (
                 <View key={idx} style={styles.exampleCard}>
                   <ThemedText style={styles.exampleHanzi}>{example.hanzi}</ThemedText>
@@ -106,7 +107,7 @@ export default function GrammarMode({
           activeOpacity={0.85}
         >
           <ThemedText style={styles.actionButtonText}>
-            Practice ({practice.length} questions)
+            {T.practice.startPractice(practice.length)}
           </ThemedText>
         </TouchableOpacity>
       </View>
@@ -117,7 +118,7 @@ export default function GrammarMode({
     <View style={styles.container}>
       <View style={styles.practiceProgress}>
         <ThemedText style={styles.practiceProgressText}>
-          Question {currentPracticeIndex + 1} of {practice.length}
+          {T.practice.questionProgress(currentPracticeIndex + 1, practice.length)}
         </ThemedText>
       </View>
 
@@ -158,9 +159,9 @@ export default function GrammarMode({
         >
           {answered
             ? currentPracticeIndex < practice.length - 1
-              ? "Next"
-              : "Continue"
-            : "Check"}
+              ? T.common.next
+              : T.common.continue
+            : T.common.check}
         </ThemedText>
       </TouchableOpacity>
     </View>

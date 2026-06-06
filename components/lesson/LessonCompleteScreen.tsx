@@ -1,6 +1,7 @@
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
+import { T } from "@/lib/strings";
 import { addXP, XP_REWARDS } from "@/lib/xp";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -61,10 +62,10 @@ export default function LessonCompleteScreen({
   }, []);
 
   const getPerformanceMessage = () => {
-    if (lessonStats.accuracy >= 90) return "Превосходно!";
-    if (lessonStats.accuracy >= 75) return "Отлично!";
-    if (lessonStats.accuracy >= 60) return "Хорошая работа!";
-    return "Продолжай практиковаться!";
+    if (lessonStats.accuracy >= 90) return T.complete.perfExcellent;
+    if (lessonStats.accuracy >= 75) return T.complete.perfGreat;
+    if (lessonStats.accuracy >= 60) return T.complete.perfGood;
+    return T.complete.perfKeep;
   };
 
   const getPerformanceColor = () => {
@@ -92,7 +93,7 @@ export default function LessonCompleteScreen({
               <Ionicons name="trophy" size={22} color={Colors.textInverse} />
             </View>
           </View>
-          <ThemedText style={styles.completeTitle}>Урок пройден!</ThemedText>
+          <ThemedText style={styles.completeTitle}>{T.complete.title}</ThemedText>
           <ThemedText style={styles.performanceMessage}>
             {getPerformanceMessage()}
           </ThemedText>
@@ -116,7 +117,7 @@ export default function LessonCompleteScreen({
               {lessonStats.accuracy}%
             </ThemedText>
             <ThemedText style={styles.accuracyLabel}>
-              {lessonStats.correctAnswers}/{lessonStats.totalQuestions} правильно
+              {T.complete.correctCount(lessonStats.correctAnswers, lessonStats.totalQuestions)}
             </ThemedText>
           </View>
         </Animated.View>
@@ -128,7 +129,7 @@ export default function LessonCompleteScreen({
               <Ionicons name="trophy" size={22} color={Colors.warningColor} />
             </View>
             <View style={styles.xpTotalCol}>
-              <ThemedText style={styles.xpLabel}>BU SAPAKDA</ThemedText>
+              <ThemedText style={styles.xpLabel}>{T.complete.inThisLesson}</ThemedText>
               <ThemedText style={styles.xpValue}>+{totalLessonXP} XP</ThemedText>
             </View>
           </View>
@@ -136,18 +137,18 @@ export default function LessonCompleteScreen({
           <View style={styles.xpBreakdown}>
             <View style={styles.xpRow}>
               <ThemedText style={styles.xpRowLabel}>
-                {lessonStats.correctAnswers} dogry jogap
+                {T.complete.correctAnswers(lessonStats.correctAnswers)}
               </ThemedText>
               <ThemedText style={styles.xpRowValue}>+{xpForAnswers}</ThemedText>
             </View>
             <View style={styles.xpRow}>
-              <ThemedText style={styles.xpRowLabel}>Sapak tamamlandy</ThemedText>
+              <ThemedText style={styles.xpRowLabel}>{T.complete.lessonComplete}</ThemedText>
               <ThemedText style={styles.xpRowValue}>+{xpForCompletion}</ThemedText>
             </View>
             {xpForPerfect > 0 && (
               <View style={styles.xpRow}>
                 <ThemedText style={[styles.xpRowLabel, styles.xpBonusLabel]}>
-                  ⭐ 100% bonus
+                  {T.complete.bonus100}
                 </ThemedText>
                 <ThemedText style={[styles.xpRowValue, styles.xpBonusValue]}>
                   +{xpForPerfect}
@@ -162,10 +163,10 @@ export default function LessonCompleteScreen({
             <Animated.View style={[styles.wrongSection, { opacity: fadeAnim }]}>
               <View style={styles.wrongHeader}>
                 <Ionicons name="alert-circle" size={22} color={Colors.primaryAccentColor} />
-                <ThemedText style={styles.wrongTitle}>Повторить</ThemedText>
+                <ThemedText style={styles.wrongTitle}>{T.complete.reviewTitle}</ThemedText>
               </View>
               <ThemedText style={styles.wrongSubtitle}>
-                Обрати внимание на эти задания
+                {T.complete.reviewSubtitle}
               </ThemedText>
 
               {lessonStats.wrongQuestions.map((question, index) => (
@@ -206,7 +207,7 @@ export default function LessonCompleteScreen({
 
       <Animated.View style={[styles.actionButtons, { opacity: fadeAnim }]}>
         <TouchableOpacity style={styles.primaryButton} onPress={onContinue} activeOpacity={0.85}>
-          <ThemedText style={styles.primaryButtonText}>Продолжить</ThemedText>
+          <ThemedText style={styles.primaryButtonText}>{T.common.continue}</ThemedText>
           <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
         </TouchableOpacity>
 
@@ -223,7 +224,7 @@ export default function LessonCompleteScreen({
                 color={Colors.primaryAccentColor}
               />
               <ThemedText style={styles.secondaryButtonText}>
-                Повторить ошибки
+                {T.complete.reviewMistakes}
               </ThemedText>
             </TouchableOpacity>
           )}

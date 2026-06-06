@@ -1,5 +1,6 @@
 import { SpeakingOption } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
+import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { ThemedText } from "../themed-text";
@@ -43,19 +44,19 @@ export function FeedbackView({
         <View style={styles.headerText}>
           <ThemedText style={styles.title}>
             {isCorrect
-              ? "Great job!"
+              ? T.feedback.correct
               : showRetryButton
-                ? "Not quite"
-                : "Keep practising"}
+                ? T.feedback.notQuite
+                : T.feedback.keepPractising}
           </ThemedText>
           {!isCorrect && showRetryButton && (
             <ThemedText style={styles.subtitle}>
-              Try again - you&apos;ve got this!
+              {T.feedback.tryAgainSub}
             </ThemedText>
           )}
           {showCorrectAnswer && (
             <ThemedText style={styles.subtitle}>
-              Here&apos;s what to say next time
+              {T.feedback.nextTimeSub}
             </ThemedText>
           )}
         </View>
@@ -64,13 +65,13 @@ export function FeedbackView({
       {transcription && (
         <View style={styles.transcriptionContainer}>
           <View style={styles.transcriptionRow}>
-            <ThemedText style={styles.transcriptionLabel}>Expected:</ThemedText>
+            <ThemedText style={styles.transcriptionLabel}>{T.feedback.expected}:</ThemedText>
             <ThemedText style={styles.transcriptionText}>
               {transcription.expected}
             </ThemedText>
           </View>
           <View style={styles.transcriptionRow}>
-            <ThemedText style={styles.transcriptionLabel}>You said:</ThemedText>
+            <ThemedText style={styles.transcriptionLabel}>{T.feedback.youSaid}:</ThemedText>
             <ThemedText
               style={[
                 styles.transcriptionText,
@@ -93,7 +94,7 @@ export function FeedbackView({
               color={Colors.successColor}
             />
             <ThemedText style={styles.correctAnswerLabel}>
-              Correct Response
+              {T.feedback.correctResponse}
             </ThemedText>
           </View>
           <View style={styles.correctAnswerContent}>
@@ -122,7 +123,7 @@ export function FeedbackView({
             >
               <Ionicons name="refresh" size={18} color={Colors.textInverse} />
               <ThemedText style={styles.retryButtonText}>
-                Try Again ({maxAttempts - attemptCount} left)
+                {T.feedback.tryAgainLeft(maxAttempts - attemptCount)}
               </ThemedText>
             </TouchableOpacity>
             <TouchableOpacity
@@ -130,7 +131,7 @@ export function FeedbackView({
               onPress={onContinue}
               activeOpacity={0.85}
             >
-              <ThemedText style={styles.skipButtonText}>Skip</ThemedText>
+              <ThemedText style={styles.skipButtonText}>{T.common.skip}</ThemedText>
             </TouchableOpacity>
           </>
         ) : (
@@ -143,7 +144,7 @@ export function FeedbackView({
             activeOpacity={0.85}
           >
             <ThemedText style={styles.continueButtonText}>
-              {isCorrect ? "Continue" : "Next Question"}
+              {isCorrect ? T.common.continue : T.feedback.nextQuestion}
             </ThemedText>
             <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
           </TouchableOpacity>
