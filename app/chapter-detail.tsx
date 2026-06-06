@@ -6,6 +6,7 @@ import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { useBookmarks } from "@/lib/bookmarks";
 import { haptics } from "@/lib/haptics";
 import { getAllProgress } from "@/lib/lessonProgress";
+import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { useCallback, useState } from "react";
@@ -43,7 +44,7 @@ export default function ChapterDetailScreen() {
   if (!chapter) {
     return (
       <SafeAreaView style={styles.container}>
-        <ThemedText>Chapter not found</ThemedText>
+        <ThemedText>{T.screen.chapterNotFound}</ThemedText>
       </SafeAreaView>
     );
   }

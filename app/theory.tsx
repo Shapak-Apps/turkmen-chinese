@@ -12,6 +12,7 @@ import {
 import PronunciationTheory from "@/components/PronunciationTheory";
 import StrokeOrderModal from "@/components/StrokeOrderModal";
 import { haptics } from "@/lib/haptics";
+import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
 import { router, useLocalSearchParams } from "expo-router";
@@ -513,7 +514,7 @@ function Placeholder({ chapterId, title }: { chapterId: number; title: string })
         Sapak {chapterId}: {title}
       </ThemedText>
       <ThemedText style={styles.placeholderText}>
-        Nazaryýet ýakyn wagtda goşular.
+        {T.screen.theoryPlaceholder}
       </ThemedText>
     </View>
   );
@@ -530,7 +531,7 @@ export default function TheoryScreen() {
   if (!chapter) {
     return (
       <SafeAreaView style={styles.container}>
-        <ThemedText>Chapter not found</ThemedText>
+        <ThemedText>{T.screen.chapterNotFound}</ThemedText>
       </SafeAreaView>
     );
   }
@@ -545,7 +546,7 @@ export default function TheoryScreen() {
           <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
         </Pressable>
         <View style={styles.headerTitleContainer}>
-          <ThemedText style={styles.headerTitle}>Nazaryýet</ThemedText>
+          <ThemedText style={styles.headerTitle}>{T.screen.theoryTitle}</ThemedText>
           <ThemedText style={styles.headerSubtitle}>
             Sapak {chapter.id}: {chapter.title}
           </ThemedText>

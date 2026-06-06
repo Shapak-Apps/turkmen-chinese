@@ -57,4 +57,29 @@ export const T = {
     questionProgress: (current: number, total: number) => `${current} / ${total} sorag`,
     matched: (matched: number, total: number) => `${matched} / ${total} jübütlendi`,
   },
+
+  // Заголовки и состояния экранов
+  screen: {
+    theoryTitle: "Teoriýa",
+    theoryPlaceholder: "Teoriýa ýakyn wagtda goşular.",
+    chapterNotFound: "Bap tapylmady",
+    matchPairsLabel: "Jübütleri birikdir",
+  },
+
+  // Диалог подтверждения (дефолтные подписи, обычно переопределяются)
+  dialog: {
+    confirm: "Tassykla",
+    cancel: "Ýatyr",
+  },
+
+  // Запись произношения (LessonContent) — фича в плане на доработку
+  speaking: {
+    micPermissionTitle: "Mikrofon rugsady",
+    micPermissionBody: "Gepleýşi maşk etmek üçin mikrofon gerek.",
+    recordingErrorTitle: "Ýazgy ýalňyşlygy",
+    couldNotStart: "Ýazgyny başladyp bolmady.",
+    noAudio: "Ses ýazga alynmady.",
+    couldNotProcess: "Ýazgyny işläp bolmady.",
+    analyzing: "Aýdylyş barlanýar...",
+  },
 };

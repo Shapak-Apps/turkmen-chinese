@@ -1,4 +1,5 @@
 import { Colors, FontFamily } from "@/constants/theme";
+import { T } from "@/lib/strings";
 import { Modal, Pressable, StyleSheet, View } from "react-native";
 import { ThemedText } from "../themed-text";
 
@@ -6,8 +7,8 @@ export default function ConfirmDialog({
   visible,
   title,
   description,
-  confirmLabel = "Confirm",
-  cancelLabel = "Cancel",
+  confirmLabel = T.dialog.confirm,
+  cancelLabel = T.dialog.cancel,
   onCancel,
   onConfirm,
   destructive = false,

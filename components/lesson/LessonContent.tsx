@@ -3,6 +3,7 @@ import { Colors, FontFamily } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
 import { incrementLessonCompletion } from "@/lib/lessonProgress";
 import { markActiveDay } from "@/lib/streak";
+import { T } from "@/lib/strings";
 import { addXP, XP_REWARDS } from "@/lib/xp";
 import {
   recordQuestionAnswered,
@@ -291,7 +292,7 @@ export default function LessonContent({
     try {
       const perm = await Audio.requestPermissionsAsync();
       if (!perm.granted) {
-        Alert.alert("Microphone Permission", "Microphone access is required to practise speaking.");
+        Alert.alert(T.speaking.micPermissionTitle, T.speaking.micPermissionBody);
         return;
       }
 
@@ -325,7 +326,7 @@ export default function LessonContent({
       console.error("Failed to start recording:", err);
       recordingRef.current = null;
       setIsRecognizing(false);
-      Alert.alert("Recording Error", "Could not start recording.");
+      Alert.alert(T.speaking.recordingErrorTitle, T.speaking.couldNotStart);
     }
   };
 
@@ -393,7 +394,7 @@ export default function LessonContent({
 
       if (!uri) {
         setIsLoading(false);
-        Alert.alert("Recording Error", "No audio was recorded.");
+        Alert.alert(T.speaking.recordingErrorTitle, T.speaking.noAudio);
         return;
       }
 
@@ -403,7 +404,7 @@ export default function LessonContent({
     } catch (err) {
       console.error("Failed to start/stop recording:", err);
       setIsLoading(false);
-      Alert.alert("Recording Error", "Could not process recording.");
+      Alert.alert(T.speaking.recordingErrorTitle, T.speaking.couldNotProcess);
     }
   };
 
@@ -498,7 +499,7 @@ export default function LessonContent({
               hanzi = q.sentence;
               pinyin = q.sentencePinyin;
             } else if (q.type === "match_pairs") {
-              english = "Match pairs";
+              english = T.screen.matchPairsLabel;
               hanzi = q.pairs.map((p) => p.left).join(", ");
               pinyin = "";
             } else if (q.type === "grammar") {
@@ -865,7 +866,7 @@ export default function LessonContent({
                   color={Colors.primaryAccentColor}
                 />
                 <ThemedText style={styles.loadingText}>
-                  Analyzing your pronunciation...
+                  {T.speaking.analyzing}
                 </ThemedText>
               </View>
             </View>
