@@ -93,7 +93,8 @@
   - `assets/data/course_content_backup.json` (1.16 МБ), `illustrations.excalidraw` (1.16 МБ), `assets/videos/broll.mp4` (10 МБ) — убрать из репо/в LFS.
   - 35 МБ неиспользуемого `assets/audio/` — решить вместе с Content п.1.
 - [x] 🟠 **S — `router.replace` в рендере.** `chapter-detail.tsx:57-60` — перенести навигацию в `useEffect` (сейчас сайд-эффект в теле render).
-- [ ] 🔴 **S — Фейковое упражнение на произношение.** `LessonContent.tsx:400-402` скармливает ожидаемую строку как «сказанную» → всегда «верно» + XP. Либо честно пометить как заглушку/убрать мик, либо реализовать реальную оценку.
+- [x] 🔴 **S — Фейковое упражнение на произношение.** ✅ Переделано в честный shadowing (слушай → повтори вслух → Dowam et), без фейк-оценки. Микрофон убран из UX + сняты mic-разрешения (RECORD_AUDIO / iOS / expo-av).
+  - [ ] ⚪ follow-up: удалить теперь **недостижимый** recording-код (`startRecording`/`stopRecording`/`processSpeechResult`, состояние `recordingRef`/`isRecognizing`/`transcription`, mic-ветка в `AudioPrompt`, зависимость `string-similarity`) — лучше делать с запущенным приложением.
 
 ### Стретч (к 8+)
 - [ ] 🟠 **L — Декомпозировать `LessonContent.tsx` (983 строки)** на контейнеры по режимам + вынести хук скоринга.
