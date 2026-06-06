@@ -70,8 +70,8 @@
 - [ ] 🟠 **M — Аналитика.** Подключить лёгкий SDK (Firebase/GA4 free или self-host PostHog): экраны, старт/финиш урока, drop-off, краши. Сейчас 0 измерений → итерировать вслепую.
 - [ ] 🟠 **M — Облачный бэкап прогресса.** `@supabase/supabase-js` уже в зависимостях (дремлет). Бэкапить XP/streak/прогресс → защита от потери при переустановке/смене телефона (сейчас теряется навсегда — худшее для streak-driven).
 - [ ] 🟠 **S — Реальный release keystore.** `android/app/build.gradle:112-115` подписывает release debug-ключом → Play отклонит локальную сборку. Сгенерировать `.jks` (или EAS Build + Play App Signing).
-- [ ] 🟡 **M — Единые гарды наград.** Новые типы упражнений (`LessonContent.tsx:669-770`) начисляют +10 на каждый `onAnswer(true)` без attempt-guard, в отличие от легаси-пути (`:163-170`). Унифицировать, убрать XP-фарм на повторе.
-- [ ] 🟡 **S — Починить speaking/listening stats.** `lib/speakingListeningStats.ts` мешает assign (`=`) и increment (`+=`) на одних полях (`:46,54` vs `:63-64`) → данные затираются. `getWeeklyStats` возвращает all-time с захардкоженным `weeklyChange:0` (`:74-78`). Исправить или убрать «недельный» UI. Заодно опечатка `useSpeakingListeningStats` («Listning»).
+- [x] 🟡 **M — Единые гарды наград.** Новые типы упражнений (`LessonContent.tsx:669-770`) начисляют +10 на каждый `onAnswer(true)` без attempt-guard, в отличие от легаси-пути (`:163-170`). Унифицировать, убрать XP-фарм на повторе.
+- [x] 🟡 **S — Починить speaking/listening stats.** `lib/speakingListeningStats.ts` мешает assign (`=`) и increment (`+=`) на одних полях (`:46,54` vs `:63-64`) → данные затираются. `getWeeklyStats` возвращает all-time с захардкоженным `weeklyChange:0` (`:74-78`). Исправить или убрать «недельный» UI. Заодно опечатка `useSpeakingListeningStats` («Listning»).
 
 ### Стретч (к 8+) / стратегия (отдельный трек)
 - [ ] 🟠 **M — Пуш-напоминания о streak** (`expo-notifications`) — без них streak не возвращает ушедших.
@@ -98,7 +98,7 @@
 ### Стретч (к 8+)
 - [ ] 🟠 **L — Декомпозировать `LessonContent.tsx` (983 строки)** на контейнеры по режимам + вынести хук скоринга.
 - [ ] 🟡 **M — Runtime-валидация данных.** Заменить `COURSE_DATA as unknown as CourseData` (`CourseData.ts:191`) и `JSON.parse as T` на zod/typebox-схемы.
-- [ ] 🟡 **S — Гарды записи + логирование.** Незащищённые `AsyncStorage.setItem` (`lessonProgress.ts:20`, `settings.ts:44`, `customScenarios.ts:25`, `speakingListeningStats.ts:30`) + перестать молча глотать ошибки в `catch {}`.
+- [x] 🟡 **S — Гарды записи + логирование.** Незащищённые `AsyncStorage.setItem` (`lessonProgress.ts:20`, `settings.ts:44`, `customScenarios.ts:25`, `speakingListeningStats.ts:30`) + перестать молча глотать ошибки в `catch {}`.
 - [ ] ⚪ **S — Починить 10 `exhaustive-deps` warnings** (`LessonContent`, `FlashcardMode:55`, `AnimatedCounter:45` и др.).
 - [ ] ⚪ **S — Репо-гигиена:** убрать `.idea/` (стейл-имя `turkmen-english.iml`), 15 one-off скриптов `scripts/add-chapter*.js`.
 
