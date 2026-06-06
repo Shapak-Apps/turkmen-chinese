@@ -22,10 +22,12 @@ export default function LessonCompleteScreen({
   lessonStats,
   onContinue,
   onReview,
+  awardXp = true,
 }: {
   lessonStats: LessonStats;
   onContinue: () => void;
   onReview: () => void;
+  awardXp?: boolean;
 }) {
   const confettiRef = useRef<any>(null);
   const xpForAnswers = lessonStats.correctAnswers * XP_REWARDS.CORRECT_ANSWER;
@@ -40,7 +42,7 @@ export default function LessonCompleteScreen({
 
   useEffect(() => {
     haptics.success();
-    void addXP(earnedXP);
+    if (awardXp) void addXP(earnedXP);
     setTimeout(() => {
       confettiRef.current?.start();
       haptics.heavy();
@@ -122,7 +124,8 @@ export default function LessonCompleteScreen({
           </View>
         </Animated.View>
 
-        {/* XP Earned */}
+        {/* XP Earned — hidden on replays/reviews where no XP is granted */}
+        {awardXp && (
         <Animated.View style={[styles.xpCard, { opacity: fadeAnim }]}>
           <View style={styles.xpHeader}>
             <View style={styles.xpIconBox}>
@@ -157,6 +160,7 @@ export default function LessonCompleteScreen({
             )}
           </View>
         </Animated.View>
+        )}
 
         {lessonStats.wrongQuestions &&
           lessonStats.wrongQuestions.length > 0 && (

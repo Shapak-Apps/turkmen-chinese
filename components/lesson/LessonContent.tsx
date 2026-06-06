@@ -1,7 +1,7 @@
 import { Question, SpeakingOption } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
-import { incrementLessonCompletion } from "@/lib/lessonProgress";
+import { hasCompletedLesson, incrementLessonCompletion } from "@/lib/lessonProgress";
 import { markActiveDay } from "@/lib/streak";
 import { T } from "@/lib/strings";
 import { addXP, XP_REWARDS } from "@/lib/xp";
@@ -83,6 +83,10 @@ export default function LessonContent({
   // Lesson completion
   const [showCompleteScreen, setShowCompleteScreen] = useState(false);
   const [lessonStats, setLessonStats] = useState<LessonStats | null>(null);
+  // XP is rewarded only the first time a lesson is completed. Replays and the
+  // "review mistakes" re-run award no XP, so the counter can't be farmed.
+  const rewardableRef = useRef(true);
+  const [awardCompletionXp, setAwardCompletionXp] = useState(true);
   const [questionAttempts, setQuestionAttempts] = useState<
     Record<number, number>
   >({});
@@ -97,6 +101,18 @@ export default function LessonContent({
     });
     return s;
   }, [questions, wrongQuestions]);
+
+  // Suppress XP rewards if this lesson was already completed in a past session.
+  useEffect(() => {
+    hasCompletedLesson(lessonId).then((done) => {
+      if (done) rewardableRef.current = false;
+    });
+  }, [lessonId]);
+
+  // Grant the per-correct-answer XP only while the lesson is still rewardable.
+  const awardCorrectXp = () => {
+    if (rewardableRef.current) void addXP(XP_REWARDS.CORRECT_ANSWER);
+  };
 
   const fadeAnim = useRef(new Animated.Value(0)).current; // Opacity pinyin/hanzi
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -166,7 +182,7 @@ export default function LessonContent({
           (attemptCount > 0 && wrongQuestions.has(currentQuestion.id))
         ) {
           setCorrectAnswersCount((prev) => prev + 1);
-          void addXP(XP_REWARDS.CORRECT_ANSWER);
+          awardCorrectXp();
           void markActiveDay();
         }
       } else {
@@ -530,6 +546,10 @@ export default function LessonContent({
             wrongQuestionsList.length > 0 ? wrongQuestionsList : undefined,
         };
 
+        // Capture whether this completion earns XP, then close the reward
+        // window so an in-session "review mistakes" replay grants nothing.
+        setAwardCompletionXp(rewardableRef.current);
+        rewardableRef.current = false;
         setLessonStats(finalStats);
         setShowCompleteScreen(true);
       }
@@ -602,6 +622,7 @@ export default function LessonContent({
     return (
       <LessonCompleteScreen
         lessonStats={lessonStats}
+        awardXp={awardCompletionXp}
         onContinue={async () => {
           await incrementLessonCompletion(lessonId);
           if (onExit) {
@@ -672,7 +693,7 @@ export default function LessonContent({
               haptics.success();
               setCorrectAnswersCount((prev) => prev + 1);
               void recordQuestionAnswered();
-              void addXP(XP_REWARDS.CORRECT_ANSWER);
+              awardCorrectXp();
               void markActiveDay();
             } else {
               haptics.error();
@@ -698,7 +719,7 @@ export default function LessonContent({
               haptics.success();
               setCorrectAnswersCount((prev) => prev + 1);
               void recordQuestionAnswered();
-              void addXP(XP_REWARDS.CORRECT_ANSWER);
+              awardCorrectXp();
               void markActiveDay();
             } else {
               haptics.error();
@@ -719,7 +740,7 @@ export default function LessonContent({
               haptics.success();
               setCorrectAnswersCount((prev) => prev + 1);
               void recordQuestionAnswered();
-              void addXP(XP_REWARDS.CORRECT_ANSWER);
+              awardCorrectXp();
               void markActiveDay();
             } else {
               haptics.error();
@@ -740,7 +761,7 @@ export default function LessonContent({
               haptics.success();
               setCorrectAnswersCount((prev) => prev + 1);
               void recordQuestionAnswered();
-              void addXP(XP_REWARDS.CORRECT_ANSWER);
+              awardCorrectXp();
               void markActiveDay();
             } else {
               haptics.error();
@@ -761,7 +782,7 @@ export default function LessonContent({
               haptics.success();
               setCorrectAnswersCount((prev) => prev + 1);
               void recordQuestionAnswered();
-              void addXP(XP_REWARDS.CORRECT_ANSWER);
+              awardCorrectXp();
               void markActiveDay();
             } else {
               haptics.error();
