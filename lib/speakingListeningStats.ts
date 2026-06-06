@@ -6,44 +6,46 @@ const MINUTES_PER_QUESTION = 0.5;
 const MINUTES_PER_CONVERSATION_TURN = 1;
 
 export interface SpeakingListeningStats {
-  minutesSpoken: number;
-  minutesListened: number;
   lastUpdate: string;
   questionsAnswered: number;
   questionsListened: number;
   conversationTurns: number;
 }
 
-const readStats = async (): Promise<SpeakingListeningStats> => {
-  try {
-    const raw = await AsyncStorage.getItem(STATS_KEY);
-    if (!raw) {
-      return getDefaultStats();
-    }
-
-    return JSON.parse(raw) as SpeakingListeningStats;
-  } catch {
-    return getDefaultStats();
-  }
-};
-
-const writeStats = async (stats: SpeakingListeningStats) => {
-  await AsyncStorage.setItem(STATS_KEY, JSON.stringify(stats));
-};
-
 const getDefaultStats = (): SpeakingListeningStats => ({
-  minutesSpoken: 0,
-  minutesListened: 0,
   lastUpdate: new Date().toISOString(),
   questionsAnswered: 0,
   questionsListened: 0,
   conversationTurns: 0,
 });
 
+const readStats = async (): Promise<SpeakingListeningStats> => {
+  try {
+    const raw = await AsyncStorage.getItem(STATS_KEY);
+    if (!raw) return getDefaultStats();
+    const parsed = JSON.parse(raw) as Partial<SpeakingListeningStats>;
+    return {
+      lastUpdate: parsed.lastUpdate ?? new Date().toISOString(),
+      questionsAnswered: parsed.questionsAnswered ?? 0,
+      questionsListened: parsed.questionsListened ?? 0,
+      conversationTurns: parsed.conversationTurns ?? 0,
+    };
+  } catch {
+    return getDefaultStats();
+  }
+};
+
+const writeStats = async (stats: SpeakingListeningStats) => {
+  try {
+    await AsyncStorage.setItem(STATS_KEY, JSON.stringify(stats));
+  } catch (err) {
+    console.warn("speakingListeningStats: failed to write", err);
+  }
+};
+
 export const recordQuestionAnswered = async () => {
   const stats = await readStats();
   stats.questionsAnswered += 1;
-  stats.minutesSpoken = stats.questionsAnswered * MINUTES_PER_QUESTION;
   stats.lastUpdate = new Date().toISOString();
   await writeStats(stats);
 };
@@ -51,7 +53,6 @@ export const recordQuestionAnswered = async () => {
 export const recordQuestionListened = async () => {
   const stats = await readStats();
   stats.questionsListened += 1;
-  stats.minutesListened = stats.questionsListened * MINUTES_PER_QUESTION;
   stats.lastUpdate = new Date().toISOString();
   await writeStats(stats);
 };
@@ -59,22 +60,27 @@ export const recordQuestionListened = async () => {
 export const recordConversationTurn = async () => {
   const stats = await readStats();
   stats.conversationTurns += 1;
-
-  stats.minutesSpoken += MINUTES_PER_CONVERSATION_TURN;
-  stats.minutesListened += MINUTES_PER_CONVERSATION_TURN;
   stats.lastUpdate = new Date().toISOString();
   await writeStats(stats);
 };
 
-export const getWeeklyStats = async () => {
+/**
+ * All-time totals, with minutes DERIVED from the canonical counters so the
+ * fields can never be clobbered by mixing assignment and increment.
+ */
+export const getStats = async () => {
   const stats = await readStats();
-
+  const minutesSpoken =
+    stats.questionsAnswered * MINUTES_PER_QUESTION +
+    stats.conversationTurns * MINUTES_PER_CONVERSATION_TURN;
+  const minutesListened =
+    stats.questionsListened * MINUTES_PER_QUESTION +
+    stats.conversationTurns * MINUTES_PER_CONVERSATION_TURN;
   return {
-    minutesSpoken: Math.round(stats.minutesSpoken * 10) / 10,
-    minutesListened: Math.round(stats.minutesListened * 10) / 10,
-    weeklyChange: {
-      spoken: 0,
-      listened: 0,
-    },
+    minutesSpoken: Math.round(minutesSpoken * 10) / 10,
+    minutesListened: Math.round(minutesListened * 10) / 10,
+    questionsAnswered: stats.questionsAnswered,
+    questionsListened: stats.questionsListened,
+    conversationTurns: stats.conversationTurns,
   };
 };

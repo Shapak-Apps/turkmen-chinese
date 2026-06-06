@@ -23,7 +23,11 @@ const readStorage = async (): Promise<StorageType> => {
 };
 
 const writeStorage = async (data: StorageType) => {
-  await AsyncStorage.setItem(STATS_KEY, JSON.stringify(data));
+  try {
+    await AsyncStorage.setItem(STATS_KEY, JSON.stringify(data));
+  } catch (err) {
+    console.warn("customScenarios: failed to write", err);
+  }
 };
 
 export const createCustomScenarioId = () => `custom_${uuid.v4()}`;

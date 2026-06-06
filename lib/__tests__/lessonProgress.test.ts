@@ -1,5 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getAllProgress, incrementLessonCompletion } from "@/lib/lessonProgress";
+import {
+  getAllProgress,
+  hasCompletedLesson,
+  incrementLessonCompletion,
+} from "@/lib/lessonProgress";
 
 beforeEach(async () => {
   await AsyncStorage.clear();
@@ -22,5 +26,17 @@ describe("lessonProgress", () => {
     await incrementLessonCompletion("chapter-1");
     await incrementLessonCompletion("chapter-2");
     expect(await getAllProgress()).toEqual({ "chapter-1": 1, "chapter-2": 1 });
+  });
+
+  describe("hasCompletedLesson", () => {
+    it("is false before any completion", async () => {
+      expect(await hasCompletedLesson("chapter-1")).toBe(false);
+    });
+
+    it("is true after the first completion", async () => {
+      await incrementLessonCompletion("chapter-1");
+      expect(await hasCompletedLesson("chapter-1")).toBe(true);
+      expect(await hasCompletedLesson("chapter-2")).toBe(false);
+    });
   });
 });

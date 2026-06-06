@@ -18,7 +18,11 @@ const readProgress = async (): Promise<LessonProgress> => {
 };
 
 const writeProgress = async (data: LessonProgress) => {
-  await AsyncStorage.setItem(STATS_KEY, JSON.stringify(data));
+  try {
+    await AsyncStorage.setItem(STATS_KEY, JSON.stringify(data));
+  } catch (err) {
+    console.warn("lessonProgress: failed to write", err);
+  }
 };
 
 export const incrementLessonCompletion = async (lessonId: string) => {
@@ -29,4 +33,10 @@ export const incrementLessonCompletion = async (lessonId: string) => {
 
 export const getAllProgress = async (): Promise<LessonProgress> => {
   return await readProgress();
+};
+
+/** Whether a lesson has ever been completed — used to grant XP rewards only once. */
+export const hasCompletedLesson = async (lessonId: string): Promise<boolean> => {
+  const progress = await readProgress();
+  return (progress[lessonId] || 0) > 0;
 };

@@ -1,25 +1,23 @@
-import { getWeeklyStats } from "@/lib/speakingListeningStats";
+import { getStats } from "@/lib/speakingListeningStats";
 import { useEffect, useState } from "react";
 
-interface WeeklyStats {
+interface Stats {
   minutesSpoken: number;
   minutesListened: number;
-  weeklyChange: {
-    spoken: number;
-    listened: number;
-  };
+  questionsAnswered: number;
+  questionsListened: number;
+  conversationTurns: number;
 }
 
-export const useSpeakingListningStats = () => {
-  const [stats, setStats] = useState<WeeklyStats | null>(null);
+export const useSpeakingListeningStats = () => {
+  const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
 
   const refresh = async () => {
     try {
-      const weeklyStats = await getWeeklyStats();
-      setStats(weeklyStats);
+      setStats(await getStats());
     } catch (err) {
-      console.error("Failed to load speaking/listning stats:", err);
+      console.error("Failed to load speaking/listening stats:", err);
     } finally {
       setLoading(false);
     }

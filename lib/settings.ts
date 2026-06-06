@@ -42,7 +42,11 @@ export async function getSettings(): Promise<Settings> {
 }
 
 export async function saveSettings(settings: Settings): Promise<void> {
-  await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  try {
+    await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  } catch (err) {
+    console.warn("settings: failed to save", err);
+  }
 }
 
 export function useSettings() {
