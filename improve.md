@@ -85,7 +85,7 @@
 **Что держит балл:** чистый `lib/`, strict TS, но 0 тестов/CI, фиктивный зелёный `tsc`, мёртвый код, god-component.
 
 ### Обязательно для 7/10
-- [ ] 🔴 **M — Тесты на ядро + CI.** Jest/RN-Testing-Library на `lib/` (скоринг, `streak`, `xp`) + GitHub Actions, гоняющий `tsc`/`lint`/`test`. Сейчас критичная математика не покрыта ничем.
+- [x] 🔴 **M — Тесты на ядро + CI.** ✅ jest-expo + 21 теста на lib/ (streak/xp/bookmarks/lessonProgress) + GitHub Actions (tsc/lint/test). Jest/RN-Testing-Library на `lib/` (скоринг, `streak`, `xp`) + GitHub Actions, гоняющий `tsc`/`lint`/`test`. Сейчас критичная математика не покрыта ничем.
 - [ ] 🟠 **S — Убрать фиктивность `tsc`.** Снять `@ts-nocheck` с `components/conversation/ConversationMode.tsx:1` (686 строк) — либо типизировать, либо удалить файл (см. ниже).
 - [ ] 🟠 **M — Удалить мёртвый код/зависимости.**
   - Оторванная фича conversation (`components/conversation/`, `app/conversation.tsx`, пустой таб `(tabs)/conversations.tsx`) — удалить или довести.
