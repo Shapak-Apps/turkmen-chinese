@@ -82,4 +82,10 @@ export const T = {
     couldNotProcess: "Ýazgyny işläp bolmady.",
     analyzing: "Aýdylyş barlanýar...",
   },
+
+  // Упражнение на произношение — режим «повтори вслух» (shadowing)
+  shadowing: {
+    prompt: "Diňläp, bu jümläni hytaýça gaýtalaň",
+    reveal: "Aýdylyşyny görmek üçin basyň",
+  },
 };

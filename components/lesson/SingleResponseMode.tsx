@@ -1,5 +1,7 @@
 import { SpeakingOption } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
+import { T } from "@/lib/strings";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import {
   Animated,
@@ -12,9 +14,11 @@ import { ThemedText } from "../themed-text";
 export default function SingleResponseMode({
   option,
   optionSelectionAnim,
+  onContinue,
 }: {
   option: SpeakingOption;
   optionSelectionAnim: Animated.Value;
+  onContinue?: () => void;
 }) {
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -38,7 +42,7 @@ export default function SingleResponseMode({
           ]}
         >
           <ThemedText style={styles.sayItPrompt}>
-            Record this response in Mandarin
+            {T.shadowing.prompt}
           </ThemedText>
         </Animated.View>
       </View>
@@ -53,7 +57,7 @@ export default function SingleResponseMode({
         >
           {!showAnswer ? (
             <ThemedText style={styles.instructionText}>
-              Tap here to reveal how to say it
+              {T.shadowing.reveal}
             </ThemedText>
           ) : (
             <View style={styles.singleResponseMandarin}>
@@ -67,6 +71,19 @@ export default function SingleResponseMode({
           )}
         </TouchableOpacity>
       </View>
+
+      {onContinue && (
+        <TouchableOpacity
+          style={styles.continueButton}
+          onPress={onContinue}
+          activeOpacity={0.85}
+        >
+          <ThemedText style={styles.continueButtonText}>
+            {T.common.continue}
+          </ThemedText>
+          <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -117,4 +134,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   singleResponseMandarin: { alignItems: "center", marginTop: 12 },
+  continueButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 14,
+    gap: 8,
+    marginTop: 20,
+    backgroundColor: Colors.primaryAccentColor,
+  },
+  continueButtonText: {
+    fontFamily: FontFamily.semibold,
+    fontSize: 15,
+    color: Colors.textInverse,
+  },
 });

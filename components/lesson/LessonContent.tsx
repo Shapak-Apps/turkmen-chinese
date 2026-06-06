@@ -235,7 +235,8 @@ export default function LessonContent({
       currentQuestion.options.length > 0 &&
       hasListenedToAudio
     ) {
-      setSelectedOption(currentQuestion.options[0].id);
+      // Shadowing: reveal the model phrase but do NOT select an option — that
+      // would summon the (removed) record mic. The user repeats aloud, no scoring.
       Animated.timing(optionSelectionAnim, {
         toValue: 1,
         duration: 300,
@@ -556,6 +557,17 @@ export default function LessonContent({
     });
   };
 
+  // Speaking is shadowing practice (no STT): the user repeats aloud, then
+  // continues. Counts as completed (participation), never as wrong.
+  const handleShadowingContinue = () => {
+    haptics.success();
+    setCorrectAnswersCount((prev) => prev + 1);
+    void recordQuestionAnswered();
+    awardCorrectXp();
+    void markActiveDay();
+    nextQuestion();
+  };
+
   const handleRetry = () => {
     Animated.timing(scaleAnim, {
       toValue: 0.9,
@@ -874,6 +886,7 @@ export default function LessonContent({
                 <SingleResponseMode
                   option={currentQuestion.options[0]}
                   optionSelectionAnim={optionSelectionAnim}
+                  onContinue={handleShadowingContinue}
                 />
               )}
             </Animated.View>
