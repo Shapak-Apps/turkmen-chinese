@@ -5,7 +5,7 @@
 // once an API key is configured. This keeps the instrumentation in place and
 // makes activating a provider a ~10-line change with no app-wide edits.
 
-export type AnalyticsProps = Record<string, string | number | boolean | undefined>;
+export type AnalyticsProps = Record<string, string | number | boolean>;
 
 export interface AnalyticsBackend {
   track(event: string, props?: AnalyticsProps): void;

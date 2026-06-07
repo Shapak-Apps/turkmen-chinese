@@ -38,7 +38,8 @@
         }
       ],
       "expo-av",
-      "expo-notifications"
+      "expo-notifications",
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true,
