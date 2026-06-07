@@ -2,6 +2,7 @@ import { ThemedText } from "@/components/themed-text";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
+import { Events, track } from "@/lib/analytics";
 import { markOnboarded } from "@/lib/onboarding";
 import { setUserName } from "@/lib/user";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -155,6 +156,7 @@ export default function OnboardingScreen() {
       await setUserName(trimmed);
     }
     await markOnboarded();
+    track(Events.OnboardingComplete);
     Keyboard.dismiss();
     router.replace("/(tabs)/lessons");
   };

@@ -2,6 +2,7 @@ import { Question, SpeakingOption } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
 import { hasCompletedLesson, incrementLessonCompletion } from "@/lib/lessonProgress";
+import { Events, track } from "@/lib/analytics";
 import { markActiveDay } from "@/lib/streak";
 import { T } from "@/lib/strings";
 import { addXP, XP_REWARDS } from "@/lib/xp";
@@ -107,6 +108,10 @@ export default function LessonContent({
     hasCompletedLesson(lessonId).then((done) => {
       if (done) rewardableRef.current = false;
     });
+  }, [lessonId]);
+
+  useEffect(() => {
+    track(Events.LessonStart, { lessonId });
   }, [lessonId]);
 
   // Grant the per-correct-answer XP only while the lesson is still rewardable.
@@ -553,6 +558,7 @@ export default function LessonContent({
         rewardableRef.current = false;
         setLessonStats(finalStats);
         setShowCompleteScreen(true);
+        track(Events.LessonComplete, { lessonId, accuracy });
       }
     });
   };

@@ -11,6 +11,7 @@ import {
 } from "@/assets/data/theory_content";
 import PronunciationTheory from "@/components/PronunciationTheory";
 import StrokeOrderModal from "@/components/StrokeOrderModal";
+import { Events, track } from "@/lib/analytics";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -527,6 +528,10 @@ function Placeholder({ chapterId, title }: { chapterId: number; title: string })
 export default function TheoryScreen() {
   const { chapterId } = useLocalSearchParams<{ chapterId: string }>();
   const id = chapterId != null ? Number(chapterId) : 1;
+
+  useEffect(() => {
+    track(Events.TheoryOpen, { chapterId: id });
+  }, [id]);
 
   const chapter = COURSE_DATA.chapters.find((ch) => ch.id === id);
 

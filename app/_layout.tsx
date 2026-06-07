@@ -1,3 +1,4 @@
+import { Events, track } from "@/lib/analytics";
 import { syncStreakReminder } from "@/lib/notifications";
 import { getSettings } from "@/lib/settings";
 import { checkAndResetIfNeeded } from "@/lib/streak";
@@ -38,6 +39,7 @@ export default function RootLayout() {
   }, [loaded, error]);
 
   useEffect(() => {
+    track(Events.AppOpen);
     void checkAndResetIfNeeded();
     void getSettings().then((s) => syncStreakReminder(s.remindersEnabled));
   }, []);

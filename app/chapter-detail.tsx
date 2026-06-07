@@ -4,6 +4,7 @@ import { CHAPTER_ILLUSTRATIONS } from "@/constants/ChapterIllustrations";
 import { COURSE_DATA } from "@/constants/CourseData";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { useBookmarks } from "@/lib/bookmarks";
+import { Events, track } from "@/lib/analytics";
 import { haptics } from "@/lib/haptics";
 import { getAllProgress } from "@/lib/lessonProgress";
 import { T } from "@/lib/strings";
@@ -46,6 +47,10 @@ export default function ChapterDetailScreen() {
       router.replace({ pathname: "/theory", params: { chapterId: "0" } });
     }
   }, [isPronunciation]);
+
+  useEffect(() => {
+    if (!isPronunciation) track(Events.ChapterOpen, { chapterId: id });
+  }, [id, isPronunciation]);
 
   const chapter = COURSE_DATA.chapters.find((ch) => ch.id === id);
 
