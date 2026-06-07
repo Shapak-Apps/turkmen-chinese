@@ -70,7 +70,8 @@
 ### Обязательно для 7/10 (корректность + измеримость + сохранность)
 - [~] 🟠 **M — Аналитика.** ✅ Каркас `lib/analytics.ts` (facade + таксономия) + инструментация воронки (app_open, onboarding, chapter/theory open, lesson start/complete) + тесты.
   - [~] PostHog подключён (`lib/analyticsProvider.ts`, init на старте, dormant пока ключ пуст) — **осталось вставить API-ключ** в `lib/analyticsConfig.ts`.
-- [ ] 🟠 **M — Облачный бэкап прогресса.** (supabase удалён как мёртвый код — бэкап переустановит его заново.) Бэкапить XP/streak/прогресс → защита от потери при переустановке/смене телефона (сейчас теряется навсегда — худшее для streak-driven).
+- [x] 🟠 **M — Бэкап прогресса (локальный).** ✅ Экспорт/импорт всего прогресса (XP/streak/уроки/настройки) в JSON-файл через системный share + document-picker (`lib/backup.ts`, секция «Maglumatlar» в Sazlamalar) + тесты. Защита от потери без сервера — по решению владельца (всё локально).
+  - [ ] ⚪ облачный бэкап (Supabase) — отложено, когда владелец захочет облако.
 - [ ] 🟠 **S — Реальный release keystore.** `android/app/build.gradle:112-115` подписывает release debug-ключом → Play отклонит локальную сборку. Сгенерировать `.jks` (или EAS Build + Play App Signing).
 - [x] 🟡 **M — Единые гарды наград.** Новые типы упражнений (`LessonContent.tsx:669-770`) начисляют +10 на каждый `onAnswer(true)` без attempt-guard, в отличие от легаси-пути (`:163-170`). Унифицировать, убрать XP-фарм на повторе.
 - [x] 🟡 **S — Починить speaking/listening stats.** `lib/speakingListeningStats.ts` мешает assign (`=`) и increment (`+=`) на одних полях (`:46,54` vs `:63-64`) → данные затираются. `getWeeklyStats` возвращает all-time с захардкоженным `weeklyChange:0` (`:74-78`). Исправить или убрать «недельный» UI. Заодно опечатка `useSpeakingListeningStats` («Listning»).
