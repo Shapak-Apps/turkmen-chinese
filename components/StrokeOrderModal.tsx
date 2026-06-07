@@ -36,7 +36,7 @@ function CharacterView({ char }: { char: string }) {
 
   return (
     <View style={styles.charContainer}>
-      <Text style={styles.charTitle}>{char}</Text>
+      <Text style={styles.charTitle} maxFontSizeMultiplier={1.3}>{char}</Text>
 
       <View style={styles.writerWrapper}>
         <HanziWriter
@@ -45,13 +45,13 @@ function CharacterView({ char }: { char: string }) {
           loading={
             <View style={styles.loadingBox}>
               <ActivityIndicator size="large" color={Colors.primaryAccentColor} />
-              <Text style={styles.loadingText}>Ýüklenýär...</Text>
+              <Text style={styles.loadingText} maxFontSizeMultiplier={1.3}>Ýüklenýär...</Text>
             </View>
           }
           error={
             <View style={styles.loadingBox}>
               <Ionicons name="alert-circle-outline" size={36} color={Colors.borderColorStrong} />
-              <Text style={styles.errorText}>Bu hiýeroglif üçin maglumat ýok</Text>
+              <Text style={styles.errorText} maxFontSizeMultiplier={1.3}>Bu hiýeroglif üçin maglumat ýok</Text>
             </View>
           }
         >
@@ -77,7 +77,7 @@ function CharacterView({ char }: { char: string }) {
           }
         >
           <Ionicons name="play" size={18} color={Colors.textInverse} />
-          <Text style={styles.animateButtonText}>Ýazylyşy</Text>
+          <Text style={styles.animateButtonText} maxFontSizeMultiplier={1.3}>Ýazylyşy</Text>
         </Pressable>
       </View>
     </View>
@@ -145,7 +145,7 @@ export default function StrokeOrderModal({
                 />
               </Pressable>
 
-              <Text style={styles.charNavText}>
+              <Text style={styles.charNavText} maxFontSizeMultiplier={1.3}>
                 {currentIndex + 1} / {characters.length}
               </Text>
 

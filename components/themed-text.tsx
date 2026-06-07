@@ -14,12 +14,16 @@ export function ThemedText({
   lightColor,
   darkColor,
   type = "default",
+  // Cap OS font scaling so very large system text still grows (accessibility)
+  // but cannot overflow the app's fixed-height containers. Overridable per call.
+  maxFontSizeMultiplier = 1.3,
   ...rest
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
 
   return (
     <Text
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
       style={[
         { color },
         type === "default" ? styles.default : undefined,

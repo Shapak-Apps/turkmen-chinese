@@ -45,7 +45,7 @@ export default function AnimatedCounter({
   }, [value, duration]);
 
   return (
-    <Text style={style}>
+    <Text style={style} maxFontSizeMultiplier={1.3}>
       {displayValue}
       {suffix}
     </Text>
