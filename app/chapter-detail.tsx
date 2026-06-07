@@ -87,7 +87,7 @@ export default function ChapterDetailScreen() {
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton}>
+        <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton} accessibilityRole="button" accessibilityLabel={T.a11y.back}>
           <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
         </Pressable>
         <View style={{ flex: 1 }} />
@@ -98,6 +98,8 @@ export default function ChapterDetailScreen() {
           }}
           hitSlop={20}
           style={styles.bookmarkButton}
+          accessibilityRole="button"
+          accessibilityLabel={isBookmarked ? T.a11y.removeBookmark : T.a11y.addBookmark}
         >
           <Ionicons
             name={isBookmarked ? "bookmark" : "bookmark-outline"}

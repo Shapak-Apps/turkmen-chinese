@@ -2,6 +2,7 @@ import { ThemedText } from "@/components/themed-text";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { T } from "@/lib/strings";
 import Constants from "expo-constants";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -47,7 +48,7 @@ export default function AboutScreen() {
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton}>
+        <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton} accessibilityRole="button" accessibilityLabel={T.a11y.back}>
           <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
         </Pressable>
         <View style={styles.headerTitleContainer}>

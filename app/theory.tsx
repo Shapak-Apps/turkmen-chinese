@@ -62,13 +62,15 @@ function VocabularyPage({ vocabulary }: { vocabulary: TheoryWord[] }) {
               <ThemedText style={styles.wordPinyin}>{word.pinyin}</ThemedText>
               <ThemedText style={styles.wordTranslation}>{word.translation}</ThemedText>
             </Pressable>
-            <Pressable onPress={() => speak(word.hanzi)} hitSlop={8}>
+            <Pressable onPress={() => speak(word.hanzi)} hitSlop={8} accessibilityRole="button" accessibilityLabel={T.a11y.playAudio}>
               <Ionicons name="volume-medium-outline" size={18} color={Colors.subduedTextColor} />
             </Pressable>
             <Pressable
               onPress={() => setStrokeChars([...word.hanzi])}
               hitSlop={8}
               style={styles.strokeButton}
+              accessibilityRole="button"
+              accessibilityLabel={T.a11y.strokeOrder}
             >
               <Ionicons name="brush-outline" size={18} color={Colors.primaryAccentColor} />
             </Pressable>
@@ -542,7 +544,7 @@ export default function TheoryScreen() {
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       {/* Header */}
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton}>
+        <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton} accessibilityRole="button" accessibilityLabel={T.a11y.back}>
           <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
         </Pressable>
         <View style={styles.headerTitleContainer}>

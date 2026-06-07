@@ -1,6 +1,7 @@
 import { ThemedText } from "@/components/themed-text";
 import { Colors, FontFamily } from "@/constants/theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { T } from "@/lib/strings";
 import { router } from "expo-router";
 import { useCallback, useRef, useState } from "react";
 import {
@@ -362,7 +363,7 @@ export default function AboutChineseScreen() {
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton}>
+        <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton} accessibilityRole="button" accessibilityLabel={T.a11y.back}>
           <Ionicons name="arrow-back" size={24} color={Colors.light.text} />
         </Pressable>
         <View style={styles.headerTitleContainer}>

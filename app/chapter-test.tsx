@@ -6,6 +6,7 @@ import { COURSE_DATA, Question } from "@/constants/CourseData";
 import { Colors, FontFamily, Spacing } from "@/constants/theme";
 import { getChapterVocabulary } from "@/lib/vocabulary";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { T } from "@/lib/strings";
 import { router, useLocalSearchParams } from "expo-router";
 import { useMemo, useState } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
@@ -25,7 +26,7 @@ function shuffleArray<T>(array: T[]): T[] {
 function BackHeader({ title }: { title: string }) {
   return (
     <View style={styles.header}>
-      <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton}>
+      <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton} accessibilityRole="button" accessibilityLabel={T.a11y.back}>
         <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
       </Pressable>
       <View style={styles.headerTitleContainer}>

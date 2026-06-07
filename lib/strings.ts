@@ -88,4 +88,14 @@ export const T = {
     prompt: "Diňläp, bu jümläni hytaýça gaýtalaň",
     reveal: "Aýdylyşyny görmek üçin basyň",
   },
+
+  // Подписи для скринридеров (accessibilityLabel) на icon-only кнопках
+  a11y: {
+    back: "Yza gaýt",
+    exit: "Çyk",
+    playAudio: "Diňle",
+    addBookmark: "Bellige goş",
+    removeBookmark: "Belligi aýyr",
+    strokeOrder: "Ýazylyşyny görkez",
+  },
 };

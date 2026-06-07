@@ -5,6 +5,7 @@ import VocabularyIntroScreen from "@/components/lesson/VocabularyIntroScreen";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { COURSE_DATA } from "@/constants/CourseData";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
+import { T } from "@/lib/strings";
 import {
   getChapterUniqueHanzi,
   getChapterVocabulary,
@@ -31,6 +32,8 @@ function BackHeader({
         onPress={onBack ?? (() => router.back())}
         hitSlop={20}
         style={styles.backButton}
+        accessibilityRole="button"
+        accessibilityLabel={T.a11y.back}
       >
         <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
       </Pressable>

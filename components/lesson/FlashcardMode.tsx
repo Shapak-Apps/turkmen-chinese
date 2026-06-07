@@ -102,7 +102,7 @@ export default function FlashcardMode({
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.wordSection, wiggleStyle]}>
-        <TouchableOpacity onPress={playAudio} style={styles.speakerButton}>
+        <TouchableOpacity onPress={playAudio} style={styles.speakerButton} accessibilityRole="button" accessibilityLabel={T.a11y.playAudio}>
           <Ionicons name="volume-high" size={22} color={Colors.primaryAccentColor} />
         </TouchableOpacity>
         <ThemedText style={styles.hanziText}>{hanzi}</ThemedText>

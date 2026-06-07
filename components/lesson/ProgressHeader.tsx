@@ -1,4 +1,5 @@
 import { Colors, FontFamily } from "@/constants/theme";
+import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Pressable, StyleSheet, View } from "react-native";
 import { ThemedText } from "../themed-text";
@@ -25,7 +26,7 @@ export default function ProgressHeader({
 
   return (
     <View style={styles.header}>
-      <Pressable hitSlop={20} style={styles.closeButton} onPress={onClose}>
+      <Pressable hitSlop={20} style={styles.closeButton} onPress={onClose} accessibilityRole="button" accessibilityLabel={T.a11y.exit}>
         <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
       </Pressable>
       <View style={styles.progressContainer}>
