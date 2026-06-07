@@ -1,3 +1,5 @@
+import { syncStreakReminder } from "@/lib/notifications";
+import { getSettings } from "@/lib/settings";
 import { checkAndResetIfNeeded } from "@/lib/streak";
 import {
   Inter_400Regular,
@@ -37,6 +39,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     void checkAndResetIfNeeded();
+    void getSettings().then((s) => syncStreakReminder(s.remindersEnabled));
   }, []);
 
   if (!loaded && !error) {

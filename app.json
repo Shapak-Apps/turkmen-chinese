@@ -37,7 +37,8 @@
           "backgroundColor": "#ffffcc"
         }
       ],
-      "expo-av"
+      "expo-av",
+      "expo-notifications"
     ],
     "experiments": {
       "typedRoutes": true,

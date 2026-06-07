@@ -1,6 +1,7 @@
 import { ThemedText } from "@/components/themed-text";
 import { Colors, FontFamily, Radius, Spacing } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
+import { syncStreakReminder } from "@/lib/notifications";
 import { resetOnboarding } from "@/lib/onboarding";
 import {
   HintThreshold,
@@ -11,7 +12,7 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
 import { router } from "expo-router";
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Switch, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Option<T extends string> {
@@ -123,6 +124,31 @@ export default function SettingsScreen() {
           </View>
 
           <ThemedText style={[styles.sectionTitle, { marginTop: 12 }]}>
+            Ýatlatmalar
+          </ThemedText>
+          <View style={styles.toggleRow}>
+            <View style={{ flex: 1, marginRight: 12 }}>
+              <ThemedText style={styles.settingLabel}>Gündelik ýatlatma</ThemedText>
+              <ThemedText style={styles.settingDescription}>
+                Her gün streagyňy dowam etmegi ýatladýar
+              </ThemedText>
+            </View>
+            <Switch
+              value={settings.remindersEnabled}
+              onValueChange={(v) => {
+                haptics.tap();
+                updateSetting("remindersEnabled", v);
+                void syncStreakReminder(v);
+              }}
+              trackColor={{
+                true: Colors.primaryAccentColor,
+                false: Colors.borderColorStrong,
+              }}
+              thumbColor={Colors.surfacePrimary}
+            />
+          </View>
+
+          <ThemedText style={[styles.sectionTitle, { marginTop: 12 }]}>
             Beýleki
           </ThemedText>
           <Pressable
@@ -210,6 +236,16 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   settingBlock: {
+    backgroundColor: Colors.surfacePrimary,
+    borderRadius: Radius.lg,
+    borderWidth: 1,
+    borderColor: Colors.borderColor,
+    padding: 16,
+    marginBottom: 14,
+  },
+  toggleRow: {
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: Colors.surfacePrimary,
     borderRadius: Radius.lg,
     borderWidth: 1,

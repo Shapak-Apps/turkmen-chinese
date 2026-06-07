@@ -11,12 +11,14 @@ export interface Settings {
   strokeLeniency: Leniency;
   hintThreshold: HintThreshold;
   strokeMode: StrokeMode;
+  remindersEnabled: boolean;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
   strokeLeniency: "medium",
   hintThreshold: "3",
   strokeMode: "learn",
+  remindersEnabled: true,
 };
 
 export const LENIENCY_VALUES: Record<Leniency, number> = {

@@ -89,6 +89,12 @@ export const T = {
     reveal: "Aýdylyşyny görmek üçin basyň",
   },
 
+  // Локальные пуш-напоминания о streak
+  notifications: {
+    reminderTitle: "Streagyňy ýitirme! 🔥",
+    reminderBody: "Şu gün hytaý dilini birazajyk maşk et.",
+  },
+
   // Подписи для скринридеров (accessibilityLabel) на icon-only кнопках
   a11y: {
     back: "Yza gaýt",
