@@ -1,5 +1,6 @@
 import { ThemedText } from "@/components/themed-text";
 import { Colors, FontFamily, Radius, Spacing } from "@/constants/theme";
+import { exportProgress, importProgress } from "@/lib/backup";
 import { haptics } from "@/lib/haptics";
 import { syncStreakReminder } from "@/lib/notifications";
 import { resetOnboarding } from "@/lib/onboarding";
@@ -12,7 +13,7 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
 import { router } from "expo-router";
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Switch, View } from "react-native";
+import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Switch, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Option<T extends string> {
@@ -147,6 +148,65 @@ export default function SettingsScreen() {
               thumbColor={Colors.surfacePrimary}
             />
           </View>
+
+          <ThemedText style={[styles.sectionTitle, { marginTop: 12 }]}>
+            Maglumatlar
+          </ThemedText>
+          <Pressable
+            style={({ pressed }) => [
+              styles.actionRow,
+              pressed && styles.actionRowPressed,
+            ]}
+            onPress={async () => {
+              haptics.tap();
+              const r = await exportProgress(new Date().toISOString());
+              if (!r.ok && r.reason !== "cancelled") {
+                Alert.alert(T.backup.failed);
+              }
+            }}
+          >
+            <View style={styles.actionIcon}>
+              <Ionicons
+                name="download-outline"
+                size={22}
+                color={Colors.primaryAccentColor}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <ThemedText style={styles.actionTitle}>{T.backup.exportTitle}</ThemedText>
+              <ThemedText style={styles.actionSubtitle}>
+                {T.backup.exportSubtitle}
+              </ThemedText>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.actionRow,
+              pressed && styles.actionRowPressed,
+            ]}
+            onPress={async () => {
+              haptics.tap();
+              const r = await importProgress();
+              if (r.ok) Alert.alert(T.backup.importDone);
+              else if (r.reason !== "cancelled") Alert.alert(T.backup.failed);
+            }}
+          >
+            <View style={styles.actionIcon}>
+              <Ionicons
+                name="cloud-upload-outline"
+                size={22}
+                color={Colors.primaryAccentColor}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <ThemedText style={styles.actionTitle}>{T.backup.importTitle}</ThemedText>
+              <ThemedText style={styles.actionSubtitle}>
+                {T.backup.importSubtitle}
+              </ThemedText>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
+          </Pressable>
 
           <ThemedText style={[styles.sectionTitle, { marginTop: 12 }]}>
             Beýleki

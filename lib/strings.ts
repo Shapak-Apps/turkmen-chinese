@@ -89,6 +89,16 @@ export const T = {
     reveal: "Aýdylyşyny görmek üçin basyň",
   },
 
+  // Локальный бэкап прогресса (экспорт/импорт в файл)
+  backup: {
+    exportTitle: "Maglumatlary ýatda sakla",
+    exportSubtitle: "XP, streak we öňegidişligi faýla göçür",
+    importTitle: "Maglumatlary dikelt",
+    importSubtitle: "Ýatda saklanan faýldan yzyna ýükle",
+    importDone: "Dikeldildi. Programmany täzeden açyň.",
+    failed: "Bir zat ýalňyş gitdi. Gaýtadan synanyşyň.",
+  },
+
   // Локальные пуш-напоминания о streak
   notifications: {
     reminderTitle: "Streagyňy ýitirme! 🔥",
