@@ -26,7 +26,8 @@
   - `components/lesson/LessonCompleteScreen.tsx` — «Урок пройден!» (95), оценки (64-67), «Повторить/Продолжить/Повторить ошибки» (165,209,226)
   - `components/lesson/GrammarMode.tsx` (91-163), `FillBlankMode.tsx` («Подсказка/Дальше» 98,160), `MultipleChoiceMode.tsx` («Выбери ответ» 26), `MatchPairsMode.tsx` (148), `FlashcardMode.tsx` (153)
   - Alert-диалоги в `LessonContent.tsx` (294,328,396,406), «Chapter not found» в `theory.tsx:46` и `chapter-detail.tsx:47`
-- [ ] 🟠 **S — Базовая доступность.** Добавить `accessibilityLabel` + `accessibilityRole="button"` на icon-only кнопки: back (все хедеры), audio-спикеры (`theory.tsx:64`, `FlashcardMode.tsx:104`), bookmark (`chapter-detail.tsx:87`), brush/close. Это снимает «нулевую» доступность.
+- [x] 🟠 **S — Базовая доступность.** ✅ `accessibilityRole/Label` (туркм., через `T.a11y`) на icon-only кнопках: back ×10 хедеров, close (ProgressHeader), bookmark (динамич.), аудио (theory + FlashcardMode), brush. «Нулевая» доступность снята.
+  - [ ] ⚪ follow-up: остаточные иконки (PronunciationTheory play/audio-cells, StrokeOrderModal close, onboarding-точки, profile-меню) — при желании.
 - [x] 🟡 **S — Единая терминология.** Выбрать одно слово: «Teoriýa» vs «Nazaryýet» (`theory.tsx:516,548` vs `onboarding.tsx:50`, `chapter-detail.tsx:194`).
 - [ ] 🟡 **S — Тёмная тема: решить.** Либо подключить (`_layout.tsx:51` хардкодит `DefaultTheme`), либо убрать мёртвые токены `Colors.dark` и шаблонные `themed-text`/`themed-view`/`collapsible`/`icon-symbol`.
 
