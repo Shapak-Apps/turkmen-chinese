@@ -32,7 +32,7 @@
 - [ ] 🟡 **S — Тёмная тема: решить.** Либо подключить (`_layout.tsx:51` хардкодит `DefaultTheme`), либо убрать мёртвые токены `Colors.dark` и шаблонные `themed-text`/`themed-view`/`collapsible`/`icon-symbol`.
 
 ### Стретч (к 8+)
-- [ ] 🟠 **M — Масштабирование шрифта.** Поддержать Dynamic Type или закапать `maxFontSizeMultiplier`; убрать фиксированные высоты, которые обрежут крупный текст (tab bar `_layout.tsx:18` h60, `chapterCard minHeight:80`, таблицы тонов с фикс-шириной колонок).
+- [x] 🟠 **M — Масштабирование шрифта.** ✅ `maxFontSizeMultiplier=1.3` по умолчанию в `ThemedText` (+ raw-Text: AnimatedCounter, StrokeOrderModal). Крупный системный шрифт растёт ~30% (доступность), но не переполняет фикс-высоты — поэтому их не пришлось переписывать.
 - [ ] 🟡 **S — Контраст amber.** `#D97706` на белом = 3.19:1 (FAIL AA) — используется в 11px лейблах «JEMI XP»/«HÄZIRKI STREAK» (`profile.tsx:382`, `LessonCompleteScreen.tsx:388`). Затемнить.
 - [ ] 🟡 **S — Reduce-motion.** Учитывать `AccessibilityInfo.isReduceMotionEnabled` для confetti(250)/wiggle/spring.
 - [ ] ⚪ **S — Узкие экраны.** `Flashcard.tsx:109` фикс `width:340` переполнит экран 320pt; таблицы тонов с абсолютными ширинами.
