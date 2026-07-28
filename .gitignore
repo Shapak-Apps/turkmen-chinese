@@ -48,3 +48,6 @@ app-example
 # source materials (kept locally, not in repo)
 Boya Chinese/
 boya_pages/
+
+# Russian content backup (pre-Turkmenization original; canonical copy is git HEAD)
+content-ru-backup/

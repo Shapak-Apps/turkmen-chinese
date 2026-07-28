@@ -48,6 +48,46 @@ export const T = {
     reviewMistakes: "Ýalňyşlary gaýtala",
   },
 
+  // Шаги главы (Stepik-лента)
+  steps: {
+    // Лейблы по subtype шага (lookup: T.steps.labels[step.subtype])
+    labels: {
+      intro: "Giriş",
+      vocab: "Sözler",
+      grammar: "Grammatika",
+      dialogue: "Dialog",
+      practice: "Gönükmeler",
+      exam: "Bap synagy",
+    } as Record<string, string>,
+    progress: (done: number, total: number) => `${done} / ${total} ädim`,
+    locked: "Ýapyk",
+  },
+
+  // Экзамен главы (Bap synagy) — экран результата с порогом 70%
+  exam: {
+    passedTitle: "Synag tabşyryldy!",
+    failedTitle: "Synag geçilmedi",
+    passedMessage: "Indiki baba geçip bilersiň.",
+    failedMessage: "Geçmek üçin azyndan 70% gerek. Gaýtadan synanyş.",
+    scoreLabel: (correct: number, total: number) => `${correct}/${total} dogry`,
+    thresholdNote: "Geçmek üçin 70% gerek",
+    breakdownTitle: "Görnüşler boýunça",
+    bestScore: (pct: number) => `Iň gowy netije: ${pct}%`,
+    retake: "Gaýtadan synanyş",
+    passBadge: "Geçdiň",
+    // Названия типов упражнений для разбивки в результатах
+    types: {
+      single_response: "Gepleýiş",
+      multiple_choice: "Saýlama",
+      listening_mc: "Diňleme",
+      flashcard: "Kartoçka",
+      fill_blank: "Boşluk doldurma",
+      match_pairs: "Jübütleme",
+      grammar: "Grammatika",
+      stroke_order: "Hat ýazuwy",
+    } as Record<string, string>,
+  },
+
   // Режимы упражнений (Flashcard / FillBlank / MultipleChoice / Grammar / MatchPairs)
   practice: {
     chooseAnswer: "Jogaby saýla:",
@@ -87,6 +127,34 @@ export const T = {
   shadowing: {
     prompt: "Diňläp, bu jümläni hytaýça gaýtalaň",
     reveal: "Aýdylyşyny görmek üçin basyň",
+  },
+
+  // Аудио-подсказка перед аудио-вопросами (AudioPrompt)
+  audioPrompt: {
+    tapToListen: "Diňlemek üçin oýnat düwmesine bas",
+    playsOnce: "Ses her jogapdan öň bir gezek çalynýar",
+    listening: "Diňlenýär...",
+    revealWhatSaid: "Näme aýdylanyny görmek üçin şu ýere bas",
+  },
+
+  // Аудирование — «что ты услышал?» (ListeningMultipleChoiceMode)
+  listening: {
+    whatDidYouHear: "Näme eşitdiň?",
+  },
+
+  // Разбор предложения по словам (SentenceBreakdownCard)
+  breakdown: {
+    title: "Sözlem derňewi",
+    tapWordForMeaning: "Manysyny görmek üçin islendik söze bas",
+    breakdownLabel: "Derňew:",
+  },
+
+  // Диалог подтверждения выхода из упражнения (ConfirmDialog в LessonContent)
+  exitLesson: {
+    title: "Gönükmeden çykmak",
+    message: "Hakykatdan hem çykmak isleýärsiňizmi? Öňegidişligiňiz ýatdan çykar.",
+    stay: "Ýok",
+    leave: "Çyk",
   },
 
   // Локальный бэкап прогресса (экспорт/импорт в файл)
