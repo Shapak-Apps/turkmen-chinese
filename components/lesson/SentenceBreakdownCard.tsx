@@ -1,5 +1,6 @@
 import { Word } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
+import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
 import { useEffect, useRef, useState } from "react";
@@ -220,11 +221,11 @@ export default function SentenceBreakdownCard({
           style={styles.fullContent}
           showsVerticalScrollIndicator={false}
         >
-          <ThemedText style={styles.title}>Sentence Breakdown</ThemedText>
+          <ThemedText style={styles.title}>{T.breakdown.title}</ThemedText>
 
           <View style={styles.wordHintContainer}>
             <ThemedText style={styles.wordHintText}>
-              Tap any word to see its meaning
+              {T.breakdown.tapWordForMeaning}
             </ThemedText>
           </View>
 
@@ -257,7 +258,7 @@ export default function SentenceBreakdownCard({
             </ThemedText>
           </View>
           <View style={styles.breakdownItem}>
-            <ThemedText style={styles.label}>Breakdown:</ThemedText>
+            <ThemedText style={styles.label}>{T.breakdown.breakdownLabel}</ThemedText>
             <ThemedText style={styles.breakdownText}>
               {sentence.breakdown}
             </ThemedText>

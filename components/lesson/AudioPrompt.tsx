@@ -1,5 +1,6 @@
 import type { Question } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
+import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
@@ -16,15 +17,11 @@ import AudioWaveform from "./AudioWaveform";
 
 export default function AudioPrompt({
   isPlaying,
-  isRecognizing,
   hasListenedToAudio,
   onPlay,
-  onStartRecord,
-  onStopRecord,
   onRevealMandarin,
   currentQuestion,
   showMandarin,
-  selectedOption,
   scaleAnim,
   instructionOpacity,
   listeningOpacity,
@@ -32,35 +29,23 @@ export default function AudioPrompt({
   fadeAnim,
 }: {
   isPlaying: boolean;
-  isRecognizing: boolean;
   hasListenedToAudio: boolean;
   onPlay: () => void;
-  onStartRecord: () => void;
-  onStopRecord: () => void;
   onRevealMandarin: () => void;
   currentQuestion: Extract<Question, { mandarin: { hanzi: string; pinyin: string } }>;
   showMandarin: boolean;
-  selectedOption: number | null;
   scaleAnim: Animated.Value;
   instructionOpacity: Animated.Value;
   listeningOpacity: Animated.Value;
   listeningScale: Animated.Value;
   fadeAnim: Animated.Value;
 }) {
-  const playbackDisabled = !selectedOption && (isPlaying || hasListenedToAudio);
+  const playbackDisabled = isPlaying || hasListenedToAudio;
   return (
     <>
       <Pressable
         disabled={playbackDisabled}
-        onPress={
-          selectedOption
-            ? isRecognizing
-              ? onStopRecord
-              : () => requestAnimationFrame(onStartRecord)
-            : playbackDisabled
-              ? undefined
-              : () => requestAnimationFrame(onPlay)
-        }
+        onPress={playbackDisabled ? undefined : () => requestAnimationFrame(onPlay)}
         onPressIn={() => {
           if (playbackDisabled) {
             return;
@@ -86,40 +71,21 @@ export default function AudioPrompt({
           style={[
             styles.playButton,
             {
-              backgroundColor: selectedOption
-                ? isRecognizing
-                  ? Colors.primaryAccentColorDark
-                  : Colors.primaryAccentColor
-                : playbackDisabled
-                  ? Colors.primaryAccentBgStrong
-                  : Colors.primaryAccentColor,
+              backgroundColor: playbackDisabled
+                ? Colors.primaryAccentBgStrong
+                : Colors.primaryAccentColor,
               transform: [{ scale: scaleAnim }],
             },
           ]}
         >
-          {selectedOption ? (
-            isRecognizing ? (
-              <MaterialIcons name="stop" size={36} color="white" />
-            ) : (
-              <Ionicons name="mic" size={36} color="white" />
-            )
-          ) : isPlaying ? (
+          {isPlaying ? (
             <MaterialIcons name="graphic-eq" size={36} color="white" />
           ) : (
             <Ionicons name="play" size={36} color="white" />
           )}
         </Animated.View>
       </Pressable>
-      {selectedOption && isRecognizing ? (
-        <View style={styles.recordingStatus}>
-          <View style={styles.recordingIndicatorLarge}>
-            <View style={styles.recordingDotLarge}></View>
-          </View>
-          <ThemedText style={styles.recordingText}>Recording...</ThemedText>
-        </View>
-      ) : (
-        <AudioWaveform isPlaying={isPlaying} />
-      )}
+      <AudioWaveform isPlaying={isPlaying} />
 
       <View
         style={[
@@ -127,15 +93,7 @@ export default function AudioPrompt({
           { minHeight: currentQuestion.type === "listening_mc" ? 0 : 50 },
         ]}
       >
-        {selectedOption ? (
-          <View style={styles.recordingPromptTop}>
-            <ThemedText style={styles.recordingPromptText}>
-              {isRecognizing
-                ? "Speak your response now"
-                : "Tap the microphone to record"}
-            </ThemedText>
-          </View>
-        ) : !hasListenedToAudio ? (
+        {!hasListenedToAudio ? (
           <View style={styles.listeningPrompt}>
             <Animated.View
               style={[
@@ -144,10 +102,10 @@ export default function AudioPrompt({
               ]}
             >
               <ThemedText style={[styles.instructionText, { marginBottom: 8 }]}>
-                Tap play to listen carefully
+                {T.audioPrompt.tapToListen}
               </ThemedText>
               <ThemedText style={[styles.instructionHint]}>
-                The audio plays once before each response
+                {T.audioPrompt.playsOnce}
               </ThemedText>
             </Animated.View>
             <Animated.View
@@ -160,7 +118,7 @@ export default function AudioPrompt({
               ]}
             >
               <ThemedText style={styles.revealButtonText}>
-                Listening...
+                {T.audioPrompt.listening}
               </ThemedText>
             </Animated.View>
           </View>
@@ -183,7 +141,7 @@ export default function AudioPrompt({
               hitSlop={{ top: 10, bottom: 10, left: 20, right: 20 }}
             >
               <ThemedText style={styles.instructionText}>
-                Tap here to reveal what was said
+                {T.audioPrompt.revealWhatSaid}
               </ThemedText>
             </TouchableOpacity>
           )
@@ -241,30 +199,7 @@ const styles = StyleSheet.create({
     color: Colors.subduedTextColor,
     marginBottom: 4,
   },
-  recordingStatus: {
-    alignItems: "center",
-    marginVertical: 16,
-  },
-  recordingIndicatorLarge: { marginBottom: 8 },
-  recordingDotLarge: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: Colors.primaryAccentColor,
-  },
-  recordingText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.primaryAccentColor,
-  },
   promptTextContainer: { alignItems: "center" },
-  recordingPromptTop: { alignItems: "center", padding: 12 },
-  recordingPromptText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
-    textAlign: "center",
-  },
   listeningPrompt: {
     alignItems: "center",
     justifyContent: "center",

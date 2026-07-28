@@ -2,7 +2,10 @@
 
 > ⏭️ **Следующее большое направление (после 7/10) — редизайн на Stepik-шаги.**
 > Полный план и решения — в `HANDOFF.md` (раздел «СЛЕДУЮЩИЙ БОЛЬШОЙ ЭТАП»).
-> Этот файл — трекер именно полировки до 7/10.
+> ✅ Stepik-редизайн реализован ЦЕЛИКОМ 2026-06-07 (логика + UI, проверено на
+> эмуляторе): экзамен 70%, модель шагов, разблокировка (`examResult`/`courseSteps`/
+> `stepProgress`), лента шагов (`chapter-detail`), GitHub-карта (`lessons`),
+> теория-по-шагам (`theory`). Детали — в `HANDOFF.md`. Этот файл — трекер полировки до 7/10.
 
 > **Цель:** довести каждое из 4 измерений минимум до **7/10**.
 > Основано на инвест-аудите от **2026-06-06** (4 независимых проверки: UI/UX, Content, Business Logic, Clean Code).
@@ -15,17 +18,27 @@
 |---|---|---|---|
 | UI/UX | 6.0 | 7.0 | ✅ **7** — локализация, доступность, масштаб шрифта, термины |
 | Content | 6.5 | 7.0 | ✅ **7** — честный оффлайн, баг-данные убраны (туркменизация = фаза переводчиков) |
-| Clean Code | 5.5 | 7.0 | ✅ **7+** — тесты+CI, write-guards, мёртвый код убран, fake-speaking, `@ts-nocheck` |
+| Clean Code | 5.5 | 7.0 | ✅ **7+** — тесты+CI, write-guards, мёртвый код убран, fake-speaking, `@ts-nocheck`; +декомпозиция `LessonContent` (Этап A+B, рантайм-проверено) |
 | Business Logic | 5.5 | 7.0 | 🔼 **почти** — награды/stats/пуш/локальный бэкап ✅, аналитика ✅(спит до ключа); осталось keystore |
 
 ### Снимок прогресса
 
 **✅ Сделано (этого достаточно для 7 по трём измерениям):**
-глава 0 в списке · единый `strings.ts` (вся локализация) · доступность (a11y-метки) · масштаб шрифта · честный «оффлайн» (−35 МБ) · баг-данные (FINALS/titleChinese/черты) · `router.replace`→effect · тесты+CI (34 теста, GitHub Actions) · удалён мёртвый conversation + 10 deps · reward-гард (XP за первое прохождение) · фикс speaking/listening stats · write-guards · fake-speaking → shadowing + сняты mic-разрешения · пуш-напоминания · каркас аналитики + PostHog · **локальный бэкап (экспорт/импорт)**.
+глава 0 в списке · единый `strings.ts` (вся локализация) · доступность (a11y-метки) · масштаб шрифта · честный «оффлайн» (−35 МБ) · баг-данные (FINALS/titleChinese/черты) · `router.replace`→effect · тесты+CI (60 тестов, GitHub Actions) · удалён мёртвый conversation + 10 deps · reward-гард (XP за первое прохождение) · фикс speaking/listening stats · write-guards · fake-speaking → shadowing + сняты mic-разрешения · пуш-напоминания · каркас аналитики + PostHog · **локальный бэкап (экспорт/импорт)**.
 
-**🟠 Осталось обязательного (2):**
+**🟠 Осталось обязательного (1):**
 - **Keystore** — локальный `.jks` (нужен ты: `keytool` + пароли). Последний блокер релиза.
-- **Декомпозиция `LessonContent`** (983 стр.) — крупный риск без запуска.
+
+**✅ Декомпозиция `LessonContent` — завершена (2026-07-03):**
+- Этап A: мёртвый recording-код удалён, 5 обработчиков `onAnswer` схлопнуты в один, скоринг
+  вынесен в `lib/lessonStats.ts` (+3 теста).
+- Этап B: мик-ветка вычищена из `AudioPrompt` (293→226 строк). **Рантайм-проверка на эмуляторе
+  Pixel 9 Pro пройдена** — flashcard / multiple_choice / listening_mc, аудио-цикл
+  play→listen→reveal→answer, `jumpToQuestion`. Мик-визуал после ответа исчез.
+- `LessonContent` **1073 → 757 строк**, tsc/lint/63 теста зелёные.
+- Вынос хуков (audio/animations/scoring) **сознательно НЕ делали** — чистый рефактор с плохим
+  риск/польза (рантайм-баги в хуках, ноль для юзера). Декомпозиция признана достаточной.
+- ✅ `string-similarity` + `@types/string-similarity` удалены из `package.json` (2026-07-03), tsc чист.
 
 **⏸ Отложено по решению владельца (всё локально пока):**
 - Активация PostHog — вставить `phc_`-ключ в `lib/analyticsConfig.ts`.
@@ -118,10 +131,10 @@ reward-гард (повтор без XP) · shadowing-произношение (
   - 35 МБ неиспользуемого `assets/audio/` — решить вместе с Content п.1.
 - [x] 🟠 **S — `router.replace` в рендере.** `chapter-detail.tsx:57-60` — перенести навигацию в `useEffect` (сейчас сайд-эффект в теле render).
 - [x] 🔴 **S — Фейковое упражнение на произношение.** ✅ Переделано в честный shadowing (слушай → повтори вслух → Dowam et), без фейк-оценки. Микрофон убран из UX + сняты mic-разрешения (RECORD_AUDIO / iOS / expo-av).
-  - [ ] ⚪ follow-up: удалить теперь **недостижимый** recording-код (`startRecording`/`stopRecording`/`processSpeechResult`, состояние `recordingRef`/`isRecognizing`/`transcription`, mic-ветка в `AudioPrompt`, зависимость `string-similarity`) — лучше делать с запущенным приложением.
+  - [x] ⚪ follow-up (2026-07-03): недостижимый recording-код удалён из `LessonContent` (`startRecording`/`stopRecording`/`processSpeechResult`, состояние `recordingRef`/`isRecognizing`/`transcription`/`isLoading`, импорт `string-similarity`) + мик-ветка вычищена из `AudioPrompt` (проверено на эмуляторе). ✅ `string-similarity` (+`@types`) удалён из `package.json` (2026-07-03).
 
 ### Стретч (к 8+)
-- [ ] 🟠 **L — Декомпозировать `LessonContent.tsx` (983 строки)** на контейнеры по режимам + вынести хук скоринга.
+- [x] 🟠 **L — Декомпозировать `LessonContent.tsx`** — ✅ (2026-07-03): Этап A (мёртвый recording-код убран, 5 `onAnswer`-обработчиков → один `handleSelfContainedAnswer`, скоринг → чистый `lib/lessonStats.ts` +3 теста) + Этап B (мик-ветка вычищена из `AudioPrompt`, рантайм-проверка на эмуляторе); **1073→757 строк**. Вынос хуков аудио/анимаций/скоринга сознательно не делали (риск ≫ пользы).
 - [ ] 🟡 **M — Runtime-валидация данных.** Заменить `COURSE_DATA as unknown as CourseData` (`CourseData.ts:191`) и `JSON.parse as T` на zod/typebox-схемы.
 - [x] 🟡 **S — Гарды записи + логирование.** Незащищённые `AsyncStorage.setItem` (`lessonProgress.ts:20`, `settings.ts:44`, `customScenarios.ts:25`, `speakingListeningStats.ts:30`) + перестать молча глотать ошибки в `catch {}`.
 - [ ] ⚪ **S — Починить 10 `exhaustive-deps` warnings** (`LessonContent`, `FlashcardMode:55`, `AnimatedCounter:45` и др.).

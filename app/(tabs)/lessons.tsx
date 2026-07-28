@@ -6,6 +6,7 @@ import { COURSE_DATA } from "@/constants/CourseData";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
 import { getAllProgress } from "@/lib/lessonProgress";
+import { ChapterUnlock, getCourseUnlocks } from "@/lib/stepProgress";
 import { useStreak } from "@/lib/streak";
 import { useUserName } from "@/lib/user";
 import { useXP } from "@/lib/xp";
@@ -47,8 +48,73 @@ function getNextChapter(completedIds: Set<number>): { id: number; title: string;
   };
 }
 
+// GitHub-style course map: each chapter is a row of step-squares. Because steps
+// unlock strictly in order, doneCount alone tells us which squares are green and
+// which one is current — no per-step state needed.
+function CourseMap({
+  data,
+  onOpen,
+}: {
+  data: ChapterUnlock[];
+  onOpen: (chapterId: number) => void;
+}) {
+  const rows = data.filter((c) => c.total > 0);
+  if (rows.length === 0) return null;
+
+  return (
+    <View style={styles.mapSection}>
+      <View style={styles.mapHeader}>
+        <ThemedText style={styles.mapTitle}>Okuw kartasy</ThemedText>
+        <View style={styles.legendRow}>
+          <View style={[styles.legendDot, styles.squareDone]} />
+          <ThemedText style={styles.legendText}>geçildi</ThemedText>
+          <View style={[styles.legendDot, styles.squareCurrent]} />
+          <ThemedText style={styles.legendText}>häzir</ThemedText>
+        </View>
+      </View>
+
+      {rows.map((ch) => (
+        <Pressable
+          key={ch.chapterId}
+          style={[styles.mapRow, !ch.unlocked && styles.mapRowLocked]}
+          disabled={!ch.unlocked}
+          onPress={() => onOpen(ch.chapterId)}
+          accessibilityRole="button"
+          accessibilityLabel={`${ch.chapterId}-nji bap`}
+        >
+          <ThemedText style={styles.mapRowLabel}>{ch.chapterId}</ThemedText>
+          <View style={styles.squares}>
+            {Array.from({ length: ch.total }).map((_, i) => {
+              const done = i < ch.doneCount;
+              const current =
+                ch.unlocked && i === ch.doneCount && ch.doneCount < ch.total;
+              return (
+                <View
+                  key={i}
+                  style={[
+                    styles.square,
+                    done && styles.squareDone,
+                    current && styles.squareCurrent,
+                    !ch.unlocked && styles.squareLocked,
+                  ]}
+                />
+              );
+            })}
+          </View>
+          {ch.passed ? (
+            <Ionicons name="checkmark-circle" size={16} color={Colors.successColor} />
+          ) : !ch.unlocked ? (
+            <Ionicons name="lock-closed" size={13} color={Colors.borderColorStrong} />
+          ) : null}
+        </Pressable>
+      ))}
+    </View>
+  );
+}
+
 export default function LessonsContent() {
   const [progress, setProgress] = useState<Record<string, number>>({});
+  const [courseMap, setCourseMap] = useState<ChapterUnlock[]>([]);
   const { xp, refresh: refreshXP } = useXP();
   const streak = useStreak();
   const { name, refresh: refreshName } = useUserName();
@@ -56,6 +122,7 @@ export default function LessonsContent() {
   useFocusEffect(
     useCallback(() => {
       getAllProgress().then(setProgress);
+      getCourseUnlocks().then(setCourseMap);
       refreshXP();
       streak.refresh();
       refreshName();
@@ -233,25 +300,17 @@ export default function LessonsContent() {
           </TouchableOpacity>
         </View>
 
-        {/* Progress bar */}
-        {completedChapterIds.size > 0 && (
-          <View style={styles.progressSection}>
-            <View style={styles.progressHeader}>
-              <ThemedText style={styles.progressLabel}>Umumy ilerleme</ThemedText>
-              <ThemedText style={styles.progressPercent}>
-                {Math.round((completedChapterIds.size / 30) * 100)}%
-              </ThemedText>
-            </View>
-            <View style={styles.progressBar}>
-              <View
-                style={[
-                  styles.progressFill,
-                  { width: `${(completedChapterIds.size / 30) * 100}%` },
-                ]}
-              />
-            </View>
-          </View>
-        )}
+        {/* GitHub-style course map */}
+        <CourseMap
+          data={courseMap}
+          onOpen={(chapterId) => {
+            haptics.tap();
+            router.push({
+              pathname: "/chapter-detail",
+              params: { chapterId: String(chapterId) },
+            });
+          }}
+        />
       </ScrollView>
     </SafeAreaView>
   );
@@ -493,36 +552,62 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 
-  progressSection: {
+  // Course map (GitHub-style)
+  mapSection: {
     backgroundColor: Colors.surfaceSecondary,
     borderRadius: Radius.lg,
     padding: 16,
   },
-  progressHeader: {
+  mapHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 14,
   },
-  progressLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 13,
-    color: Colors.textSecondary,
-  },
-  progressPercent: {
+  mapTitle: {
     fontFamily: FontFamily.bold,
-    fontSize: 15,
-    color: Colors.primaryAccentColor,
+    fontSize: 16,
+    color: Colors.textPrimary,
   },
-  progressBar: {
-    height: 8,
+  legendRow: { flexDirection: "row", alignItems: "center", gap: 5 },
+  legendDot: { width: 10, height: 10, borderRadius: 3 },
+  legendText: {
+    fontFamily: FontFamily.medium,
+    fontSize: 11,
+    color: Colors.subduedTextColor,
+    marginRight: 4,
+  },
+  mapRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 6,
+    gap: 10,
+  },
+  mapRowLocked: { opacity: 0.55 },
+  mapRowLabel: {
+    fontFamily: FontFamily.bold,
+    fontSize: 12,
+    color: Colors.subduedTextColor,
+    width: 22,
+    textAlign: "right",
+  },
+  squares: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 4,
+  },
+  square: {
+    width: 14,
+    height: 14,
+    borderRadius: 3,
     backgroundColor: Colors.borderColor,
-    borderRadius: 4,
-    overflow: "hidden",
   },
-  progressFill: {
-    height: "100%",
-    backgroundColor: Colors.primaryAccentColor,
-    borderRadius: 4,
+  squareDone: { backgroundColor: Colors.successColor },
+  squareCurrent: {
+    backgroundColor: Colors.primaryAccentBg,
+    borderWidth: 1.5,
+    borderColor: Colors.primaryAccentColor,
   },
+  squareLocked: { backgroundColor: Colors.borderColor },
 });

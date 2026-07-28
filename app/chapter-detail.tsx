@@ -5,13 +5,18 @@ import { COURSE_DATA } from "@/constants/CourseData";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { useBookmarks } from "@/lib/bookmarks";
 import { Events, track } from "@/lib/analytics";
+import { CourseStep, StepSubtype } from "@/lib/courseSteps";
 import { haptics } from "@/lib/haptics";
-import { getAllProgress } from "@/lib/lessonProgress";
+import {
+  ChapterStepStates,
+  getChapterStepStates,
+  StepWithState,
+} from "@/lib/stepProgress";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const UNITS: { range: [number, number]; title: string; subtitle: string }[] = [
@@ -27,18 +32,119 @@ function getUnit(chapterId: number) {
   return UNITS.find((u) => chapterId >= u.range[0] && chapterId <= u.range[1]);
 }
 
+const STEP_ICONS: Record<StepSubtype, keyof typeof Ionicons.glyphMap> = {
+  intro: "flag-outline",
+  vocab: "library-outline",
+  grammar: "construct-outline",
+  dialogue: "chatbubbles-outline",
+  practice: "pencil-outline",
+  exam: "trophy-outline",
+};
+
+function StepRow({
+  item,
+  isLast,
+  onPress,
+}: {
+  item: StepWithState;
+  isLast: boolean;
+  onPress: (step: CourseStep) => void;
+}) {
+  const { step, state, done } = item;
+  const locked = state === "locked";
+  const current = state === "current";
+
+  const circleStyle =
+    state === "done"
+      ? styles.circleDone
+      : current
+        ? styles.circleCurrent
+        : styles.circleLocked;
+
+  const label = T.steps.labels[step.subtype] ?? step.subtype;
+
+  return (
+    <View style={styles.stepRow}>
+      {/* Left rail: connector line + status circle */}
+      <View style={styles.railCol}>
+        <View
+          style={[
+            styles.railLine,
+            styles.railLineTop,
+            step.index === 0 && styles.railLineHidden,
+            done && styles.railLineDone,
+          ]}
+        />
+        <View style={[styles.circle, circleStyle]}>
+          {state === "done" ? (
+            <Ionicons name="checkmark" size={18} color={Colors.textInverse} />
+          ) : locked ? (
+            <Ionicons name="lock-closed" size={14} color={Colors.subduedTextColor} />
+          ) : (
+            <Ionicons name={STEP_ICONS[step.subtype]} size={16} color={Colors.textInverse} />
+          )}
+        </View>
+        <View
+          style={[
+            styles.railLine,
+            styles.railLineBottom,
+            isLast && styles.railLineHidden,
+            done && styles.railLineDone,
+          ]}
+        />
+      </View>
+
+      {/* Step card */}
+      <Pressable
+        style={[
+          styles.stepCard,
+          current && styles.stepCardCurrent,
+          locked && styles.stepCardLocked,
+        ]}
+        disabled={locked}
+        onPress={() => onPress(step)}
+        accessibilityRole="button"
+        accessibilityLabel={`${label}${locked ? ` — ${T.steps.locked}` : ""}`}
+      >
+        <View style={styles.stepCardContent}>
+          <ThemedText
+            style={[styles.stepLabel, locked && styles.stepLabelLocked]}
+            numberOfLines={1}
+          >
+            {label}
+          </ThemedText>
+          {step.title ? (
+            <ThemedText style={styles.stepSubtitle} numberOfLines={1}>
+              {step.title}
+            </ThemedText>
+          ) : null}
+        </View>
+        {locked ? (
+          <Ionicons name="lock-closed" size={16} color={Colors.borderColorStrong} />
+        ) : (
+          <Ionicons
+            name="chevron-forward"
+            size={18}
+            color={current ? Colors.primaryAccentColor : Colors.subduedTextColor}
+          />
+        )}
+      </Pressable>
+    </View>
+  );
+}
+
 export default function ChapterDetailScreen() {
   const { chapterId } = useLocalSearchParams<{ chapterId: string }>();
   const id = chapterId != null ? Number(chapterId) : 1;
   const isPronunciation = id === 0;
-  const [progress, setProgress] = useState<Record<string, number>>({});
+  const [stepData, setStepData] = useState<ChapterStepStates | null>(null);
   const { bookmarks, toggle: toggleBookmark } = useBookmarks();
   const isBookmarked = bookmarks.has(id);
 
   useFocusEffect(
     useCallback(() => {
-      getAllProgress().then(setProgress);
-    }, []),
+      getChapterStepStates(id).then(setStepData);
+    }, [id]),
   );
 
   // Chapter 0 (Pronunciation) is theory-only — redirect to the theory screen.
@@ -81,13 +187,26 @@ export default function ChapterDetailScreen() {
   const grammarCount = theory?.grammar?.length ?? 0;
   const dialogueCount = theory?.dialogues?.length ?? 0;
 
-  const previewWords = theory?.vocabulary?.slice(0, 4) ?? [];
-
   const Illustration = CHAPTER_ILLUSTRATIONS[id];
   const unit = getUnit(id);
 
-  const exerciseDone = (progress[`chapter-${id}`] ?? 0) > 0;
-  const testDone = (progress[`test-${id}`] ?? 0) > 0;
+  const openStep = (step: CourseStep) => {
+    haptics.tap();
+    if (step.kind === "exam") {
+      router.push({ pathname: "/chapter-test", params: { chapterId: String(id) } });
+    } else if (step.kind === "practice") {
+      router.push({ pathname: "/practise", params: { chapterId: String(id) } });
+    } else {
+      router.push({
+        pathname: "/theory",
+        params: { chapterId: String(id), step: step.key },
+      });
+    }
+  };
+
+  const steps = stepData?.steps ?? [];
+  const doneCount = stepData?.doneCount ?? 0;
+  const total = stepData?.total ?? 0;
 
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
@@ -171,110 +290,31 @@ export default function ChapterDetailScreen() {
           </View>
         </View>
 
-        {/* Vocabulary preview chips */}
-        {previewWords.length > 0 && (
-          <View style={styles.previewSection}>
-            <ThemedText style={styles.previewLabel}>Sözlerden</ThemedText>
-            <View style={styles.previewChips}>
-              {previewWords.map((word, idx) => (
-                <View key={idx} style={styles.wordChip}>
-                  <ThemedText style={styles.wordChipHanzi}>{word.hanzi}</ThemedText>
-                  <ThemedText style={styles.wordChipPinyin}>
-                    {word.pinyin}
-                  </ThemedText>
-                </View>
-              ))}
-            </View>
+        {/* Steps lenta */}
+        {total > 0 && (
+          <View style={styles.lentaHeader}>
+            <ThemedText style={styles.lentaTitle}>Ädimler</ThemedText>
+            <ThemedText style={styles.lentaProgress}>
+              {T.steps.progress(doneCount, total)}
+            </ThemedText>
           </View>
         )}
-
-        {/* Action cards */}
-        <View style={styles.actions}>
-          <TouchableOpacity
-            style={styles.actionCard}
-            activeOpacity={0.85}
-            onPress={() => {
-              haptics.tap();
-              router.push({
-                pathname: "/theory",
-                params: { chapterId: String(chapter.id) },
-              });
-            }}
-          >
-            <View style={[styles.actionIcon, { backgroundColor: Colors.primaryAccentBg }]}>
-              <Ionicons name="book-outline" size={22} color={Colors.primaryAccentColor} />
-            </View>
-            <View style={styles.actionContent}>
-              <ThemedText style={styles.actionTitle}>Teoriýa</ThemedText>
-              <ThemedText style={styles.actionSubtitle}>
-                Sözler, grammatika, dialoglar
-              </ThemedText>
-            </View>
-            <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.actionCard}
-            activeOpacity={0.85}
-            onPress={() => {
-              haptics.tap();
-              router.push({
-                pathname: "/practise",
-                params: { chapterId: String(chapter.id) },
-              });
-            }}
-          >
-            <View style={[styles.actionIcon, { backgroundColor: Colors.successBg }]}>
-              <Ionicons name="pencil-outline" size={22} color={Colors.successColor} />
-            </View>
-            <View style={styles.actionContent}>
-              <ThemedText style={styles.actionTitle}>Gönükmeler</ThemedText>
-              <ThemedText style={styles.actionSubtitle}>
-                {totalQuestions > 0
-                  ? `Türgenleşik · ${totalQuestions} sorag`
-                  : "Ýakyn wagtda goşular"}
-              </ThemedText>
-            </View>
-            {exerciseDone && (
-              <View style={styles.doneBadge}>
-                <Ionicons name="checkmark" size={14} color={Colors.textInverse} />
-              </View>
-            )}
-            <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.actionCard}
-            activeOpacity={0.85}
-            onPress={() => {
-              haptics.tap();
-              router.push({
-                pathname: "/chapter-test",
-                params: { chapterId: String(chapter.id) },
-              });
-            }}
-          >
-            <View style={[styles.actionIcon, { backgroundColor: Colors.warningBg }]}>
-              <Ionicons name="trophy-outline" size={22} color={Colors.warningColor} />
-            </View>
-            <View style={styles.actionContent}>
-              <ThemedText style={styles.actionTitle}>Bap synagy</ThemedText>
-              <ThemedText style={styles.actionSubtitle}>
-                15 tötänleýin gönükme
-              </ThemedText>
-            </View>
-            {testDone && (
-              <View style={styles.doneBadge}>
-                <Ionicons name="checkmark" size={14} color={Colors.textInverse} />
-              </View>
-            )}
-            <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
-          </TouchableOpacity>
+        <View style={styles.lenta}>
+          {steps.map((item, i) => (
+            <StepRow
+              key={item.step.key}
+              item={item}
+              isLast={i === steps.length - 1}
+              onPress={openStep}
+            />
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
+
+const CIRCLE = 36;
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.surfacePrimary },
@@ -358,7 +398,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.surfaceSecondary,
     borderRadius: Radius.lg,
     paddingVertical: 14,
-    marginBottom: 20,
+    marginBottom: 24,
     alignItems: "center",
   },
   statBox: {
@@ -384,82 +424,97 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.borderColor,
   },
 
-  // Vocabulary preview
-  previewSection: {
-    marginBottom: 24,
-  },
-  previewLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-    marginBottom: 10,
-  },
-  previewChips: {
+  // Lenta
+  lentaHeader: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
+    alignItems: "baseline",
+    justifyContent: "space-between",
+    marginBottom: 12,
   },
-  wordChip: {
-    backgroundColor: Colors.primaryAccentBg,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: Radius.md,
-    alignItems: "center",
-    minWidth: 64,
-  },
-  wordChipHanzi: {
+  lentaTitle: {
     fontFamily: FontFamily.bold,
-    fontSize: 17,
-    color: Colors.primaryAccentColor,
+    fontSize: 18,
+    color: Colors.textPrimary,
   },
-  wordChipPinyin: {
-    fontFamily: FontFamily.medium,
-    fontSize: 11,
-    color: Colors.textSecondary,
-    marginTop: 2,
+  lentaProgress: {
+    fontFamily: FontFamily.semibold,
+    fontSize: 13,
+    color: Colors.subduedTextColor,
   },
-
-  // Action cards
-  actions: { gap: 12 },
-  actionCard: {
+  lenta: {},
+  stepRow: {
+    flexDirection: "row",
+    alignItems: "stretch",
+  },
+  railCol: {
+    width: CIRCLE,
+    alignItems: "center",
+  },
+  railLine: {
+    width: 2,
+    flex: 1,
+    backgroundColor: Colors.borderColor,
+  },
+  railLineTop: { minHeight: 8 },
+  railLineBottom: { minHeight: 8 },
+  railLineHidden: { backgroundColor: "transparent" },
+  railLineDone: { backgroundColor: Colors.successColor },
+  circle: {
+    width: CIRCLE,
+    height: CIRCLE,
+    borderRadius: CIRCLE / 2,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  circleDone: { backgroundColor: Colors.successColor },
+  circleCurrent: {
+    backgroundColor: Colors.primaryAccentColor,
+    shadowColor: Colors.primaryAccentColor,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 4,
+  },
+  circleLocked: {
+    backgroundColor: Colors.surfaceSecondary,
+    borderWidth: 1,
+    borderColor: Colors.borderColor,
+  },
+  stepCard: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 16,
+    marginLeft: 12,
+    marginVertical: 5,
+    paddingVertical: 14,
     paddingHorizontal: 16,
     borderRadius: Radius.lg,
     borderWidth: 1,
     borderColor: Colors.borderColor,
     backgroundColor: Colors.surfacePrimary,
-    gap: 12,
+    gap: 10,
     ...Shadow.sm,
   },
-  actionIcon: {
-    width: 42,
-    height: 42,
-    borderRadius: Radius.md,
-    alignItems: "center",
-    justifyContent: "center",
+  stepCardCurrent: {
+    borderColor: Colors.primaryAccentColor,
+    backgroundColor: Colors.primaryAccentBg,
   },
-  actionContent: { flex: 1 },
-  actionTitle: {
+  stepCardLocked: {
+    backgroundColor: Colors.surfaceSecondary,
+    borderColor: Colors.divider,
+    ...({ shadowOpacity: 0, elevation: 0 } as object),
+  },
+  stepCardContent: { flex: 1 },
+  stepLabel: {
     fontFamily: FontFamily.semibold,
     fontSize: 16,
     color: Colors.textPrimary,
-    marginBottom: 2,
   },
-  actionSubtitle: {
+  stepLabelLocked: { color: Colors.subduedTextColor },
+  stepSubtitle: {
     fontFamily: FontFamily.regular,
-    fontSize: 13,
+    fontSize: 12,
     color: Colors.subduedTextColor,
-  },
-  doneBadge: {
-    width: 22,
-    height: 22,
-    borderRadius: 11,
-    backgroundColor: Colors.successColor,
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: 2,
   },
 });

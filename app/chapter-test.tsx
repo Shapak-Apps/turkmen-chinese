@@ -1,12 +1,12 @@
-import LessonContent from "@/components/lesson/LessonContent";
-import VocabularyIntroScreen from "@/components/lesson/VocabularyIntroScreen";
+import ExamResultScreen from "@/components/lesson/ExamResultScreen";
+import LessonContent, { LessonStats } from "@/components/lesson/LessonContent";
 import { ThemedText } from "@/components/themed-text";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { COURSE_DATA, Question } from "@/constants/CourseData";
 import { Colors, FontFamily, Spacing } from "@/constants/theme";
-import { getChapterVocabulary } from "@/lib/vocabulary";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { ExamResult, saveExamResult } from "@/lib/examResult";
 import { T } from "@/lib/strings";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useLocalSearchParams } from "expo-router";
 import { useMemo, useState } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
@@ -37,27 +37,52 @@ function BackHeader({ title }: { title: string }) {
   );
 }
 
+function leaveTest() {
+  if (router.canGoBack()) {
+    router.back();
+  } else {
+    router.push("/lessons");
+  }
+}
+
 export default function ChapterTestScreen() {
   const { chapterId } = useLocalSearchParams<{ chapterId: string }>();
-  const [isStudyingVocabulary, setIsStudyingVocabulary] = useState(true);
+  // Bumping this re-shuffles questions and remounts the runner for a retake.
+  const [attemptKey, setAttemptKey] = useState(0);
+  const [stats, setStats] = useState<LessonStats | null>(null);
+  const [outcome, setOutcome] = useState<ExamResult | null>(null);
 
-  const { questions, id, words } = useMemo(() => {
-    if (!chapterId) return { questions: [] as Question[], id: "", words: [] };
+  const { questions, lessonId } = useMemo(() => {
+    if (!chapterId) return { questions: [] as Question[], lessonId: "" };
 
     const chapter = COURSE_DATA.chapters.find(
       (ch) => ch.id === Number(chapterId),
     );
-    if (!chapter) return { questions: [] as Question[], id: "", words: [] };
+    if (!chapter) return { questions: [] as Question[], lessonId: "" };
 
     const allQuestions = chapter.lessons.flatMap((l) => l.questions);
     const selected = shuffleArray(allQuestions).slice(0, TEST_QUESTION_COUNT);
 
-    return {
-      questions: selected,
-      id: `test-${chapterId}`,
-      words: getChapterVocabulary(Number(chapterId)),
-    };
-  }, [chapterId]);
+    return { questions: selected, lessonId: `test-${chapterId}` };
+    // attemptKey is intentionally a dependency: a retake reshuffles questions.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chapterId, attemptKey]);
+
+  const handleComplete = async (finalStats: LessonStats) => {
+    const correct = finalStats.firstTryCorrect ?? finalStats.correctAnswers;
+    const result = await saveExamResult(Number(chapterId), {
+      correct,
+      total: finalStats.totalQuestions,
+    });
+    setStats(finalStats);
+    setOutcome(result);
+  };
+
+  const handleRetake = () => {
+    setStats(null);
+    setOutcome(null);
+    setAttemptKey((k) => k + 1);
+  };
 
   if (questions.length === 0) {
     return (
@@ -76,13 +101,14 @@ export default function ChapterTestScreen() {
     );
   }
 
-  if (isStudyingVocabulary) {
+  if (outcome && stats) {
     return (
       <SafeAreaView style={styles.container}>
-        <VocabularyIntroScreen
-          key={id}
-          words={words}
-          onStartLesson={() => setIsStudyingVocabulary(false)}
+        <ExamResultScreen
+          result={outcome}
+          byType={stats.byType ?? []}
+          onRetake={handleRetake}
+          onContinue={leaveTest}
         />
       </SafeAreaView>
     );
@@ -90,7 +116,13 @@ export default function ChapterTestScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LessonContent questions={questions} lessonId={id} />
+      <LessonContent
+        key={attemptKey}
+        mode="exam"
+        questions={questions}
+        lessonId={lessonId}
+        onComplete={handleComplete}
+      />
     </SafeAreaView>
   );
 }

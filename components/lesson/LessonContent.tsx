@@ -1,8 +1,9 @@
 import { Question, SpeakingOption } from "@/constants/CourseData";
-import { Colors, FontFamily } from "@/constants/theme";
+import { Colors } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
 import { hasCompletedLesson, incrementLessonCompletion } from "@/lib/lessonProgress";
 import { Events, track } from "@/lib/analytics";
+import { computeLessonStats, type LessonStats } from "@/lib/lessonStats";
 import { markActiveDay } from "@/lib/streak";
 import { T } from "@/lib/strings";
 import { addXP, XP_REWARDS } from "@/lib/xp";
@@ -10,13 +11,10 @@ import {
   recordQuestionAnswered,
   recordQuestionListened,
 } from "@/lib/speakingListeningStats";
-import { Audio, InterruptionModeIOS } from "expo-av";
 import { router } from "expo-router";
 import * as Speech from "expo-speech";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ActivityIndicator, Alert, Animated, StyleSheet, View } from "react-native";
-import { compareTwoStrings } from "string-similarity";
-import { ThemedText } from "../themed-text";
+import { Animated, StyleSheet, View } from "react-native";
 import ConfirmDialog from "../ui/ConfirmDialog";
 import AudioPrompt from "./AudioPrompt";
 import { FeedbackView } from "./FeedbackView";
@@ -33,21 +31,10 @@ import MatchPairsMode from "./MatchPairsMode";
 import StrokeOrderMode from "./StrokeOrderMode";
 import ExerciseNavBar from "./ExerciseNavBar";
 
-interface WrongQuestion {
-  english: string;
-  mandarin: {
-    hanzi: string;
-    pinyin: string;
-  };
-  attempts: number;
-}
-
-export interface LessonStats {
-  correctAnswers: number;
-  totalQuestions: number;
-  accuracy: number;
-  wrongQuestions?: WrongQuestion[];
-}
+// LessonStats/TypeBreakdown теперь живут в lib/lessonStats.ts (чистый модуль,
+// покрыт тестами). Реэкспорт — чтобы существующие импортёры этого файла
+// (chapter-test, ExamResultScreen, LessonCompleteScreen) не менялись.
+export type { LessonStats, TypeBreakdown } from "@/lib/lessonStats";
 
 const MAX_ATTEMPTS = 3;
 
@@ -55,26 +42,29 @@ export default function LessonContent({
   questions,
   lessonId,
   onExit,
+  mode = "lesson",
+  onComplete,
 }: {
   questions: Question[];
   lessonId: string;
   onExit?: () => void;
+  /**
+   * "lesson" — обычный урок: начисляет XP и показывает LessonCompleteScreen.
+   * "exam" — экзамен главы: XP не начисляет (оценка, а не практика), а по
+   * завершении вызывает onComplete с итоговой статистикой; родитель сам
+   * рисует экран результата (ExamResultScreen).
+   */
+  mode?: "lesson" | "exam";
+  onComplete?: (stats: LessonStats) => void;
 }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [exitConfirmVisible, setExitConfirmVisible] = useState(false);
   const [showMandarin, setShowMandarin] = useState(false);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [hasListenedToAudio, setHasListenedToAudio] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [attemptCount, setAttemptCount] = useState(0);
-  const [isRecognizing, setIsRecognizing] = useState(false);
-  const recordingRef = useRef<Audio.Recording | null>(null);
-  const [transcription, setTranscription] = useState<{
-    expected: string;
-    said: string;
-  } | null>(null);
   const currentQuestion = useMemo(
     () => questions[currentQuestionIndex],
     [questions, currentQuestionIndex],
@@ -115,7 +105,10 @@ export default function LessonContent({
   }, [lessonId]);
 
   // Grant the per-correct-answer XP only while the lesson is still rewardable.
+  // Exams are assessments, not practice — they never award XP (also prevents
+  // farming XP by retaking the exam).
   const awardCorrectXp = () => {
+    if (mode === "exam") return;
     if (rewardableRef.current) void addXP(XP_REWARDS.CORRECT_ANSWER);
   };
 
@@ -167,9 +160,6 @@ export default function LessonContent({
   useEffect(() => {
     return () => {
       Speech.stop();
-      if (recordingRef.current) {
-        recordingRef.current.stopAndUnloadAsync();
-      }
     };
   }, []);
 
@@ -305,131 +295,6 @@ export default function LessonContent({
     });
   };
 
-  const startRecording = async () => {
-    if (isSpeechPlaying) {
-      Speech.stop();
-      setIsSpeechPlaying(false);
-    }
-
-    try {
-      const perm = await Audio.requestPermissionsAsync();
-      if (!perm.granted) {
-        Alert.alert(T.speaking.micPermissionTitle, T.speaking.micPermissionBody);
-        return;
-      }
-
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-        interruptionModeIOS: InterruptionModeIOS.DoNotMix,
-        staysActiveInBackground: true,
-      });
-
-      const preset = Audio.RecordingOptionsPresets.HIGH_QUALITY;
-      const { recording } = await Audio.Recording.createAsync({
-        ...preset,
-        ios: {
-          ...preset.ios,
-          extension: ".wav",
-          audioQuality: Audio.IOSAudioQuality.MAX,
-          outputFormat: Audio.IOSOutputFormat.LINEARPCM,
-        },
-        android: {
-          ...preset.android,
-          extension: ".wav",
-          outputFormat: Audio.AndroidOutputFormat.DEFAULT,
-          audioEncoder: Audio.AndroidAudioEncoder.DEFAULT,
-        },
-      });
-
-      recordingRef.current = recording;
-      setIsRecognizing(true);
-    } catch (err) {
-      console.error("Failed to start recording:", err);
-      recordingRef.current = null;
-      setIsRecognizing(false);
-      Alert.alert(T.speaking.recordingErrorTitle, T.speaking.couldNotStart);
-    }
-  };
-
-  const processSpeechResult = (transcript: string) => {
-    setIsLoading(false);
-    setShowResult(true);
-
-    const punctuationRegex = /[.,\/#!$%\^&\*;:{}=\-_`~()?]/g;
-
-    const rawExpected = selectedSentence?.mandarin.pinyin || "";
-    const expected = rawExpected
-      .toLowerCase()
-      .replace(punctuationRegex, "")
-      .replace(/\s+/g, "")
-      .trim();
-
-    const said = transcript
-      .toLowerCase()
-      .replace(punctuationRegex, "")
-      .replace(/\s+/g, "")
-      .trim();
-
-    setTranscription({ expected: rawExpected, said: transcript });
-
-    if (!said || !expected) {
-      setIsCorrect(false);
-    } else {
-      const similarity = compareTwoStrings(expected, said);
-      const isSimilarEnough = similarity >= 0.8;
-
-      setIsCorrect(isSimilarEnough);
-      if (isSimilarEnough) {
-        void recordQuestionAnswered();
-      }
-    }
-
-    Animated.sequence([
-      Animated.timing(scaleAnim, {
-        toValue: 1.05,
-        duration: 200,
-        useNativeDriver: true,
-      }),
-      Animated.timing(scaleAnim, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
-
-  const stopRecording = async () => {
-    setIsLoading(true);
-    setIsRecognizing(false);
-
-    try {
-      const recording = recordingRef.current;
-      if (!recording) {
-        setIsLoading(false);
-        return;
-      }
-
-      await recording.stopAndUnloadAsync();
-      const uri = recording.getURI();
-      recordingRef.current = null;
-
-      if (!uri) {
-        setIsLoading(false);
-        Alert.alert(T.speaking.recordingErrorTitle, T.speaking.noAudio);
-        return;
-      }
-
-      // TODO: Add offline transcription or API-based transcription later
-      // For now, skip transcription and mark as correct (practice mode)
-      processSpeechResult(selectedSentence?.mandarin.pinyin || "");
-    } catch (err) {
-      console.error("Failed to start/stop recording:", err);
-      setIsLoading(false);
-      Alert.alert(T.speaking.recordingErrorTitle, T.speaking.couldNotProcess);
-    }
-  };
-
   const handleRevealMandarin = () => {
     if (showMandarin) {
       Animated.timing(fadeAnim, {
@@ -489,68 +354,24 @@ export default function LessonContent({
         setCurrentQuestionIndex(next);
         setVisitedIndices((prev) => new Set(prev).add(next));
       } else {
-        const accuracy = Math.round(
-          (correctAnswersCount / questions.length) * 100,
+        const finalStats = computeLessonStats(
+          questions,
+          correctAnswersCount,
+          wrongQuestions,
+          questionAttempts,
         );
 
-        const wrongQuestionsList = questions
-          .filter((q) => wrongQuestions.has(q.id))
-          .map((q) => {
-            let english = "";
-            let hanzi = "";
-            let pinyin = "";
+        track(Events.LessonComplete, {
+          lessonId,
+          accuracy: finalStats.accuracy,
+        });
 
-            if (q.type === "listening_mc") {
-              english =
-                q.options.find((opt) => opt.id === q.correctOptionId)
-                  ?.english || "";
-              hanzi = q.mandarin.hanzi;
-              pinyin = q.mandarin.pinyin;
-            } else if (q.type === "multiple_choice" || q.type === "single_response") {
-              const option = q.options[0];
-              english = option.english;
-              hanzi = option.mandarin.hanzi;
-              pinyin = option.mandarin.pinyin;
-            } else if (q.type === "flashcard") {
-              const correct = q.options.find((opt) => opt.id === q.correctOptionId);
-              english = correct?.english || "";
-              hanzi = q.mandarin.hanzi;
-              pinyin = q.mandarin.pinyin;
-            } else if (q.type === "fill_blank") {
-              english = q.correctAnswer;
-              hanzi = q.sentence;
-              pinyin = q.sentencePinyin;
-            } else if (q.type === "match_pairs") {
-              english = T.screen.matchPairsLabel;
-              hanzi = q.pairs.map((p) => p.left).join(", ");
-              pinyin = "";
-            } else if (q.type === "grammar") {
-              english = q.rule.title;
-              hanzi = "";
-              pinyin = "";
-            } else if (q.type === "stroke_order") {
-              english = q.instruction || "Hiýeroglif ýaz";
-              hanzi = q.characters.join("");
-              pinyin = "";
-            }
-
-            return {
-              english,
-              mandarin: {
-                hanzi,
-                pinyin,
-              },
-              attempts: questionAttempts[q.id] || 1,
-            };
-          });
-
-        const finalStats: LessonStats = {
-          correctAnswers: correctAnswersCount,
-          totalQuestions: questions.length,
-          accuracy,
-          wrongQuestions:
-            wrongQuestionsList.length > 0 ? wrongQuestionsList : undefined,
-        };
+        // Exam: hand the result to the parent, which renders ExamResultScreen
+        // and owns persistence. No XP, no built-in completion screen.
+        if (mode === "exam" && onComplete) {
+          onComplete(finalStats);
+          return;
+        }
 
         // Capture whether this completion earns XP, then close the reward
         // window so an in-session "review mistakes" replay grants nothing.
@@ -558,7 +379,6 @@ export default function LessonContent({
         rewardableRef.current = false;
         setLessonStats(finalStats);
         setShowCompleteScreen(true);
-        track(Events.LessonComplete, { lessonId, accuracy });
       }
     });
   };
@@ -571,6 +391,22 @@ export default function LessonContent({
     void recordQuestionAnswered();
     awardCorrectXp();
     void markActiveDay();
+    nextQuestion();
+  };
+
+  // Self-contained modes (flashcard/fill_blank/match_pairs/grammar/stroke_order)
+  // report only pass/fail; scoring, XP and advancing are identical for all five.
+  const handleSelfContainedAnswer = (correct: boolean) => {
+    if (correct) {
+      haptics.success();
+      setCorrectAnswersCount((prev) => prev + 1);
+      void recordQuestionAnswered();
+      awardCorrectXp();
+      void markActiveDay();
+    } else {
+      haptics.error();
+      setWrongQuestions((prev) => new Set(prev).add(currentQuestion.id));
+    }
     nextQuestion();
   };
 
@@ -587,7 +423,6 @@ export default function LessonContent({
       if (currentQuestion.type === "listening_mc") {
         setSelectedOption(null);
       } else {
-        setIsLoading(false);
         setHasListenedToAudio(true);
 
         if (currentQuestion.type === "multiple_choice") {
@@ -622,8 +457,6 @@ export default function LessonContent({
     setShowResult(false);
     setHasListenedToAudio(false);
     setAttemptCount(0);
-    setIsLoading(false);
-    setTranscription(null);
     Speech.stop();
     setIsSpeechPlaying(false);
     fadeAnim.setValue(0);
@@ -669,17 +502,14 @@ export default function LessonContent({
     <View style={styles.container}>
       <ConfirmDialog
         visible={exitConfirmVisible}
-        title="Gönükmeden çykmak"
-        description="Hakykatdan hem çykmak isleýärsiňizmi? Öňegidişligiňiz ýatdan çykar."
-        cancelLabel="Ýok"
-        confirmLabel="Çyk"
+        title={T.exitLesson.title}
+        description={T.exitLesson.message}
+        cancelLabel={T.exitLesson.stay}
+        confirmLabel={T.exitLesson.leave}
         destructive
         onConfirm={async () => {
           setExitConfirmVisible(false);
           Speech.stop();
-          if (recordingRef.current) {
-            await recordingRef.current.stopAndUnloadAsync();
-          }
           if (onExit) {
             onExit();
           } else if (router.canGoBack()) {
@@ -706,19 +536,7 @@ export default function LessonContent({
           instruction={currentQuestion.instruction}
           options={currentQuestion.options}
           correctOptionId={currentQuestion.correctOptionId}
-          onAnswer={(correct) => {
-            if (correct) {
-              haptics.success();
-              setCorrectAnswersCount((prev) => prev + 1);
-              void recordQuestionAnswered();
-              awardCorrectXp();
-              void markActiveDay();
-            } else {
-              haptics.error();
-              setWrongQuestions((prev) => new Set(prev).add(currentQuestion.id));
-            }
-            nextQuestion();
-          }}
+          onAnswer={handleSelfContainedAnswer}
         />
       )}
 
@@ -732,19 +550,7 @@ export default function LessonContent({
           hint={currentQuestion.hint}
           instruction={currentQuestion.instruction}
           options={currentQuestion.options}
-          onAnswer={(correct) => {
-            if (correct) {
-              haptics.success();
-              setCorrectAnswersCount((prev) => prev + 1);
-              void recordQuestionAnswered();
-              awardCorrectXp();
-              void markActiveDay();
-            } else {
-              haptics.error();
-              setWrongQuestions((prev) => new Set(prev).add(currentQuestion.id));
-            }
-            nextQuestion();
-          }}
+          onAnswer={handleSelfContainedAnswer}
         />
       )}
 
@@ -753,19 +559,7 @@ export default function LessonContent({
           key={currentQuestion.id}
           instruction={currentQuestion.instruction}
           pairs={currentQuestion.pairs}
-          onAnswer={(correct) => {
-            if (correct) {
-              haptics.success();
-              setCorrectAnswersCount((prev) => prev + 1);
-              void recordQuestionAnswered();
-              awardCorrectXp();
-              void markActiveDay();
-            } else {
-              haptics.error();
-              setWrongQuestions((prev) => new Set(prev).add(currentQuestion.id));
-            }
-            nextQuestion();
-          }}
+          onAnswer={handleSelfContainedAnswer}
         />
       )}
 
@@ -774,19 +568,7 @@ export default function LessonContent({
           key={currentQuestion.id}
           rule={currentQuestion.rule}
           practice={currentQuestion.practice}
-          onAnswer={(correct) => {
-            if (correct) {
-              haptics.success();
-              setCorrectAnswersCount((prev) => prev + 1);
-              void recordQuestionAnswered();
-              awardCorrectXp();
-              void markActiveDay();
-            } else {
-              haptics.error();
-              setWrongQuestions((prev) => new Set(prev).add(currentQuestion.id));
-            }
-            nextQuestion();
-          }}
+          onAnswer={handleSelfContainedAnswer}
         />
       )}
 
@@ -795,19 +577,7 @@ export default function LessonContent({
           key={currentQuestion.id}
           characters={currentQuestion.characters}
           instruction={currentQuestion.instruction}
-          onAnswer={(correct) => {
-            if (correct) {
-              haptics.success();
-              setCorrectAnswersCount((prev) => prev + 1);
-              void recordQuestionAnswered();
-              awardCorrectXp();
-              void markActiveDay();
-            } else {
-              haptics.error();
-              setWrongQuestions((prev) => new Set(prev).add(currentQuestion.id));
-            }
-            nextQuestion();
-          }}
+          onAnswer={handleSelfContainedAnswer}
         />
       )}
 
@@ -824,22 +594,18 @@ export default function LessonContent({
                 minHeight: audioSectionAnimHeight,
                 flex: hasListenedToAudio ? 0 : 1,
                 justifyContent: "center",
-                opacity: isLoading || showResult ? 0.6 : 1,
+                opacity: showResult ? 0.6 : 1,
               },
             ]}
-            pointerEvents={isLoading || showResult ? "none" : "auto"}
+            pointerEvents={showResult ? "none" : "auto"}
           >
             <AudioPrompt
               isPlaying={isSpeechPlaying}
-              isRecognizing={isRecognizing}
               hasListenedToAudio={hasListenedToAudio}
               onPlay={playAudio}
-              onStartRecord={startRecording}
-              onStopRecord={stopRecording}
               onRevealMandarin={handleRevealMandarin}
               currentQuestion={currentQuestion}
               showMandarin={showMandarin}
-              selectedOption={selectedOption}
               scaleAnim={scaleAnim}
               instructionOpacity={instructionOpacity}
               listeningOpacity={listeningOpacity}
@@ -855,7 +621,7 @@ export default function LessonContent({
                 {
                   opacity: Animated.multiply(
                     optionsAnimValue,
-                    isLoading || showResult ? 0.5 : 1,
+                    showResult ? 0.5 : 1,
                   ),
                   transform: [
                     {
@@ -867,14 +633,14 @@ export default function LessonContent({
                   ],
                 },
               ]}
-              pointerEvents={isLoading || showResult ? "none" : "auto"}
+              pointerEvents={showResult ? "none" : "auto"}
             >
               {currentQuestion.type === "multiple_choice" && (
                 <MultipleChoiceMode
                   options={currentQuestion.options}
                   selectedOption={selectedOption}
                   handleOptionPress={handleOptionPress}
-                  isLoading={isLoading}
+                  isLoading={false}
                   showResult={showResult}
                   instruction={currentQuestion.instruction}
                 />
@@ -884,7 +650,7 @@ export default function LessonContent({
                   options={currentQuestion.options}
                   selectedOption={selectedOption}
                   handleOptionPress={handleOptionPress}
-                  isLoading={isLoading}
+                  isLoading={false}
                   showResult={showResult}
                 />
               )}
@@ -896,20 +662,6 @@ export default function LessonContent({
                 />
               )}
             </Animated.View>
-          )}
-
-          {isLoading && (
-            <View style={styles.bottomSection}>
-              <View style={styles.loadingContainer}>
-                <ActivityIndicator
-                  size="large"
-                  color={Colors.primaryAccentColor}
-                />
-                <ThemedText style={styles.loadingText}>
-                  {T.speaking.analyzing}
-                </ThemedText>
-              </View>
-            </View>
           )}
 
           {/* Feedback view */}
@@ -931,14 +683,6 @@ export default function LessonContent({
                 }
                 attemptCount={isCorrect ? attemptCount : attemptCount + 1}
                 maxAttempts={MAX_ATTEMPTS}
-                transcription={
-                  transcription
-                    ? {
-                        expected: transcription.expected,
-                        said: transcription.said,
-                      }
-                    : undefined
-                }
               />
             </Animated.View>
           )}
@@ -947,7 +691,6 @@ export default function LessonContent({
 
       {/* Sentence Breakdown Card */}
       {currentQuestion.type === "listening_mc" &&
-        !isLoading &&
         hasListenedToAudio && (
           <SentenceBreakdownCard
             sentence={{
@@ -965,7 +708,6 @@ export default function LessonContent({
         )}
       {(currentQuestion.type === "multiple_choice" ||
         currentQuestion.type === "single_response") &&
-        !isLoading &&
         selectedSentence && (
           <SentenceBreakdownCard
             sentence={{
@@ -1003,14 +745,6 @@ const styles = StyleSheet.create({
   optionsSection: {
     flex: 1,
     marginBottom: 24,
-  },
-  bottomSection: { marginBottom: 20 },
-  loadingContainer: { alignItems: "center", padding: 20 },
-  loadingText: {
-    marginTop: 12,
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
   },
   feedbackWrapper: {
     position: "absolute",

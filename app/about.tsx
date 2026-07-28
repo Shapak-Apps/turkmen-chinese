@@ -24,7 +24,7 @@ const SHAPAK_LOGO = require("../assets/images/shapak_logo.png");
 const APP_VERSION =
   Constants.expoConfig?.version ?? Constants.manifest?.version ?? "1.0.0";
 
-const APP_NAME = "Şapak — Hytaý dili";
+const APP_NAME = "Hytaý dili 1";
 const TEAM_EMAIL = "shapak.app@gmail.com";
 const YEAR = new Date().getFullYear();
 

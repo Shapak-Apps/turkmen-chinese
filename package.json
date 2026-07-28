@@ -56,14 +56,12 @@
     "react-native-svg": "15.12.1",
     "react-native-web": "~0.21.0",
     "react-native-worklets": "0.5.1",
-    "sonner-native": "^0.23.1",
-    "string-similarity": "^4.0.4"
+    "sonner-native": "^0.23.1"
   },
   "devDependencies": {
     "@react-native-community/cli": "^20.1.2",
     "@types/jest": "^29.5.14",
     "@types/react": "~19.1.0",
-    "@types/string-similarity": "^4.0.2",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
     "hanzi-writer-data": "^2.0.1",

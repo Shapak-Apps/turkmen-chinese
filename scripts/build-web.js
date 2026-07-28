@@ -19,7 +19,7 @@ const html = `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TurkmenLearn: Chinese — Preview</title>
+<title>Hytaý dili 1 — Preview</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #11181C; }
@@ -156,7 +156,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 <div class="app" id="app">
   <div class="screen active" id="screen-home">
     <div class="scroll">
-      <div class="home-title">TurkmenLearn: Chinese</div>
+      <div class="home-title">Hytaý dili 1</div>
       <div class="card" onclick="showWelcome()">
         <div class="card-icon" style="background:#007AFF">&#9995;</div>
         <div class="card-content">

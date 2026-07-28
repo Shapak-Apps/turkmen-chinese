@@ -13,6 +13,7 @@ import PronunciationTheory from "@/components/PronunciationTheory";
 import StrokeOrderModal from "@/components/StrokeOrderModal";
 import { Events, track } from "@/lib/analytics";
 import { haptics } from "@/lib/haptics";
+import { markTheoryStepDone } from "@/lib/stepProgress";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
@@ -403,19 +404,59 @@ function renderPage(page: PageData) {
 
 // --- Main pager component ---
 
-function TheoryPager({ theory, chapterId }: { theory: TheoryChapter; chapterId: number }) {
+// Map a pager page index to its step key (null for the trailing tips page,
+// which has no Stepik step). Order mirrors buildPages: intro, vocab, grammar×N,
+// dialogue×N, [tips].
+function stepKeyForPage(theory: TheoryChapter, pageIndex: number): string | null {
+  if (pageIndex === 0) return "intro";
+  if (pageIndex === 1) return "vocab";
+  const gStart = 2;
+  const gCount = theory.grammar.length;
+  if (pageIndex < gStart + gCount) return `grammar-${pageIndex - gStart}`;
+  const dStart = gStart + gCount;
+  const dCount = theory.dialogues.length;
+  if (pageIndex < dStart + dCount) return `dialogue-${pageIndex - dStart}`;
+  return null; // tips
+}
+
+function pageForStepKey(theory: TheoryChapter, key?: string): number {
+  if (!key || key === "intro") return 0;
+  if (key === "vocab") return 1;
+  const m = key.match(/^(grammar|dialogue)-(\d+)$/);
+  if (m) {
+    const idx = Number(m[2]);
+    return m[1] === "grammar" ? 2 + idx : 2 + theory.grammar.length + idx;
+  }
+  return 0;
+}
+
+function TheoryPager({
+  theory,
+  chapterId,
+  initialStepKey,
+}: {
+  theory: TheoryChapter;
+  chapterId: number;
+  initialStepKey?: string;
+}) {
   const pages = buildPages(theory, chapterId);
-  const [currentPage, setCurrentPage] = useState(0);
+  const initialPage = pageForStepKey(theory, initialStepKey);
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const flatListRef = useRef<FlatList>(null);
   const insets = useSafeAreaInsets();
 
+  // Theory is auto-pass: viewing a section marks its step done. Sweeping through
+  // the pager completes the chapter's theory steps in order, unlocking practice.
   const onViewableItemsChanged = useCallback(
     ({ viewableItems }: { viewableItems: ViewToken[] }) => {
       if (viewableItems.length > 0 && viewableItems[0].index != null) {
-        setCurrentPage(viewableItems[0].index);
+        const index = viewableItems[0].index;
+        setCurrentPage(index);
+        const key = stepKeyForPage(theory, index);
+        if (key) void markTheoryStepDone(chapterId, key);
       }
     },
-    [],
+    [theory, chapterId],
   );
 
   const viewabilityConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
@@ -435,6 +476,7 @@ function TheoryPager({ theory, chapterId }: { theory: TheoryChapter; chapterId: 
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, i) => String(i)}
+        initialScrollIndex={initialPage}
         renderItem={({ item }) => (
           <View style={{ width: SCREEN_WIDTH }}>{renderPage(item)}</View>
         )}
@@ -526,7 +568,10 @@ function Placeholder({ chapterId, title }: { chapterId: number; title: string })
 // --- Main screen ---
 
 export default function TheoryScreen() {
-  const { chapterId } = useLocalSearchParams<{ chapterId: string }>();
+  const { chapterId, step } = useLocalSearchParams<{
+    chapterId: string;
+    step?: string;
+  }>();
   const id = chapterId != null ? Number(chapterId) : 1;
 
   useEffect(() => {
@@ -565,7 +610,7 @@ export default function TheoryScreen() {
       {id === 0 ? (
         <PronunciationTheory />
       ) : theory ? (
-        <TheoryPager theory={theory} chapterId={id} />
+        <TheoryPager theory={theory} chapterId={id} initialStepKey={step} />
       ) : (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 20 }}>
           <Placeholder chapterId={chapter.id} title={chapter.title} />

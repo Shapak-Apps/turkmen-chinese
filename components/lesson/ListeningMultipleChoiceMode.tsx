@@ -1,6 +1,7 @@
 import { ListeningOption } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
+import { T } from "@/lib/strings";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { ThemedText } from "../themed-text";
 
@@ -20,7 +21,7 @@ export default function ListeningMultipleChoiceMode({
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.promptContainer}>
-        <ThemedText style={styles.sectionTitle}>What did you just hear?</ThemedText>
+        <ThemedText style={styles.sectionTitle}>{T.listening.whatDidYouHear}</ThemedText>
       </View>
       <ScrollView
         style={styles.optionsScrollView}
