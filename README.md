@@ -49,6 +49,7 @@ Diňe türkmen bahalaryny terjime ediň. Hanzi we pinyin ýazgylaryny üýtgetm�
 ### Barlaglar
 
 ```bash
+npm run lint
 npx tsc --noEmit
 npm test
 ```
@@ -110,6 +111,7 @@ Translate Turkmen values only. Never modify hanzi or pinyin.
 ### Checks
 
 ```bash
+npm run lint
 npx tsc --noEmit
 npm test
 ```
