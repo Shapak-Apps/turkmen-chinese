@@ -3,6 +3,9 @@
 # dependencies
 node_modules/
 
+# IDE
+.idea/
+
 supabase/.temp
 .env
 
