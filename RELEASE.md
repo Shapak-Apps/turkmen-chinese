@@ -118,16 +118,17 @@ PostHog — анкету придётся переписывать, это ст�
 `android-icon.png` и `android-icon-background.png`, неиспользуемая `convo-minimal.png`,
 `scripts/restructure.js`, и `.idea/` (там лежал `turkmen-english.iml` — файл от другого проекта).
 
-Осталось под вопросом, я не трогал:
+Решено 2026-08-07 (всё удалённое остаётся в git-истории):
 
-| Что | Почему под вопросом |
+| Что | Решение |
 |---|---|
-| `scripts/add-chapter*.js` — 12 файлов | Одноразовые генераторы глав, контент давно собран. Но это история |
-| `scripts/reset-project.js` | Шаблон Expo, стирает приложение. Висит в `package.json` как команда — опасная кнопка |
-| `scripts/bundle-hanzi.js` | Ссылок из кода нет, но может запускаться руками |
-| `thumbnail.png` в корне | Ссылок нет |
-| `improve.md`, 21 КБ | 19 пунктов сделано, 16 нет. Часть могла устареть после Stepik-редизайна |
-| `android/` на диске, **3,7 ГБ** | Мусор сборки, в git его нет, пересоздаётся `expo run:android` |
+| `scripts/add-chapter*.js` — 12 файлов | ✅ Удалены (их удаления требовал сам improve.md) |
+| `scripts/reset-project.js` | ✅ Удалён + команда `reset-project` убрана из `package.json` |
+| `scripts/bundle-hanzi.js` | ✅ Оставлен — пересобирает `hanzi_data.json`, если вычитка тронет иероглифы |
+| `thumbnail.png` в корне | ✅ Удалён (эпоха v1.0, 790 КБ, ссылок нет) |
+| `improve.md` | ✅ Удалён; 6 живых пунктов перенесены в issues [#16](https://github.com/Shapak-Apps/turkmen-chinese/issues/16)–[#19](https://github.com/Shapak-Apps/turkmen-chinese/issues/19), ссылка в HANDOFF поправлена |
+| `web/index.html` + `scripts/build-web.js` | ✅ Удалены — превью со вшитыми **русскими** данными, после туркменизации не пересобиралось; вычитку покроет закрытый трек в Play |
+| `android/` на диске, **3,7 ГБ** | ✅ Оставлен на время релизных сборок — мусор, в git его нет, пересоздаётся `expo run:android` |
 
 Python-скрипты (`build_glossary.py`, `apply_chapter.py`, `next_chapter.py`) и `glossary-ru-tm.*`
 **не трогать** — это рабочий процесс перевода, он понадобится после вычитки носителями.
