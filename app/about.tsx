@@ -26,6 +26,9 @@ const APP_VERSION =
 
 const APP_NAME = "Hytaý dili 1";
 const TEAM_EMAIL = "shapak.app@gmail.com";
+const GITHUB_REPO_URL = "https://github.com/Shapak-Apps/turkmen-chinese";
+const GITHUB_ORG_URL = "https://github.com/Shapak-Apps";
+const WEBSITE_URL = "https://shapak-apps.github.io";
 const YEAR = new Date().getFullYear();
 
 type ModalType = "authors" | "series" | null;
@@ -43,6 +46,11 @@ export default function AboutScreen() {
   const openEmail = () => {
     haptics.tap();
     Linking.openURL(`mailto:${TEAM_EMAIL}?subject=${APP_NAME}`).catch(() => {});
+  };
+
+  const openLink = (url: string) => {
+    haptics.tap();
+    Linking.openURL(url).catch(() => {});
   };
 
   return (
@@ -186,6 +194,24 @@ export default function AboutScreen() {
                   color={Colors.primaryAccentColor}
                 />
               </Pressable>
+              <Pressable
+                style={[styles.emailBtn, styles.linkBtnGap]}
+                onPress={() => openLink(GITHUB_REPO_URL)}
+              >
+                <Ionicons
+                  name="logo-github"
+                  size={18}
+                  color={Colors.primaryAccentColor}
+                />
+                <ThemedText style={styles.emailText}>
+                  Açyk çeşme kody — GitHub
+                </ThemedText>
+                <Ionicons
+                  name="arrow-forward"
+                  size={14}
+                  color={Colors.primaryAccentColor}
+                />
+              </Pressable>
               <ThemedText style={styles.sectionHint}>
                 Teklipler, ýalňyşlyklar ýa-da soraglar üçin ýazyň.
               </ThemedText>
@@ -249,6 +275,46 @@ export default function AboutScreen() {
                 Programmalar türkmen ulanyjylar üçin niýetlense-de, dünýäniň
                 islendik künjeginden ulanmak mümkin.
               </ThemedText>
+            </Section>
+
+            {/* Links */}
+            <Section icon="link" color="#8B5CF6" title="Salgylar">
+              <Pressable
+                style={styles.emailBtn}
+                onPress={() => openLink(WEBSITE_URL)}
+              >
+                <Ionicons
+                  name="globe-outline"
+                  size={18}
+                  color={Colors.primaryAccentColor}
+                />
+                <ThemedText style={styles.emailText}>
+                  shapak-apps.github.io
+                </ThemedText>
+                <Ionicons
+                  name="arrow-forward"
+                  size={14}
+                  color={Colors.primaryAccentColor}
+                />
+              </Pressable>
+              <Pressable
+                style={[styles.emailBtn, styles.linkBtnGap]}
+                onPress={() => openLink(GITHUB_ORG_URL)}
+              >
+                <Ionicons
+                  name="logo-github"
+                  size={18}
+                  color={Colors.primaryAccentColor}
+                />
+                <ThemedText style={styles.emailText}>
+                  github.com/Shapak-Apps
+                </ThemedText>
+                <Ionicons
+                  name="arrow-forward"
+                  size={14}
+                  color={Colors.primaryAccentColor}
+                />
+              </Pressable>
             </Section>
 
             {/* App 1 — Ykjam Terjime */}
@@ -609,5 +675,8 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.semibold,
     fontSize: 14,
     color: Colors.primaryAccentColor,
+  },
+  linkBtnGap: {
+    marginTop: 10,
   },
 });
