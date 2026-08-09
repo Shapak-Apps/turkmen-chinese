@@ -55,3 +55,7 @@ boya_pages/
 
 # Russian content backup (pre-Turkmenization original; canonical copy is git HEAD)
 content-ru-backup/
+
+# internal working docs (kept locally, not in repo)
+HANDOFF.md
+RELEASE.md
