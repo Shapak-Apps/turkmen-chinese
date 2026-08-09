@@ -3744,7 +3744,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   30: {
     introduction:
-      "Bu tutuş okuw kitabynyň jemleýji baby! Siz ähli esasy gurluşlary gaýtalarsyňyz we çykyşa taýýarlanmak hakda gürrüň bermegi, 怕 (gorkmak) we emfatik 多……啊 («ahyry-ha edil şu X!») ulanmagy öwrenersiňiz.\n\n" +
+      "Bu tutuş kursuň jemleýji baby! Siz ähli esasy gurluşlary gaýtalarsyňyz we çykyşa taýýarlanmak hakda gürrüň bermegi, 怕 (gorkmak) we emfatik 多……啊 («ahyry-ha edil şu X!») ulanmagy öwrenersiňiz.\n\n" +
       "Ýagdaý: 阿曼 fakultet ýygnanyşygyna taýýarlanýar. Ol hytaý halk aýdymyny aýtmagy karar etdi, ýöne aýdylyşy sebäpli howsala düşýär.",
 
     vocabulary: [
@@ -3879,9 +3879,9 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
     tips: [
       "民歌 (míngē) — halk aýdymy. Hytaýda örän meşhur žanr. Belli aýdymlar: 茉莉花 (Jasmin gülü), 康定情歌 (Kandiniň söýgi aýdymy). Hytaý dilini öwrenmek üçin ajaýyp.",
       "面子 (miànzi) — «abraý, at-abraý». Hytaý medeniýetiniň esasy düşünjesi. 没面子 — abraýdan gaçmak, utanç bolmak. 给面子 — hormat goýmak (abraý bermek). Işewürlik gatnaşyklarynda möhüm düşünje.",
-      "光盘 — CD/DVD. Streaming döwründe söz könelişýär, ýöne 2012-nji ýylyň okuw kitabynda häzirki. Häzir köplenç 下载 (ýükläp almak) ýa-da diňe 听音乐 diýilýär.",
+      "光盘 — CD/DVD. Streaming döwründe söz könelişýär, ýöne henizem duş gelýär. Häzir köplenç 下载 (ýükläp almak) ýa-da diňe 听音乐 diýilýär.",
       "发音 (aýdylyş) — hytaý diliniň iň kyn böleklerinden biri. Äheňler (声调) + dogry aýdyş. Olarsyz iýeroglifler dogry bolsa-da saňa düşünmezler.",
-      "Boya Chinese Elementary 1-i tamamlanyň bilen gutlaýaryn! 30 bap, 700+ söz, ähli esasy grammatik gurluşlar. Indiki dereje — Boya Chinese Elementary 2 (31-60-njy baplar).",
+      "Kursy tamamlanyň bilen gutlaýaryn! 30 bap, 700+ söz, ähli esasy grammatik gurluşlar. Bu — hytaý dilinde ynamly başlangyç!",
     ],
   },
 };

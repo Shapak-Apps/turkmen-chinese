@@ -25,7 +25,7 @@ const APP_VERSION =
   Constants.expoConfig?.version ?? Constants.manifest?.version ?? "1.0.0";
 
 const APP_NAME = "Hytaý dili 1";
-const TEAM_EMAIL = "shapak.app@gmail.com";
+const TEAM_EMAIL = "shapak.apps@gmail.com";
 const GITHUB_REPO_URL = "https://github.com/Shapak-Apps/turkmen-chinese";
 const GITHUB_ORG_URL = "https://github.com/Shapak-Apps";
 const WEBSITE_URL = "https://shapak-apps.github.io";
@@ -171,7 +171,7 @@ export default function AboutScreen() {
 
             {/* Features */}
             <Section icon="apps" color={Colors.warningColor} title="Mümkinçilikler">
-              <FeatureRow icon="book" text="Boya Chinese kitaby boýunça 31 bap" />
+              <FeatureRow icon="book" text="31 bap (başlangyç dereje)" />
               <FeatureRow icon="checkbox" text="600+ gönükme (8 dürli görnüş)" />
               <FeatureRow icon="brush" text="Hiýeroglif ýazuwy (768 oflaýn)" />
               <FeatureRow icon="volume-high" text="1632 pinýin ses faýly" />
@@ -226,8 +226,8 @@ export default function AboutScreen() {
               <ThemedText style={styles.sectionText}>
                 Programma MIT lisenziýasy bilen açyk çeşmäni esas alýar.
                 {"\n\n"}
-                Mazmun çeşmeleri: Boya Chinese Elementary I (Peking University
-                Press), Twemoji (CC-BY 4.0), Hanzi Writer (MIT), Inter şrift (OFL).
+                Ulanylan çeşmeler: Twemoji (CC-BY 4.0), Hanzi Writer (MIT),
+                Inter şrift (OFL).
               </ThemedText>
             </Section>
           </ScrollView>
@@ -339,9 +339,8 @@ export default function AboutScreen() {
               highlight
             >
               <ThemedText style={styles.sectionText}>
-                Häzirki programma — hytaý dilini öwretmek üçin doly kurs. Boya
-                Chinese kitaby boýunça 31 bap, 600+ gönükme, hiýeroglif ýazuwy,
-                pinýin sesleri.
+                Häzirki programma — hytaý dilini öwretmek üçin doly kurs.
+                31 bap, 600+ gönükme, hiýeroglif ýazuwy, pinýin sesleri.
               </ThemedText>
             </Section>
 

@@ -141,7 +141,7 @@ function ChaptersPage() {
   return (
     <PageWrapper label="Sapaklar" title="31 bap">
       <ThemedText style={styles.body}>
-        Sapaklar Boya Chinese Elementary I okuw kitabynyň gurluşy boýunça düzüldi. Her bap belli bir tema bagyşlanan: salamlaşmak, ýaşaýyş, wagt, maşgala, söwda we beýlekiler.
+        Sapaklar ýönekeýden çylşyrymla tarap yzygiderli düzüldi. Her bap belli bir tema bagyşlanan: salamlaşmak, ýaşaýyş, wagt, maşgala, söwda we beýlekiler.
       </ThemedText>
 
       <View style={styles.chapterCard}>
