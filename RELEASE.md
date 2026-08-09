@@ -52,6 +52,39 @@ npx expo run:android
 Вычитку логично закрывать через закрытый трек в Play: переводчики видят строки **в живом приложении**,
 а не в JSON — сразу заметны обрезки, тон и то, как фраза сидит на экране.
 
+### Keystore — начато 2026-08-07, остановились на шаге 1 из 5
+
+**Разведка (проверено):** `keytool` есть в JDK от Android Studio —
+`C:\Users\seydi\AppData\Local\Programs\Android Studio\jbr\bin\keytool.exe`.
+Keystore от Ykjam Terjime лежит в `D:\2. SEYDI\5. Documents\Google Play Keystore\`
+вместе с файлом пароля — туда же кладём новый.
+
+⚠️ **Главная ловушка: `android/` не в git** (`.gitignore:50`, 0 отслеживаемых файлов) и полностью
+пересоздаётся при `npx expo prebuild`. Значит правку `signingConfigs` прямо в
+`android/app/build.gradle` снесёт следующая пересборка. Подпись надо вносить **config-плагином**,
+который патчит `build.gradle` на каждом prebuild. Плагинов в проекте пока нет (`plugins/` отсутствует),
+`eas.json` тоже нет.
+
+**План на 5 шагов:**
+
+1. ⏳ **Сгенерировать keystore** — владелец, в cmd.exe. Пароль спросит дважды, остальные поля в команде:
+   ```
+   "C:\Users\seydi\AppData\Local\Programs\Android Studio\jbr\bin\keytool.exe" -genkeypair -v -storetype PKCS12 -keystore "D:\2. SEYDI\5. Documents\Google Play Keystore\hytay-dili-1.jks" -alias hytay-dili-1 -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Hytay dili 1, OU=Shapak Apps, O=Shapak Apps, L=Mary, ST=Mary, C=TM"
+   ```
+   Параметры: alias `hytay-dili-1`, PKCS12, RSA 2048, 10000 дней (Play требует срок минимум до 22.10.2033).
+2. `plugins/withReleaseSigning.js` — config-плагин, вписывает release-`signingConfig`, читает
+   `keystore.properties` из корня; плагин подключается в `app.json`.
+3. `keystore.properties` с реальным паролем (**в `.gitignore`**) + `keystore.properties.example` в репо.
+4. Пересборка: `npx expo prebuild --platform android` → `cd android && .\gradlew bundleRelease`.
+   Здесь же включить ABI splits + ProGuard и сверить target API.
+5. Проверить подпись готового AAB (`apksigner verify --print-certs` / `jarsigner -verify`) —
+   что подписан нашим ключом, а не debug.
+
+**Про риск потери:** для новых приложений Play App Signing включён по умолчанию, то есть этот ключ
+будет **upload key**, а не финальный ключ подписи. Его потеря не фатальна — Google сбрасывает upload key
+по запросу. Бэкап всё равно обязателен, но формулировка «больше никогда не обновить» относится
+к финальному ключу, который держит Google.
+
 ---
 
 ## 3. Android — Google Play
@@ -91,6 +124,14 @@ PostHog — анкету придётся переписывать, это ст�
 
 ⚠️ `expo-notifications` в плагинах: на Android 13+ появляется `POST_NOTIFICATIONS`. Проверить, что
 после `prebuild` в манифесте нет ничего лишнего сверх нужного.
+
+⚠️ **Проверено после prebuild 2026-08-07 — лишние разрешения есть.** `android.permissions` в
+`app.json` пустой, но библиотеки дописывают в манифест своё, и там оказались `RECORD_AUDIO`,
+`MODIFY_AUDIO_SETTINGS`, `READ_EXTERNAL_STORAGE`, `WRITE_EXTERNAL_STORAGE`, `SYSTEM_ALERT_WINDOW`
+(в основном от `expo-av`). Микрофоном приложение не пользуется — «говорение» это shadowing без STT,
+мик-ветку вычистили из `AudioPrompt` ещё 03.07. `RECORD_AUDIO` в списке = Play спросит про запись
+звука в Data Safety и покажет её пользователю в карточке. Лечится `android.blockedPermissions`
+в `app.json`; после правки пересобрать и перепроверить манифест.
 
 **Закрытое тестирование.** Проверить в консоли, требуется ли трек «12 тестировщиков × 14 дней».
 Для персональных аккаунтов, заведённых после ноября 2023, это обязательно; организации освобождены,
