@@ -1,35 +1,35 @@
 import { Question, SpeakingOption } from "@/constants/CourseData";
 import { Colors } from "@/constants/theme";
+import { Events, track } from "@/lib/analytics";
 import { haptics } from "@/lib/haptics";
 import { hasCompletedLesson, incrementLessonCompletion } from "@/lib/lessonProgress";
-import { Events, track } from "@/lib/analytics";
 import { computeLessonStats, type LessonStats } from "@/lib/lessonStats";
-import { markActiveDay } from "@/lib/streak";
-import { T } from "@/lib/strings";
-import { addXP, XP_REWARDS } from "@/lib/xp";
 import {
   recordQuestionAnswered,
   recordQuestionListened,
 } from "@/lib/speakingListeningStats";
+import { markActiveDay } from "@/lib/streak";
+import { T } from "@/lib/strings";
+import { addXP, XP_REWARDS } from "@/lib/xp";
 import { router } from "expo-router";
 import * as Speech from "expo-speech";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import ConfirmDialog from "../ui/ConfirmDialog";
 import AudioPrompt from "./AudioPrompt";
+import ExerciseNavBar from "./ExerciseNavBar";
 import { FeedbackView } from "./FeedbackView";
+import FillBlankMode from "./FillBlankMode";
+import FlashcardMode from "./FlashcardMode";
+import GrammarMode from "./GrammarMode";
 import LessonCompleteScreen from "./LessonCompleteScreen";
 import ListeningMultipleChoiceMode from "./ListeningMultipleChoiceMode";
+import MatchPairsMode from "./MatchPairsMode";
 import MultipleChoiceMode from "./MultipleChoiceMode";
 import ProgressHeader from "./ProgressHeader";
 import SentenceBreakdownCard from "./SentenceBreakdownCard";
 import SingleResponseMode from "./SingleResponseMode";
-import FillBlankMode from "./FillBlankMode";
-import FlashcardMode from "./FlashcardMode";
-import GrammarMode from "./GrammarMode";
-import MatchPairsMode from "./MatchPairsMode";
 import StrokeOrderMode from "./StrokeOrderMode";
-import ExerciseNavBar from "./ExerciseNavBar";
 
 // LessonStats/TypeBreakdown теперь живут в lib/lessonStats.ts (чистый модуль,
 // покрыт тестами). Реэкспорт — чтобы существующие импортёры этого файла
@@ -107,6 +107,7 @@ export default function LessonContent({
   // Grant the per-correct-answer XP only while the lesson is still rewardable.
   // Exams are assessments, not practice — they never award XP (also prevents
   // farming XP by retaking the exam).
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const awardCorrectXp = () => {
     if (mode === "exam") return;
     if (rewardableRef.current) void addXP(XP_REWARDS.CORRECT_ANSWER);
@@ -192,7 +193,7 @@ export default function LessonContent({
         }
       }
     }
-  }, [showResult, isCorrect, attemptCount, currentQuestion.id]);
+  }, [showResult, isCorrect, attemptCount, currentQuestion.id, awardCorrectXp, wrongQuestions]);
 
   useEffect(() => {
     if (isSpeechPlaying && !hasStartedFirstPlay && !hasListenedToAudio) {
@@ -222,7 +223,7 @@ export default function LessonContent({
         ]),
       ]).start();
     }
-  }, [isSpeechPlaying, hasStartedFirstPlay, hasListenedToAudio]);
+  }, [isSpeechPlaying, hasStartedFirstPlay, hasListenedToAudio, instructionOpacity, listeningOpacity, listeningScale]);
 
   useEffect(() => {
     if (
@@ -238,7 +239,7 @@ export default function LessonContent({
         useNativeDriver: true,
       }).start();
     }
-  }, [currentQuestion, hasListenedToAudio]);
+  }, [currentQuestion, hasListenedToAudio, optionSelectionAnim]);
 
   const finishListening = () => {
     if (hasListenedToAudio) return;
@@ -585,109 +586,109 @@ export default function LessonContent({
       {(currentQuestion.type === "multiple_choice" ||
         currentQuestion.type === "single_response" ||
         currentQuestion.type === "listening_mc") && (
-        <View style={styles.content}>
-          <Animated.View
-            style={[
-              styles.audioSection,
-              {
-                backgroundColor: Colors.surfaceSecondary,
-                minHeight: audioSectionAnimHeight,
-                flex: hasListenedToAudio ? 0 : 1,
-                justifyContent: "center",
-                opacity: showResult ? 0.6 : 1,
-              },
-            ]}
-            pointerEvents={showResult ? "none" : "auto"}
-          >
-            <AudioPrompt
-              isPlaying={isSpeechPlaying}
-              hasListenedToAudio={hasListenedToAudio}
-              onPlay={playAudio}
-              onRevealMandarin={handleRevealMandarin}
-              currentQuestion={currentQuestion}
-              showMandarin={showMandarin}
-              scaleAnim={scaleAnim}
-              instructionOpacity={instructionOpacity}
-              listeningOpacity={listeningOpacity}
-              listeningScale={listeningScale}
-              fadeAnim={fadeAnim}
-            />
-          </Animated.View>
-
-          {hasListenedToAudio && (
+          <View style={styles.content}>
             <Animated.View
               style={[
-                styles.optionsSection,
+                styles.audioSection,
                 {
-                  opacity: Animated.multiply(
-                    optionsAnimValue,
-                    showResult ? 0.5 : 1,
-                  ),
-                  transform: [
-                    {
-                      translateY: optionsAnimValue.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [30, 0],
-                      }),
-                    },
-                  ],
+                  backgroundColor: Colors.surfaceSecondary,
+                  minHeight: audioSectionAnimHeight,
+                  flex: hasListenedToAudio ? 0 : 1,
+                  justifyContent: "center",
+                  opacity: showResult ? 0.6 : 1,
                 },
               ]}
               pointerEvents={showResult ? "none" : "auto"}
             >
-              {currentQuestion.type === "multiple_choice" && (
-                <MultipleChoiceMode
-                  options={currentQuestion.options}
-                  selectedOption={selectedOption}
-                  handleOptionPress={handleOptionPress}
-                  isLoading={false}
-                  showResult={showResult}
-                  instruction={currentQuestion.instruction}
-                />
-              )}
-              {currentQuestion.type === "listening_mc" && (
-                <ListeningMultipleChoiceMode
-                  options={currentQuestion.options}
-                  selectedOption={selectedOption}
-                  handleOptionPress={handleOptionPress}
-                  isLoading={false}
-                  showResult={showResult}
-                />
-              )}
-              {currentQuestion.type === "single_response" && (
-                <SingleResponseMode
-                  option={currentQuestion.options[0]}
-                  optionSelectionAnim={optionSelectionAnim}
-                  onContinue={handleShadowingContinue}
-                />
-              )}
-            </Animated.View>
-          )}
-
-          {/* Feedback view */}
-          {showResult && selectedSentence && (
-            <Animated.View
-              style={[
-                styles.feedbackWrapper,
-                { transform: [{ scale: scaleAnim }] },
-              ]}
-            >
-              <FeedbackView
-                correctOption={selectedSentence}
-                isCorrect={isCorrect}
-                onContinue={nextQuestion}
-                onRetry={
-                  attemptCount < MAX_ATTEMPTS && !isCorrect
-                    ? handleRetry
-                    : undefined
-                }
-                attemptCount={isCorrect ? attemptCount : attemptCount + 1}
-                maxAttempts={MAX_ATTEMPTS}
+              <AudioPrompt
+                isPlaying={isSpeechPlaying}
+                hasListenedToAudio={hasListenedToAudio}
+                onPlay={playAudio}
+                onRevealMandarin={handleRevealMandarin}
+                currentQuestion={currentQuestion}
+                showMandarin={showMandarin}
+                scaleAnim={scaleAnim}
+                instructionOpacity={instructionOpacity}
+                listeningOpacity={listeningOpacity}
+                listeningScale={listeningScale}
+                fadeAnim={fadeAnim}
               />
             </Animated.View>
-          )}
-        </View>
-      )}
+
+            {hasListenedToAudio && (
+              <Animated.View
+                style={[
+                  styles.optionsSection,
+                  {
+                    opacity: Animated.multiply(
+                      optionsAnimValue,
+                      showResult ? 0.5 : 1,
+                    ),
+                    transform: [
+                      {
+                        translateY: optionsAnimValue.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [30, 0],
+                        }),
+                      },
+                    ],
+                  },
+                ]}
+                pointerEvents={showResult ? "none" : "auto"}
+              >
+                {currentQuestion.type === "multiple_choice" && (
+                  <MultipleChoiceMode
+                    options={currentQuestion.options}
+                    selectedOption={selectedOption}
+                    handleOptionPress={handleOptionPress}
+                    isLoading={false}
+                    showResult={showResult}
+                    instruction={currentQuestion.instruction}
+                  />
+                )}
+                {currentQuestion.type === "listening_mc" && (
+                  <ListeningMultipleChoiceMode
+                    options={currentQuestion.options}
+                    selectedOption={selectedOption}
+                    handleOptionPress={handleOptionPress}
+                    isLoading={false}
+                    showResult={showResult}
+                  />
+                )}
+                {currentQuestion.type === "single_response" && (
+                  <SingleResponseMode
+                    option={currentQuestion.options[0]}
+                    optionSelectionAnim={optionSelectionAnim}
+                    onContinue={handleShadowingContinue}
+                  />
+                )}
+              </Animated.View>
+            )}
+
+            {/* Feedback view */}
+            {showResult && selectedSentence && (
+              <Animated.View
+                style={[
+                  styles.feedbackWrapper,
+                  { transform: [{ scale: scaleAnim }] },
+                ]}
+              >
+                <FeedbackView
+                  correctOption={selectedSentence}
+                  isCorrect={isCorrect}
+                  onContinue={nextQuestion}
+                  onRetry={
+                    attemptCount < MAX_ATTEMPTS && !isCorrect
+                      ? handleRetry
+                      : undefined
+                  }
+                  attemptCount={isCorrect ? attemptCount : attemptCount + 1}
+                  maxAttempts={MAX_ATTEMPTS}
+                />
+              </Animated.View>
+            )}
+          </View>
+        )}
 
       {/* Sentence Breakdown Card */}
       {currentQuestion.type === "listening_mc" &&

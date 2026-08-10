@@ -19,6 +19,7 @@ export default function AnimatedCounter({
   const startValueRef = useRef(0);
   const rafRef = useRef<number | null>(null);
 
+
   useEffect(() => {
     startValueRef.current = displayValue;
     startTimeRef.current = null;
@@ -42,7 +43,7 @@ export default function AnimatedCounter({
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
-  }, [value, duration]);
+  }, [value, duration, displayValue]);
 
   return (
     <Text style={style} maxFontSizeMultiplier={1.3}>
