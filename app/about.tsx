@@ -1,8 +1,8 @@
 import { ThemedText } from "@/components/themed-text";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import Constants from "expo-constants";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -45,12 +45,12 @@ export default function AboutScreen() {
 
   const openEmail = () => {
     haptics.tap();
-    Linking.openURL(`mailto:${TEAM_EMAIL}?subject=${APP_NAME}`).catch(() => {});
+    Linking.openURL(`mailto:${TEAM_EMAIL}?subject=${APP_NAME}`).catch(() => { });
   };
 
   const openLink = (url: string) => {
     haptics.tap();
-    Linking.openURL(url).catch(() => {});
+    Linking.openURL(url).catch(() => { });
   };
 
   return (
@@ -218,6 +218,18 @@ export default function AboutScreen() {
             </Section>
 
             {/* License */}
+            {/* CHANGED: Added a dedicated Audio Credits section for the 1632 Pinyin MP3 files */}
+            <Section
+              icon="musical-notes"
+              color={Colors.primaryAccentColor}
+              title="Audio Credits"
+            >
+              <ThemedText style={styles.sectionText}>
+                Pinyin Audio Credits: Uses 1,632 Pinyin pronunciation MP3 files from the open-source Pinyin audio dataset.
+              </ThemedText>
+            </Section>
+
+            {/* CHANGED: Included the Pinyin audio dataset in the license sources list */}
             <Section
               icon="document-text"
               color={Colors.subduedTextColor}
@@ -227,7 +239,7 @@ export default function AboutScreen() {
                 Programma MIT lisenziýasy bilen açyk çeşmäni esas alýar.
                 {"\n\n"}
                 Ulanylan çeşmeler: Twemoji (CC-BY 4.0), Hanzi Writer (MIT),
-                Inter şrift (OFL).
+                Inter şrift (OFL), Pinyin Audio Dataset (CC-BY 4.0).
               </ThemedText>
             </Section>
           </ScrollView>
