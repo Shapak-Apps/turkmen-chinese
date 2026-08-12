@@ -80,7 +80,7 @@ function WelcomePage() {
         Bu programma türkmen dilinde gepleýänler üçin hytaý dilini öwretmek üçin döredildi. Maksadymyz — sada we düşnükli ýol bilen başlangyç derejäni özleşdirmek.
       </ThemedText>
       <ThemedText style={styles.body}>
-        Programma esasan oflaýn işleýär — sözlükler, grammatika, gönükmeler we hiýeroglifler telefonyňyzda saklanýar. Diňe aýdylyş seslerini diňlemek üçin internet gerek bolup biler.
+        Programma esasan oflaýn işleýär — sözlükler, grammatika, gönükmeler we iýeroglifler telefonyňyzda saklanýar. Diňe aýdylyş seslerini diňlemek üçin internet gerek bolup biler.
       </ThemedText>
       <View style={styles.statsRow}>
         <View style={styles.statBox}>
@@ -93,7 +93,7 @@ function WelcomePage() {
         </View>
         <View style={styles.statBox}>
           <ThemedText style={styles.statValue}>768</ThemedText>
-          <ThemedText style={styles.statLabel}>hiýeroglif</ThemedText>
+          <ThemedText style={styles.statLabel}>iýeroglif</ThemedText>
         </View>
         <View style={styles.statBox}>
           <ThemedText style={styles.statValue}>1632</ThemedText>
@@ -116,7 +116,7 @@ function MainScreenPage() {
 
       <FeatureCard
         icon="hand-left-outline"
-        title="Hoş geldiňiz"
+        title="Hoş geldiň"
         desc="Programma hakynda we hytaý dili hakynda umumy maglumat. Täze öwrenip başlaýanlar üçin başlangyç nokat."
       />
       <FeatureCard
@@ -127,7 +127,7 @@ function MainScreenPage() {
       <FeatureCard
         icon="settings-outline"
         title="Sazlamalar"
-        desc="Hiýeroglif ýazuwynyň gatylygy, kömek, režim. Şahsy tertibiňize sazlap bolýar."
+        desc="Iýeroglif ýazuwynyň gatylygy, kömek, režim. Şahsy tertibiňe sazlap bolýar."
       />
 
       <ThemedText style={styles.body}>
@@ -149,7 +149,7 @@ function ChaptersPage() {
         <View style={styles.chapterContent}>
           <ThemedText style={styles.chapterTitle}>Aýdylyşy (语音)</ThemedText>
           <ThemedText style={styles.chapterDesc}>
-            Pinýin, tonlar, başlangyç we soňlangyç sesler. Diňe teoriýa, 1632 ses faýly bilen.
+            Pinýin, tonlar, başlangyç we soňky sesler. Diňe teoriýa, 1632 ses faýly bilen.
           </ThemedText>
         </View>
       </View>
@@ -190,7 +190,7 @@ function TheoryPage() {
       <StepRow
         n="2"
         title="Täze sözler"
-        desc="17-22 söz: hiýeroglif + pinýin + türkmen/rus terjimesi. 🖌️ basyň — hiýeroglifiň näçe gezek ýazylýandygy animasiýa bilen görkeziler."
+        desc="17-22 söz: iýeroglif + pinýin + türkmen/rus terjimesi. 🖌️ basyň — iýeroglifiň näçe gezek ýazylýandygy animasiýa bilen görkeziler."
       />
       <StepRow
         n="3"
@@ -230,12 +230,12 @@ function ExercisesPage() {
       <FeatureCard
         icon="checkbox-outline"
         title="Gönükmelere geç"
-        desc="Sekiz görnüşli 20 gönükme: kart, saýlaw, diňle, doldur, jübütle, grammatika, jogap, hiýeroglif. Aşakda her gönükmäniň belgisi (1-20) bar — basyp böküp bolýar."
+        desc="Sekiz görnüşli 20 gönükme: kart, saýlaw, diňle, doldur, jübütle, grammatika, jogap, iýeroglif. Aşakda her gönükmäniň belgisi (1-20) bar — basyp böküp bolýar."
       />
       <FeatureCard
         icon="brush-outline"
-        title="Hiýerogliflerini ýaz"
-        desc="Bapdaky ähli hiýeroglifleri barmak bilen ýazmak. Her hiýeroglif aýratyn karta — basanyňda ýazuw režimi açylar."
+        title="Iýerogliflerini ýaz"
+        desc="Bapdaky ähli iýeroglifleri barmak bilen ýazmak. Her iýeroglif aýratyn karta — basanyňda ýazuw režimi açylar."
       />
 
       <ThemedText style={styles.body}>
@@ -247,7 +247,7 @@ function ExercisesPage() {
 
 function TestAndStrokePage() {
   return (
-    <PageWrapper label="Synag we ýazuw" title="Bap synagy we hiýeroglif">
+    <PageWrapper label="Synag we ýazuw" title="Bap synagy we iýeroglif">
       <View style={styles.bigBlock}>
         <View style={styles.bigBlockHeader}>
           <Ionicons name="checkmark-done-outline" size={24} color={Colors.primaryAccentColor} />
@@ -264,15 +264,15 @@ function TestAndStrokePage() {
       <View style={styles.bigBlock}>
         <View style={styles.bigBlockHeader}>
           <Ionicons name="brush-outline" size={24} color={Colors.primaryAccentColor} />
-          <ThemedText style={styles.bigBlockTitle}>Hiýeroglif ýazuwy</ThemedText>
+          <ThemedText style={styles.bigBlockTitle}>Iýeroglif ýazuwy</ThemedText>
         </View>
         <ThemedText style={styles.bigBlockBody}>
           Iki ýerde ulanylýar:
         </ThemedText>
-        <ThemedText style={styles.listItem}>• Teoriýada — sözüň ýanyndaky 🖌️ basyň, hiýeroglifiň ýazylyşy animasiýa bilen görkeziler.</ThemedText>
-        <ThemedText style={styles.listItem}>• Gönükmelerde — barmak bilen ekranda çyzýarsyňyz, her zarbany dogry tertipde.</ThemedText>
+        <ThemedText style={styles.listItem}>• Teoriýada — sözüň ýanyndaky 🖌️ basyň, iýeroglifiň ýazylyşy animasiýa bilen görkeziler.</ThemedText>
+        <ThemedText style={styles.listItem}>• Gönükmelerde — barmak bilen ekranda çyzýarsyňyz, her çyzygy dogry tertipde.</ThemedText>
         <ThemedText style={styles.bigBlockBody}>
-          768 hiýeroglif programmanyň içinde saklanýar — internet gerek däl.
+          768 iýeroglif programmanyň içinde saklanýar — internet gerek däl.
         </ThemedText>
       </View>
     </PageWrapper>
@@ -283,7 +283,7 @@ function SettingsPage() {
   return (
     <PageWrapper label="Sazlamalar" title="Şahsy tertibi sazlaň">
       <ThemedText style={styles.body}>
-        Hiýeroglif ýazuwynyň gatylygyny we kömek görnüşini şahsy gerekligiňize görä üýtgedip bolýar. «Sazlamalar» plitkasy esasy ekrandan açylýar.
+        Iýeroglif ýazuwynyň gatylygyny we kömek görnüşini şahsy gerekligiňize görä üýtgedip bolýar. «Sazlamalar» plitkasy esasy ekrandan açylýar.
       </ThemedText>
 
       <View style={styles.settingCard}>
@@ -299,7 +299,7 @@ function SettingsPage() {
       <View style={styles.settingCard}>
         <ThemedText style={styles.settingTitle}>Kömek görkez</ThemedText>
         <ThemedText style={styles.settingDesc}>
-          Näçe ýalňyşdan soň kömek (indiki zarbanyň ýolunyň çyzygy) görkezilsin:
+          Näçe ýalňyşdan soň kömek (indiki çyzygyň ýolunyň çyzygy) görkezilsin:
         </ThemedText>
         <ThemedText style={styles.listItem}>• 3 ýalňyşdan soň</ThemedText>
         <ThemedText style={styles.listItem}>• 5 ýalňyşdan soň</ThemedText>
@@ -331,7 +331,7 @@ function TipsPage() {
         Tonlara üns beriň. Bir we şol bir ses dürli tonda dürli many berýär. Ilkibada kyn, soň özbaşdak gelýär.
       </ThemedText>
       <ThemedText style={styles.tipItem}>
-        Hiýeroglifleri tertibinde ýazyň. Zarbalaryň dogry tertibi okamak we ýatda saklamak üçin möhüm.
+        Iýeroglifleri tertibinde ýazyň. Zarbalaryň dogry tertibi okamak we ýatda saklamak üçin möhüm.
       </ThemedText>
       <ThemedText style={styles.tipItem}>
         Ýalňyşlykdan gorkmaň. Her ýalňyş — öwrenmegiň bir bölegi. Gönükmäni täzeden geçip bilersiňiz.

@@ -81,10 +81,10 @@ export const T = {
       multiple_choice: "Saýlama",
       listening_mc: "Diňleme",
       flashcard: "Kartoçka",
-      fill_blank: "Boşluk doldurma",
+      fill_blank: "Boşlugy doldurma",
       match_pairs: "Jübütleme",
       grammar: "Grammatika",
-      stroke_order: "Hat ýazuwy",
+      stroke_order: "Çyzyklaryň tertibi",
     } as Record<string, string>,
   },
 
@@ -125,8 +125,8 @@ export const T = {
 
   // Упражнение на произношение — режим «повтори вслух» (shadowing)
   shadowing: {
-    prompt: "Diňläp, bu jümläni hytaýça gaýtalaň",
-    reveal: "Aýdylyşyny görmek üçin basyň",
+    prompt: "Diňläp, bu jümläni hytaýça gaýtala",
+    reveal: "Aýdylyşyny görmek üçin bas",
   },
 
   // Аудио-подсказка перед аудио-вопросами (AudioPrompt)
@@ -152,7 +152,7 @@ export const T = {
   // Диалог подтверждения выхода из упражнения (ConfirmDialog в LessonContent)
   exitLesson: {
     title: "Gönükmeden çykmak",
-    message: "Hakykatdan hem çykmak isleýärsiňizmi? Öňegidişligiňiz ýatdan çykar.",
+    message: "Hakykatdan hem çykmak isleýärsiňmi? Öňegidişligiň ýitiriler.",
     stay: "Ýok",
     leave: "Çyk",
   },
@@ -163,8 +163,8 @@ export const T = {
     exportSubtitle: "XP, streak we öňegidişligi faýla göçür",
     importTitle: "Maglumatlary dikelt",
     importSubtitle: "Ýatda saklanan faýldan yzyna ýükle",
-    importDone: "Dikeldildi. Programmany täzeden açyň.",
-    failed: "Bir zat ýalňyş gitdi. Gaýtadan synanyşyň.",
+    importDone: "Dikeldildi. Programmany täzeden aç.",
+    failed: "Bir zat ýalňyş gitdi. Gaýtadan synanyş.",
   },
 
   // Локальные пуш-напоминания о streak

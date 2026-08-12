@@ -173,7 +173,7 @@ export default function AboutScreen() {
             <Section icon="apps" color={Colors.warningColor} title="Mümkinçilikler">
               <FeatureRow icon="book" text="31 bap (başlangyç dereje)" />
               <FeatureRow icon="checkbox" text="600+ gönükme (8 dürli görnüş)" />
-              <FeatureRow icon="brush" text="Hiýeroglif ýazuwy (768 oflaýn)" />
+              <FeatureRow icon="brush" text="Iýeroglif ýazuwy (768 oflaýn)" />
               <FeatureRow icon="volume-high" text="1632 pinýin ses faýly" />
               <FeatureRow icon="chatbubbles" text="Auto-play dialoglar" />
               <FeatureRow icon="trophy" text="XP we Streak sistemasy" />
@@ -340,7 +340,7 @@ export default function AboutScreen() {
             >
               <ThemedText style={styles.sectionText}>
                 Häzirki programma — hytaý dilini öwretmek üçin doly kurs.
-                31 bap, 600+ gönükme, hiýeroglif ýazuwy, pinýin sesleri.
+                31 bap, 600+ gönükme, iýeroglif ýazuwy, pinýin sesleri.
               </ThemedText>
             </Section>
 
