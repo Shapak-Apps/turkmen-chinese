@@ -106,7 +106,8 @@ export default function Flashcard({
 
 const styles = StyleSheet.create({
   card: {
-    width: 340,
+    width: "100%",
+    maxWidth: 340,
     maxHeight: 440,
     height: "100%",
     justifyContent: "center",
