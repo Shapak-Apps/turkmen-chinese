@@ -103,7 +103,7 @@ export const T = {
     theoryTitle: "Teoriýa",
     theoryPlaceholder: "Teoriýa ýakyn wagtda goşular.",
     chapterNotFound: "Bap tapylmady",
-    matchPairsLabel: "Jübütleri tapyň",
+    matchPairsLabel: "Jübütleri tap",
   },
 
   // Диалог подтверждения (дефолтные подписи, обычно переопределяются)
@@ -125,8 +125,8 @@ export const T = {
 
   // Упражнение на произношение — режим «повтори вслух» (shadowing)
   shadowing: {
-    prompt: "Diňläň we bu sözlemi hytaý dilinde gaýtalaň",
-    reveal: "Aýdylyşyny görmek üçin basyň",
+    prompt: "Diňle we bu sözlemi hytaý dilinde gaýtala",
+    reveal: "Aýdylyşyny görmek üçin bas",
   },
 
   // Аудио-подсказка перед аудио-вопросами (AudioPrompt)
@@ -164,7 +164,7 @@ export const T = {
     importTitle: "Maglumatlary dikelt",
     importSubtitle: "Ýatda saklanan faýldan yzyna ýükle",
     importDone: "Dikeldildi. Programmany täzeden aç.",
-    failed: "Näsazlyk ýüze çykdy. Gaýtadan synanyşyň.",
+    failed: "Näsazlyk ýüze çykdy. Gaýtadan synanyş.",
   },
 
   // Локальные пуш-напоминания о streak
