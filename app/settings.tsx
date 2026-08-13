@@ -86,12 +86,12 @@ export default function SettingsScreen() {
         </View>
       ) : (
         <ScrollView contentContainerStyle={styles.scrollContent}>
-          <ThemedText style={styles.sectionTitle}>Hiýeroglif ýazuwy</ThemedText>
+          <ThemedText style={styles.sectionTitle}>Iýeroglif ýazuwy</ThemedText>
 
           <View style={styles.settingBlock}>
             <ThemedText style={styles.settingLabel}>Gatylyk</ThemedText>
             <ThemedText style={styles.settingDescription}>
-              Ýazuwyňyzyň näçe takyk barlanmalydygy
+              Ýazuwyňyň näçe takyk barlanmalydygy
             </ThemedText>
             <Segmented
               options={leniencyOptions}

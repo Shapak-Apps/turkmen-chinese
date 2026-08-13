@@ -155,7 +155,7 @@ function WriterBody({
             <View style={styles.loadingBox}>
               <Ionicons name="alert-circle-outline" size={36} color={Colors.borderColorStrong} />
               <ThemedText style={styles.mutedText}>
-                Bu hiýeroglif üçin maglumat ýok
+                Bu iýeroglif üçin maglumat ýok
               </ThemedText>
             </View>
           }

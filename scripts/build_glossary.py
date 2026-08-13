@@ -52,7 +52,11 @@ for i in range(theory_start, theory_end):
             pairs[ru][tm] += 1; src[ru].add("teoriýa")
 
 # 3. conflicts guard
-conflicts = {ru: dict(c) for ru, c in pairs.items() if len(c) > 1}
+# Осознанные омонимы: один RU-глосс у разных иероглифов с разными TM-переводами.
+# история: 历史 = taryh (гл.27), 故事 = hekaýa (гл.28, вычитка 2026-08-12)
+ALLOWED_HOMONYMS = {"история"}
+conflicts = {ru: dict(c) for ru, c in pairs.items()
+             if len(c) > 1 and ru not in ALLOWED_HOMONYMS}
 if conflicts:
     print("CONFLICTS — not writing:")
     for ru, v in conflicts.items(): print(" ", repr(ru), v)

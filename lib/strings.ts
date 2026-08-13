@@ -81,7 +81,7 @@ export const T = {
       multiple_choice: "Saýlama",
       listening_mc: "Diňleme",
       flashcard: "Kartoçka",
-      fill_blank: "Boşluk doldurma",
+      fill_blank: "Boşlugy doldurma",
       match_pairs: "Jübütleme",
       grammar: "Grammatika",
       stroke_order: "Çyzyklaryň tertibi",
@@ -152,7 +152,7 @@ export const T = {
   // Диалог подтверждения выхода из упражнения (ConfirmDialog в LessonContent)
   exitLesson: {
     title: "Gönükmeden çykmak",
-    message: "Çykmak isleýärsiňmi? Öňegidişligiň ýitiriler.",
+    message: "Hakykatdan hem çykmak isleýärsiňmi? Öňegidişligiň ýitiriler.",
     stay: "Ýok",
     leave: "Çyk",
   },
@@ -163,7 +163,7 @@ export const T = {
     exportSubtitle: "XP, uznuksyzlyk we öňegidişligi faýla göçür",
     importTitle: "Maglumatlary dikelt",
     importSubtitle: "Ýatda saklanan faýldan yzyna ýükle",
-    importDone: "Dikeldildi. Programmany täzeden açyň.",
+    importDone: "Dikeldildi. Programmany täzeden aç.",
     failed: "Näsazlyk ýüze çykdy. Gaýtadan synanyşyň.",
   },
 

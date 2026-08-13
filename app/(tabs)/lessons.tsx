@@ -280,7 +280,7 @@ export default function LessonsContent() {
             <View style={[styles.quickIcon, { backgroundColor: Colors.successBg }]}>
               <Ionicons name="hand-left-outline" size={22} color={Colors.successColor} />
             </View>
-            <ThemedText style={styles.quickTitle}>Hoş geldiňiz</ThemedText>
+            <ThemedText style={styles.quickTitle}>Hoş geldiň</ThemedText>
             <ThemedText style={styles.quickSubtitle}>Başlangyç</ThemedText>
           </TouchableOpacity>
 
