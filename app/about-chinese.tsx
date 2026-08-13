@@ -183,7 +183,7 @@ function PinyinPage() {
       <ThemedText style={styles.listItem}>&#8226; «sh» — «ş» ýaly</ThemedText>
       <ThemedText style={styles.listItem}>&#8226; «r» — ýumşak «ž» ýaly</ThemedText>
       <ThemedText style={styles.body}>
-        Bu programmada her söz iýeroglifi (汉字) we pinýini bilen görkezilýär — aýdylyşy ädimme-ädim öwrenip bilersiňiz.
+        Bu programmada her söz iýeroglifi (汉字) we pinýini bilen görkezilýär — aýdylyşy ädimme-ädim öwrenip bilersiň.
       </ThemedText>
     </PageWrapper>
   );
@@ -213,7 +213,7 @@ function NumbersPage() {
   return (
     <PageWrapper label="数字" title="Hytaý sanlary">
       <ThemedText style={styles.body}>
-        Hytaý sanlary örän logikaly. 1-10 öwrenseňiz, 99-a çenli sanap bilersiňiz:
+        Hytaý sanlary örän logikaly. 1-10 öwrenseň, 99-a çenli sanap bilersiň:
       </ThemedText>
       <View style={styles.numbersGrid}>
         {[
@@ -230,7 +230,7 @@ function NumbersPage() {
         ))}
       </View>
       <ThemedText style={styles.body}>
-        Kada ýönekeý — ilki onluklary, soň birlikleri aýdýarsyňyz:
+        Kada ýönekeý — ilki onluklary, soň birlikleri aýdýarsyň:
       </ThemedText>
       <ThemedText style={styles.listItem}>&#8226; 11 = 十一 (sh&#237; y&#299;) — «on-bir»</ThemedText>
       <ThemedText style={styles.listItem}>&#8226; 20 = 二十 (&#232;r sh&#237;) — «iki-on»</ThemedText>

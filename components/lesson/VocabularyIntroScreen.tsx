@@ -192,7 +192,7 @@ export default function VocabularyIntroScreen({
             Sapagyň sözleri
           </ThemedText>
           <ThemedText style={styles.instructionText}>
-            Öwürmek üçin basyň. Bilmeýänleriňizi gaýtalaň.
+            Öwürmek üçin bas. Bilmeýänleriňi gaýtala.
           </ThemedText>
         </View>
 

@@ -108,7 +108,7 @@ export default function PractiseScreen() {
         <BackHeader title="Gönükmeler" />
         <View style={styles.menuContent}>
           <ThemedText style={styles.menuHeading}>
-            Nireden başlamak isleýärsiňiz?
+            Nireden başlamak isleýärsiň?
           </ThemedText>
 
           <TouchableOpacity
