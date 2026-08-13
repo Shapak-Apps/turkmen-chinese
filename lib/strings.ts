@@ -21,10 +21,10 @@ export const T = {
   feedback: {
     correct: "Berekella!",
     notQuite: "Az galdy",
-    keepPractising: "Maşk et",
+    keepPractising: "Ýene maşk et",
     tryAgainSub: "Ýene synan — başararsyň!",
     nextTimeSub: "Indiki gezek şeýle aýt",
-    expected: "Garaşylýan",
+    expected: "Garaşylýan jogap",
     youSaid: "Sen aýtdyň",
     correctResponse: "Dogry jogap",
     nextQuestion: "Indiki sorag",
@@ -60,37 +60,37 @@ export const T = {
       exam: "Bap synagy",
     } as Record<string, string>,
     progress: (done: number, total: number) => `${done} / ${total} ädim`,
-    locked: "Ýapyk",
+    locked: "Gulpda",
   },
 
   // Экзамен главы (Bap synagy) — экран результата с порогом 70%
   exam: {
-    passedTitle: "Synag tabşyryldy!",
+    passedTitle: "Synag şowly tabşyryldy!",
     failedTitle: "Synag geçilmedi",
     passedMessage: "Indiki baba geçip bilersiň.",
     failedMessage: "Geçmek üçin azyndan 70% gerek. Gaýtadan synanyş.",
     scoreLabel: (correct: number, total: number) => `${correct}/${total} dogry`,
-    thresholdNote: "Geçmek üçin 70% gerek",
+    thresholdNote: "Geçiş baly: 70%",
     breakdownTitle: "Görnüşler boýunça",
     bestScore: (pct: number) => `Iň gowy netije: ${pct}%`,
     retake: "Gaýtadan synanyş",
     passBadge: "Geçdiň",
     // Названия типов упражнений для разбивки в результатах
     types: {
-      single_response: "Gepleýiş",
+      single_response: "Gepleşik",
       multiple_choice: "Saýlama",
       listening_mc: "Diňleme",
       flashcard: "Kartoçka",
       fill_blank: "Boşluk doldurma",
       match_pairs: "Jübütleme",
       grammar: "Grammatika",
-      stroke_order: "Hat ýazuwy",
+      stroke_order: "Çyzyklaryň tertibi",
     } as Record<string, string>,
   },
 
   // Режимы упражнений (Flashcard / FillBlank / MultipleChoice / Grammar / MatchPairs)
   practice: {
-    chooseAnswer: "Jogaby saýla:",
+    chooseAnswer: "Dogry jogaby saýla:",
     hintLabel: "Kömek",
     examples: "Mysallar",
     startPractice: (n: number) => `Maşk (${n} sorag)`,
@@ -103,7 +103,7 @@ export const T = {
     theoryTitle: "Teoriýa",
     theoryPlaceholder: "Teoriýa ýakyn wagtda goşular.",
     chapterNotFound: "Bap tapylmady",
-    matchPairsLabel: "Jübütleri birikdir",
+    matchPairsLabel: "Jübütleri tapyň",
   },
 
   // Диалог подтверждения (дефолтные подписи, обычно переопределяются)
@@ -125,16 +125,16 @@ export const T = {
 
   // Упражнение на произношение — режим «повтори вслух» (shadowing)
   shadowing: {
-    prompt: "Diňläp, bu jümläni hytaýça gaýtalaň",
+    prompt: "Diňläň we bu sözlemi hytaý dilinde gaýtalaň",
     reveal: "Aýdylyşyny görmek üçin basyň",
   },
 
   // Аудио-подсказка перед аудио-вопросами (AudioPrompt)
   audioPrompt: {
-    tapToListen: "Diňlemek üçin oýnat düwmesine bas",
-    playsOnce: "Ses her jogapdan öň bir gezek çalynýar",
-    listening: "Diňlenýär...",
-    revealWhatSaid: "Näme aýdylanyny görmek üçin şu ýere bas",
+    tapToListen: "Diňlemek üçin bas",
+    playsOnce: "Her soragda diňe bir gezek goýberilýär",
+    listening: "Diňlenilýär...",
+    revealWhatSaid: "Näme aýdylandygyny görkez",
   },
 
   // Аудирование — «что ты услышал?» (ListeningMultipleChoiceMode)
@@ -144,7 +144,7 @@ export const T = {
 
   // Разбор предложения по словам (SentenceBreakdownCard)
   breakdown: {
-    title: "Sözlem derňewi",
+    title: "Sözlemiň düzümi",
     tapWordForMeaning: "Manysyny görmek üçin islendik söze bas",
     breakdownLabel: "Derňew:",
   },
@@ -152,24 +152,24 @@ export const T = {
   // Диалог подтверждения выхода из упражнения (ConfirmDialog в LessonContent)
   exitLesson: {
     title: "Gönükmeden çykmak",
-    message: "Hakykatdan hem çykmak isleýärsiňizmi? Öňegidişligiňiz ýatdan çykar.",
+    message: "Çykmak isleýärsiňmi? Öňegidişligiň ýitiriler.",
     stay: "Ýok",
     leave: "Çyk",
   },
 
   // Локальный бэкап прогресса (экспорт/импорт в файл)
   backup: {
-    exportTitle: "Maglumatlary ýatda sakla",
-    exportSubtitle: "XP, streak we öňegidişligi faýla göçür",
+    exportTitle: "Maglumatlary ätiýaçlandyr",
+    exportSubtitle: "XP, uznuksyzlyk we öňegidişligi faýla göçür",
     importTitle: "Maglumatlary dikelt",
     importSubtitle: "Ýatda saklanan faýldan yzyna ýükle",
     importDone: "Dikeldildi. Programmany täzeden açyň.",
-    failed: "Bir zat ýalňyş gitdi. Gaýtadan synanyşyň.",
+    failed: "Näsazlyk ýüze çykdy. Gaýtadan synanyşyň.",
   },
 
   // Локальные пуш-напоминания о streak
   notifications: {
-    reminderTitle: "Streagyňy ýitirme! 🔥",
+    reminderTitle: "Uznuksyzlygyňy ýitirme! 🔥",
     reminderBody: "Şu gün hytaý dilini birazajyk maşk et.",
   },
 
