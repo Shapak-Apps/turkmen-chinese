@@ -122,7 +122,7 @@ function InitialsPage() {
 function FinalsPage() {
   return (
     <PageWrapper label="韵母" title="38 soňky ses">
-      <Body text="Soňlangyç ses (韵母) — bognuň çekimli bölegi. Eşitmek üçin basyň." />
+      <Body text="Soňky ses (韵母) — bognuň çekimli bölegi. Eşitmek üçin basyň." />
       {FINALS.map((group) => (
         <View key={group.name} style={s.groupBlock}>
           <ThemedText style={s.groupName}>

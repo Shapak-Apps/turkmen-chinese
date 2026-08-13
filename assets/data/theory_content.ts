@@ -249,7 +249,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   3: {
     introduction:
-      "Bu bapda siz zatlary görkezmegi («bu», «ol»), 谁 (kim) we 什么 (näme) sözleri bilen sorag bermegi, şeýle-de degişliligi görkezmek üçin 的 bölejigini ulanmagy öwrenersiňiz («kimiň?», «meniň kitabym»).\n\n" +
+      "Bu bapda sen zatlary görkezmegi («bu», «ol»), 谁 (kim) we 什么 (näme) sözleri bilen sorag bermegi, şeýle-de degişliligi görkezmek üçin 的 bölejigini ulanmagy öwrenersiň («kimiň?», «meniň kitabym»).\n\n" +
       "Gahrymanlar: 阿曼, 古丽 (kitap we sözlük hakda gürleşýärler), 中村 (Zhōngcūn) — ýaponly talyp, olar ýapon saz žurnaly hakda gürleşýärler.",
 
     vocabulary: [
@@ -359,7 +359,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   4: {
     introduction:
-      "Bu bapda siz bir zadyň nirede ýerleşýändigini soramagy we ýerleşişini beýan etmegi öwrenersiňiz. 在 (zài — ýerleşmek) işligi, 哪儿 (nirede) sorag sözi we ugur sözleri bilen tanşarsyňyz: 东/西/南/北/左/右 + 边.\n\n" +
+      "Bu bapda sen bir zadyň nirede ýerleşýändigini soramagy we ýerleşişini beýan etmegi öwrenersiň. 在 (zài — ýerleşmek) işligi, 哪儿 (nirede) sorag sözi we ugur sözleri bilen tanşarsyň: 东/西/南/北/左/右 + 边.\n\n" +
       "Ýagdaý: 古丽 uniwersitet çäginde kitaphanany gözleýär we duşýan talyplardan soraýar.",
 
     vocabulary: [
@@ -380,7 +380,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
       { hanzi: "北边", pinyin: "běibian", translation: "demirgazyk tarap, demirgazyga" },
       { hanzi: "左边", pinyin: "zuǒbian", translation: "çep tarap, çepde" },
       { hanzi: "右边", pinyin: "yòubian", translation: "sag tarap, sagda" },
-      { hanzi: "不用谢", pinyin: "búyòng xiè", translation: "minnetdarlyga zerurlyk ýok" },
+      { hanzi: "不用谢", pinyin: "búyòng xiè", translation: "Hiç zat däl" },
       { hanzi: "不用", pinyin: "búyòng", translation: "gerek däl, hökman däl" },
       { hanzi: "东边", pinyin: "dōngbian", translation: "gündogar tarap" },
       { hanzi: "西边", pinyin: "xībian", translation: "günbatar tarap" },
@@ -426,7 +426,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
       {
         title: "Ugur sözleri (方位词): 东/西/南/北/左/右 + 边",
         explanation:
-          "«X-iň demirgazygynda», «X-iň sagynda» we ş.m. diýmek üçin şu shema ulanylýar:\n\n" +
+          "«X-iň demirgazygynda», «X-iň sagynda» we ş.m. diýmek üçin şu gurluş ulanylýar:\n\n" +
           "X + 的 + ugur + 边\n\n" +
           "Ugurlar:\n" +
           "东 (dōng) — gündogar → 东边\n" +
@@ -452,7 +452,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
         lines: [
           { speaker: "A", hanzi: "同学，请问，图书馆在哪儿？", pinyin: "Tóngxué, qǐngwèn, túshūguǎn zài nǎr?", translation: "Talyp, bagyşlaň, kitaphana nirede?" },
           { speaker: "B", hanzi: "对不起，我不是这个学校的学生，不知道。", pinyin: "Duìbuqǐ, wǒ bú shì zhège xuéxiào de xuésheng, bù zhīdào.", translation: "Bagyşlaň, men bu uniwersitetiň talyby däl, bilemok." },
-          { speaker: "A", hanzi: "没关系。", pinyin: "Méi guānxi.", translation: "Hiç zat däl." },
+          { speaker: "A", hanzi: "没关系。", pinyin: "Méi guānxi.", translation: "Zyýany ýok." },
         ],
       },
       {
@@ -470,7 +470,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
     tips: [
       "请问 (qǐngwèn) — tanamaýan adamlardan sorag bermegiň edepli başlangyjy. Sözme-söz: «sorap göreýin». Köçede örän peýdaly jümle.",
-      "对不起 / 没关系 — «bagyşla / hiç zat däl» standart jübüti. Ikisini bile ýat tut, olar jübüt bolup gelýär.",
+      "对不起 / 没关系 — «bagyşla / Zyýany ýok.» standart jübüti. Ikisini bile ýat tut, olar jübüt bolup gelýär.",
       "不用谢 we 不客气 — ikisi hem «hiç zat däl» diýmek. 不客气 has ýumşak we ählumumy, 不用谢 has gepleşik görnüşi.",
       "Hytaýçada ugur sözleri jübütlerde üýtgeýär: 这儿 şu ýerde / 那儿 ol ýerde / 哪儿 nirede. 儿 goşulmasyna üns ber — ol demirgazyk (Pekin) şiwesine mahsus.",
       "个 (gè) ölçeg sözi — iň ählumumy. San/görkezme bilen atyň arasynda goýulýar: 这个学校 (bu mekdep), 一个朋友 (bir dost). 这学校 diýip bolmaýar — 个 gerek.",
@@ -479,7 +479,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   5: {
     introduction:
-      "Bu Unit 1-iň jemleýji baby — geçilenleriň gaýtalanmagy we giňeldilmegi. Siz öz okuwyňyz hakda gürrüň bermegi (uniwersitet, hünär), 有 (eýe bolmak, bar bolmak) işligini we 的时候 (haçan, pursatynda) aňlatmasyny ulanmagy öwrenersiňiz.\n\n" +
+      "Bu Unit 1-iň jemleýji baby — geçilenleriň gaýtalanmagy we giňeldilmegi. Sen öz okuwyň hakda gürrüň bermegi (uniwersitet, hünär), 有 (eýe bolmak, bar bolmak) işligini we 的时候 (haçan, pursatynda) aňlatmasyny ulanmagy öwrenersiň.\n\n" +
       "Gahrymanlar: 古丽 Çinhua uniwersitetinden 王红 (Wáng Hóng) atly talyp gyz bilen tanyşýar. Şol bir wagtda 阿曼 hajathanany gözleýär.",
 
     vocabulary: [
@@ -518,7 +518,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           "2-nji many — bar bolmak («bir ýerde bar»):\n" +
           "Ýer + 有 + Obýekt\n" +
           "学校有图书馆。— Uniwersitetde kitaphana bar.\n" +
-          "教室里有老师。— Auditoriýada mugallym bar.\n\n" +
+          "教室里有老师。— Okuw otagynda mugallym bar.\n\n" +
           "Inkär DIŇE 没 arkaly (不 DÄL):\n" +
           "❌ 不有\n" +
           "✅ 没有 (méi yǒu) — «bolmazlyk»\n\n" +
@@ -538,7 +538,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           "有空儿的时候，欢迎你去玩儿。\n" +
           "«Boş wagtyň bolanda, myhmançylyga gel».\n\n" +
           "Möhüm: tertip rusçanyň TERSINE. Ilki şert/wagt aýdylýar, soň esasy hereket.\n\n" +
-          "Rusça: esasy hereket öňde durup bilýär\n" +
+          "Rusça: «Gel, HAÇAN wagtyň bolsa»\n" +
           "Hytaýça: «HAÇAN wagt — gel»",
         examples: [
           { hanzi: "有空儿的时候，欢迎你去玩儿。", pinyin: "Yǒu kòngr de shíhou, huānyíng nǐ qù wánr.", translation: "Wagtyň bolanda — myhmançylyga gel." },
@@ -603,7 +603,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   6: {
     introduction:
-      "Bu bapda siz wagty aýtmagy (sagat we minut), 100-e çenli sanamagy we 几 (näçe) bilen wagt hakda sorag bermegi öwrenersiňiz. Şeýle hem 太……了 («aşa») gurluşy we 一会儿见 («görüşýänçäk») aňlatmasy bilen tanşarsyňyz.\n\n" +
+      "Bu bapda sen wagty aýtmagy (sagat we minut), 100-e çenli sanamagy we 几 (näçe) bilen wagt hakda sorag bermegi öwrenersiň. Şeýle hem 太……了 («aşa») gurluşy we 一会儿见 («görüşýänçäk») aňlatmasy bilen tanşarsyň.\n\n" +
       "Ýagdaýlar: 古丽 中村-dan Ýaponiýada sapaklaryň haçan başlaýandygyny soraýar, soň 阿曼-dan leksiýanyň näçede başlajakdygyny bilýär.",
 
     vocabulary: [
@@ -747,7 +747,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
     tips: [
       "一 (yī) indiki bogna görä tonuny üýtgedýär: 4-nji tonuň öňünde → 2-nji (yí kè, yí ge), 1/2/3-nji tonuň öňünde → 4-nji (yì bēi, yì nián, yì wǎn). Ýeke özi — 1-nji ton (yī).",
       "零 (líng = nol) 〇 (tegelek) iýeroglifi bilen hem ýazylýar. Meselem 2026-njy ýyl = 二〇二六年. Wagt sanlarynda (8:05) 零 hökman, ýogsam düşnüksiz.",
-      "Hoşlaşmak formulalary: 一会儿见 (görüşýänçäk, birazdan), 明天见 (ertire çenli), 再见 (sag boluň). Ählisi «[wagt]见» görnüşinde gurulýar.",
+      "Hoşlaşmak formulalary: 一会儿见 (görüşýänçäk, birazdan), 明天见 (ertire çenli), 再见 (hoş gal). Ählisi «[wagt]见» görnüşinde gurulýar.",
       "上课 / 下课 — sözme-söz «sapaga çykmak» / «sapakdan düşmek». Meňzeş jübütler: 上班/下班 (iş), 上车/下车 (ulag).",
       "Gepleşikde hytaýlylar takyk «三十分» we «十五分» diýenden, 半 (ýarym sagat) we 一刻/三刻 (çärýekler) diýmegi köp ulanýarlar. Şu gysgaltmalary ulanmagy öwren.",
     ],
@@ -755,12 +755,12 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   7: {
     introduction:
-      "Bu bapda siz günüň meýilnamalary hakda gürlemegi (säher / günortadan soň / agşam), 有 bilen bir zadyň barlygyny soramagy, çaklama üçin 吧 bölejigini we 上/下/里/外 sözlerini sypat hökmünde ulanmagy öwrenersiňiz.\n\n" +
+      "Bu bapda sen günüň meýilnamalary hakda gürlemegi (säher / günortadan soň / agşam), 有 bilen bir zadyň barlygyny soramagy, çaklama üçin 吧 bölejigini we 上/下/里/外 sözlerini sypat hökmünde ulanmagy öwrenersiň.\n\n" +
       "Ýagdaýlar: 古丽 中村-dan tigir karz alýar, 阿曼 古丽-ni kino çagyrýar.",
 
     vocabulary: [
       { hanzi: "明天", pinyin: "míngtiān", translation: "ertir" },
-      { hanzi: "课", pinyin: "kè", translation: "sapak, ders" },
+      { hanzi: "课", pinyin: "kè", translation: "sapak" },
       { hanzi: "上午", pinyin: "shàngwǔ", translation: "günortadan öň, ertirki wagt (10-12)" },
       { hanzi: "下午", pinyin: "xiàwǔ", translation: "günortadan soň, gündiz" },
       { hanzi: "没(有)", pinyin: "méi(yǒu)", translation: "bolmazlyk, ýok" },
@@ -899,7 +899,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   8: {
     introduction:
-      "Bu bapda siz telefon, otag, awtobus ugrunyň belgisini aýtmagy, «nädip barmaly?» diýip soramagy we 吧 bölejigi arkaly «geliň...» diýip teklip etmegi öwrenersiňiz. Şeýle hem 几 / 多少 tapawudy bilen tanşarsyňyz.\n\n" +
+      "Bu bapda sen telefon, otag, awtobus ugrunyň belgisini aýtmagy, «nädip barmaly?» diýip soramagy we 吧 bölejigi arkaly «geliň...» diýip teklip etmegi öwrenersiň. Şeýle hem 几 / 多少 tapawudy bilen tanşarsyň.\n\n" +
       "Ýagdaý: 王红 古丽-a jaň edip, Çinhua myhmançylyga çagyrýar, olar salgy we telefon belgileri bilen alyşýarlar.",
 
     vocabulary: [
@@ -980,10 +980,10 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
         title: "几 vs 多少 — haçan haýsyny ulanmaly",
         explanation:
           "Ikisi hem «näçe» diýmek, emma tapawut garaşylýan ululykda:\n\n" +
-          "• 几 (jǐ) — KIÇI san garaşylýar (adatça 10-a çenli). Sanaýyş sözi talap edýär.\n" +
+          "• 几 (jǐ) — KIÇI san garaşylýar (adatça 10-a çenli). Ölçeg sözi talap edýär.\n" +
           "  你有几个朋友？— Näçe dostuň bar? (1-10 garaşýaryn)\n" +
           "  几点？— Sagat näçe? (1-24)\n\n" +
-          "• 多少 (duōshao) — ULY san garaşylýar ÝA-DA näçedigini takyk bilmeýärsiň. Sanaýyş sözi HÖKMAN däl.\n" +
+          "• 多少 (duōshao) — ULY san garaşylýar ÝA-DA näçedigini takyk bilmeýärsiň. Ölçeg sözi HÖKMAN däl.\n" +
           "  你的电话是多少？— Seniň belgiň näçe? (köp san)\n" +
           "  多少钱？— Näçe pul?\n" +
           "  多少学生？— Näçe talyp? (köp bolup biler)\n\n" +
@@ -1031,7 +1031,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   9: {
     introduction:
-      "Bu bapda siz dükanda söwda etmegi öwrenersiňiz: bahany soramagy, ýuanda pul sanamagy, ölçeg sözlerini (瓶, 本) ulanmagy we 二 / 两 (iki) tapawutlandyrmagy.\n\n" +
+      "Bu bapda sen dükanda söwda etmegi öwrenersiň: bahany soramagy, ýuanda pul sanamagy, ölçeg sözlerini (瓶, 本) ulanmagy we 二 / 两 (iki) tapawutlandyrmagy.\n\n" +
       "Ýagdaýlar: 阿曼 kioskda piwo we suw satyn alýar, 古丽 kitap dükanynda iňlis-hytaý sözlügini satyn alýar.",
 
     vocabulary: [
@@ -1059,10 +1059,10 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
     grammar: [
       {
-        title: "Sanaýyş sözleri (量词) — sanlar bilen hökman!",
+        title: "Ölçeg sözleri (量词) — sanlar bilen hökman!",
         explanation:
           "Hytaýçada sanyň (ýa-da 这/那) bilen atyň arasynda ölçeg sözi HÖKMAN goýulýar. «bir kitap» diýip 一书 diýip bolmaýar — 一本书 gerek.\n\n" +
-          "Gurluş:  San / 这 / 那 / 几 + Sanaýyş sözi + At\n\n" +
+          "Gurluş:  San / 这 / 那 / 几 + Ölçeg sözi + At\n\n" +
           "Esasy ölçeg sözleri:\n" +
           "个 (ge) — ählumumy (adamlar, zatlar)\n" +
           "本 (běn) — kitaplar, sözlükler, žurnallar\n" +
@@ -1090,7 +1090,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           "• Tertip sanlarda (第二 — ikinji, 二号 — 2-nji belgi)\n" +
           "• Salgylarda we belgilerde (二号楼 — 2-nji bina)\n\n" +
           "两 (liǎng) — ulanylýar:\n" +
-          "• Sanaýyş sözünden öň: 两本书 (2 kitap), 两个朋友 (2 dost), 两瓶水\n" +
+          "• Ölçeg sözünden öň: 两本书 (2 kitap), 两个朋友 (2 dost), 两瓶水\n" +
           "• «Uly» sanlaryň öňünde: 两千 (2000), 两万 (20000), 两亿\n\n" +
           "Ýönekeý düzgün: yzyndan ölçeg sözi ýa-da «müň/million» gelse → 两. Beýleki ýagdaýlarda → 二.",
         examples: [
@@ -1107,7 +1107,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           "• 元 (yuán) — ýuan (ýazuwda). Gepleşikde: 块 (kuài).\n" +
           "• 角 (jiǎo) — ýuanyň 1/10-y. Gepleşikde: 毛 (máo).\n" +
           "• 分 (fēn) — ýuanyň 1/100-i (ownuk pul, seýrek ulanylýar).\n\n" +
-          "Baha shemasy:\n" +
+          "Baha gurluşy:\n" +
           "5.50 ýuan → 五块五（毛）— 5 ýuan 5 mao\n" +
           "12.50 ýuan → 十二块五（毛）\n" +
           "6.20 ýuan → 六块二（毛）\n" +
@@ -1144,7 +1144,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           { speaker: "A", hanzi: "我要这本小词典。多少钱一本？", pinyin: "Wǒ yào zhè běn xiǎo cídiǎn. Duōshao qián yì běn?", translation: "Şu kiçi sözlügi isleýärin. Bir sanysy näçe?" },
           { speaker: "B", hanzi: "二十二块。", pinyin: "Èrshí'èr kuài.", translation: "22 ýuan." },
           { speaker: "A", hanzi: "对不起，我没有零钱。", pinyin: "Duìbuqǐ, wǒ méiyǒu língqián.", translation: "Bagyşlaň, mende ownuk pul ýok." },
-          { speaker: "B", hanzi: "没关系。", pinyin: "Méi guānxi.", translation: "Hiç zat däl." },
+          { speaker: "B", hanzi: "没关系。", pinyin: "Méi guānxi.", translation: "Zyýany ýok." },
         ],
       },
     ],
@@ -1160,7 +1160,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   10: {
     introduction:
-      "Bu Unit 2-niň jemleýji baby — gaýtalama we giňeltme. Siz öz maşgalaňyz hakda gürrüň bermegi, 口 (maşgala agzalary üçin) we 条 (itler, derýalar, ýollar üçin) ölçeg sözlerini, şeýle hem 还 («ýene, üstesine») sözüni ulanmagy öwrenersiňiz.\n\n" +
+      "Bu Unit 2-niň jemleýji baby — gaýtalama we giňeltme. Sen öz maşgalaň hakda gürrüň bermegi, 口 (maşgala agzalary üçin) we 条 (itler, derýalar, ýollar üçin) ölçeg sözlerini, şeýle hem 还 («ýene, üstesine») sözüni ulanmagy öwrenersiň.\n\n" +
       "Ýagdaý: 古丽 we 王红 maşgala suratyna seredip, biri-birine öz maşgalalary hakda gürrüň berýärler.",
 
     vocabulary: [
@@ -1274,7 +1274,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   11: {
     introduction:
-      "Bu bapda siz howa hakda gürrüň bermegi, pasyllary deňeşdirmegi we sypatlary habar hökmünde (是-siz) ulanmagy öwrenersiňiz. 怎么样 sowaly («nähili?»), 不A不B gurluşy («ne A, ne B — edil ýerbe-ýer») we 比较 hal bilen tanyşarsyňyz.\n\n" +
+      "Bu bapda sen howa hakda gürrüň bermegi, pasyllary deňeşdirmegi we sypatlary habar hökmünde (是-siz) ulanmagy öwrenersiň. 怎么样 sowaly («nähili?»), 不A不B gurluşy («ne A, ne B — edil ýerbe-ýer») we 比较 haly bilen tanyşarsyň.\n\n" +
       "Ýagdaý: 古丽 中村-den şu gün howanyň nähilidigini soraýar, 阿曼 王老师 bilen Pekiniň pasyllary hakda gürrüň edýär.",
 
     vocabulary: [
@@ -1329,7 +1329,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           "Hytaýçada sypat ÖZÜ habar bolýar — 是 GEREK DÄL.\n\n" +
           "❌ 这个学校是小 (nädogry!)\n" +
           "✅ 这个学校很小。— Bu mekdep örän kiçi.\n\n" +
-          "Möhüm: halsyz (很, 比较, 挺, 太…) sypat deňeşdirme ýaly eşidilýär:\n" +
+          "Möhüm: hal sözi bolmasa (很, 比较, 挺, 太…) sypat deňeşdirme ýaly eşidilýär:\n" +
           "• 我的房间大。— Meniň otagym uly (başga birinden uly diýen many aňladýar).\n" +
           "• 我的房间很大。— Meniň otagym ýönekeý uly (bitarap many).\n\n" +
           "Şonuň üçin 很, «örän» diýen manyny aňlatmak islemedik ýagdaýynda-da, köplenç goşulýar — bu «grammatik dolgy».",
@@ -1414,7 +1414,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   12: {
     introduction:
-      "Bu bapda siz edil häzir edýän işiňiz hakda gürrüň bermegi (häzirki dowamly zaman), hepdäniň günlerini atlandyrmagy we «-den... çenli» (从……到……) aňlatmalaryny ulanmagy öwrenersiňiz. Şeýle hem 每 («her») sözi bilen tanyşarsyňyz.\n\n" +
+      "Bu bapda sen edil häzir edýän işiňiz hakda gürrüň bermegi (häzirki dowamly zaman), hepdäniň günlerini atlandyrmagy we «-den... çenli» (从……到……) aňlatmalaryny ulanmagy öwrenersiň. Şeýle hem 每 («her») sözi bilen tanyşarsyň.\n\n" +
       "Ýagdaý: 阿曼 we 古丽 telefonda kimiň näme edýändigi hakda gürrüň edýärler — 阿曼 öý işini edýär, 古丽 bolsa dosty bilen barda.",
 
     vocabulary: [
@@ -1466,7 +1466,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
       {
         title: "Hepdäniň günleri",
         explanation:
-          "Hepdäniň günleri şu shema boýunça gurulýar: 星期 + san (1-6) ýa-da 天/日.\n\n" +
+          "Hepdäniň günleri şu gurluş boýunça gurulýar: 星期 + san (1-6) ýa-da 天/日.\n\n" +
           "星期一 xīngqīyī — duşenbe\n" +
           "星期二 xīngqī'èr — sişenbe\n" +
           "星期三 xīngqīsān — çarşenbe\n" +
@@ -1537,7 +1537,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           { speaker: "A", hanzi: "你自己吗？", pinyin: "Nǐ zìjǐ ma?", translation: "Sen ýeke özüňmi?" },
           { speaker: "B", hanzi: "不，还有我的同屋和她的朋友，他们正在唱歌呢。", pinyin: "Bù, hái yǒu wǒ de tóngwū hé tā de péngyou, tāmen zhèngzài chàng gē ne.", translation: "Ýok, ýene meniň otagdaşym we onuň dosty bar, olar edil häzir aýdym aýdýarlar." },
           { speaker: "A", hanzi: "明天你们没有课吗？", pinyin: "Míngtiān nǐmen méiyǒu kè ma?", translation: "Ertir sizde sapak ýokmy?" },
-          { speaker: "B", hanzi: "有，我们十点就回宿舍。", pinyin: "Yǒu, wǒmen shí diǎn jiù huí sùshè.", translation: "Bar, biz 10-da ýatakhana gaýdyp geleris." },
+          { speaker: "B", hanzi: "有，我们十点就回宿舍。", pinyin: "Yǒu, wǒmen shí diǎn jiù huí sùshè.", translation: "Bar, biz 10-da umumy ýaşaýyş jaýyna gaýdyp geleris." },
         ],
       },
     ],
@@ -1553,7 +1553,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   13: {
     introduction:
-      "Bu bapda siz yzly-yzyna birnäçe işlik bilen sözlem gurmagy (gitmek + etmek), 先……然后 («ilki... soň») baglaýjysyny, 不 arkaly alternatiw sorag (贵不贵?) we 咱们-i 我们-den tapawutlandyrmagy öwrenersiňiz.\n\n" +
+      "Bu bapda sen yzly-yzyna birnäçe işlik bilen sözlem gurmagy (gitmek + etmek), 先……然后 («ilki... soň») baglaýjysyny, 不 arkaly alternatiw sorag (贵不贵?) we 咱们-i 我们-den tapawutlandyrmagy öwrenersiň.\n\n" +
       "Ýagdaý: 阿曼 we 张伟 bilelikde banka we dükana barýarlar, 古丽 we 中村 söwda merkezine gitmegi meýilleşdirýärler.",
 
     vocabulary: [
@@ -1612,7 +1612,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
         examples: [
           { hanzi: "我先去银行换钱，然后去商店买东西。", pinyin: "Wǒ xiān qù yínháng huàn qián, ránhòu qù shāngdiàn mǎi dōngxi.", translation: "Ilki banka, soň dükana." },
           { hanzi: "明天我先去银行，然后去商店。", pinyin: "Míngtiān wǒ xiān qù yínháng, ránhòu qù shāngdiàn.", translation: "Ertir ilki banka, soň dükana." },
-          { hanzi: "张伟先去电影院，然后回宿舍。", pinyin: "Zhāng Wěi xiān qù diànyǐngyuàn, ránhòu huí sùshè.", translation: "Zhang Wei ilki kinoteatra, soň ýatakhana gidýär." },
+          { hanzi: "张伟先去电影院，然后回宿舍。", pinyin: "Zhāng Wěi xiān qù diànyǐngyuàn, ránhòu huí sùshè.", translation: "Zhang Wei ilki kinoteatra, soň umumy ýaşaýyş jaýyna gidýär." },
           { hanzi: "他先去商店买东西，然后去书店买词典。", pinyin: "Tā xiān qù shāngdiàn mǎi dōngxi, ránhòu qù shūdiàn mǎi cídiǎn.", translation: "Ol ilki dükana söwda etmäge, soň kitap dükanyna sözlük almaga gidýär." },
         ],
       },
@@ -1699,7 +1699,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   14: {
     introduction:
-      "Bu bapda siz zatlary (eşikleri, ulaglary) reňki, ölçegi, hili boýunça beýan etmegi öwrenersiňiz. 挺 («birneme») hal, 有(一)点儿 («azajyk, birneme») aňlatmasy we «X的» gurluşy (aty çalyşýan) bilen tanyşarsyňyz.\n\n" +
+      "Bu bapda sen zatlary (eşikleri, ulaglary) reňki, ölçegi, hili boýunça beýan etmegi öwrenersiň. 挺 («birneme») haly, 有(一)点儿 («azajyk, birneme») aňlatmasy we «X的» gurluşy (aty çalyşýan) bilen tanyşarsyň.\n\n" +
       "Ýagdaý: 古丽 中村 bilen switer saýlaýar, soň 阿曼 onuň bilen täze tigiri hakda gürrüň edýär.",
 
     vocabulary: [
@@ -1823,7 +1823,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   15: {
     introduction:
-      "Bu Unit 3-niň jemleýji baby. Siz sowgatlar hakda gürrüň bermegi, «A ýa-da B» saýlawyny (还是), 比如 arkaly mysal getirmegi we 一直 («hemişe») ulanmagy öwrenersiňiz.\n\n" +
+      "Bu Unit 3-niň jemleýji baby. Sen sowgatlar hakda gürrüň bermegi, «A ýa-da B» saýlawyny (还是), 比如 arkaly mysal getirmegi we 一直 («hemişe») ulanmagy öwrenersiň.\n\n" +
       "Ýagdaý: 中村 joranyň doglan gününe tort taýýarlaýar, 张伟 阿曼 bilen gyza näme sowgat bermelidigini maslahatlaşýar.",
 
     vocabulary: [
@@ -1957,7 +1957,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   16: {
     introduction:
-      "Bu bapda siz öz dynç günleriňiz we boş wagtyňyz hakda gürrüň bermegi, işlikleriň gaýtalanmagyny (gepleşigi ýumşatmak üçin), 太……了 gurluşyny we ýer halyny (在+ýer işlikden öň) ulanmagy öwrenersiňiz.\n\n" +
+      "Bu bapda sen öz dynç günleriň we boş wagtyň hakda gürrüň bermegi, işlikleriň gaýtalanmagyny (gepleşigi ýumşatmak üçin), 太……了 gurluşyny we ýer halyny (在+ýer işlikden öň) ulanmagy öwrenersiň.\n\n" +
       "Ýagdaý: 阿曼 (işjeň dynç güni janköýeri) kursdaşy (ýalňyz öýde ýadaýan) bilen gürleşýär — her kimiň dynç güni hakda öz garaýşy bar.",
 
     vocabulary: [
@@ -2003,7 +2003,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           "Öwüşgin: «azajyk, ýeňilräk, synanyş». Gündelik gepleşikde örän ýygy.",
         examples: [
           { hanzi: "周末可以好好儿玩儿玩儿。", pinyin: "Zhōumò kěyǐ hǎohāor wánr wánr.", translation: "Dynç günleri gowyja dynç alyp bolýar." },
-          { hanzi: "在宿舍里看看电视，洗洗衣服。", pinyin: "Zài sùshè li kànkan diànshì, xǐxi yīfu.", translation: "Ýatakhanada telewizora seredýärin, eşiklerimi ýuwýaryn." },
+          { hanzi: "在宿舍里看看电视，洗洗衣服。", pinyin: "Zài sùshè li kànkan diànshì, xǐxi yīfu.", translation: "Umumy ýaşaýyş jaýynda telewizora seredýärin, eşiklerimi ýuwýaryn." },
           { hanzi: "和朋友逛逛商店。", pinyin: "Hé péngyou guàngguang shāngdiàn.", translation: "Dostum bilen dükanlarda gezeris." },
           { hanzi: "去图书馆学习学习。", pinyin: "Qù túshūguǎn xuéxí xuéxí.", translation: "Kitaphana azajyk okamaga giderin." },
         ],
@@ -2026,7 +2026,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
         ],
       },
       {
-        title: "Ýer hal: 在 + ýer + işlik",
+        title: "Ýer haly: 在 + ýer + işlik",
         explanation:
           "«Y ýerinde X edýärin»: hytaýçada «ýerde» HEMIŞE işlikden ÖŇ goýulýar.\n\n" +
           "Gurluş:  Eýe + 在 + Ýer + Işlik + (Obýekt)\n\n" +
@@ -2037,7 +2037,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           "• Hytaýça: «Aman PEKINDE hytaý dilini öwrenýär»\n\n" +
           "Ýeri sözlemiň soňuna goýup bolmaýar — bu başga many berýär (ýersiz 在 işligi).",
         examples: [
-          { hanzi: "在宿舍里看电视。", pinyin: "Zài sùshè li kàn diànshì.", translation: "Ýatakhanada telewizor görýärin." },
+          { hanzi: "在宿舍里看电视。", pinyin: "Zài sùshè li kàn diànshì.", translation: "Umumy ýaşaýyş jaýynda telewizor görýärin." },
           { hanzi: "阿曼在北京大学学习汉语。", pinyin: "Āmàn zài Běijīng Dàxué xuéxí Hànyǔ.", translation: "Aman Pekin uniwersitetinde hytaý dilini öwrenýär." },
           { hanzi: "他在图书馆看书。", pinyin: "Tā zài túshūguǎn kàn shū.", translation: "Ol kitaphanada okaýar." },
           { hanzi: "他们在购物中心买东西。", pinyin: "Tāmen zài gòuwù zhōngxīn mǎi dōngxi.", translation: "Olar söwda merkezinde satyn alýarlar." },
@@ -2054,7 +2054,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           { speaker: "A", hanzi: "当然喜欢啦！周末可以好好儿玩儿玩儿，你不喜欢吗？", pinyin: "Dāngrán xǐhuan la! Zhōumò kěyǐ hǎohāor wánr wánr, nǐ bù xǐhuan ma?", translation: "Elbetde halaýaryn! Dynç günleri gowyja dynç alyp bolýar — sen halamaýarsyňmy?" },
           { speaker: "B", hanzi: "我不喜欢。每个周末，我都觉得没意思。", pinyin: "Wǒ bù xǐhuan. Měi ge zhōumò, wǒ dōu juéde méi yìsi.", translation: "Men halamaýaryn. Her dynç güni maňa gyzykly däl." },
           { speaker: "A", hanzi: "你周末都干什么呢？", pinyin: "Nǐ zhōumò dōu gàn shénme ne?", translation: "Sen dynç günleri näme edýärsiň?" },
-          { speaker: "B", hanzi: "在宿舍里看看电视，洗洗衣服，做做作业，睡睡懒觉……", pinyin: "Zài sùshè li kànkan diànshì, xǐxi yīfu, zuòzuo zuòyè, shuìshui lǎnjiào...", translation: "Ýatakhanada telewizora seredýärin, eşik ýuwýaryn, öý işimi edýärin, köpräk ýatýaryn…" },
+          { speaker: "B", hanzi: "在宿舍里看看电视，洗洗衣服，做做作业，睡睡懒觉……", pinyin: "Zài sùshè li kànkan diànshì, xǐxi yīfu, zuòzuo zuòyè, shuìshui lǎnjiào...", translation: "Umumy ýaşaýyş jaýynda telewizora seredýärin, eşik ýuwýaryn, öý işimi edýärin, köpräk ýatýaryn…" },
           { speaker: "A", hanzi: "你不和朋友一起出去玩儿吗？", pinyin: "Nǐ bù hé péngyou yìqǐ chūqu wánr ma?", translation: "Dostlaryň bilen gezmäge çykmaýarsyňmy?" },
           { speaker: "B", hanzi: "有时候和朋友一起逛逛商店，有时候去图书馆学习学习。你周末都干什么呢？", pinyin: "Yǒu shíhou hé péngyou yìqǐ guàngguang shāngdiàn, yǒu shíhou qù túshūguǎn xuéxí xuéxí. Nǐ zhōumò dōu gàn shénme ne?", translation: "Käwagt dostlar bilen dükanlarda gezýärin, käwagt kitaphana gidýärin. Sen dynç günleri näme edýärsiň?" },
           { speaker: "A", hanzi: "我每个周末都有不同的安排。上个周末到朋友家包饺子，上上个周末去迪厅跳舞……", pinyin: "Wǒ měi ge zhōumò dōu yǒu bù tóng de ānpái. Shàng ge zhōumò dào péngyou jiā bāo jiǎozi, shàng shàng ge zhōumò qù dítīng tiào wǔ...", translation: "Meniň her dynç günüm dürli meýilnamam bar. Geçen dynç güni dostumyň öýünde pelmeni ýasadym, ondan öňkü dynç güni diskotekada tans etdim…" },
@@ -2076,7 +2076,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   17: {
     introduction:
-      "Bu bapda siz myhmançylyga barmagy öwrenersiňiz: öý eýelerini salamlamak, sowgat bermek, sylagly klişeler aýtmak. 会 («başarmak») işligi, nygtaýjy 就是 we beýleki etiket kadalary bilen tanyşarsyňyz.\n\n" +
+      "Bu bapda sen myhmançylyga barmagy öwrenersiň: öý eýelerini salamlamak, sowgat bermek, sylagly klişeler aýtmak. 会 («başarmak») işligi, nygtaýjy 就是 we beýleki etiket kadalary bilen tanyşarsyň.\n\n" +
       "Ýagdaý: 阿曼 we 古丽 王老师-niň myhmançylygyna barýarlar — sowgat alyşýarlar we pelmeni ýasaýarlar.",
 
     vocabulary: [
@@ -2194,7 +2194,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   18: {
     introduction:
-      "Myhmançylygyň dowamy (Part 2). Siz mysallary sanamagy (A啦 B啦 C啦), 得 («gerek») ulanmagy, 不是……吗? ritorik soragyny we 如果……就…… («eger... onda...») şert dolanyşygyny öwrenersiňiz.\n\n" +
+      "Myhmançylygyň dowamy (Part 2). Sen mysallary sanamagy (A啦 B啦 C啦), 得 («gerek») ulanmagy, 不是……吗? ritorik soragyny we 如果……就…… («eger... onda...») şert dolanyşygyny öwrenersiň.\n\n" +
       "Ýagdaý: stoluň başynda demirgazyk we günorta hytaýlaryň iýmit tapawudy hakda, hem-de pelmenini özüň ýasamak ýa-da doňdurylanyny satyn almak haýsynyň aňsatdygy hakda gürrüň edýärler.",
 
     vocabulary: [
@@ -2328,7 +2328,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   19: {
     introduction:
-      "Bu bapda siz endikler we öwrenişme wagty hakda gürrüň bermegi, ýagdaý üýtgemesi üçin 了 bölejigini ulanmagy, 就 (irräk) bilen 才 (giç) tapawutlandyrmagy we ýaşy dürli usulda soramagy öwrenersiňiz.\n\n" +
+      "Bu bapda sen endikler we öwrenişme wagty hakda gürrüň bermegi, ýagdaý üýtgemesi üçin 了 bölejigini ulanmagy, 就 (irräk) bilen 才 (giç) tapawutlandyrmagy we ýaşy dürli usulda soramagy öwrenersiň.\n\n" +
       "Ýagdaý: 王老师 阿曼-den onuň Pekindäki durmuşy hakda soraýar — öwrenişdimi, haçan ýatýar.",
 
     vocabulary: [
@@ -2464,7 +2464,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   20: {
     introduction:
-      "Bu Unit 4-iň jemleýji baby. Siz «sypat+死了» («örän...») gurluşyny, inkär buýrugy 别 («etme») ulanmagy öwrenersiňiz we 16-19-njy baplaryň grammatikasyny gaýtalarsyňyz.\n\n" +
+      "Bu Unit 4-iň jemleýji baby. Sen «sypat+死了» («örän...») gurluşyny, inkär buýrugy 别 («etme») ulanmagy öwrenersiň we 16-19-njy baplaryň grammatikasyny gaýtalarsyň.\n\n" +
       "Ýagdaý: 阿曼 syrkawlan 古丽-ni hassahanada görmäge barýar. Olar syrkawlamak bilen okamagyň haýsysynyň gowudygy hakda degişýärler.",
 
     vocabulary: [
@@ -2579,7 +2579,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   21: {
     introduction:
-      "Bu bapda siz 又-ni (ýene, gaýtalama), 了 bölejiginiň (2) sanlar bilen ulanylyşyny (V+了+mukdar+O) we 好像-ni («öýdýän») ulanmagy öwrenersiňiz. Mowzuk — hytaý myhmansöýerlik medeniýeti we alkogol.\n\n" +
+      "Bu bapda sen 又-ni (ýene, gaýtalama), 了 bölejiginiň (2) sanlar bilen ulanylyşyny (V+了+mukdar+O) we 好像-ni («öýdýän») ulanmagy öwrenersiň. Mowzuk — hytaý myhmansöýerlik medeniýeti we alkogol.\n\n" +
       "Ýagdaý: 古丽 阿曼-ny alkogolyň täsirinden syrkaw ýagdaýda tapýar. Düýn hytaý dostlary ony baýjiu bilen sylapdyrlar — ol ýarym jin (250g!) güýçli alkogol içipdir.",
 
     vocabulary: [
@@ -2695,7 +2695,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   22: {
     introduction:
-      "Bu bapda siz keseller hakda gürrüň bermegi, 能 işligini («bilmek, mümkin bolmak»), 最好 («etseň gowy bolar») we hytaýça sene ýazmagy öwrenersiňiz.\n\n" +
+      "Bu bapda sen keseller hakda gürrüň bermegi, 能 işligini («bilmek, mümkin bolmak»), 最好 («etseň gowy bolar») we hytaýça sene ýazmagy öwrenersiň.\n\n" +
       "Ýagdaý: 阿曼 futbol duşuşygyndan soň ýagyşda üşütdi. 古丽 mugallyma onuň sapaklardan boşadylmagyny soraýan haty gowşurýar.",
 
     vocabulary: [
@@ -2808,7 +2808,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   23: {
     introduction:
-      "Bu bapda siz dowamlylyk hakda soramagy (V + 了 + wagt), 大概-ni (takmynan) ulanmagy, duýdansyz hereketleri (了) uzak dowam edýänlerden tapawutlandyrmagy öwrenersiňiz.\n\n" +
+      "Bu bapda sen dowamlylyk hakda soramagy (V + 了 + wagt), 大概-ni (takmynan) ulanmagy, duýdansyz hereketleri (了) uzak dowam edýänlerden tapawutlandyrmagy öwrenersiň.\n\n" +
       "Ýagdaý: 古丽 ýol dyknyşygy we ýarylan şina sebäpli 王红 bilen duşuşyga gijä galdy. Soňra olar dilleri näçe ýyl öwrenýändikleri hakda gürrüň edýärler.",
 
     vocabulary: [
@@ -2844,7 +2844,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
         explanation:
           "«Nämedir bir zady näçe wagt etdim» diýip nädip soramaly/aýtmaly? Gurluşy çylşyrymly: işlik gaýtalanýar.\n\n" +
           "Gurluş:  V + 了 + Wagt  (obýekt bolmasa)\n" +
-          "Obýektli shema:  V + 了 + Wagt + 的 + Obýekt  ÝA-DA  V + Obýekt + V + 了 + Wagt\n\n" +
+          "Obýektli gurluş:  V + 了 + Wagt + 的 + Obýekt  ÝA-DA  V + Obýekt + V + 了 + Wagt\n\n" +
           "我学了十年英语。— Men iňlis dilini 10 ýyl öwrendim.\n" +
           "换轮胎换了多长时间？— Tigiri näçe wagt çalyşdyň?\n" +
           "我学汉语学了半年了。— Men hytaý dilini eýýäm ýarym ýyl öwrenýärin.\n\n" +
@@ -2935,7 +2935,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   24: {
     introduction:
-      "Bu bapda siz buýruk sözlemlerini («geliň!»), ritorik sorag 我+V+什么-ni («maňa näme üçin X?»), 了 (4) bölejigini hereketleriň yzygiderligi üçin we Wagt + Ýer tertibini işlikden öň ulanmagy öwrenersiňiz.\n\n" +
+      "Bu bapda sen buýruk sözlemlerini («geliň!»), ritorik sorag 我+V+什么-ni («maňa näme üçin X?»), 了 (4) bölejigini hereketleriň yzygiderligi üçin we Wagt + Ýer tertibini işlikden öň ulanmagy öwrenersiň.\n\n" +
       "Ýagdaý: 张伟 we 王红 telefonda gürleşýärler — nahar we 小美-niň doglan güni toýy hakda gürrüň edýärler.",
 
     vocabulary: [
@@ -3025,10 +3025,10 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           "Sözlemde hem WAGT, hem ÝER bar bolsa — ikisi hem işlikden ÖŇ goýulýar: ilki wagt, soň ýer.\n\n" +
           "Gurluş:  Eýe + Wagt + 在+Ýer + Işlik + Obýekt\n\n" +
           "我们明天八点半在你们宿舍门口见面。\n" +
-          "«Biz ertir sagat 8:30-da siziň ýatakhanaňyzyň gapysynda duşuşarys.»\n\n" +
+          "«Biz ertir sagat 8:30-da siziň umumy ýaşaýyş jaýyňyzyň gapysynda duşuşarys.»\n\n" +
           "Logika: uly konteksden (haçan) kiçä (nirede) — hereket.",
         examples: [
-          { hanzi: "我们明天八点半在你们宿舍门口见面。", pinyin: "Wǒmen míngtiān bā diǎn bàn zài nǐmen sùshè ménkǒu jiàn miàn.", translation: "Ertir sagat 8:30-da ýatakhananyň gapysynda duşuşarys." },
+          { hanzi: "我们明天八点半在你们宿舍门口见面。", pinyin: "Wǒmen míngtiān bā diǎn bàn zài nǐmen sùshè ménkǒu jiàn miàn.", translation: "Ertir sagat 8:30-da umumy ýaşaýyş jaýynyň gapysynda duşuşarys." },
           { hanzi: "今天下课以后我在图书馆学习。", pinyin: "Jīntiān xià kè yǐhòu wǒ zài túshūguǎn xuéxí.", translation: "Şu gün sapakdan soň kitaphanada okaryn." },
           { hanzi: "他每天早上在家喝咖啡。", pinyin: "Tā měi tiān zǎoshang zài jiā hē kāfēi.", translation: "Ol her ertir öýde kofe içýär." },
         ],
@@ -3042,7 +3042,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           { speaker: "A", hanzi: "喂，王红，是我。", pinyin: "Wèi, Wáng Hóng, shì wǒ.", translation: "Alo, Wan Hun, bu men." },
           { speaker: "B", hanzi: "张伟，你吃饭了吗？", pinyin: "Zhāng Wěi, nǐ chī fàn le ma?", translation: "Zhang Wei, nahar iýdiňmi?" },
           { speaker: "A", hanzi: "还没呢。刚打球回来，我想去食堂吃几两饺子，你去吗？", pinyin: "Hái méi ne. Gāng dǎ qiú huílai, wǒ xiǎng qù shítáng chī jǐ liǎng jiǎozi, nǐ qù ma?", translation: "Entek ýok. Ýaňy top oýnap gaýtdym, naharhana birnäçe lýan pelmeni iýmäge gitmek isleýärin — sen barýarsyňmy?" },
-          { speaker: "B", hanzi: "不去了。今天是小美二十三岁生日，我们宿舍聚会。", pinyin: "Bú qù le. Jīntiān shì Xiǎoměi èrshísān suì shēngrì, wǒmen sùshè jùhuì.", translation: "Barmaýaryn. Şu gün Sýaomeýniň 23 ýaşy dolýar — ýatakhanamyzda toý bar." },
+          { speaker: "B", hanzi: "不去了。今天是小美二十三岁生日，我们宿舍聚会。", pinyin: "Bú qù le. Jīntiān shì Xiǎoměi èrshísān suì shēngrì, wǒmen sùshè jùhuì.", translation: "Barmaýaryn. Şu gün Sýaomeýniň 23 ýaşy dolýar — umumy ýaşaýyş jaýymyzda toý bar." },
           { speaker: "A", hanzi: "是吗？那祝她生日快乐。", pinyin: "Shì ma? Nà zhù tā shēngrì kuàilè.", translation: "Şeýlemi? Onda oňa doglan güni gutlaryn." },
           { speaker: "B", hanzi: "今天我们做了很多好吃的。我已经吃了一碗面条儿，还喝了一杯葡萄酒，现在在吃冰激凌呢。你也来吧！", pinyin: "Jīntiān wǒmen zuò le hěn duō hǎochī de. Wǒ yǐjīng chī le yì wǎn miàntiáor, hái hē le yì bēi pútáojiǔ, xiànzài zài chī bīngjīlíng ne. Nǐ yě lái ba!", translation: "Biz köp tagamly zat bişirdik. Men eýýäm bir käse lapşa iýdim, bir käse üzüm çakyry-da içdim, häzir doňdurma iýýärin. Sen-de geliber!" },
           { speaker: "A", hanzi: "你们女生一起玩儿，我去干什么？晚上你们还有别的安排吗？", pinyin: "Nǐmen nǚshēng yìqǐ wánr, wǒ qù gàn shénme? Wǎnshang nǐmen hái yǒu bié de ānpái ma?", translation: "Siz gyzlar bile gezýärsiňiz — men ol ýerde näme etjek? Agşam ýene bir ýere gitjekmi?" },
@@ -3051,7 +3051,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           { speaker: "B", hanzi: "放心吧！对了，明天又是周末了，我们去哪儿玩儿？", pinyin: "Fàng xīn ba! Duì le, míngtiān yòu shì zhōumò le, wǒmen qù nǎr wánr?", translation: "Arkaýyn bol! Aýtmagyn, ertir ýene dynç güni — nirä gideris?" },
           { speaker: "A", hanzi: "听说美术馆的展览很不错，去看展览怎么样？", pinyin: "Tīngshuō měishùguǎn de zhǎnlǎn hěn búcuò, qù kàn zhǎnlǎn zěnmeyàng?", translation: "Eşidişime görä, çeperçilik muzeýinde gowy sergi bar, sergä baralymy?" },
           { speaker: "B", hanzi: "好啊，没意见。你吃了早饭来找我，好吗？", pinyin: "Hǎo a, méi yìjiàn. Nǐ chī le zǎofàn lái zhǎo wǒ, hǎo ma?", translation: "Bolýar, garşy däl. Ertirligi iý-de meni almaga gel, bolýarmy?" },
-          { speaker: "A", hanzi: "好，明天八点半在你们宿舍门口见面，行吗？", pinyin: "Hǎo, míngtiān bā diǎn bàn zài nǐmen sùshè ménkǒu jiàn miàn, xíng ma?", translation: "Bolýar, ertir sagat 8:30-da siziň ýatakhanaňyzyň gapysynda duşuşarys, bolýarmy?" },
+          { speaker: "A", hanzi: "好，明天八点半在你们宿舍门口见面，行吗？", pinyin: "Hǎo, míngtiān bā diǎn bàn zài nǐmen sùshè ménkǒu jiàn miàn, xíng ma?", translation: "Bolýar, ertir sagat 8:30-da siziň umumy ýaşaýyş jaýyňyzyň gapysynda duşuşarys, bolýarmy?" },
           { speaker: "B", hanzi: "行。那今天你干什么？", pinyin: "Xíng. Nà jīntiān nǐ gàn shénme?", translation: "Bolýar. Onda şu gün näme edýärsiň?" },
           { speaker: "A", hanzi: "和同学上网聊天儿吧。明天见！", pinyin: "Hé tóngxué shàng wǎng liáo tiānr ba. Míngtiān jiàn!", translation: "Kursdaşym bilen internetde gürrüňleşerin. Ertire çenli!" },
           { speaker: "B", hanzi: "明天见！", pinyin: "Míngtiān jiàn!", translation: "Ertire çenli!" },
@@ -3070,7 +3070,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   25: {
     introduction:
-      "Unit 5-iň jemleýji baby. Siz ähli modal işlikleri (会/能/要/得/应该) gaýtalarsyňyz we 别 + V (inkär «gerek däl») bilen tanyşarsyňyz.\n\n" +
+      "Unit 5-iň jemleýji baby. Sen ähli modal işlikleri (会/能/要/得/应该) gaýtalarsyň we 别 + V (inkär «gerek däl») bilen tanyşarsyň.\n\n" +
       "Ýagdaý: 中村 taýszi toparyna ýazyldy we irden turýar. 古丽 goşulmaga karar berýär — ylgamak we hereketlenmek üçin, ýogsam düýbünden ýalta bolupdyr.",
 
     vocabulary: [
@@ -3197,7 +3197,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   26: {
     introduction:
-      "Bu bapda siz 快……了 / 要……了 («basym X») arkaly geljek wakalar hakda gürrüň bermegi, 只好-ny («başga alaç ýok») we 可能-ni («belki») ulanmagy öwrenersiňiz.\n\n" +
+      "Bu bapda sen 快……了 / 要……了 («basym X») arkaly geljek wakalar hakda gürrüň bermegi, 只好-ny («başga alaç ýok») we 可能-ni («belki») ulanmagy öwrenersiň.\n\n" +
       "Ýagdaý: synaglar golaýlaşýar. 古丽 kitaphanada ýatdan öwrenýär, 阿曼 dynç alyşda Hytaýyň demirgazyk-gündogaryna gitmegi meýilleşdirýär. 中村 Roždestwo açyk hatlaryny ýazýar.",
 
     vocabulary: [
@@ -3328,7 +3328,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   27: {
     introduction:
-      "Bu bapda siz 极了-ni (iň ýokary dereje), 想 bilen 要-niň tapawudyny, hereketler üçin ölçeg sözlerini (趟, 次) ulanmagy we dynç alyş meýilnamalary hakda gürrüň bermegi öwrenersiňiz.\n\n" +
+      "Bu bapda sen 极了-ni (iň ýokary dereje), 想 bilen 要-niň tapawudyny, hereketler üçin ölçeg sözlerini (趟, 次) ulanmagy we dynç alyş meýilnamalary hakda gürrüň bermegi öwrenersiň.\n\n" +
       "Ýagdaý: 张伟 gadymy taryh boýunça magistratura taýýarlanmak üçin galýar, 阿曼 Harbine gidýär. Ikisi-de dynç alyş meýilnamalaryny we Täze ýylda öýe gaýtmagy maslahatlaşýarlar.",
 
     vocabulary: [
@@ -3473,7 +3473,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   28: {
     introduction:
-      "Bu bapda siz hereketiň nähili ýerine ýetirilendigini bahalandyrmagy (V+得+sypat), 都-ni «hemmesi» we «eýýäm» hökmünde tapawutlandyrmagy, 也许-ni («belki»), 为什么-ni («näme üçin») we 够-ni («ýeterlik») ulanmagy öwrenersiňiz.\n\n" +
+      "Bu bapda sen hereketiň nähili ýerine ýetirilendigini bahalandyrmagy (V+得+sypat), 都-ni «hemmesi» we «eýýäm» hökmünde tapawutlandyrmagy, 也许-ni («belki»), 为什么-ni («näme üçin») we 够-ni («ýeterlik») ulanmagy öwrenersiň.\n\n" +
       "Ýagdaý: 古丽 we 王红 synaglary maslahatlaşýarlar. 古丽 gynanýar — iýeroglifleri haýal okaýar we ýazýar, wagt ýetmedi.",
 
     vocabulary: [
@@ -3499,7 +3499,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
       { hanzi: "记", pinyin: "jì", translation: "ýat tutmak, ýazyp goýmak" },
       { hanzi: "方法", pinyin: "fāngfǎ", translation: "usul" },
       { hanzi: "编", pinyin: "biān", translation: "düzmek" },
-      { hanzi: "故事", pinyin: "gùshi", translation: "taryh" },
+      { hanzi: "故事", pinyin: "gùshi", translation: "hekaýa" },
       { hanzi: "也许", pinyin: "yěxǔ", translation: "belki, mümkin bolmak" },
       { hanzi: "帮助", pinyin: "bāngzhù", translation: "kömek, kömek etmek" },
       { hanzi: "担心", pinyin: "dān xīn", translation: "howsala düşmek, gynanmak" },
@@ -3516,7 +3516,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           "写得很慢。— Haýal ýazýaryn.\n" +
           "考得怎么样？— Nähili tabşyrdyň? (göni manysy: «tabşyrmak nähili boldy?»)\n" +
           "跑得很快。— Çalt ylgaýar.\n\n" +
-          "Eger obýekt bar bolsa, shema çylşyrymlaşýar:\n" +
+          "Eger obýekt bar bolsa, gurluş çylşyrymlaşýar:\n" +
           "V + O + V + 得 + Sypat.  (işlik gaýtalanýar!)\n" +
           "我写汉字写得很慢。— Iýeroglifleri haýal ýazýaryn.\n\n" +
           "得 DĚI (gerek) bilen bulaşdyrma. Bu ýerde ol gurluş bölejigi DE — hemişe işlik bilen beýanyň arasynda.",
@@ -3615,14 +3615,14 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
       "得 (de) bahadan öň — 得 ýazgysynyň üç wezipesiniň biri. Bulaşdyrmaz ýaly: 得 DE — HEMIŞE işlik bilen beýanyň arasynda (写得快). Işlikden öň bolsa — bu děi «gerek» (我得写).",
       "门 — okuw sapaklary üçin ölçeg söz: 一门课 (bir sapak), 三门课 (üç sapak). 三个课 diýip bolmaýar.",
       "道 — soraglar, tabşyryklar, naharlar üçin ölçeg söz: 一道题 (tabşyryk), 一道菜 (nahar).",
-      "看X看得Y — obýekt we baha bilen işligiň gaýtalanma shemasy. «Iýeroglifleri haýal okaýaryn» = 我看汉字看得很慢. 看 işligi gaýtalanýar!",
+      "看X看得Y — obýekt we baha bilen işligiň gaýtalanma gurluşy. «Iýeroglifleri haýal okaýaryn» = 我看汉字看得很慢. 看 işligi gaýtalanýar!",
       "18-nji Bapdaky 对X来说 bu ýerde hem köp ulanylýar: 对欧美人来说 = «ýewropalylaryň we amerikalylaryň nazarynda». Pikir ýöretmek üçin örän peýdaly formula.",
     ],
   },
 
   29: {
     introduction:
-      "Bu bapda siz netijeli işlikleri (V+好了, V+完了) ulanmagy, biletler üçin ölçeg sözi (张) we otly bilen syýahat hakda gürrüň bermegi öwrenersiňiz.\n\n" +
+      "Bu bapda sen netijeli işlikleri (V+好了, V+完了) ulanmagy, biletler üçin ölçeg sözi (张) we otly bilen syýahat hakda gürrüň bermegi öwrenersiň.\n\n" +
       "Ýagdaý: 阿曼 ähli synaglary tabşyrdy we Harbin üçin bilet satyn aldy. 张伟 ony ugramazyndan öň dostlukly ýygnanyşyga çagyrýar.",
 
     vocabulary: [
@@ -3631,7 +3631,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
       { hanzi: "别提", pinyin: "biétí", translation: "agzamaga degmeýär (erbet)" },
       { hanzi: "提", pinyin: "tí", translation: "gozgamak (mowzugy)" },
       { hanzi: "糟糕", pinyin: "zāogāo", translation: "erbet, heläkçilik" },
-      { hanzi: "声调", pinyin: "shēngdiào", translation: "äheň" },
+      { hanzi: "声调", pinyin: "shēngdiào", translation: "ton" },
       { hanzi: "错", pinyin: "cuò", translation: "ýalňyşlyk, nädogry" },
       { hanzi: "谦虚", pinyin: "qiānxū", translation: "kiçigöwünli" },
       { hanzi: "嗐", pinyin: "hài", translation: "ah (duýgy sözi)" },
@@ -3714,7 +3714,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
           { speaker: "A", hanzi: "阿曼，今天全部考完了吧？", pinyin: "Āmàn, jīntiān quánbù kǎo wán le ba?", translation: "Aman, şu gün hemmesini tabşyrdyňmy?" },
           { speaker: "B", hanzi: "考了三天，终于考完了。", pinyin: "Kǎo le sān tiān, zhōngyú kǎo wán le.", translation: "3 gün synag berdim — ahyrsoňy hemmesi gutardy." },
           { speaker: "A", hanzi: "考得怎么样？", pinyin: "Kǎo de zěnmeyàng?", translation: "Nähili?" },
-          { speaker: "B", hanzi: "别提了，考得糟糕极了，特别是声调和汉字，错得比较多。", pinyin: "Biétí le, kǎo de zāogāo jí le, tèbié shì shēngdiào hé Hànzì, cuò de bǐjiào duō.", translation: "Sorama, örän erbet — aýratyn hem äheňler we iýeroglifler, ýalňyşlyk köp." },
+          { speaker: "B", hanzi: "别提了，考得糟糕极了，特别是声调和汉字，错得比较多。", pinyin: "Biétí le, kǎo de zāogāo jí le, tèbié shì shēngdiào hé Hànzì, cuò de bǐjiào duō.", translation: "Sorama, örän erbet — aýratyn hem tonlar we iýeroglifler, ýalňyşlyk köp." },
           { speaker: "A", hanzi: "你是谦虚吧？平时我看你说得挺不错的。", pinyin: "Nǐ shì qiānxū ba? Píngshí wǒ kàn nǐ shuō de tǐng búcuò de.", translation: "Kiçigöwünlilik edýäňmi? Adatça sen erbet däl gepleýärsiň." },
           { speaker: "B", hanzi: "嗐！已经考完了，不想考试的事了。", pinyin: "Hài! Yǐjīng kǎo wán le, bù xiǎng kǎoshì de shì le.", translation: "Ah! Eýýäm tabşyrdym, synag hakda başga pikirlenesim gelenok." },
           { speaker: "A", hanzi: "你什么时候去旅行？", pinyin: "Nǐ shénme shíhou qù lǚxíng?", translation: "Syýahata haçan gidýärsiň?" },
@@ -3744,7 +3744,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
 
   30: {
     introduction:
-      "Bu tutuş kursuň jemleýji baby! Siz ähli esasy gurluşlary gaýtalarsyňyz we çykyşa taýýarlanmak hakda gürrüň bermegi, 怕 (gorkmak) we emfatik 多……啊 («ahyry-ha edil şu X!») ulanmagy öwrenersiňiz.\n\n" +
+      "Bu tutuş kursuň jemleýji baby! Sen ähli esasy gurluşlary gaýtalarsyňyz we çykyşa taýýarlanmak hakda gürrüň bermegi, 怕 (gorkmak) we emfatik 多……啊 («ahyry-ha edil şu X!») ulanmagy öwrenersiň.\n\n" +
       "Ýagdaý: 阿曼 fakultet ýygnanyşygyna taýýarlanýar. Ol hytaý halk aýdymyny aýtmagy karar etdi, ýöne aýdylyşy sebäpli howsala düşýär.",
 
     vocabulary: [
@@ -3880,7 +3880,7 @@ export const THEORY_DATA: Record<number, TheoryChapter> = {
       "民歌 (míngē) — halk aýdymy. Hytaýda örän meşhur žanr. Belli aýdymlar: 茉莉花 (Jasmin gülü), 康定情歌 (Kandiniň söýgi aýdymy). Hytaý dilini öwrenmek üçin ajaýyp.",
       "面子 (miànzi) — «abraý, at-abraý». Hytaý medeniýetiniň esasy düşünjesi. 没面子 — abraýdan gaçmak, utanç bolmak. 给面子 — hormat goýmak (abraý bermek). Işewürlik gatnaşyklarynda möhüm düşünje.",
       "光盘 — CD/DVD. Streaming döwründe söz könelişýär, ýöne henizem duş gelýär. Häzir köplenç 下载 (ýükläp almak) ýa-da diňe 听音乐 diýilýär.",
-      "发音 (aýdylyş) — hytaý diliniň iň kyn böleklerinden biri. Äheňler (声调) + dogry aýdyş. Olarsyz iýeroglifler dogry bolsa-da saňa düşünmezler.",
+      "发音 (aýdylyş) — hytaý diliniň iň kyn böleklerinden biri. Tonlar (声调) + dogry aýdyş. Olarsyz iýeroglifler dogry bolsa-da saňa düşünmezler.",
       "Kursy tamamlanyň bilen gutlaýaryn! 30 bap, 700+ söz, ähli esasy grammatik gurluşlar. Bu — hytaý dilinde ynamly başlangyç!",
     ],
   },

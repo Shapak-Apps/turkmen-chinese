@@ -58,7 +58,7 @@ export const INTRO_TEXT =
   "声母 (shēngmǔ) — başlangyç ses (bognuň başyndaky çekimsiz)\n" +
   "韵母 (yùnmǔ) — soňky ses (bognuň çekimli bölegi)\n" +
   "声调 (shēngdiào) — ton\n\n" +
-  "Başlangyç ses + Soňlangyç ses + Ton = Bogun\n\n" +
+  "Başlangyç ses + Soňky ses + Ton = Bogun\n\n" +
   "Meselem: b + a + 4-nji ton = bà (kaka)\n\n" +
   "Hytaý dilinde 21 başlangyç we 38 soňky ses bar. Olaryň utgaşmasy 400 töweregi bogun, 4 ton bilen bolsa 1600-den gowrak görnüş emele getirýär.";
 

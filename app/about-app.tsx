@@ -331,7 +331,7 @@ function TipsPage() {
         Tonlara üns beriň. Bir we şol bir ses dürli tonda dürli many berýär. Ilkibada kyn, soň özbaşdak gelýär.
       </ThemedText>
       <ThemedText style={styles.tipItem}>
-        Iýeroglifleri tertibinde ýazyň. Zarbalaryň dogry tertibi okamak we ýatda saklamak üçin möhüm.
+        Iýeroglifleri tertibinde ýazyň. Çyzyklaryň dogry tertibi okamak we ýatda saklamak üçin möhüm.
       </ThemedText>
       <ThemedText style={styles.tipItem}>
         Ýalňyşlykdan gorkmaň. Her ýalňyş — öwrenmegiň bir bölegi. Gönükmäni täzeden geçip bilersiňiz.

@@ -191,7 +191,7 @@
 | Сравни:\n | Deňeşdir:\n | teoriýa |
 | Сразу после глагола | Işlikden edil soň | gönükme |
 | Степень:\n | Dereje:\n | teoriýa |
-| Схема цен:\n | Baha shemasy:\n | teoriýa |
+| Схема цен:\n | Baha gurluşy:\n | teoriýa |
 | Схемы:\n | Gurluşlar:\n | teoriýa |
 | ТВ | TW | gönükme |
 | ТЦ | söwda merkezi | gönükme |
@@ -482,7 +482,7 @@
 | заново, снова | gaýtadan, täzeden | teoriýa |
 | занят, быть занятым | başagaý, meşgul | teoriýa |
 | занятие | sapak | gönükme |
-| занятие, урок | sapak, ders | teoriýa |
+| занятие, урок | sapak | teoriýa |
 | занято | başagaý | gönükme |
 | занятый | başagaý | gönükme |
 | запад | günbatar | gönükme |
@@ -721,7 +721,7 @@
 | не поздно | giç däl | gönükme |
 | не спать | ýatmazlyk | gönükme |
 | не спрашивай | sorama | gönükme |
-| не стоит благодарности | minnetdarlyga zerurlyk ýok | teoriýa |
+| не стоит благодарности | Hiç zat däl | teoriýa |
 | не хватать | ýetmezlik | gönükme |
 | не, нет | däl, ýok | teoriýa |
 | небо | asman | gönükme |
@@ -1121,8 +1121,8 @@
 | только что | edil şu wagt | gönükme, teoriýa |
 | только что, недавно | edil şu wagt, ýaňy | teoriýa |
 | только, лишь | diňe, ýalňyz | teoriýa |
-| тон | äheň | teoriýa |
-| тоны | äheňler | gönükme |
+| тон | ton | teoriýa |
+| тоны | tonlar | gönükme |
 | торговый центр | söwda merkezi | teoriýa |
 | торт | tort | gönükme, teoriýa |
 | точно | takyk | gönükme |
@@ -1431,7 +1431,7 @@
 | «В 2 не сплю» — противоположно. | «2-de ýatmaýaryn» — tersine. | gönükme |
 | «В Пекинском университете занятия в 8 утра.» Как выразить «это слишком рано!»? | «Pekin uniwersitetinde sapaklar ertirine 8-de.» «Bu aşa ir!» diýip nädip aňlatmaly? | gönükme |
 | «В кинотеатре вечером фильм, пойдёшь?» Ты хочешь сказать «конечно пойду!». Как правильно? | «Kinoteatrda agşam kinofilm bar, gidersiňmi?» Sen «elbetde giderin!» diýmek isleýärsiň. Nädip dogry? | gönükme |
-| «В общежитии смотрю ТВ». Место перед глаголом. | «Ýatakhanada TW görýärin». Ýer işlikden öň. | gönükme |
+| «В общежитии смотрю ТВ». Место перед глаголом. | «Umumy ýaşaýyş jaýynda TW görýärin». Ýer işlikden öň. | gönükme |
 | «Велосипед дорог» — не о поломке. | «Tigir gymmat» — döwülme hakda däl. | gönükme |
 | «Вечера нет» — неверно. | «Agşam ýok» — nädogry. | gönükme |
 | «Вместе» — но не можешь сейчас. | «Bile» — ýöne häzir bolmaýar. | gönükme |
@@ -1491,7 +1491,7 @@
 | «Как долго учишь китайский?» | «Hytaý dilini näçe wagt öwrenýärsiň?» | gönükme |
 | «Как простыл?» Под дождём без зонта. Как объяснить? | «Nädip üşütdi?» Zontsyz ýagyşda galdy. Nädip düşündirmeli? | gönükme |
 | «Как сдал?» Не очень, не хватило времени, не всё успел. Как? | «Nähili tabşyrdyň?» Onçakly gowy däl, wagt ýetmedi, hemmesini ýetişmedim. Nädip? | gönükme |
-| «Как сдал?» Ужасно, особенно тоны и иероглифы. Как? | «Nähili tabşyrdyň?» Erbet, aýratyn hem äheňler we iýeroglifler. Nädip? | gönükme |
+| «Как сдал?» Ужасно, особенно тоны и иероглифы. Как? | «Nähili tabşyrdyň?» Erbet, aýratyn hem tonlar we iýeroglifler. Nädip? | gönükme |
 | «Как тот белый свитер?» Довольно симпатичный, но белое легко пачкается. Как ответить? | «Ol ak switer nähili?» Birneme owadan, ýöne agy aňsat hapalanýar. Nädip jogap bermeli? | gönükme |
 | «Как ты усердна!» Скоро экзамен, база слабая — приходится. Как объяснить? | «Sen näme yhlasly!» Basym synag, esas gowşak — mejbur. Nädip düşündirmeli? | gönükme |
 | «Какая осенью погода в Пекине?» Не холодно и не жарко, комфортно. Как сказать? | «Pekinde güýzüň howasy nähili?» Ne sowuk, ne yssy, amatly. Nädip aýtmaly? | gönükme |
@@ -1514,7 +1514,7 @@
 | «Которая книга?» — вопрос, не ответ. | «Haýsy kitap?» — sorag, jogap däl. | gönükme |
 | «Кто есть в твоей семье?» В семье: папа, мама, старший брат. Как перечислить? | «Seniň maşgalaňda kim bar?» Maşgalada: kaka, eje, aga. Nädip sanamaly? | gönükme |
 | «Куда вечером?» В караоке. Предупреди «не задерживайтесь поздно». | «Agşam nirä?» Karaokä. «Aşa giç etmäň» diýip duýduryş ber. | gönükme |
-| «Куда завтра?» В музей, встретимся у общежития в 8:30. Как? | «Ertir nirä?» Muzeýe, ýatakhanada 8:30-da duşuşarys. Nädip? | gönükme |
+| «Куда завтра?» В музей, встретимся у общежития в 8:30. Как? | «Ertir nirä?» Muzeýe, umumy ýaşaýyş jaýynda 8:30-da duşuşarys. Nädip? | gönükme |
 | «Куда идёшь?» Идёшь в библиотеку за книгой. Как ответить? | «Nirä gidýärsiň?» Kitaphana kitap almaga gidýärsiň. Nädip jogap bermeli? | gönükme |
 | «Лекция — это 6 часов» — бессмыслица. | «Leksiýa — bu 6 sagat» — manysyz. | gönükme |
 | «Лепить пельмени хлопотно?» Да, особенно когда мало людей. Как? | «Pelmeni ýasamak kynçylyklymy?» Hawa, aýratyn hem adam az bolanda. Nädip? | gönükme |
@@ -1531,7 +1531,7 @@
 | «Моя специальность — международные отношения.» Схема: 我的 + X + 是 + Y. | «Meniň hünärim — halkara gatnaşyklar.» Gurluş: 我的 + X + 是 + Y. | gönükme |
 | «Мужской» — противоположный ответ. | «Erkek» — tersine jogap. | gönükme |
 | «Мужчине или женщине?» Женщине. Как кратко ответить? | «Erkege ýa-da aýala?» Aýala. Gysgaça nädip jogap bermeli? | gönükme |
-| «Мы завтра в 8:30 у ваших дверей общежития встретимся.»\n\n | «Biz ertir sagat 8:30-da siziň ýatakhanaňyzyň gapysynda duşuşarys.»\n\n | teoriýa |
+| «Мы завтра в 8:30 у ваших дверей общежития встретимся.»\n\n | «Biz ertir sagat 8:30-da siziň umumy ýaşaýyş jaýyňyzyň gapysynda duşuşarys.»\n\n | teoriýa |
 | «На Новый год едешь домой?» Да, родители просят. Как? | «Täze ýylda öýe gidýärsiňmi?» Hawa, kaka-eje haýyş edýär. Nädip? | gönükme |
 | «На выходных свободна?» Ты хочешь пригласить в университет на экскурсию. Как? | «Dynç günleri boşmuň?» Sen uniwersitete gezelenje çagyrmak isleýärsiň. Nädip? | gönükme |
 | «На каникулах в путешествие?» Ещё не решили, может на северо-восток. Как? | «Dynç alyşda syýahata gitjekmi?» Entek karar bermediler, belki demirgazyk-gündogara. Nädip? | gönükme |
@@ -1593,10 +1593,10 @@
 | «Нет, я канадец.» Отрицание через 不 + страна + 人. | «Ýok, men kanadaly.» Inkär 不 + ýurt + 人 arkaly. | gönükme |
 | «Никуда» — но ты идёшь. | «Hiç ýere» — emma sen barýarsyň. | gönükme |
 | «Ничего не хочу» — невежливо. | «Hiç zat islämok» — sylagsyz. | gönükme |
-| «Ничего страшного» — стандартный вежливый ответ. | «Hiç zat däl» — standart edepli jogap. | gönükme |
-| «Ничего страшного» — это ответ на извинение, а не на вопрос. | «Hiç zat däl» — bu bagyşlaýşa jogap, soraga däl. | gönükme |
+| «Ничего страшного» — стандартный вежливый ответ. | «Zyýany ýok.» — standart edepli jogap. | gönükme |
+| «Ничего страшного» — это ответ на извинение, а не на вопрос. | «Zyýany ýok.» — bu bagyşlaýşa jogap, soraga däl. | gönükme |
 | «Новый, дорогой» — противоречит сюжету. | «Täze, gymmat» — waka gapma-garşy. | gönükme |
-| «Общежитие смотрит ТВ» — бессмыслица. | «Ýatakhana telewizor görýär» — manysyz. | gönükme |
+| «Общежитие смотрит ТВ» — бессмыслица. | «Umumy ýaşaýyş jaýy telewizor görýär» — manysyz. | gönükme |
 | «Один буду лепить» — противоположно. | «Men ýeke ýasaryn» — tersine. | gönükme |
 | «Один...один...» — подчёркивает одиночество. | «Ýeke...ýeke...» — ýalňyzlygy nygtaýar. | gönükme |
 | «Он американский студент, а ты?» Ты тоже американский студент. Как ответить? | «Ol amerikaly talyp, a sen?» Sen hem amerikaly talyp. Nädip jogap bermeli? | gönükme |
@@ -1691,7 +1691,7 @@
 | «Чай — не сок» — не отвечает. | «Çaý — miwe suwy däl» — jogap bermeýär. | gönükme |
 | «Что будете — чай или сок?» Не хочешь выбирать, вежливо. Как? | «Näme içersiňiz — çaý ýa-da miwe suwy?» Saýlamak islemeýärsiň, sylagly. Nädip? | gönükme |
 | «Что в эти выходные?» Идёшь на концерт, зовёшь друга. Как? | «Bu dynç güni näme?» Konserte gidýärsiň, dostuňy çagyrýarsyň. Nädip? | gönükme |
-| «Что делаешь на выходных?» В общежитии смотришь ТВ, стираешь. Как сказать (с удвоением)? | «Dynç günleri näme edýärsiň?» Ýatakhanada telewizor görýärsiň, eşik ýuwýarsyň. Nädip aýtmaly (gaýtalama bilen)? | gönükme |
+| «Что делаешь на выходных?» В общежитии смотришь ТВ, стираешь. Как сказать (с удвоением)? | «Dynç günleri näme edýärsiň?» Umumy ýaşaýyş jaýynda telewizor görýärsiň, eşik ýuwýarsyň. Nädip aýtmaly (gaýtalama bilen)? | gönükme |
 | «Что делаешь?» Готовишь подарок на день рождения друга. Как сказать? | «Näme edýärsiň?» Dostuňyň doglan gününe sowgat taýýarlaýarsyň. Nädip aýtmaly? | gönükme |
 | «Что если произношение плохое?» Будет стыдно! Как выразить? | «Aýdylyş erbet bolsa näme?» Utanç bolar! Nädip aýtmaly? | gönükme |
 | «Что планируешь завтра?» Сначала в банк, потом в магазин. Как правильно? | «Ertir näme meýilleşdirýärsiň?» Ilki banka, soň dükana. Nädip dogry aýtmaly? | gönükme |
@@ -1719,7 +1719,7 @@
 | «Это моё» — говорит о принадлежности, а спрашивают о типе. | «Bu meniňki» — degişlilik hakda aýdýar, emma görnüş soralýar. | gönükme |
 | «Это твой велосипед?» Купила вчера, б/у, дешевле. Как объяснить? | «Bu seniň tigiriňmi?» Düýn satyn aldym, ulanylan, arzanrak. Nädip düşündirmeli? | gönükme |
 | «Это твой журнал?» Журнал твоего друга. Как правильно ответить? | «Bu seniň žurnalyňmy?» Žurnal dostuňky. Nädip dogry jogap bermeli? | gönükme |
-| «Это учебник китайского.» Определение + определяемое. | «Bu hytaý dili okuw kitaby.» Kesgitleme + kesgitlenýän. | gönükme |
+| «Это учебник китайского.» Определение + определяемое. | «Bu hytaý dili okuw kitaby.» Aýyklaýjy + aýyklanýan. | gönükme |
 | «Я американец» — не ответ на радость знакомства. | «Men amerikaly» — tanyşlyk şatlygyna jogap däl. | gönükme |
 | «Я в баре пью кофе». | «Men barda kofe içýärin». | gönükme |
 | «Я готовил подарок» — прошедшее, не продолженное. | «Men sowgat taýýarladym» — geçen zaman, dowamly däl. | gönükme |
@@ -1770,7 +1770,7 @@
 | «我是中国人。» Как встречно спросить «а ты?» | «我是中国人。» «a sen?» diýip nädip garşylykly soramaly? | gönükme |
 | «是» 字句 — Предложения с 是 | «是» 字句 — 是 bilen sözlemler | teoriýa |
 | «的» как заменитель существительного | «的» aty çalyşýan hökmünde | gönükme |
-| «的» после глагольной фразы как определение | «的» işlik jümlesinden soň kesgitleýji hökmünde | gönükme |
+| «的» после глагольной фразы как определение | «的» işlik jümlesinden soň aýyklaýjy hökmünde | gönükme |
 | А братьев и сестёр нет? | A aga-uýaň ýokmy? | teoriýa |
 | А в библиотеку не идёшь? | Kitaphana gitmeýärsiňmi? | teoriýa |
 | А в супермаркете разве нет замороженных? Если хочется — купи пакетик. | Supermarketde doňdurylan ýokmy näme? Iýesiň gelse — bir haltajyk satyn al. | teoriýa |
@@ -1875,7 +1875,7 @@
 | В Пекине много университетов — например, Бэйда и Цинхуа. | Pekinde köp uniwersitet bar, meselem Beýda, Çinhua. | teoriýa |
 | В Пекинском университете есть библиотека. | Pekin uniwersitetinde kitaphana bar. | teoriýa |
 | В Пекинском университете занятия в 8 утра — слишком рано! | Pekin uniwersitetinde sapaklar ertirine 8-de — aşa ir! | teoriýa |
-| В ТВ смотрю общежитие — 在电视看宿舍 | TW-de ýatakhana görýärin — 在电视看宿舍 | gönükme |
+| В ТВ смотрю общежитие — 在电视看宿舍 | TW-de umumy ýaşaýyş jaýyny görýärin — 在电视看宿舍 | gönükme |
 | В Харбине холодно — 哈尔滨很冷 | Harbinde sowuk — 哈尔滨很冷 | gönükme |
 | В банк и магазин (阿曼 и 张伟) | Banka we dükana (阿曼 we 张伟) | teoriýa |
 | В библиотеке читаю. | Kitaphanada okaýaryn. | gönükme |
@@ -1906,7 +1906,7 @@
 | В китайском много способов выразить степень качества:\n\n | Hytaýçada hiliň derejesini aňlatmagyň köp usuly bar:\n\n | teoriýa |
 | В китайском направления меняются парами: 这儿 здесь / 那儿 там / 哪儿 где. Обрати внимание на суффикс 儿 — он характерен для северного (пекинского) диалекта. | Hytaýçada ugur sözleri jübütlerde üýtgeýär: 这儿 şu ýerde / 那儿 ol ýerde / 哪儿 nirede. 儿 goşulmasyna üns ber — ol demirgazyk (Pekin) şiwesine mahsus. | teoriýa |
 | В китайском понятия «неделя»: 星期 (xīngqī) — стандартное, 周 (zhōu) — более формальное (周末 — выходные, 周一 — пн), 礼拜 (lǐbài) — разговорное. | Hytaýçada «hepde» düşünjesi: 星期 (xīngqī) — adaty, 周 (zhōu) — has resmi (周末 — dynç günleri, 周一 — duşenbe), 礼拜 (lǐbài) — gepleşik dilinde. | teoriýa |
-| В китайском прилагательное САМО является сказуемым — 是 НЕ нужно. ⏎  ⏎ ❌ 这个学校是小 ⏎ ✅ 这个学校很小。 ⏎  ⏎ Без наречия (很, 比较, 最...) звучит как сравнение. Поэтому 很 часто добавляют даже без значения «очень». | Hytaýçada sypat ÖZÜ habar bolýar — 是 GEREK DÄL. ⏎  ⏎ ❌ 这个学校是小 ⏎ ✅ 这个学校很小。 ⏎  ⏎ Hal-sözsüz (很, 比较, 最...) deňeşdirme ýaly eşidilýär. Şonuň üçin 很 «örän» manysyz-da köplenç goşulýar. | gönükme |
+| В китайском прилагательное САМО является сказуемым — 是 НЕ нужно. ⏎  ⏎ ❌ 这个学校是小 ⏎ ✅ 这个学校很小。 ⏎  ⏎ Без наречия (很, 比较, 最...) звучит как сравнение. Поэтому 很 часто добавляют даже без значения «очень». | Hytaýçada sypat ÖZÜ habar bolýar — 是 GEREK DÄL. ⏎  ⏎ ❌ 这个学校是小 ⏎ ✅ 这个学校很小。 ⏎  ⏎ Hal sözi bolmasa (很, 比较, 最...) deňeşdirme ýaly eşidilýär. Şonuň üçin 很 «örän» manysyz-da köplenç goşulýar. | gönükme |
 | В китайском прилагательное САМО является сказуемым — 是 НЕ нужно.\n\n | Hytaýçada sypat ÖZÜ habar bolýar — 是 GEREK DÄL.\n\n | teoriýa |
 | В китайском 比如 часто ставится в середину предложения как вводное слово. Также можно использовать 比如说 (bǐrúshuō) — более разговорно. | Hytaýçada 比如 köplenç sözlemiň ortasynda girizme söz hökmünde goýulýar. Şeýle hem 比如说 (bǐrúshuō) ulanylyp bilner — has gepleşik dilinde. | teoriýa |
 | В книжном (古丽 и продавец) | Kitap dükanynda (古丽 we satyjy) | teoriýa |
@@ -1915,11 +1915,11 @@
 | В нашей семье пятеро: дедушка, бабушка, папа, мама и я. | Biziň maşgalamyzda bäş adam: ata, mama, kaka, eje we men. | teoriýa |
 | В нашей семье четверо: папа, мама, старший брат и я. | Biziň maşgalamyzda dört adam: kaka, eje, aga we men. | teoriýa |
 | В нашем вузе студенты из разных стран — из США, Японии, Англии… | Biziň uniwersitetimizde dürli ýurtlardan talyplar bar — ABŞ-dan, Ýaponiýadan, Angliýadan… | teoriýa |
-| В общежитии смотрю ТВ — 在宿舍里看看电视 | Ýatakhanada TW görýärin — 在宿舍里看看电视 | gönükme |
-| В общежитии смотрю ТВ. | Ýatakhanada TW görýärin. | gönükme |
-| В общежитии смотрю телевизор. | Ýatakhanada telewizor görýärin. | teoriýa |
-| В общежитии смотрю телик, стираю вещи. | Ýatakhanada telewizora seredýärin, eşiklerimi ýuwýaryn. | teoriýa |
-| В общежитии смотрю телик, стираю, делаю уроки, высыпаюсь… | Ýatakhanada telewizora seredýärin, eşik ýuwýaryn, öý işimi edýärin, köpräk ýatýaryn… | teoriýa |
+| В общежитии смотрю ТВ — 在宿舍里看看电视 | Umumy ýaşaýyş jaýynda TW görýärin — 在宿舍里看看电视 | gönükme |
+| В общежитии смотрю ТВ. | Umumy ýaşaýyş jaýynda TW görýärin. | gönükme |
+| В общежитии смотрю телевизор. | Umumy ýaşaýyş jaýynda telewizor görýärin. | teoriýa |
+| В общежитии смотрю телик, стираю вещи. | Umumy ýaşaýyş jaýynda telewizora seredýärin, eşiklerimi ýuwýaryn. | teoriýa |
+| В общежитии смотрю телик, стираю, делаю уроки, высыпаюсь… | Umumy ýaşaýyş jaýynda telewizora seredýärin, eşik ýuwýaryn, öý işimi edýärin, köpräk ýatýaryn… | teoriýa |
 | В ответе можно просто 有 / 没有 без повторения объекта. | Jogapda obýekti gaýtalaman diňe 有 / 没有 diýip bolýar. | teoriýa |
 | В ответе на место 几 ставится конкретное число:\n | Jogapda 几-niň ýerine anyk san goýulýar:\n | teoriýa |
 | В ответе 是 можно опустить. | Jogapda 是-ni taşlap bolýar. | teoriýa |
@@ -1941,34 +1941,34 @@
 | В чём разница между 你有课吗 и 你有课吧? | 你有课吗 bilen 你有课吧 arasynda näme tapawut bar? | gönükme |
 | В чём разница 能 и 会? | 能 bilen 会-niň arasynda näme tapawut bar? | gönükme |
 | В школьном кинотеатре показывают фильм, пойдёшь? | Mekdebiň kinoteatrynda kinofilm görkezýärler, gidersiňmi? | teoriýa |
-| В этой главе вы научитесь говорить о болезнях, использовать глагол 能 («мочь, быть способным»), 最好 (лучше всего бы) и записывать даты по-китайски.\n\n | Bu bapda siz keseller hakda gürrüň bermegi, 能 işligini («bilmek, mümkin bolmak»), 最好 («etseň gowy bolar») we hytaýça sene ýazmagy öwrenersiňiz.\n\n | teoriýa |
-| В этой главе вы научитесь говорить о будущих событиях с помощью 快……了 / 要……了 («скоро X»), использовать 只好 («ничего не остаётся кроме как») и 可能 («возможно»).\n\n | Bu bapda siz 快……了 / 要……了 («basym X») arkaly geljek wakalar hakda gürrüň bermegi, 只好-ny («başga alaç ýok») we 可能-ni («belki») ulanmagy öwrenersiňiz.\n\n | teoriýa |
-| В этой главе вы научитесь говорить о планах на день (утром / днём / вечером), спрашивать о наличии чего-либо с помощью 有, использовать частицу 吧 для предположения и слова 上/下/里/外 как прилагательные.\n\n | Bu bapda siz günüň meýilnamalary hakda gürlemegi (säher / günortadan soň / agşam), 有 bilen bir zadyň barlygyny soramagy, çaklama üçin 吧 bölejigini we 上/下/里/外 sözlerini sypat hökmünde ulanmagy öwrenersiňiz.\n\n | teoriýa |
-| В этой главе вы научитесь говорить о погоде, сравнивать времена года и использовать прилагательные как сказуемое (без 是). Познакомитесь с вопросом 怎么样 («как?»), конструкцией 不А不B («ни A ни B — как раз») и наречием 比较.\n\n | Bu bapda siz howa hakda gürrüň bermegi, pasyllary deňeşdirmegi we sypatlary habar hökmünde (是-siz) ulanmagy öwrenersiňiz. 怎么样 sowaly («nähili?»), 不A不B gurluşy («ne A, ne B — edil ýerbe-ýer») we 比较 hal bilen tanyşarsyňyz.\n\n | teoriýa |
-| В этой главе вы научитесь говорить о привычках и времени привыкания, использовать частицу 了 для изменения состояния, различать 就 (раньше) и 才 (позже) и спрашивать возраст разными способами.\n\n | Bu bapda siz endikler we öwrenişme wagty hakda gürrüň bermegi, ýagdaý üýtgemesi üçin 了 bölejigini ulanmagy, 就 (irräk) bilen 才 (giç) tapawutlandyrmagy we ýaşy dürli usulda soramagy öwrenersiňiz.\n\n | teoriýa |
-| В этой главе вы научитесь говорить о том, что делаете прямо сейчас (настоящее продолженное время), называть дни недели и использовать выражения «от... до...» (从……到……). Также познакомитесь со словом 每 («каждый»).\n\n | Bu bapda siz edil häzir edýän işiňiz hakda gürrüň bermegi (häzirki dowamly zaman), hepdäniň günlerini atlandyrmagy we «-den... çenli» (从……到……) aňlatmalaryny ulanmagy öwrenersiňiz. Şeýle hem 每 («her») sözi bilen tanyşarsyňyz.\n\n | teoriýa |
-| В этой главе вы научитесь делать покупки в магазине: спрашивать цену, считать деньги в юанях, использовать счётные слова (瓶, 本) и различать 二 / 两 (два).\n\n | Bu bapda siz dükanda söwda etmegi öwrenersiňiz: bahany soramagy, ýuanda pul sanamagy, ölçeg sözlerini (瓶, 本) ulanmagy we 二 / 两 (iki) tapawutlandyrmagy.\n\n | teoriýa |
+| В этой главе вы научитесь говорить о болезнях, использовать глагол 能 («мочь, быть способным»), 最好 (лучше всего бы) и записывать даты по-китайски.\n\n | Bu bapda sen keseller hakda gürrüň bermegi, 能 işligini («bilmek, mümkin bolmak»), 最好 («etseň gowy bolar») we hytaýça sene ýazmagy öwrenersiň.\n\n | teoriýa |
+| В этой главе вы научитесь говорить о будущих событиях с помощью 快……了 / 要……了 («скоро X»), использовать 只好 («ничего не остаётся кроме как») и 可能 («возможно»).\n\n | Bu bapda sen 快……了 / 要……了 («basym X») arkaly geljek wakalar hakda gürrüň bermegi, 只好-ny («başga alaç ýok») we 可能-ni («belki») ulanmagy öwrenersiň.\n\n | teoriýa |
+| В этой главе вы научитесь говорить о планах на день (утром / днём / вечером), спрашивать о наличии чего-либо с помощью 有, использовать частицу 吧 для предположения и слова 上/下/里/外 как прилагательные.\n\n | Bu bapda sen günüň meýilnamalary hakda gürlemegi (säher / günortadan soň / agşam), 有 bilen bir zadyň barlygyny soramagy, çaklama üçin 吧 bölejigini we 上/下/里/外 sözlerini sypat hökmünde ulanmagy öwrenersiň.\n\n | teoriýa |
+| В этой главе вы научитесь говорить о погоде, сравнивать времена года и использовать прилагательные как сказуемое (без 是). Познакомитесь с вопросом 怎么样 («как?»), конструкцией 不А不B («ни A ни B — как раз») и наречием 比较.\n\n | Bu bapda sen howa hakda gürrüň bermegi, pasyllary deňeşdirmegi we sypatlary habar hökmünde (是-siz) ulanmagy öwrenersiň. 怎么样 sowaly («nähili?»), 不A不B gurluşy («ne A, ne B — edil ýerbe-ýer») we 比较 haly bilen tanyşarsyň.\n\n | teoriýa |
+| В этой главе вы научитесь говорить о привычках и времени привыкания, использовать частицу 了 для изменения состояния, различать 就 (раньше) и 才 (позже) и спрашивать возраст разными способами.\n\n | Bu bapda sen endikler we öwrenişme wagty hakda gürrüň bermegi, ýagdaý üýtgemesi üçin 了 bölejigini ulanmagy, 就 (irräk) bilen 才 (giç) tapawutlandyrmagy we ýaşy dürli usulda soramagy öwrenersiň.\n\n | teoriýa |
+| В этой главе вы научитесь говорить о том, что делаете прямо сейчас (настоящее продолженное время), называть дни недели и использовать выражения «от... до...» (从……到……). Также познакомитесь со словом 每 («каждый»).\n\n | Bu bapda sen edil häzir edýän işiňiz hakda gürrüň bermegi (häzirki dowamly zaman), hepdäniň günlerini atlandyrmagy we «-den... çenli» (从……到……) aňlatmalaryny ulanmagy öwrenersiň. Şeýle hem 每 («her») sözi bilen tanyşarsyň.\n\n | teoriýa |
+| В этой главе вы научитесь делать покупки в магазине: спрашивать цену, считать деньги в юанях, использовать счётные слова (瓶, 本) и различать 二 / 两 (два).\n\n | Bu bapda sen dükanda söwda etmegi öwrenersiň: bahany soramagy, ýuanda pul sanamagy, ölçeg sözlerini (瓶, 本) ulanmagy we 二 / 两 (iki) tapawutlandyrmagy.\n\n | teoriýa |
 | В этой главе вы научитесь здороваться, представляться и вести простейший разговор по-китайски. Главное грамматическое правило — предложения с глаголом 是 (shì — быть) и вопросы с частицей 吗 (ma).\n\n | Bu bapda sen hytaý dilinde salamlaşmagy, öz-özüňi tanyşdyrmagy we iň ýönekeý söhbetdeşlik geçirmegi öwrenersiň. Esasy grammatika düzgüni — 是 (shì — bolmak) işlikli sözlemler we 吗 (ma) bölejigi bilen soraglar.\n\n | teoriýa |
-| В этой главе вы научитесь идти в гости: приветствовать хозяев, дарить подарок, говорить вежливые клише. Познакомитесь с глаголом 会 («уметь»), эмфатическим 就是 и другими правилами этикета.\n\n | Bu bapda siz myhmançylyga barmagy öwrenersiňiz: öý eýelerini salamlamak, sowgat bermek, sylagly klişeler aýtmak. 会 («başarmak») işligi, nygtaýjy 就是 we beýleki etiket kadalary bilen tanyşarsyňyz.\n\n | teoriýa |
-| В этой главе вы научитесь использовать повелительные предложения («давай!»), риторический вопрос 我+V+什么 («зачем мне X?»), частицу 了 (4) для последовательности действий и порядок Время + Место перед глаголом.\n\n | Bu bapda siz buýruk sözlemlerini («geliň!»), ritorik sorag 我+V+什么-ni («maňa näme üçin X?»), 了 (4) bölejigini hereketleriň yzygiderligi üçin we Wagt + Ýer tertibini işlikden öň ulanmagy öwrenersiňiz.\n\n | teoriýa |
-| В этой главе вы научитесь использовать результативные глаголы (V+好了, V+完了), счётные слова для билетов (张) и говорить о путешествиях на поезде.\n\n | Bu bapda siz netijeli işlikleri (V+好了, V+完了) ulanmagy, biletler üçin ölçeg sözi (张) we otly bilen syýahat hakda gürrüň bermegi öwrenersiňiz.\n\n | teoriýa |
-| В этой главе вы научитесь использовать 又 (снова, повторение), частицу 了 (2) с числами (V+了+кол-во+O) и 好像 («кажется»). Тема — китайская культура гостеприимства и алкоголь.\n\n | Bu bapda siz 又-ni (ýene, gaýtalama), 了 bölejiginiň (2) sanlar bilen ulanylyşyny (V+了+mukdar+O) we 好像-ni («öýdýän») ulanmagy öwrenersiňiz. Mowzuk — hytaý myhmansöýerlik medeniýeti we alkogol.\n\n | teoriýa |
-| В этой главе вы научитесь использовать 极了 (крайняя степень), разницу 想 и 要, счётные слова для действий (趟, 次) и говорить о планах на каникулы.\n\n | Bu bapda siz 极了-ni (iň ýokary dereje), 想 bilen 要-niň tapawudyny, hereketler üçin ölçeg sözlerini (趟, 次) ulanmagy we dynç alyş meýilnamalary hakda gürrüň bermegi öwrenersiňiz.\n\n | teoriýa |
-| В этой главе вы научитесь называть время (часы и минуты), считать до 100 и задавать вопросы о времени с помощью 几 (сколько). Также познакомитесь с конструкцией 太……了 («слишком») и выражением 一会儿见 («до скорого»).\n\n | Bu bapda siz wagty aýtmagy (sagat we minut), 100-e çenli sanamagy we 几 (näçe) bilen wagt hakda sorag bermegi öwrenersiňiz. Şeýle hem 太……了 («aşa») gurluşy we 一会儿见 («görüşýänçäk») aňlatmasy bilen tanşarsyňyz.\n\n | teoriýa |
-| В этой главе вы научитесь называть номер телефона, комнаты, маршрут автобуса, спрашивать «как добраться?» и предлагать «давай...» через частицу 吧. Также познакомитесь с разницей 几 / 多少.\n\n | Bu bapda siz telefon, otag, awtobus ugrunyň belgisini aýtmagy, «nädip barmaly?» diýip soramagy we 吧 bölejigi arkaly «geliň...» diýip teklip etmegi öwrenersiňiz. Şeýle hem 几 / 多少 tapawudy bilen tanşarsyňyz.\n\n | teoriýa |
-| В этой главе вы научитесь описывать вещи (одежду, транспорт) по цвету, размеру, качеству. Познакомитесь с наречием 挺 («довольно»), выражением 有(一)点儿 («немного, чуть-чуть») и конструкцией «X的» (заменитель существительного).\n\n | Bu bapda siz zatlary (eşikleri, ulaglary) reňki, ölçegi, hili boýunça beýan etmegi öwrenersiňiz. 挺 («birneme») hal, 有(一)点儿 («azajyk, birneme») aňlatmasy we «X的» gurluşy (aty çalyşýan) bilen tanyşarsyňyz.\n\n | teoriýa |
-| В этой главе вы научитесь оценивать как выполнено действие (V+得+прил.), различать 都 как «все» и «уже», использовать 也许 («может быть»), 为什么 («почему») и 够 («достаточно»).\n\n | Bu bapda siz hereketiň nähili ýerine ýetirilendigini bahalandyrmagy (V+得+sypat), 都-ni «hemmesi» we «eýýäm» hökmünde tapawutlandyrmagy, 也许-ni («belki»), 为什么-ni («näme üçin») we 够-ni («ýeterlik») ulanmagy öwrenersiňiz.\n\n | teoriýa |
-| В этой главе вы научитесь рассказывать о своих выходных и досуге, использовать удвоение глаголов (для мягкости речи), конструкцию 太……了 и обстоятельство места 在+место перед глаголом.\n\n | Bu bapda siz öz dynç günleriňiz we boş wagtyňyz hakda gürrüň bermegi, işlikleriň gaýtalanmagyny (gepleşigi ýumşatmak üçin), 太……了 gurluşyny we ýer halyny (在+ýer işlikden öň) ulanmagy öwrenersiňiz.\n\n | teoriýa |
+| В этой главе вы научитесь идти в гости: приветствовать хозяев, дарить подарок, говорить вежливые клише. Познакомитесь с глаголом 会 («уметь»), эмфатическим 就是 и другими правилами этикета.\n\n | Bu bapda sen myhmançylyga barmagy öwrenersiň: öý eýelerini salamlamak, sowgat bermek, sylagly klişeler aýtmak. 会 («başarmak») işligi, nygtaýjy 就是 we beýleki etiket kadalary bilen tanyşarsyň.\n\n | teoriýa |
+| В этой главе вы научитесь использовать повелительные предложения («давай!»), риторический вопрос 我+V+什么 («зачем мне X?»), частицу 了 (4) для последовательности действий и порядок Время + Место перед глаголом.\n\n | Bu bapda sen buýruk sözlemlerini («geliň!»), ritorik sorag 我+V+什么-ni («maňa näme üçin X?»), 了 (4) bölejigini hereketleriň yzygiderligi üçin we Wagt + Ýer tertibini işlikden öň ulanmagy öwrenersiň.\n\n | teoriýa |
+| В этой главе вы научитесь использовать результативные глаголы (V+好了, V+完了), счётные слова для билетов (张) и говорить о путешествиях на поезде.\n\n | Bu bapda sen netijeli işlikleri (V+好了, V+完了) ulanmagy, biletler üçin ölçeg sözi (张) we otly bilen syýahat hakda gürrüň bermegi öwrenersiň.\n\n | teoriýa |
+| В этой главе вы научитесь использовать 又 (снова, повторение), частицу 了 (2) с числами (V+了+кол-во+O) и 好像 («кажется»). Тема — китайская культура гостеприимства и алкоголь.\n\n | Bu bapda sen 又-ni (ýene, gaýtalama), 了 bölejiginiň (2) sanlar bilen ulanylyşyny (V+了+mukdar+O) we 好像-ni («öýdýän») ulanmagy öwrenersiň. Mowzuk — hytaý myhmansöýerlik medeniýeti we alkogol.\n\n | teoriýa |
+| В этой главе вы научитесь использовать 极了 (крайняя степень), разницу 想 и 要, счётные слова для действий (趟, 次) и говорить о планах на каникулы.\n\n | Bu bapda sen 极了-ni (iň ýokary dereje), 想 bilen 要-niň tapawudyny, hereketler üçin ölçeg sözlerini (趟, 次) ulanmagy we dynç alyş meýilnamalary hakda gürrüň bermegi öwrenersiň.\n\n | teoriýa |
+| В этой главе вы научитесь называть время (часы и минуты), считать до 100 и задавать вопросы о времени с помощью 几 (сколько). Также познакомитесь с конструкцией 太……了 («слишком») и выражением 一会儿见 («до скорого»).\n\n | Bu bapda sen wagty aýtmagy (sagat we minut), 100-e çenli sanamagy we 几 (näçe) bilen wagt hakda sorag bermegi öwrenersiň. Şeýle hem 太……了 («aşa») gurluşy we 一会儿见 («görüşýänçäk») aňlatmasy bilen tanşarsyň.\n\n | teoriýa |
+| В этой главе вы научитесь называть номер телефона, комнаты, маршрут автобуса, спрашивать «как добраться?» и предлагать «давай...» через частицу 吧. Также познакомитесь с разницей 几 / 多少.\n\n | Bu bapda sen telefon, otag, awtobus ugrunyň belgisini aýtmagy, «nädip barmaly?» diýip soramagy we 吧 bölejigi arkaly «geliň...» diýip teklip etmegi öwrenersiň. Şeýle hem 几 / 多少 tapawudy bilen tanşarsyň.\n\n | teoriýa |
+| В этой главе вы научитесь описывать вещи (одежду, транспорт) по цвету, размеру, качеству. Познакомитесь с наречием 挺 («довольно»), выражением 有(一)点儿 («немного, чуть-чуть») и конструкцией «X的» (заменитель существительного).\n\n | Bu bapda sen zatlary (eşikleri, ulaglary) reňki, ölçegi, hili boýunça beýan etmegi öwrenersiň. 挺 («birneme») haly, 有(一)点儿 («azajyk, birneme») aňlatmasy we «X的» gurluşy (aty çalyşýan) bilen tanyşarsyň.\n\n | teoriýa |
+| В этой главе вы научитесь оценивать как выполнено действие (V+得+прил.), различать 都 как «все» и «уже», использовать 也许 («может быть»), 为什么 («почему») и 够 («достаточно»).\n\n | Bu bapda sen hereketiň nähili ýerine ýetirilendigini bahalandyrmagy (V+得+sypat), 都-ni «hemmesi» we «eýýäm» hökmünde tapawutlandyrmagy, 也许-ni («belki»), 为什么-ni («näme üçin») we 够-ni («ýeterlik») ulanmagy öwrenersiň.\n\n | teoriýa |
+| В этой главе вы научитесь рассказывать о своих выходных и досуге, использовать удвоение глаголов (для мягкости речи), конструкцию 太……了 и обстоятельство места 在+место перед глаголом.\n\n | Bu bapda sen öz dynç günleriň we boş wagtyň hakda gürrüň bermegi, işlikleriň gaýtalanmagyny (gepleşigi ýumşatmak üçin), 太……了 gurluşyny we ýer halyny (在+ýer işlikden öň) ulanmagy öwrenersiň.\n\n | teoriýa |
 | В этой главе вы научитесь рассказывать откуда вы и спрашивать национальность собеседника. Познакомитесь с суффиксом множественного числа 们, наречием 也 («тоже») и вопросительной частицей 呢 (для коротких встречных вопросов).\n\n | Bu bapda sen nireden bolýandygyňy gürrüň bermegi we söhbetdeşiňiň milletini soramagy öwrenersiň. Köplük san goşulmasy 们, «hem» manysyndaky 也 hal we gysga garşylykly soraglar üçin 呢 sorag bölejigi bilen tanşarsyň.\n\n | teoriýa |
-| В этой главе вы научитесь составлять предложения с несколькими глаголами подряд (идти + делать), использовать связку 先……然后 («сначала… потом»), альтернативный вопрос через 不 (贵不贵?) и отличать 咱们 от 我们.\n\n | Bu bapda siz yzly-yzyna birnäçe işlik bilen sözlem gurmagy (gitmek + etmek), 先……然后 («ilki... soň») baglaýjysyny, 不 arkaly alternatiw sorag (贵不贵?) we 咱们-i 我们-den tapawutlandyrmagy öwrenersiňiz.\n\n | teoriýa |
-| В этой главе вы научитесь спрашивать где что находится и описывать местоположение. Познакомитесь с глаголом 在 (zài — находиться), вопросительным словом 哪儿 (где) и словами направления: 东/西/南/北/左/右 + 边.\n\n | Bu bapda siz bir zadyň nirede ýerleşýändigini soramagy we ýerleşişini beýan etmegi öwrenersiňiz. 在 (zài — ýerleşmek) işligi, 哪儿 (nirede) sorag sözi we ugur sözleri bilen tanşarsyňyz: 东/西/南/北/左/右 + 边.\n\n | teoriýa |
-| В этой главе вы научитесь спрашивать про длительность (V + 了 + время), использовать 大概 (примерно), отличать действия внезапные (了) от длящихся.\n\n | Bu bapda siz dowamlylyk hakda soramagy (V + 了 + wagt), 大概-ni (takmynan) ulanmagy, duýdansyz hereketleri (了) uzak dowam edýänlerden tapawutlandyrmagy öwrenersiňiz.\n\n | teoriýa |
-| В этой главе вы научитесь указывать на предметы («это», «то»), задавать вопросы со словами 谁 (кто) и 什么 (что), а также использовать частицу 的 для обозначения принадлежности («чей?», «моя книга»).\n\n | Bu bapda siz zatlary görkezmegi («bu», «ol»), 谁 (kim) we 什么 (näme) sözleri bilen sorag bermegi, şeýle-de degişliligi görkezmek üçin 的 bölejigini ulanmagy öwrenersiňiz («kimiň?», «meniň kitabym»).\n\n | teoriýa |
+| В этой главе вы научитесь составлять предложения с несколькими глаголами подряд (идти + делать), использовать связку 先……然后 («сначала… потом»), альтернативный вопрос через 不 (贵不贵?) и отличать 咱们 от 我们.\n\n | Bu bapda sen yzly-yzyna birnäçe işlik bilen sözlem gurmagy (gitmek + etmek), 先……然后 («ilki... soň») baglaýjysyny, 不 arkaly alternatiw sorag (贵不贵?) we 咱们-i 我们-den tapawutlandyrmagy öwrenersiň.\n\n | teoriýa |
+| В этой главе вы научитесь спрашивать где что находится и описывать местоположение. Познакомитесь с глаголом 在 (zài — находиться), вопросительным словом 哪儿 (где) и словами направления: 东/西/南/北/左/右 + 边.\n\n | Bu bapda sen bir zadyň nirede ýerleşýändigini soramagy we ýerleşişini beýan etmegi öwrenersiň. 在 (zài — ýerleşmek) işligi, 哪儿 (nirede) sorag sözi we ugur sözleri bilen tanşarsyň: 东/西/南/北/左/右 + 边.\n\n | teoriýa |
+| В этой главе вы научитесь спрашивать про длительность (V + 了 + время), использовать 大概 (примерно), отличать действия внезапные (了) от длящихся.\n\n | Bu bapda sen dowamlylyk hakda soramagy (V + 了 + wagt), 大概-ni (takmynan) ulanmagy, duýdansyz hereketleri (了) uzak dowam edýänlerden tapawutlandyrmagy öwrenersiň.\n\n | teoriýa |
+| В этой главе вы научитесь указывать на предметы («это», «то»), задавать вопросы со словами 谁 (кто) и 什么 (что), а также использовать частицу 的 для обозначения принадлежности («чей?», «моя книга»).\n\n | Bu bapda sen zatlary görkezmegi («bu», «ol»), 谁 (kim) we 什么 (näme) sözleri bilen sorag bermegi, şeýle-de degişliligi görkezmek üçin 的 bölejigini ulanmagy öwrenersiň («kimiň?», «meniň kitabym»).\n\n | teoriýa |
 | ВНИМАНИЕ — обратный порядок в русском:\n | ÜNS BER — rusçada tertip ters:\n | teoriýa |
 | Важно не перепутать — для ребёнка 多大 звучит странно, а для старика 几岁 — грубо. | Bulaşdyrmazlyk möhüm — çaga üçin 多大 geň eşidilýär, garry üçin bolsa 几岁 gödek. | teoriýa |
 | Важно не путать с 或者 (huòzhě — «или»), которое используется в УТВЕРЖДЕНИЯХ:\n | Möhüm: 或者 (huòzhě — «ýa-da») bilen bulaşdyrma, ol AÝDYŇLARDA ulanylýar:\n | teoriýa |
 | Важно: НЕ путать с (一)点儿 (без 有) после глагола — это «немного» без негативного оттенка.\n\n | Möhüm: işlikden soň gelýän (一)点儿 (有-siz) bilen bulaşdyrma — bu ýaramaz öwüşginsiz «azajyk».\n\n | teoriýa |
-| Важно: без наречия (很, 比较, 挺, 太…) прилагательное звучит как сравнение:\n | Möhüm: halsyz (很, 比较, 挺, 太…) sypat deňeşdirme ýaly eşidilýär:\n | teoriýa |
+| Важно: без наречия (很, 比较, 挺, 太…) прилагательное звучит как сравнение:\n | Möhüm: hal sözi bolmasa (很, 比较, 挺, 太…) sypat deňeşdirme ýaly eşidilýär:\n | teoriýa |
 | Важно: порядок ОБРАТНЫЙ русскому. Сначала говорится условие/время, потом основное действие.\n\n | Möhüm: tertip rusçanyň TERSINE. Ilki şert/wagt aýdylýar, soň esasy hereket.\n\n | teoriýa |
 | Важно: с вопросительными словами (哪儿, 谁, 什么) НЕ используется 吗.\n | Möhüm: sorag sözleri bilen (哪儿, 谁, 什么) 吗 ULANYLMAÝAR.\n | teoriýa |
 | Важно: с этой формой 吗 НЕ используется!\n | Möhüm: bu görnüşde 吗 ULANYLMAÝAR!\n | teoriýa |
@@ -2082,7 +2082,7 @@
 | Вставь пропущенное слово: «Делать начинку — нужно много времени.» | Ýetmeýän sözi goý: «Içlik etmek — köp wagt sarp etmeli.» | gönükme |
 | Вставь пропущенное слово: «Если хочешь есть — купи пакетик.» | Ýetmeýän sözi goý: «Eger iýesiň gelse — bir haltajyk satyn al.» | gönükme |
 | Вставь пропущенное слово: «Ещё не решил, возможно, на северо-восток.» | Ýetmeýän sözi goý: «Entek karar bermedim, belki demirgazyk-gündogara.» | gönükme |
-| Вставь пропущенное слово: «Завтра в 8:30 встретимся у вашего общежития.» | Ýetmeýän sözi goý: «Ertir sagat 8:30-da ýatakhananyň gapysynda duşuşarys.» | gönükme |
+| Вставь пропущенное слово: «Завтра в 8:30 встретимся у вашего общежития.» | Ýetmeýän sözi goý: «Ertir sagat 8:30-da umumy ýaşaýyş jaýynyň gapysynda duşuşarys.» | gönükme |
 | Вставь пропущенное слово: «Завтра днём у меня нет занятий, утром есть.» | Ýetmeýän sözi goý: «Ertir günortadan soň meniň sapagym ýok, günortadan öň bar.» | gönükme |
 | Вставь пропущенное слово: «Завтра пары, надо рано встать.» | Ýetmeýän sözi goý: «Ertir sapak bar, irräk turmaly.» | gönükme |
 | Вставь пропущенное слово: «Завтра снова выходные, я так рад!» | Ýetmeýän sözi goý: «Ertir ýene dynç güni, men örän şat!» | gönükme |
@@ -2172,11 +2172,11 @@
 | Вставь пропущенное слово: «Я студент, а ты?» | Ýetmeýän sözi goý: «Men talyp, a sen?» | gönükme |
 | Вставь пропущенное слово: «Я умею лепить пельмени.» | Ýetmeýän sözi goý: «Men pelmeni ýasap bilýärin.» | gönükme |
 | Вставь пропущенное слово: «Я умею тайцзи.» | Ýetmeýän sözi goý: «Men taýszi başarýaryn.» | gönükme |
-| Вставь счётное слово: «Мне нужен маленький словарь.» | Sanaýyş sözüni goý: «Maňa kiçi sözlük gerek.» | gönükme |
-| Вставь счётное слово: «Сколько человек в твоей семье?» | Sanaýyş sözüni goý: «Seniň maşgalaňda näçe adam bar?» | gönükme |
-| Вставь счётное слово: «У нас дома одна собака.» | Sanaýyş sözüni goý: «Biziň öýümizde bir it bar.» | gönükme |
+| Вставь счётное слово: «Мне нужен маленький словарь.» | Ölçeg sözüni goý: «Maňa kiçi sözlük gerek.» | gönükme |
+| Вставь счётное слово: «Сколько человек в твоей семье?» | Ölçeg sözüni goý: «Seniň maşgalaňda näçe adam bar?» | gönükme |
+| Вставь счётное слово: «У нас дома одна собака.» | Ölçeg sözüni goý: «Biziň öýümizde bir it bar.» | gönükme |
 | Вставь частицу вопроса: «Ты учитель ___?» | Sorag bölejigini goý: «Sen mugallym ___?» | gönükme |
-| Встретимся завтра в 8:30 у входа в общежитие. | Ertir sagat 8:30-da ýatakhananyň gapysynda duşuşarys. | teoriýa |
+| Встретимся завтра в 8:30 у входа в общежитие. | Ertir sagat 8:30-da umumy ýaşaýyş jaýynyň gapysynda duşuşarys. | teoriýa |
 | Встречный вопрос «а ты?» | Garşylykly sorag «a sen?» | gönükme |
 | Встречный вопрос, а не ответ. | Garşylykly sorag, jogap däl. | gönükme |
 | Вторая форма 了 — срaзу после глагола, когда речь о ЗАВЕРШЁННОМ действии с КОНКРЕТНЫМ количеством. ⏎  ⏎ Схема: V + 了 + [число+сч.слово] + Объект ⏎  ⏎ 我喝了半斤白酒。— Выпил полцзиня. ⏎ 他们吃了十个饺子。— Съели 10 пельменей. ⏎ 妹妹买了一件衣服。— Сестра купила одну вещь. | 了-niň ikinji görnüşi — işlikden EDIL SOŇ, KONKRET mukdar bilen TAMAMLANAN hereket barada. ⏎  ⏎ Gurluş: V + 了 + [san+ölçeg sözi] + Obýekt ⏎  ⏎ 我喝了半斤白酒。— Ýarym jin içdim. ⏎ 他们吃了十个饺子。— 10 pelmeni iýdiler. ⏎ 妹妹买了一件衣服。— Uýam bir zat satyn aldy. | gönükme |
@@ -2309,7 +2309,7 @@
 | Для номеров (телефона, дома, автобуса) ВСЕГДА 多少. | Belgiler üçin (telefon, öý, awtobus) HEMIŞE 多少. | teoriýa |
 | Для описания последовательности действий используется пара 先 (сначала) — 然后 (потом).\n\n | Hereketleriň yzygiderligini beýan etmek üçin 先 (ilki) — 然后 (soň) jübüti ulanylýar.\n\n | teoriýa |
 | Для списка используется 还有 (и ещё). | Sanaw üçin 还有 (ýene bar) ulanylýar. | gönükme |
-| Дни недели строятся по схеме: 星期 + число (1-6) или 天/日.\n\n | Hepdäniň günleri şu shema boýunça gurulýar: 星期 + san (1-6) ýa-da 天/日.\n\n | teoriýa |
+| Дни недели строятся по схеме: 星期 + число (1-6) или 天/日.\n\n | Hepdäniň günleri şu gurluş boýunça gurulýar: 星期 + san (1-6) ýa-da 天/日.\n\n | teoriýa |
 | Дни рождения, праздники, гости — обычно лепят пельмени. | Doglan günler, baýramlar, myhmanlar — adatça pelmeni ýasalýar. | teoriýa |
 | До завтра! | Ertire çenli! | teoriýa |
 | До скорого. | Görüşýänçäk. | gönükme |
@@ -2329,7 +2329,7 @@
 | Его, кажется, нет дома. | Ol öýdýän öýde ýok. | gönükme |
 | Ему надо учиться. | Oňa okamaly. | gönükme |
 | Если есть время — 如果有时间 | Eger wagt bar bolsa — 如果有时间 | gönükme |
-| Если есть объект, схема усложняется:\n | Eger obýekt bar bolsa, shema çylşyrymlaşýar:\n | teoriýa |
+| Если есть объект, схема усложняется:\n | Eger obýekt bar bolsa, gurluş çylşyrymlaşýar:\n | teoriýa |
 | Если ехать на метро — быстрее и дешевле. | Eger metro bilen gitseň — has çalt we has arzan. | teoriýa |
 | Если народная известная — слова все знают, всё будет ок. | Eger belli halk aýdymy bolsa, olar sözlerini gowy bilýändir, kynçylyk bolmaz. | teoriýa |
 | Если нет планов — схожу. | Eger meýilnamam bolmasa, giderin. | gönükme, teoriýa |
@@ -2341,7 +2341,7 @@
 | Есть и другие значения 会 (возможность, вероятность) — их изучим позже. Пока — только «уметь». | 会-niň başga manylary hem bar (mümkinçilik, ähtimallyk) — olary soň öwreneris. Häzirlikçe — diňe «başarmak». | teoriýa |
 | Есть собака — 有一条狗 | It bar — 有一条狗 | gönükme |
 | Есть — чёрные, синие, серые, жёлтые. Какой цвет тебе нравится? | Bar — garasy, gögi, çaly, sarysy bar. Saňa haýsy reňk ýarýar? | teoriýa |
-| Есть, мы в 10 уже вернёмся в общежитие. | Bar, biz 10-da ýatakhana gaýdyp geleris. | teoriýa |
+| Есть, мы в 10 уже вернёмся в общежитие. | Bar, biz 10-da umumy ýaşaýyş jaýyna gaýdyp geleris. | teoriýa |
 | Есть. А что? | Bar. Näme boldy? | teoriýa |
 | Ешь один, спишь один, играешь один — скукотища. | Ýeke iýýärsiň, ýeke ýatýarsyň, ýeke oýnaýarsyň — örän gyzyksyz. | teoriýa |
 | Ещё не решил, возможно поеду на северо-восток. | Entek karar bermedim, belki demirgazyk-gündogara giderin. | gönükme |
@@ -2356,7 +2356,7 @@
 | Женщине. | Aýala. | teoriýa |
 | Завтра + быть + мой + друг + 的 + день рождения. | Ertir + bolmak + meniň + dostum + 的 + doglan gün. | gönükme |
 | Завтра в 8 занятия, нужно встать в 7. | Ertir sagat 8-de sapak bar, maňa 7-de turmaly. | teoriýa |
-| Завтра в 8:30 у вашего общежития встретимся. | Ertir sagat 8:30-da ýatakhananyňyzda duşuşarys. | gönükme |
+| Завтра в 8:30 у вашего общежития встретимся. | Ertir sagat 8:30-da umumy ýaşaýyş jaýyňyzda duşuşarys. | gönükme |
 | Завтра воскресенье, пойдём в бар. | Ertir ýekşenbe, bara gideliň. | teoriýa |
 | Завтра день рождения моего друга — 明天是我朋友的生日 | Ertir meniň dostumyň doglan güni — 明天是我朋友的生日 | gönükme |
 | Завтра день рождения моего друга. | Ertir meniň dostumyň doglan güni. | gönükme |
@@ -2424,7 +2424,7 @@
 | Итого 9.40 — 一共九块四毛钱 | Jemi 9.40 — 一共九块四毛钱 | gönükme |
 | Итого шесть человек. | Jemi alty adam. | teoriýa |
 | Итого шесть человек? | Jemi alty adammy? | teoriýa |
-| Итоговая глава Unit 5. Вы повторите все модальные глаголы (会/能/要/得/应该) и познакомитесь с 别 + V (отрицание для «не надо»).\n\n | Unit 5-iň jemleýji baby. Siz ähli modal işlikleri (会/能/要/得/应该) gaýtalarsyňyz we 别 + V (inkär «gerek däl») bilen tanyşarsyňyz.\n\n | teoriýa |
+| Итоговая глава Unit 5. Вы повторите все модальные глаголы (会/能/要/得/应该) и познакомитесь с 别 + V (отрицание для «не надо»).\n\n | Unit 5-iň jemleýji baby. Sen ähli modal işlikleri (会/能/要/得/应该) gaýtalarsyň we 别 + V (inkär «gerek däl») bilen tanyşarsyň.\n\n | teoriýa |
 | Итоговая сумма: 9 юаней 4 мао = 9.40. | Jemi mukdar: 9 ýuan 4 mao = 9.40. | gönükme |
 | К востоку от Бэйда — Цинхуа. | Beýdanyň gündogarynda Çinhua. | gönükme |
 | К востоку от Бэйда — как раз Цинхуа. | Beýdanyň gündogarynda edil Çinhua bar. | teoriýa |
@@ -2719,11 +2719,11 @@
 | Не очень, забыла как пишутся два слова, и один вопрос не успела. | Onçakly gowy däl, iki täze sözüň nähili ýazylýandygyny unutdym, ýene bir tabşyrygy hem ýetişmedim. | teoriýa |
 | Не очень, попробуем! | Onçakly başarmok, synanyşalyň! | teoriýa |
 | Не по теме. | Mowzuga degişli däl. | gönükme |
-| Не пойду. У Сяомэй 23-летие — у нас в общаге вечеринка. | Barmaýaryn. Şu gün Sýaomeýniň 23 ýaşy dolýar — ýatakhanamyzda toý bar. | teoriýa |
+| Не пойду. У Сяомэй 23-летие — у нас в общаге вечеринка. | Barmaýaryn. Şu gün Sýaomeýniň 23 ýaşy dolýar — umumy ýaşaýyş jaýymyzda toý bar. | teoriýa |
 | Не рад — 不高兴 | Şat däl — 不高兴 | gönükme |
 | Не сдал — 没考 | Tabşyrmadym — 没考 | gönükme |
 | Не совсем, в автобусе было тесновато. | Onçakly rahat däldi, awtobusda azajyk gysykdy. | teoriýa |
-| Не спрашивай, ужасно — особенно тоны и иероглифы, много ошибок. | Sorama, örän erbet — aýratyn hem äheňler we iýeroglifler, ýalňyşlyk köp. | teoriýa |
+| Не спрашивай, ужасно — особенно тоны и иероглифы, много ошибок. | Sorama, örän erbet — aýratyn hem tonlar we iýeroglifler, ýalňyşlyk köp. | teoriýa |
 | Не стесняйся — 别客气 | Çekinme — 别客气 | gönükme |
 | Не стесняйся. | Çekinme. | gönükme, teoriýa |
 | Не стесняйся. Ни занятий, ни заданий — наверное кайф? | Çekinme. Sapak-da ýok, öý işi-de ýok — birneme rahatdyr-a? | teoriýa |
@@ -2745,7 +2745,7 @@
 | Незавершённый вопрос — не ответ. | Tamamlanmadyk sorag — jogap däl. | gönükme |
 | Некоторые китайцы, когда угощают, любят уговаривать пить. Ты не знал? | Käbir hytaýlar myhman edeninde içmäge yralamagy halaýar. Bilmediňmi? | teoriýa |
 | Неловко сказать, пока нет. В Америке я обычно только в 8 вставал. | Bagyşlaň, muňa entek öwrenişmedim. ABŞ-da men adatça diňe ertirki 8-de turýardym. | teoriýa |
-| Нельзя без счётного слова: нужно 这本词典. | Sanaýyş sözsüz bolmaýar: 这本词典 gerek. | gönükme |
+| Нельзя без счётного слова: нужно 这本词典. | Ölçeg sözsüz bolmaýar: 这本词典 gerek. | gönükme |
 | Немного. | Azajyk. | teoriýa |
 | Неопределённость + предположение с 可能. | Näbellilik + 可能 bilen çak. | gönükme |
 | Неплохо, довольно красивый — куплю его. | Erbet däl, birneme gözel — muny satyn alaýyn. | teoriýa |
@@ -2787,7 +2787,7 @@
 | Нечасто. Южане любят рис, мучное — не очень. | Ýygy iýmeýärler. Günortalylar tüwini halaýar, un önümlerini onçakly halamaýarlar. | teoriýa |
 | Ничего готовить не надо. Но могут попросить что-то спеть. | Hiç zat taýýarlamaly däl. Ýöne, belki bir çykyş etmegiňi haýyş ederler. | teoriýa |
 | Ничего не поделаешь, родни и друзей много — целый час писал. | Alaç ýok, garyndaşlarym-dostlarym köp — bütin bir sagat ýazdym. | teoriýa |
-| Ничего страшного. | Hiç zat däl. | teoriýa |
+| Ничего страшного. | Zyýany ýok. | teoriýa |
 | Ничего, библиотека не закрывается. | Zyýany ýok, kitaphana ýapylmaýar. | teoriýa |
 | Ничего. | Zyýany ýok. | teoriýa |
 | Ничего. Пробка? | Zyýany ýok. Ýolda dyknyşyk boldumy? | teoriýa |
@@ -2803,7 +2803,7 @@
 | Ну ты и ленивый! Но лепить вместе — весело, и правда интересно. | Sen hakykatdanam ýalta! Ýöne hemmeler bile pelmeni ýasasa, gyzgalaňly, hakykatdanam gyzykly. | teoriýa |
 | О семьях (古丽 и 王红) | Maşgalalar hakda (古丽 we 王红) | teoriýa |
 | Оба глагола значат «хотеть», но с нюансом:\n\n | Iki işlik hem «islemek» diýen manyny berýär, ýöne öwüşginde tapawut bar:\n\n | teoriýa |
-| Оба значат «сколько», но разница в ожидаемой величине: ⏎  ⏎ • 几 (jǐ) — ожидается МАЛОЕ число (обычно до 10). Требует счётного слова. ⏎   几点? — Который час? (1-24) ⏎   你有几个朋友? — Сколько у тебя друзей? (ожидаю 1-10) ⏎  ⏎ • 多少 (duōshao) — БОЛЬШОЕ число или точно не знаешь. Счётное слово НЕ обязательно. ⏎   你的电话是多少? — Какой у тебя номер? (много цифр) ⏎   多少学生? — Сколько студентов? ⏎  ⏎ ❗ Для номеров (телефона, дома, автобуса) ВСЕГДА 多少. | Ikisi hem «näçe» diýmek, emma tapawut garaşylýan ululykda: ⏎  ⏎ • 几 (jǐ) — KIÇI san garaşylýar (adatça 10-a çenli). Sanaýyş sözi talap edýär. ⏎   几点? — Sagat näçe? (1-24) ⏎   你有几个朋友? — Näçe dostuň bar? (1-10 garaşýaryn) ⏎  ⏎ • 多少 (duōshao) — ULY san ýa-da takyk bilmeýärsiň. Sanaýyş sözi HÖKMAN däl. ⏎   你的电话是多少? — Seniň belgiň näçe? (köp san) ⏎   多少学生? — Näçe talyp? ⏎  ⏎ ❗ Belgiler üçin (telefon, öý, awtobus) HEMIŞE 多少. | gönükme |
+| Оба значат «сколько», но разница в ожидаемой величине: ⏎  ⏎ • 几 (jǐ) — ожидается МАЛОЕ число (обычно до 10). Требует счётного слова. ⏎   几点? — Который час? (1-24) ⏎   你有几个朋友? — Сколько у тебя друзей? (ожидаю 1-10) ⏎  ⏎ • 多少 (duōshao) — БОЛЬШОЕ число или точно не знаешь. Счётное слово НЕ обязательно. ⏎   你的电话是多少? — Какой у тебя номер? (много цифр) ⏎   多少学生? — Сколько студентов? ⏎  ⏎ ❗ Для номеров (телефона, дома, автобуса) ВСЕГДА 多少. | Ikisi hem «näçe» diýmek, emma tapawut garaşylýan ululykda: ⏎  ⏎ • 几 (jǐ) — KIÇI san garaşylýar (adatça 10-a çenli). Ölçeg sözi talap edýär. ⏎   几点? — Sagat näçe? (1-24) ⏎   你有几个朋友? — Näçe dostuň bar? (1-10 garaşýaryn) ⏎  ⏎ • 多少 (duōshao) — ULY san ýa-da takyk bilmeýärsiň. Ölçeg sözi HÖKMAN däl. ⏎   你的电话是多少? — Seniň belgiň näçe? (köp san) ⏎   多少学生? — Näçe talyp? ⏎  ⏎ ❗ Belgiler üçin (telefon, öý, awtobus) HEMIŞE 多少. | gönükme |
 | Оба значат «сколько», но разница в ожидаемой величине:\n\n | Ikisi hem «näçe» diýmek, emma tapawut garaşylýan ululykda:\n\n | teoriýa |
 | Оба слова значат «мы», но с разницей в инклюзивности:\n\n | Iki söz hem «biz» diýen manyny berýär, emma diňleýjini öz içine alyş boýunça tapawutlanýar:\n\n | teoriýa |
 | Оба слова ставятся ПЕРЕД глаголом. 然后 можно заменить на 再 (zài — снова, ещё). | Ikisi hem işlikden ÖŇ goýulýar. 然后-ni 再 (zài — ýene, gaýtadan) bilen çalşyp bolýar. | teoriýa |
@@ -2812,7 +2812,7 @@
 | Обменяю и куплю. | Çalşaryn-da satyn alaryn. | gönükme |
 | Обратите внимание: в отрицании 不是 произносится «bú shì» (不 меняет тон перед 4-м тоном). | Üns ber: inkärde 不是 «bú shì» diýlip aýdylýar (不 4-nji tonuň öňünde tonuny üýtgedýär). | teoriýa |
 | Обратный порядок — бессмыслица. | Ters tertip — manysyz. | gönükme |
-| Обстоятельство места: 在 + место + глагол | Ýer hal: 在 + ýer + işlik | teoriýa |
+| Обстоятельство места: 在 + место + глагол | Ýer haly: 在 + ýer + işlik | teoriýa |
 | Общежитие к северу от библиотеки — 宿舍楼在图书馆的北边 | Umumy ýaşaýyş jaýy kitaphananyň demirgazygynda — 宿舍楼在图书馆的北边 | gönükme |
 | Общежитие — с западной стороны. | Umumy ýaşaýyş jaýy günbatar tarapda. | teoriýa |
 | Объявление плана + приглашение с 怎么样. | Meýilnamany aýtmak + 怎么样 bilen çagyryş. | gönükme |
@@ -2827,7 +2827,7 @@
 | Одно фото. | Bir surat. | gönükme |
 | Одолжу попользоваться, возможно поможет. | Karz alyp ulanaýyn, belki kömek eder. | teoriýa |
 | Ой! Вы зря так беспокоитесь. | Eý! Siz gaty çekinipsiňiz. | teoriýa |
-| Ок, встречаемся в 8:30 у вашего общежития? | Bolýar, ertir sagat 8:30-da siziň ýatakhanaňyzyň gapysynda duşuşarys, bolýarmy? | teoriýa |
+| Ок, встречаемся в 8:30 у вашего общежития? | Bolýar, ertir sagat 8:30-da siziň umumy ýaşaýyş jaýyňyzyň gapysynda duşuşarys, bolýarmy? | teoriýa |
 | Около 200 юаней. | Takmynan 200 ýuan. | gönükme |
 | Около 8 прибуду. | Takmynan sagat 8-de ýeterin. | gönükme |
 | Он НЕ ходил в библиотеку. | Ol kitaphana gitmedi. | teoriýa |
@@ -3079,7 +3079,7 @@
 | Причинно-следственная связь через 所以. | 所以 arkaly sebäp-netije baglanyşygy. | gönükme |
 | Про выходные (阿曼 и одноклассник) | Dynç günleri hakda (阿曼 we kursdaşy) | teoriýa |
 | Про экзамены (古丽 и 王红) | Synaglar hakda (古丽 we 王红) | teoriýa |
-| Продолжение визита (Part 2). Вы научитесь перечислять примеры (A啦 B啦 C啦), использовать 得 («должен»), риторический вопрос 不是……吗? и условный оборот 如果……就…… («если… то…»).\n\n | Myhmançylygyň dowamy (Part 2). Siz mysallary sanamagy (A啦 B啦 C啦), 得 («gerek») ulanmagy, 不是……吗? ritorik soragyny we 如果……就…… («eger... onda...») şert dolanyşygyny öwrenersiňiz.\n\n | teoriýa |
+| Продолжение визита (Part 2). Вы научитесь перечислять примеры (A啦 B啦 C啦), использовать 得 («должен»), риторический вопрос 不是……吗? и условный оборот 如果……就…… («если… то…»).\n\n | Myhmançylygyň dowamy (Part 2). Sen mysallary sanamagy (A啦 B啦 C啦), 得 («gerek») ulanmagy, 不是……吗? ritorik soragyny we 如果……就…… («eger... onda...») şert dolanyşygyny öwrenersiň.\n\n | teoriýa |
 | Продолженное действие: 在...呢. | Dowam edýän hereket: 在...呢. | gönükme |
 | Просишь налить воды. Вежливое согласие и совет поспать. Как? | Suw guýmagy haýyş edýärsiň. Sylagly razylyk we ýatmak maslahaty. Nädip? | gönükme |
 | Простите, где библиотека? | Bagyşlaň, kitaphana nirede? | gönükme |
@@ -3120,7 +3120,7 @@
 | Родители зовут домой. | Kaka-eje meni öýe çagyrýar. | teoriýa |
 | Родители зовут меня домой. | Ata-enem meni öýe çagyrýar. | gönükme |
 | Родители просят меня приехать — 爸爸妈妈让我回家 | Kaka-eje meni öýe gelmegi haýyş edýär — 爸爸妈妈让我回家 | gönükme |
-| Русский: «Приходи, КОГДА будет время»\n | Rusça: esasy hereket öňde durup bilýär\n | teoriýa |
+| Русский: «Приходи, КОГДА будет время»\n | Rusça: «Gel, HAÇAN wagtyň bolsa»\n | teoriýa |
 | С 8 утра до 12 занятия. | Ertirki 8-den 12-ä çenli sapak bar. | gönükme |
 | С 8 утра до полудня у меня 4 пары. | Ertirki 8-den günortanky 12-ä çenli meniň 4 sapagym bar. | teoriýa |
 | С вторым 了 — «до сих пор учусь», без — закончил | Ikinji 了 bilen — «şu wagta çenli öwrenýärin», onsuz — tamamlady | gönükme |
@@ -3251,7 +3251,7 @@
 | Слышал, в музее хорошая выставка — сходим? | Eşidişime görä, çeperçilik muzeýinde gowy sergi bar, sergä baralymy? | teoriýa |
 | Смог купить только 3 билета на плацкарт. | Diňe 3 ýatak orunly bilet satyn alyp bildim. | teoriýa |
 | Смотри, какой там пейзаж красивый! | Seret, ol ýerdäki tebigy görnüş ýaman owadan! | teoriýa |
-| Смотрю ТВ в общежитии — 看电视在宿舍 | TW görýärin ýatakhanada — 看电视在宿舍 | gönükme |
+| Смотрю ТВ в общежитии — 看电视在宿舍 | TW görýärin umumy ýaşaýyş jaýynda — 看电视在宿舍 | gönükme |
 | Смысл 呢 берётся из контекста предыдущего предложения:\n | 呢-niň manysy öňki sözlemiň kontekstinden alynýar:\n | teoriýa |
 | Смысл: нет лучшего варианта, вынужденно.\n\n | Many: has gowy wariant ýok, mejbur.\n\n | teoriýa |
 | Сначала в банк менять деньги, потом в магазин за покупками. | Ilki banka pul çalyşmaga, soň dükana söwda etmäge. | teoriýa |
@@ -3272,7 +3272,7 @@
 | Спасибо. | Sag bol. | teoriýa |
 | Специальные вопросы с 谁 / 什么 | 谁 / 什么 bilen ýörite soraglar | teoriýa |
 | Спокойной ночи, Накамура. | Gije ýagşy, Nakamura. | teoriýa |
-| Стандартная схема: 在 + Y + 的 + направление-边. | Standart shema: 在 + Y + 的 + ugur-边. | gönükme |
+| Стандартная схема: 在 + Y + 的 + направление-边. | Standart gurluş: 在 + Y + 的 + ugur-边. | gönükme |
 | Стандартная формула вручения. | Bermegiň adaty formulasy. | gönükme |
 | Стандартная фраза про политику одного ребёнка. | Bir çaga syýasaty hakda standart jümle. | gönükme |
 | Стандартный вопрос о времени. 几 заменяет ожидаемую цифру часов. | Wagt hakda standart sorag. 几 garaşylýan sagat sanynyň ýerini tutýar. | gönükme |
@@ -3298,7 +3298,7 @@
 | Схема 1:  Подлежащее + 在 + Место\n | Gurluş 1:  Eýe + 在 + Ýer\n | teoriýa |
 | Схема 2 (обратный порядок):  Место + 是 + Подлежащее\n | Gurluş 2 (ters tertip):  Ýer + 是 + Eýe\n | teoriýa |
 | Схема 2:  [Время] + Подл. + Глагол + …\n | Gurluş 2:  [Wagt] + Eýe + Işlik + …\n | teoriýa |
-| Схема с объектом:  V + 了 + Время + 的 + Объект  ИЛИ  V + Объект + V + 了 + Время\n\n | Obýektli shema:  V + 了 + Wagt + 的 + Obýekt  ÝA-DA  V + Obýekt + V + 了 + Wagt\n\n | teoriýa |
+| Схема с объектом:  V + 了 + Время + 的 + Объект  ИЛИ  V + Объект + V + 了 + Время\n\n | Obýektli gurluş:  V + 了 + Wagt + 的 + Obýekt  ÝA-DA  V + Obýekt + V + 了 + Wagt\n\n | teoriýa |
 | Схема та же: X + 的 + направление\n | Gurluş şol bir: X + 的 + ugur\n | teoriýa |
 | Схема 太 + прил. + 了 — «слишком», с эмоциональной оценкой. | Gurluş 太 + syp. + 了 — «aşa», duýgy bahasy bilen. | gönükme |
 | Схема:  (Подл. +) 只好 + Глагол\n\n | Gurluş:  (Eýe +) 只好 + Işlik\n\n | teoriýa |
@@ -3340,7 +3340,7 @@
 | Схема:  Существительное + 怎么样？\n\n | Gurluş:  At + 怎么样？\n\n | teoriýa |
 | Схема:  Утверждение + 吧？\n\n | Gurluş:  Tassyklama + 吧？\n\n | teoriýa |
 | Схема:  Число + 张 + Сущ.\n\n | Gurluş:  San + 张 + At\n\n | teoriýa |
-| Схема:  Число / 这 / 那 / 几 + Счётное слово + Существительное\n\n | Gurluş:  San / 这 / 那 / 几 + Sanaýyş sözi + At\n\n | teoriýa |
+| Схема:  Число / 这 / 那 / 几 + Счётное слово + Существительное\n\n | Gurluş:  San / 这 / 那 / 几 + Ölçeg sözi + At\n\n | teoriýa |
 | Схема:  一个人 + Глагол\n\n | Gurluş:  一个人 + Işlik\n\n | teoriýa |
 | Схема:  不是 + Утверждение + 吗？\n\n | Gurluş:  不是 + Aýdyň + 吗？\n\n | teoriýa |
 | Схема:  也许 + Сказуемое\n\n | Gurluş:  也许 + Habar\n\n | teoriýa |
@@ -3371,8 +3371,8 @@
 | Счётное слово 张 — для плоских объектов | 张 ölçeg sözi — ýasy zatlar üçin | teoriýa |
 | Счётное слово 张 — плоские объекты | 张 ölçeg sözi — ýasy zatlar | gönükme |
 | Счётное слово 条 — для длинных/тонких объектов | 条 ölçeg sözi — uzyn/inçe zatlar üçin | teoriýa |
-| Счётные слова (量词) — обязательны с числами | Sanaýyş sözleri (量词) — sanlar bilen hökman | gönükme |
-| Счётные слова (量词) — обязательны с числами! | Sanaýyş sözleri (量词) — sanlar bilen hökman! | teoriýa |
+| Счётные слова (量词) — обязательны с числами | Ölçeg sözleri (量词) — sanlar bilen hökman | gönükme |
+| Счётные слова (量词) — обязательны с числами! | Ölçeg sözleri (量词) — sanlar bilen hökman! | teoriýa |
 | Счётные слова для действий: 趟 / 次 / 遍 / 下 | Hereketler üçin ölçeg sözler: 趟 / 次 / 遍 / 下 | teoriýa |
 | Счётные слова для одежды: 件 (jiàn) — для верха (рубашка, свитер, пальто), 条 (tiáo) — для низа (штаны, юбка). «Одна рубашка» = 一件衬衫, «одни штаны» = 一条裤子. | Eşik üçin ölçeg sözler: 件 (jiàn) — ýokarky eşikler üçin (köýnek, switer, palto), 条 (tiáo) — aşaky eşikler üçin (balak, ýubka). «Bir köýnek» = 一件衬衫, «bir balak» = 一条裤子. | teoriýa |
 | Счётные слова 首 и 次 — для песен и раз | 首 we 次 ölçeg sözleri — aýdymlar we gezekler üçin | teoriýa |
@@ -3588,9 +3588,9 @@
 | Формула «как давно?». | «Haçandan bäri?» formulasy. | gönükme |
 | Формула «национальность»: 哪国人？(из какой страны?) → Страна + 人: 美国人 (американец), 中国人 (китаец), 加拿大人 (канадец). Так же для любой страны: 俄罗斯人 (россиянин), 土库曼人 (туркмен). | «Millet» formulasy: 哪国人？(haýsy ýurtdan?) → Ýurt + 人: 美国人 (amerikaly), 中国人 (hytaýly), 加拿大人 (kanadaly). Islendik ýurt üçin şeýle: 俄罗斯人 (rus), 土库曼人 (türkmen). | teoriýa |
 | Формула продолженного: 在 + глагол + 呢. | Dowamlynyň formulasy: 在 + işlik + 呢. | gönükme |
-| Формула прощания «[время]见». Другие: 明天见 (до завтра), 再见 (до свидания). | Hoşlaşmak formulasy «[wagt]见». Beýlekiler: 明天见 (ertire çenli), 再见 (sag boluň). | gönükme |
+| Формула прощания «[время]见». Другие: 明天见 (до завтра), 再见 (до свидания). | Hoşlaşmak formulasy «[wagt]见». Beýlekiler: 明天见 (ertire çenli), 再见 (hoş gal). | gönükme |
 | Формула совета «надо побольше что-то делать» — с 多 перед удвоенным глаголом.\n\n | «Köpräk bir zat etmeli» maslahat formulasy — gaýtalanan işlikden öň 多 bilen.\n\n | teoriýa |
-| Формулы прощания: 一会儿见 (до скорого, через пару минут), 明天见 (до завтра), 再见 (до свидания). Все строятся как «[время]见». | Hoşlaşmak formulalary: 一会儿见 (görüşýänçäk, birazdan), 明天见 (ertire çenli), 再见 (sag boluň). Ählisi «[wagt]见» görnüşinde gurulýar. | teoriýa |
+| Формулы прощания: 一会儿见 (до скорого, через пару минут), 明天见 (до завтра), 再见 (до свидания). Все строятся как «[время]见». | Hoşlaşmak formulalary: 一会儿见 (görüşýänçäk, birazdan), 明天见 (ertire çenli), 再见 (hoş gal). Ählisi «[wagt]见» görnüşinde gurulýar. | teoriýa |
 | Формы 开门/关门 — про магазины: 几点开门？ (во сколько открывается?), 几点关门？ (во сколько закрывается?). | 开门/关门 görnüşleri — dükanlar hakda: 几点开门？ (näçede açylýar?), 几点关门？ (näçede ýapylýar?). | teoriýa |
 | Харбин зимой — красотища неописуемая. | Harbiniň gyşky tebigy görnüşi örän owadan. | teoriýa |
 | Харбин? Там зимой жуткий холод. | Harbinmi? Ol ýerde gyşyna örän sowuk. | teoriýa |
@@ -3644,7 +3644,7 @@
 | Четверть седьмого (6:15) — 六点一刻 | Alta çärýek geçdi (6:15) — 六点一刻 | gönükme |
 | Четвёртое значение 了 — между двумя глаголами. Первое действие ЗАКОНЧИЛОСЬ, ПОТОМ начинается второе.\n\n | 了-niň dördünji manysy — iki işligiň arasynda. Birinji hereket TAMAMLANÝAR, SOŇ ikinjisi başlaýar.\n\n | teoriýa |
 | Четыре сезона: 春天 (весна), 夏天 (лето), 秋天 (осень), 冬天 (зима). Все заканчиваются на 天. | Dört pasyl: 春天 (ýaz), 夏天 (tomus), 秋天 (güýz), 冬天 (gyş). Ählisi 天 bilen gutarýar. | teoriýa |
-| Чжан Вэй сначала в кино, потом в общежитие. | Zhang Wei ilki kinoteatra, soň ýatakhana gidýär. | teoriýa |
+| Чжан Вэй сначала в кино, потом в общежитие. | Zhang Wei ilki kinoteatra, soň umumy ýaşaýyş jaýyna gidýär. | teoriýa |
 | Чжан Вэй справа от Давэя. | Zhang Wei Daweýiň sagynda. | gönükme |
 | Чжан Вэй тоже наш одногруппник. Он китаец. | Zhang Wei hem biziň kursdaşymyz. Ol hytaýly. | teoriýa |
 | Чжан Вэй — китаец, и Ван Мин тоже китаец. | Zhang Wei hytaýly, Wan Min hem hytaýly. | teoriýa |
@@ -3688,8 +3688,8 @@
 | Что я больше всего люблю — это пельмени. | Iýmekde iň halaýanym — edil pelmeni. | teoriýa |
 | Чтобы был красивый ритм | Owadan ritm bolmagy üçin | gönükme |
 | Чтобы превратить утверждение в вопрос «да/нет», просто добавьте 吗 в конец предложения. Порядок слов не меняется!\n\n | Tassyklamany «hawa/ýok» soragyna öwürmek üçin, diňe sözlemiň soňuna 吗 goş. Söz tertibi üýtgemeýär!\n\n | teoriýa |
-| Чтобы сказать «к северу от X», «справа от X» и т.д., используется схема:\n\n | «X-iň demirgazygynda», «X-iň sagynda» we ş.m. diýmek üçin şu shema ulanylýar:\n\n | teoriýa |
-| Чтобы сказать «к северу от X», «справа от X», используется схема: ⏎  ⏎ X + 的 + направление + 边 ⏎  ⏎ Направления: ⏎ 东 (восток) → 东边 ⏎ 西 (запад) → 西边 ⏎ 南 (юг) → 南边 ⏎ 北 (север) → 北边 ⏎ 左 (лево) → 左边 ⏎ 右 (право) → 右边 ⏎  ⏎ Обрати внимание на порядок: сначала идёт ориентир (от чего), потом направление. Это противоположно русскому. ⏎  ⏎ Пример: 图书馆在宿舍楼的北边 = «Библиотека к северу от общежития». | «X-iň demirgazygynda», «X-iň sagynda» diýmek üçin şu shema ulanylýar: ⏎  ⏎ X + 的 + ugur + 边 ⏎  ⏎ Ugurlar: ⏎ 东 (gündogar) → 东边 ⏎ 西 (günbatar) → 西边 ⏎ 南 (günorta) → 南边 ⏎ 北 (demirgazyk) → 北边 ⏎ 左 (çep) → 左边 ⏎ 右 (sag) → 右边 ⏎  ⏎ Tertibe üns ber: ilki ugrukdyryjy (nämeden), soň ugur. Bu rusçanyň tersine. ⏎  ⏎ Mysal: 图书馆在宿舍楼的北边 = «Kitaphana umumy ýaşaýyş jaýynyň demirgazygynda». | gönükme |
+| Чтобы сказать «к северу от X», «справа от X» и т.д., используется схема:\n\n | «X-iň demirgazygynda», «X-iň sagynda» we ş.m. diýmek üçin şu gurluş ulanylýar:\n\n | teoriýa |
+| Чтобы сказать «к северу от X», «справа от X», используется схема: ⏎  ⏎ X + 的 + направление + 边 ⏎  ⏎ Направления: ⏎ 东 (восток) → 东边 ⏎ 西 (запад) → 西边 ⏎ 南 (юг) → 南边 ⏎ 北 (север) → 北边 ⏎ 左 (лево) → 左边 ⏎ 右 (право) → 右边 ⏎  ⏎ Обрати внимание на порядок: сначала идёт ориентир (от чего), потом направление. Это противоположно русскому. ⏎  ⏎ Пример: 图书馆在宿舍楼的北边 = «Библиотека к северу от общежития». | «X-iň demirgazygynda», «X-iň sagynda» diýmek üçin şu gurluş ulanylýar: ⏎  ⏎ X + 的 + ugur + 边 ⏎  ⏎ Ugurlar: ⏎ 东 (gündogar) → 东边 ⏎ 西 (günbatar) → 西边 ⏎ 南 (günorta) → 南边 ⏎ 北 (demirgazyk) → 北边 ⏎ 左 (çep) → 左边 ⏎ 右 (sag) → 右边 ⏎  ⏎ Tertibe üns ber: ilki ugrukdyryjy (nämeden), soň ugur. Bu rusçanyň tersine. ⏎  ⏎ Mysal: 图书馆在宿舍楼的北边 = «Kitaphana umumy ýaşaýyş jaýynyň demirgazygynda». | gönükme |
 | Чтобы сказать «меня зовут...», используйте 我叫... (wǒ jiào...). Чтобы спросить имя — 你叫什么名字？(nǐ jiào shénme míngzi?). | «Meniň adym...» diýmek üçin 我叫... (wǒ jiào...) ulan. Ady soramak üçin — 你叫什么名字？(nǐ jiào shénme míngzi?). | teoriýa |
 | Чтобы сказать «я делаю X прямо сейчас», в китайском используют одну из конструкций:\n\n | «Men edil häzir X edýärin» diýmek üçin hytaýçada şu gurluşlaryň biri ulanylýar:\n\n | teoriýa |
 | Чтобы сказать «я делаю X прямо сейчас»: ⏎  ⏎ • 正在 + Глагол + 呢 (полная форма) ⏎ • 在 + Глагол + 呢 ⏎ • Глагол + 呢 ⏎  ⏎ Все три означают примерно одно. ⏎  ⏎ 你在干什么呢？— Что сейчас делаешь? ⏎ 我正在做作业呢。— Делаю уроки. ⏎  ⏎ Отрицание: 没 + Глагол (без 在 и 呢). | «Men edil häzir X edýärin» diýmek üçin: ⏎  ⏎ • 正在 + Işlik + 呢 (doly görnüş) ⏎ • 在 + Işlik + 呢 ⏎ • Işlik + 呢 ⏎  ⏎ Üç görnüşi hem takmynan bir manyny aňladýar. ⏎  ⏎ 你在干什么呢？— Häzir näme edýärsiň? ⏎ 我正在做作业呢。— Öý işimi edýärin. ⏎  ⏎ Inkär: 没 + Işlik (在 we 呢-siz). | gönükme |
@@ -3720,11 +3720,11 @@
 | Это вопрос, не ответ. | Bu sorag, jogap däl. | gönükme |
 | Это второе значение 吧 (первое — «подтверждение», Глава 7). Здесь 吧 в конце утверждения превращает его в МЯГКОЕ ПРЕДЛОЖЕНИЕ, типа «давай» или «давайте».\n\n | Bu 吧-niň ikinji manysy (birinjisi — «tassyklama», 7-nji bap). Bu ýerde tassyklamanyň soňunda 吧 ony «geliň» ýaly ÝUMŞAK TEKLIBE öwürýär.\n\n | teoriýa |
 | Это и есть учитель Ван. | Bu edil Wan mugallym. | teoriýa |
-| Это итоговая глава Unit 1 — повторение и расширение пройденного. Вы научитесь рассказывать о своей учёбе (университет, специальность), использовать глагол 有 (иметь, существовать) и выражение 的时候 (когда, в момент).\n\n | Bu Unit 1-iň jemleýji baby — geçilenleriň gaýtalanmagy we giňeldilmegi. Siz öz okuwyňyz hakda gürrüň bermegi (uniwersitet, hünär), 有 (eýe bolmak, bar bolmak) işligini we 的时候 (haçan, pursatynda) aňlatmasyny ulanmagy öwrenersiňiz.\n\n | teoriýa |
-| Это итоговая глава Unit 2 — повторение и расширение. Вы научитесь рассказывать о своей семье, использовать счётное слово 口 (для членов семьи) и 条 (для собак, рек, дорог), а также слово 还 («ещё, вдобавок»).\n\n | Bu Unit 2-niň jemleýji baby — gaýtalama we giňeltme. Siz öz maşgalaňyz hakda gürrüň bermegi, 口 (maşgala agzalary üçin) we 条 (itler, derýalar, ýollar üçin) ölçeg sözlerini, şeýle hem 还 («ýene, üstesine») sözüni ulanmagy öwrenersiňiz.\n\n | teoriýa |
-| Это итоговая глава Unit 3. Вы научитесь обсуждать подарки, выбор «А или Б» (还是), давать примеры через 比如 и использовать 一直 («всё время»).\n\n | Bu Unit 3-niň jemleýji baby. Siz sowgatlar hakda gürrüň bermegi, «A ýa-da B» saýlawyny (还是), 比如 arkaly mysal getirmegi we 一直 («hemişe») ulanmagy öwrenersiňiz.\n\n | teoriýa |
-| Это итоговая глава Unit 4. Вы научитесь использовать конструкцию «прил.+死了» («ужасно…»), отрицательную команду 别 («не делай») и повторите грамматику глав 16-19.\n\n | Bu Unit 4-iň jemleýji baby. Siz «sypat+死了» («örän...») gurluşyny, inkär buýrugy 别 («etme») ulanmagy öwrenersiňiz we 16-19-njy baplaryň grammatikasyny gaýtalarsyňyz.\n\n | teoriýa |
-| Это итоговая глава всего учебника! Вы повторите все ключевые конструкции и научитесь рассказывать о подготовке к выступлению, использовать 怕 (бояться) и эмфатическое 多……啊 («ведь это же X!»).\n\n | Bu tutuş kursuň jemleýji baby! Siz ähli esasy gurluşlary gaýtalarsyňyz we çykyşa taýýarlanmak hakda gürrüň bermegi, 怕 (gorkmak) we emfatik 多……啊 («ahyry-ha edil şu X!») ulanmagy öwrenersiňiz.\n\n | teoriýa |
+| Это итоговая глава Unit 1 — повторение и расширение пройденного. Вы научитесь рассказывать о своей учёбе (университет, специальность), использовать глагол 有 (иметь, существовать) и выражение 的时候 (когда, в момент).\n\n | Bu Unit 1-iň jemleýji baby — geçilenleriň gaýtalanmagy we giňeldilmegi. Sen öz okuwyň hakda gürrüň bermegi (uniwersitet, hünär), 有 (eýe bolmak, bar bolmak) işligini we 的时候 (haçan, pursatynda) aňlatmasyny ulanmagy öwrenersiň.\n\n | teoriýa |
+| Это итоговая глава Unit 2 — повторение и расширение. Вы научитесь рассказывать о своей семье, использовать счётное слово 口 (для членов семьи) и 条 (для собак, рек, дорог), а также слово 还 («ещё, вдобавок»).\n\n | Bu Unit 2-niň jemleýji baby — gaýtalama we giňeltme. Sen öz maşgalaň hakda gürrüň bermegi, 口 (maşgala agzalary üçin) we 条 (itler, derýalar, ýollar üçin) ölçeg sözlerini, şeýle hem 还 («ýene, üstesine») sözüni ulanmagy öwrenersiň.\n\n | teoriýa |
+| Это итоговая глава Unit 3. Вы научитесь обсуждать подарки, выбор «А или Б» (还是), давать примеры через 比如 и использовать 一直 («всё время»).\n\n | Bu Unit 3-niň jemleýji baby. Sen sowgatlar hakda gürrüň bermegi, «A ýa-da B» saýlawyny (还是), 比如 arkaly mysal getirmegi we 一直 («hemişe») ulanmagy öwrenersiň.\n\n | teoriýa |
+| Это итоговая глава Unit 4. Вы научитесь использовать конструкцию «прил.+死了» («ужасно…»), отрицательную команду 别 («не делай») и повторите грамматику глав 16-19.\n\n | Bu Unit 4-iň jemleýji baby. Sen «sypat+死了» («örän...») gurluşyny, inkär buýrugy 别 («etme») ulanmagy öwrenersiň we 16-19-njy baplaryň grammatikasyny gaýtalarsyň.\n\n | teoriýa |
+| Это итоговая глава всего учебника! Вы повторите все ключевые конструкции и научитесь рассказывать о подготовке к выступлению, использовать 怕 (бояться) и эмфатическое 多……啊 («ведь это же X!»).\n\n | Bu tutuş kursuň jemleýji baby! Sen ähli esasy gurluşlary gaýtalarsyňyz we çykyşa taýýarlanmak hakda gürrüň bermegi, 怕 (gorkmak) we emfatik 多……啊 («ahyry-ha edil şu X!») ulanmagy öwrenersiň.\n\n | teoriýa |
 | Это как раз библиотека. | Bu edil kitaphana. | gönükme |
 | Это книга учителя. | Bu mugallymyň kitaby. | teoriýa |
 | Это книжная/вежливая форма. В разговоре чаще скажут 可以 (kěyǐ) — «можно». | Bu kitap dilindäki/sylagly görnüş. Gepleşikde has köp 可以 (kěyǐ) — «bolýar» diýilýär. | teoriýa |
@@ -4013,7 +4013,7 @@
 | • Номер дома/комнаты: 502室 → 五〇二室 (wǔ líng èr shì)\n | • Öý/otag belgisi: 502室 → 五〇二室 (wǔ líng èr shì)\n | teoriýa |
 | • Односложный глагол:  V + V  или  V + 一 + V\n | • Bir bogunly işlik:  V + V  ýa-da  V + 一 + V\n | teoriýa |
 | • Перед «большими» числами: 两千 (2000), 两万 (20000), 两亿\n\n | • «Uly» sanlaryň öňünde: 两千 (2000), 两万 (20000), 两亿\n\n | teoriýa |
-| • Перед счётным словом: 两本书 (2 книги), 两个朋友 (2 друга), 两瓶水\n | • Sanaýyş sözünden öň: 两本书 (2 kitap), 两个朋友 (2 dost), 两瓶水\n | teoriýa |
+| • Перед счётным словом: 两本书 (2 книги), 两个朋友 (2 друга), 两瓶水\n | • Ölçeg sözünden öň: 两本书 (2 kitap), 两个朋友 (2 dost), 两瓶水\n | teoriýa |
 | • Позитивное («как здóрово»):  太高兴了！— Очень рад!\n | • Oňyn («örän gowy»):  太高兴了！— Örän şat!\n | teoriýa |
 | • При счёте (一, 二, 三...)\n | • Sanananda (一, 二, 三...)\n | teoriýa |
 | • Прил. + 不 + Прил. = Прил. + 吗\n | • Sypat + 不 + Sypat = Sypat + 吗\n | teoriýa |
@@ -4041,7 +4041,7 @@
 | • 便宜一点儿 — «немного дешевле, подешевле» (просьба) | • 便宜一点儿 — «azajyk arzanrak» (haýyş) | teoriýa |
 | • 元 (yuán) — юань (письменно). Разговорно: 块 (kuài).\n | • 元 (yuán) — ýuan (ýazuwda). Gepleşikde: 块 (kuài).\n | teoriýa |
 | • 再 — о будущем («сделаю снова») | • 再 — geljek barada («ýene ederin») | teoriýa |
-| • 几 (jǐ) — ожидается МАЛОЕ число (обычно до 10). Требует счётного слова.\n | • 几 (jǐ) — KIÇI san garaşylýar (adatça 10-a çenli). Sanaýyş sözi talap edýär.\n | teoriýa |
+| • 几 (jǐ) — ожидается МАЛОЕ число (обычно до 10). Требует счётного слова.\n | • 几 (jǐ) — KIÇI san garaşylýar (adatça 10-a çenli). Ölçeg sözi talap edýär.\n | teoriýa |
 | • 分 (fēn) — 1/100 юаня (мелочь, редко используется).\n\n | • 分 (fēn) — ýuanyň 1/100-i (ownuk pul, seýrek ulanylýar).\n\n | teoriýa |
 | • 别说 — не говори (вообще)\n | • 别说 — gepleme (umuman)\n | teoriýa |
 | • 别说了 — хватит говорить (сейчас) | • 别说了 — ýeterlik, gepleme (häzir) | teoriýa |
@@ -4052,7 +4052,7 @@
 | • 咱们 (zánmen) — ВСЕГДА включает собеседника: «ты и я / мы с тобой»\n | • 咱们 (zánmen) — HEMIŞE diňleýjini öz içine alýar: «sen we men / biz seniň bilen»\n | teoriýa |
 | • 在 + Глагол + (Объект) + 呢\n | • 在 + Işlik + (Obýekt) + 呢\n | teoriýa |
 | • 地图 — карта: 一张地图\n\n | • 地图 — karta: 一张地图\n\n | teoriýa |
-| • 多少 (duōshao) — ожидается БОЛЬШОЕ число ИЛИ точно не знаешь сколько. Счётное слово НЕ обязательно.\n | • 多少 (duōshao) — ULY san garaşylýar ÝA-DA näçedigini takyk bilmeýärsiň. Sanaýyş sözi HÖKMAN däl.\n | teoriýa |
+| • 多少 (duōshao) — ожидается БОЛЬШОЕ число ИЛИ точно не знаешь сколько. Счётное слово НЕ обязательно.\n | • 多少 (duōshao) — ULY san garaşylýar ÝA-DA näçedigini takyk bilmeýärsiň. Ölçeg sözi HÖKMAN däl.\n | teoriýa |
 | • 太 (tài) — «слишком» (с 了)\n | • 太 (tài) — «aşa» (了 bilen)\n | teoriýa |
 | • 太……了 — слишком\n | • 太……了 — aşa\n | teoriýa |
 | • 好 (hǎo) — сделать качественно/до конца: 买好了 (купил как надо), 准备好了 (подготовил)\n | • 好 (hǎo) — hilli/ahyryna çenli etmek: 买好了 (gerekli ýaly satyn aldy), 准备好了 (taýýarlady)\n | teoriýa |
@@ -4116,7 +4116,7 @@
 | • 遍 (biàn) — полный раз (от начала до конца):\n | • 遍 (biàn) — doly gezek (başyndan ahyryna çenli):\n | teoriýa |
 | • 首 (shǒu) — счётное слово для ПЕСЕН и СТИХОВ:\n | • 首 (shǒu) — AÝDYMLAR we GOŞGULAR üçin ölçeg söz:\n | teoriýa |
 | …的时候 (de shíhou) означает «когда…, во время…». Ставится в КОНЦЕ придаточной части, перед главной.\n\n | …的时候 (de shíhou) «haçan…, wagtynda…» diýmegi aňladýar. Eýerjeň bölegiň SOŇUNDA, esasy bölekden öň goýulýar.\n\n | teoriýa |
-| …的时候 = «когда…, во время…». Ставится в КОНЦЕ придаточной части, перед главной. ⏎  ⏎ Схема: [действие/ситуация] + 的时候，[основная часть] ⏎  ⏎ 有空儿的时候，欢迎你去玩儿。 ⏎ «Когда будет время, приходи в гости.» ⏎  ⏎ Порядок ОБРАТНЫЙ русскому: сначала условие/время, потом основное действие. ⏎  ⏎ Русский: «Приходи, КОГДА будет время» ⏎ Китайский: «КОГДА время — приходи» | …的时候 = «haçan…, wagtynda…». Eýerjeň bölegiň SOŇUNDA, esasy bölekden öň goýulýar. ⏎  ⏎ Gurluş: [hereket/ýagdaý] + 的时候，[esasy bölek] ⏎  ⏎ 有空儿的时候，欢迎你去玩儿。 ⏎ «Wagtyň bolanda, myhmançylyga gel.» ⏎  ⏎ Tertip rusçanyň TERSINE: ilki şert/wagt, soň esasy hereket. ⏎  ⏎ Rusça: esasy hereket öňde durup bilýär ⏎ Hytaýça: «HAÇAN wagt — gel» | gönükme |
+| …的时候 = «когда…, во время…». Ставится в КОНЦЕ придаточной части, перед главной. ⏎  ⏎ Схема: [действие/ситуация] + 的时候，[основная часть] ⏎  ⏎ 有空儿的时候，欢迎你去玩儿。 ⏎ «Когда будет время, приходи в гости.» ⏎  ⏎ Порядок ОБРАТНЫЙ русскому: сначала условие/время, потом основное действие. ⏎  ⏎ Русский: «Приходи, КОГДА будет время» ⏎ Китайский: «КОГДА время — приходи» | …的时候 = «haçan…, wagtynda…». Eýerjeň bölegiň SOŇUNDA, esasy bölekden öň goýulýar. ⏎  ⏎ Gurluş: [hereket/ýagdaý] + 的时候，[esasy bölek] ⏎  ⏎ 有空儿的时候，欢迎你去玩儿。 ⏎ «Wagtyň bolanda, myhmançylyga gel.» ⏎  ⏎ Tertip rusçanyň TERSINE: ilki şert/wagt, soň esasy hereket. ⏎  ⏎ Rusça: «Gel, HAÇAN wagtyň bolsa» ⏎ Hytaýça: «HAÇAN wagt — gel» | gönükme |
 | ✅ 没有 (méi yǒu) — «не иметь»\n\n | ✅ 没有 (méi yǒu) — «bolmazlyk»\n\n | teoriýa |
 | ✅ 这个学校很小。— Эта школа очень маленькая.\n\n | ✅ 这个学校很小。— Bu mekdep örän kiçi.\n\n | teoriýa |
 | ❌ 五口学生 (пять студентов — там 个)\n | ❌ 五口学生 (bäş talyp — ol ýerde 个)\n | teoriýa |
@@ -4261,7 +4261,7 @@
 | 又 vs 再: оба «снова». 又 — о прошлом/повторяющемся («опять же»), 再 — о будущем («снова сделаю»). 又是周末 = «опять выходные» (регулярно происходит). | 又 we 再: ikisi hem «ýene». 又 — geçmiş/gaýtalanýan barada («ýene-de»), 再 — geljek barada («ýene ederin»). 又是周末 = «ýene dynç güni» (yzygider bolup durýar). | teoriýa |
 | 又 — «снова, опять» (для прошлого/повторения) | 又 — «ýene, gaýtadan» (geçmiş/gaýtalanma üçin) | teoriýa |
 | 发烧 / 咳嗽 / 头疼 — стандартный набор симптомов простуды. Запомни как один блок — врач первым делом спросит именно об этом. | 发烧 / 咳嗽 / 头疼 — üşütmäniň adaty alamatlar toplumy. Bir blok hökmünde ýat tut — lukman ilkinji nobatda şu barada sorar. | teoriýa |
-| 发音 (произношение) — одна из самых сложных частей китайского. Тоны (声调) + правильная артикуляция. Без них тебя не поймут, даже если иероглифы правильные. | 发音 (aýdylyş) — hytaý diliniň iň kyn böleklerinden biri. Äheňler (声调) + dogry aýdyş. Olarsyz iýeroglifler dogry bolsa-da saňa düşünmezler. | teoriýa |
+| 发音 (произношение) — одна из самых сложных частей китайского. Тоны (声调) + правильная артикуляция. Без них тебя не поймут, даже если иероглифы правильные. | 发音 (aýdylyş) — hytaý diliniň iň kyn böleklerinden biri. Tonlar (声调) + dogry aýdyş. Olarsyz iýeroglifler dogry bolsa-da saňa düşünmezler. | teoriýa |
 | 口 (kǒu) — особое счётное слово для подсчёта человек в СЕМЬЕ. В других контекстах 口 для людей НЕ используется — там 个.\n\n | 口 (kǒu) — MAŞGALADAKY adamlary sanamak üçin ýörite ölçeg sözi. Başga ýagdaýlarda adamlar üçin 口 ULANYLMAÝAR — ol ýerde 个.\n\n | teoriýa |
 | 口 (kǒu) — специальное счётное слово для подсчёта человек В СЕМЬЕ. В других контекстах для людей используется 个. ⏎  ⏎ Вопрос: 你家有几口人？ ⏎ Ответ: 我家有五口人。 ⏎  ⏎ НЕЛЬЗЯ сказать 五口学生 или 五口朋友 — только про семью. | 口 (kǒu) — MAŞGALADAKY adamlary sanamak üçin ýörite ölçeg sözi. Başga ýagdaýlarda adamlar üçin 个 ulanylýar. ⏎  ⏎ Sorag: 你家有几口人？ ⏎ Jogap: 我家有五口人。 ⏎  ⏎ 五口学生 ýa-da 五口朋友 diýip BOLMAÝAR — diňe maşgala hakda. | gönükme |
 | 古丽的朋友 — друг Гульнара\n\n | 古丽的朋友 — Gülnaranyň dosty\n\n | teoriýa |
@@ -4351,7 +4351,7 @@
 | 对X感兴趣 — «интересоваться X». Устойчивая формула. 对 + тема + 感兴趣. «Интересуюсь историей» = 对历史感兴趣. | 对X感兴趣 — «X bilen gyzyklanmak». Durnukly formula. 对 + mowzuk + 感兴趣. «Taryh bilen gyzyklanýaryn» = 对历史感兴趣. | teoriýa |
 | 对X来说 из Главы 18 часто используется здесь: 对欧美人来说 = «с точки зрения европейцев и американцев». Крайне полезная формула для рассуждений. | 18-nji Bapdaky 对X来说 bu ýerde hem köp ulanylýar: 对欧美人来说 = «ýewropalylaryň we amerikalylaryň nazarynda». Pikir ýöretmek üçin örän peýdaly formula. | teoriýa |
 | 对……来说 — «с точки зрения кого-то, для кого-то». Очень употребительная формула: 对学生来说 (для студентов), 对我来说 (для меня), 对中国人来说 (с точки зрения китайцев). | 对……来说 — «kimdir biriniň garaýşyndan, kimdir biri üçin». Örän ýygy ulanylýan formula: 对学生来说 (talyplar üçin), 对我来说 (meniň üçin), 对中国人来说 (hytaýlaryň garaýşyndan). | teoriýa |
-| 对不起 / 没关系 — стандартная пара «извини / ничего страшного». Запомни обе фразы вместе, они идут в паре. | 对不起 / 没关系 — «bagyşla / hiç zat däl» standart jübüti. Ikisini bile ýat tut, olar jübüt bolup gelýär. | teoriýa |
+| 对不起 / 没关系 — стандартная пара «извини / ничего страшного». Запомни обе фразы вместе, они идут в паре. | 对不起 / 没关系 — «bagyşla / Zyýany ýok.» standart jübüti. Ikisini bile ýat tut, olar jübüt bolup gelýär. | teoriýa |
 | 对了 (duì le) — «кстати, ах да!» Переключение темы, вспомнил что-то. Очень частая разговорная фраза. | 对了 (duì le) — «aýtmagyn, ýeri!» Mowzugy üýtgetmek, bir zady ýatlamak. Örän ýygy gepleşik jümlesi. | teoriýa |
 | 对吧？ в конце — «верно? так?» (как «吧» из Главы 7 — подтверждение догадки). Очень частая разговорная фраза. | 对吧？ soňunda — «şeýlemi? dogrumy?» (7-nji bapdaky «吧» ýaly — çaklamany tassyklamak). Örän ýygy gepleşik jümlesi. | teoriýa |
 | 就 (jiù) подчёркивает быстроту/лёгкость: 十五分钟就到 = «и всего за 15 минут добираешься». Переводится как «уже», «сразу же», но часто только эмоциональный оттенок «и всё». | 就 (jiù) çaltlygy/aňsatlygy nygtaýar: 十五分钟就到 = «bary-ýogy 15 minutda ýetýärsiň». «eýýäm», «şobada» diýlip terjime edilýär, emma köplenç diňe «hemme zat şu» duýgy öwüşgini. | teoriýa |
@@ -4431,7 +4431,7 @@
 | 放心 — «успокой сердце», не волнуйся. 放心吧！— очень тёплое заверение. В ответе на заботу. | 放心 — «ýüregiňi köşeşdir», arkaýyn bol. 放心吧！— örän mähirli ynandyrma. Alada üçin jogap hökmünde. | teoriýa |
 | 教学楼的北边是图书馆。— С северной стороны учебного корпуса — библиотека.\n\n | 教学楼的北边是图书馆。— Okuw binasynyň demirgazyk tarapynda — kitaphana.\n\n | teoriýa |
 | 教室外 — снаружи аудитории\n\n | 教室外 — okuw otagynyň daşynda\n\n | teoriýa |
-| 教室里有老师。— В аудитории есть учитель.\n\n | 教室里有老师。— Auditoriýada mugallym bar.\n\n | teoriýa |
+| 教室里有老师。— В аудитории есть учитель.\n\n | 教室里有老师。— Okuw otagynda mugallym bar.\n\n | teoriýa |
 | 斤 (jīn) — китайская мера веса = 500 г. 半斤 = 250 г. Полцзиня крепкого байцзю (40-60°) — это очень много. | 斤 (jīn) — hytaý agram ölçegi = 500 g. 半斤 = 250 g. Ýarym jin güýçli baýjiu (40-60°) — bu örän köp. | teoriýa |
 | 新年要来了。— Новый год приближается.\n\n | 新年要来了。— Täze ýyl golaýlaşýar.\n\n | teoriýa |
 | 旁边 (pángbiān) — сбоку, рядом\n | 旁边 (pángbiān) — gapdalynda, ýanynda\n | teoriýa |
@@ -4502,7 +4502,7 @@
 | 的-фраза — X的 (тот, что X) | 的-jümle — X的 (X bolan zat) | gönükme |
 | 的-фраза — «X-ный, тот, который X» | 的-jümle — «X bolan zat» | teoriýa |
 | 看 в разных контекстах: 看书 (читать), 看电影 (смотреть), 看病 (идти к врачу), 看朋友 (навестить друга). Глагол очень разнообразный. | 看 dürli kontekstlerde: 看书 (okamak), 看电影 (görmek), 看病 (lukmana barmak), 看朋友 (dosty görmäge barmak). Örän köp manyly işlik. | teoriýa |
-| 看X看得Y — схема повторения глагола с объектом и оценкой. «Я читаю иероглифы медленно» = 我看汉字看得很慢. Глагол 看 повторяется! | 看X看得Y — obýekt we baha bilen işligiň gaýtalanma shemasy. «Iýeroglifleri haýal okaýaryn» = 我看汉字看得很慢. 看 işligi gaýtalanýar! | teoriýa |
+| 看X看得Y — схема повторения глагола с объектом и оценкой. «Я читаю иероглифы медленно» = 我看汉字看得很慢. Глагол 看 повторяется! | 看X看得Y — obýekt we baha bilen işligiň gaýtalanma gurluşy. «Iýeroglifleri haýal okaýaryn» = 我看汉字看得很慢. 看 işligi gaýtalanýar! | teoriýa |
 | 看病人 и 看医生: 看病人 — «навестить больного», 看医生 / 看病 — «пойти к врачу». Глагол 看 тут = «посещать, смотреть». | 看病人 we 看医生: 看病人 — «syrkawy görmäge barmak», 看医生 / 看病 — «lukmana barmak». Bu ýerde 看 işligi = «barmak, görmek». | teoriýa |
 | 真 (zhēn) перед прилагательным = «правда, действительно»: 真干净 (правда чисто), 真好吃 (реально вкусно). Сильнее чем 很. | 真 (zhēn) sypatdan öň = «hakykatdanam, çyndan»: 真干净 (hakykatdanam arassa), 真好吃 (çyndan tagamly). 很-den güýçli. | teoriýa |
 | 真 + прилагательное для эмоциональной оценки. | 真 + duýgy bahasy üçin sypat. | gönükme |

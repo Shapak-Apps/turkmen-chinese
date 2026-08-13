@@ -203,7 +203,7 @@ function CharactersPage() {
       <ThemedText style={styles.listItem}>&#8226; 口 (agyz) — sözlerde: 吃 (iýmek), 喝 (içmek), 叫 (çagyrmak)</ThemedText>
       <ThemedText style={styles.listItem}>&#8226; 女 (aýal) — sözlerde: 妈 (eje), 姐 (uýa), 好 (gowy)</ThemedText>
       <ThemedText style={styles.body}>
-        Zarbalaryň ýazylyş tertibi möhüm! Umumy düzgün: ýokardan aşak, çepden saga. Dogry tertip çalt ýazmaga we iýeroglifleri tanamaga kömek edýär.
+        Çyzyklaryň ýazylyş tertibi möhüm! Umumy düzgün: ýokardan aşak, çepden saga. Dogry tertip çalt ýazmaga we iýeroglifleri tanamaga kömek edýär.
       </ThemedText>
     </PageWrapper>
   );

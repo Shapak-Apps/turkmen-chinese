@@ -2336,7 +2336,7 @@
                         "english": "okuw kitaby"
                       }
                     ],
-                    "breakdown": "«Bu hytaý dili okuw kitaby.» Kesgitleme + kesgitlenýän."
+                    "breakdown": "«Bu hytaý dili okuw kitaby.» Aýyklaýjy + aýyklanýan."
                   }
                 },
                 {
@@ -3385,7 +3385,7 @@
                     "hanzi": "没关系",
                     "pinyin": "Méi guānxi",
                     "words": [],
-                    "breakdown": "«Hiç zat däl» — bu bagyşlaýşa jogap, soraga däl."
+                    "breakdown": "«Zyýany ýok.» — bu bagyşlaýşa jogap, soraga däl."
                   }
                 },
                 {
@@ -3589,7 +3589,7 @@
               "type": "grammar",
               "rule": {
                 "title": "Ugur sözleri: 东/西/南/北/左/右 + 边",
-                "explanation": "«X-iň demirgazygynda», «X-iň sagynda» diýmek üçin şu shema ulanylýar:\n\nX + 的 + ugur + 边\n\nUgurlar:\n东 (gündogar) → 东边\n西 (günbatar) → 西边\n南 (günorta) → 南边\n北 (demirgazyk) → 北边\n左 (çep) → 左边\n右 (sag) → 右边\n\nTertibe üns ber: ilki ugrukdyryjy (nämeden), soň ugur. Bu rusçanyň tersine.\n\nMysal: 图书馆在宿舍楼的北边 = «Kitaphana umumy ýaşaýyş jaýynyň demirgazygynda».",
+                "explanation": "«X-iň demirgazygynda», «X-iň sagynda» diýmek üçin şu gurluş ulanylýar:\n\nX + 的 + ugur + 边\n\nUgurlar:\n东 (gündogar) → 东边\n西 (günbatar) → 西边\n南 (günorta) → 南边\n北 (demirgazyk) → 北边\n左 (çep) → 左边\n右 (sag) → 右边\n\nTertibe üns ber: ilki ugrukdyryjy (nämeden), soň ugur. Bu rusçanyň tersine.\n\nMysal: 图书馆在宿舍楼的北边 = «Kitaphana umumy ýaşaýyş jaýynyň demirgazygynda».",
                 "examples": [
                   {
                     "hanzi": "日本在中国的东边。",
@@ -4326,7 +4326,7 @@
                         "english": "gündogar"
                       }
                     ],
-                    "breakdown": "Standart shema: 在 + Y + 的 + ugur-边."
+                    "breakdown": "Standart gurluş: 在 + Y + 的 + ugur-边."
                   }
                 },
                 {
@@ -4545,7 +4545,7 @@
               "type": "grammar",
               "rule": {
                 "title": "的时候 (de shíhou) aňlatmasy — «haçan, pursatynda»",
-                "explanation": "…的时候 = «haçan…, wagtynda…». Eýerjeň bölegiň SOŇUNDA, esasy bölekden öň goýulýar.\n\nGurluş: [hereket/ýagdaý] + 的时候，[esasy bölek]\n\n有空儿的时候，欢迎你去玩儿。\n«Wagtyň bolanda, myhmançylyga gel.»\n\nTertip rusçanyň TERSINE: ilki şert/wagt, soň esasy hereket.\n\nRusça: esasy hereket öňde durup bilýär\nHytaýça: «HAÇAN wagt — gel»",
+                "explanation": "…的时候 = «haçan…, wagtynda…». Eýerjeň bölegiň SOŇUNDA, esasy bölekden öň goýulýar.\n\nGurluş: [hereket/ýagdaý] + 的时候，[esasy bölek]\n\n有空儿的时候，欢迎你去玩儿。\n«Wagtyň bolanda, myhmançylyga gel.»\n\nTertip rusçanyň TERSINE: ilki şert/wagt, soň esasy hereket.\n\nRusça: «Gel, HAÇAN wagtyň bolsa»\nHytaýça: «HAÇAN wagt — gel»",
                 "examples": [
                   {
                     "hanzi": "有空儿的时候，欢迎你去玩儿。",
@@ -5676,7 +5676,7 @@
                         "english": "görüşmek"
                       }
                     ],
-                    "breakdown": "Hoşlaşmak formulasy «[wagt]见». Beýlekiler: 明天见 (ertire çenli), 再见 (sag boluň)."
+                    "breakdown": "Hoşlaşmak formulasy «[wagt]见». Beýlekiler: 明天见 (ertire çenli), 再见 (hoş gal)."
                   }
                 }
               ]
@@ -7388,7 +7388,7 @@
               "type": "grammar",
               "rule": {
                 "title": "几 vs 多少 — haçan haýsyny ulanmaly",
-                "explanation": "Ikisi hem «näçe» diýmek, emma tapawut garaşylýan ululykda:\n\n• 几 (jǐ) — KIÇI san garaşylýar (adatça 10-a çenli). Sanaýyş sözi talap edýär.\n  几点? — Sagat näçe? (1-24)\n  你有几个朋友? — Näçe dostuň bar? (1-10 garaşýaryn)\n\n• 多少 (duōshao) — ULY san ýa-da takyk bilmeýärsiň. Sanaýyş sözi HÖKMAN däl.\n  你的电话是多少? — Seniň belgiň näçe? (köp san)\n  多少学生? — Näçe talyp?\n\n❗ Belgiler üçin (telefon, öý, awtobus) HEMIŞE 多少.",
+                "explanation": "Ikisi hem «näçe» diýmek, emma tapawut garaşylýan ululykda:\n\n• 几 (jǐ) — KIÇI san garaşylýar (adatça 10-a çenli). Ölçeg sözi talap edýär.\n  几点? — Sagat näçe? (1-24)\n  你有几个朋友? — Näçe dostuň bar? (1-10 garaşýaryn)\n\n• 多少 (duōshao) — ULY san ýa-da takyk bilmeýärsiň. Ölçeg sözi HÖKMAN däl.\n  你的电话是多少? — Seniň belgiň näçe? (köp san)\n  多少学生? — Näçe talyp?\n\n❗ Belgiler üçin (telefon, öý, awtobus) HEMIŞE 多少.",
                 "examples": [
                   {
                     "hanzi": "你的房间号是多少？",
@@ -7842,7 +7842,7 @@
               "blankedWord": "本",
               "correctAnswer": "本",
               "hint": "kitaplar/sözlükler üçin ölçeg sözi",
-              "instruction": "Sanaýyş sözüni goý: «Maňa kiçi sözlük gerek.»",
+              "instruction": "Ölçeg sözüni goý: «Maňa kiçi sözlük gerek.»",
               "options": [
                 {
                   "id": 1,
@@ -8057,7 +8057,7 @@
                     "hanzi": "我要这词典",
                     "pinyin": "Wǒ yào zhè cídiǎn",
                     "words": [],
-                    "breakdown": "Sanaýyş sözsüz bolmaýar: 这本词典 gerek."
+                    "breakdown": "Ölçeg sözsüz bolmaýar: 这本词典 gerek."
                   }
                 },
                 {
@@ -8099,7 +8099,7 @@
                     "hanzi": "没关系",
                     "pinyin": "Méi guānxi",
                     "words": [],
-                    "breakdown": "«Hiç zat däl» — standart edepli jogap."
+                    "breakdown": "«Zyýany ýok.» — standart edepli jogap."
                   }
                 },
                 {
@@ -8231,7 +8231,7 @@
               "id": 9116,
               "type": "grammar",
               "rule": {
-                "title": "Sanaýyş sözleri (量词) — sanlar bilen hökman",
+                "title": "Ölçeg sözleri (量词) — sanlar bilen hökman",
                 "explanation": "Sanyň (ýa-da 这/那/几) bilen atyň arasynda HEMIŞE ölçeg sözi goýulýar.\n\nGurluş: San + 量词 + At.\n\nEsasylar:\n个 (ge) — ählumumy\n本 (běn) — kitaplar, sözlükler\n瓶 (píng) — çüýşeler\n块 (kuài) — ýuanlar\n辆 (liàng) — ulag\n位 (wèi) — adamlar üçin edepli",
                 "examples": [
                   {
@@ -8742,7 +8742,7 @@
               "blankedWord": "口",
               "correctAnswer": "口",
               "hint": "maşgala agzalary üçin ölçeg sözi",
-              "instruction": "Sanaýyş sözüni goý: «Seniň maşgalaňda näçe adam bar?»",
+              "instruction": "Ölçeg sözüni goý: «Seniň maşgalaňda näçe adam bar?»",
               "options": [
                 {
                   "id": 1,
@@ -8774,7 +8774,7 @@
               "blankedWord": "条",
               "correctAnswer": "条",
               "hint": "uzyn/çeýe zatlar üçin ölçeg sözi (itler, balyklar hem)",
-              "instruction": "Sanaýyş sözüni goý: «Biziň öýümizde bir it bar.»",
+              "instruction": "Ölçeg sözüni goý: «Biziň öýümizde bir it bar.»",
               "options": [
                 {
                   "id": 1,
@@ -10090,7 +10090,7 @@
               "type": "grammar",
               "rule": {
                 "title": "是-syz habar bolýan sypat",
-                "explanation": "Hytaýçada sypat ÖZÜ habar bolýar — 是 GEREK DÄL.\n\n❌ 这个学校是小\n✅ 这个学校很小。\n\nHal-sözsüz (很, 比较, 最...) deňeşdirme ýaly eşidilýär. Şonuň üçin 很 «örän» manysyz-da köplenç goşulýar.",
+                "explanation": "Hytaýçada sypat ÖZÜ habar bolýar — 是 GEREK DÄL.\n\n❌ 这个学校是小\n✅ 这个学校很小。\n\nHal sözi bolmasa (很, 比较, 最...) deňeşdirme ýaly eşidilýär. Şonuň üçin 很 «örän» manysyz-da köplenç goşulýar.",
                 "examples": [
                   {
                     "hanzi": "北京的冬天很冷。",
@@ -12391,7 +12391,7 @@
               "sentencePinyin": "Zhè shì wǒ zuótiān mǎi ___.",
               "blankedWord": "的",
               "correctAnswer": "的",
-              "hint": "«的» işlik jümlesinden soň kesgitleýji hökmünde",
+              "hint": "«的» işlik jümlesinden soň aýyklaýjy hökmünde",
               "instruction": "Ýetmeýän sözi goý: «Bu meniň düýn satyn alan zadym.»",
               "options": [
                 {
@@ -14225,7 +14225,7 @@
                 "hanzi": "你周末都干什么呢？",
                 "pinyin": "Nǐ zhōumò dōu gàn shénme ne?"
               },
-              "instruction": "«Dynç günleri näme edýärsiň?» Ýatakhanada telewizor görýärsiň, eşik ýuwýarsyň. Nädip aýtmaly (gaýtalama bilen)?",
+              "instruction": "«Dynç günleri näme edýärsiň?» Umumy ýaşaýyş jaýynda telewizor görýärsiň, eşik ýuwýarsyň. Nädip aýtmaly (gaýtalama bilen)?",
               "options": [
                 {
                   "id": 1,
@@ -14265,7 +14265,7 @@
                     "hanzi": "宿舍在看电视",
                     "pinyin": "Sùshè zài kàn diànshì",
                     "words": [],
-                    "breakdown": "«Ýatakhana telewizor görýär» — manysyz."
+                    "breakdown": "«Umumy ýaşaýyş jaýy telewizor görýär» — manysyz."
                   }
                 },
                 {
@@ -14471,21 +14471,21 @@
                     "english": "TW"
                   }
                 ],
-                "breakdown": "«Ýatakhanada TW görýärin». Ýer işlikden öň."
+                "breakdown": "«Umumy ýaşaýyş jaýynda TW görýärin». Ýer işlikden öň."
               },
               "instruction": "Diňle we terjimäni saýla",
               "options": [
                 {
                   "id": 1,
-                  "english": "Ýatakhanada TW görýärin — 在宿舍里看看电视"
+                  "english": "Umumy ýaşaýyş jaýynda TW görýärin — 在宿舍里看看电视"
                 },
                 {
                   "id": 2,
-                  "english": "TW görýärin ýatakhanada — 看电视在宿舍"
+                  "english": "TW görýärin umumy ýaşaýyş jaýynda — 看电视在宿舍"
                 },
                 {
                   "id": 3,
-                  "english": "TW-de ýatakhana görýärin — 在电视看宿舍"
+                  "english": "TW-de umumy ýaşaýyş jaýyny görýärin — 在电视看宿舍"
                 },
                 {
                   "id": 4,
@@ -14509,7 +14509,7 @@
                   {
                     "hanzi": "在宿舍里看看电视。",
                     "pinyin": "Zài sùshè li kànkan diànshì.",
-                    "english": "Ýatakhanada TW görýärin."
+                    "english": "Umumy ýaşaýyş jaýynda TW görýärin."
                   }
                 ]
               },
@@ -21262,7 +21262,7 @@
               "blankedWord": "在",
               "correctAnswer": "在",
               "hint": "«-de (ýerde)»",
-              "instruction": "Ýetmeýän sözi goý: «Ertir sagat 8:30-da ýatakhananyň gapysynda duşuşarys.»",
+              "instruction": "Ýetmeýän sözi goý: «Ertir sagat 8:30-da umumy ýaşaýyş jaýynyň gapysynda duşuşarys.»",
               "options": [
                 {
                   "id": 1,
@@ -21414,7 +21414,7 @@
                 "hanzi": "明天去哪儿玩儿？",
                 "pinyin": "Míngtiān qù nǎr wánr?"
               },
-              "instruction": "«Ertir nirä?» Muzeýe, ýatakhanada 8:30-da duşuşarys. Nädip?",
+              "instruction": "«Ertir nirä?» Muzeýe, umumy ýaşaýyş jaýynda 8:30-da duşuşarys. Nädip?",
               "options": [
                 {
                   "id": 1,
@@ -21777,7 +21777,7 @@
               "options": [
                 {
                   "id": 1,
-                  "english": "Ertir sagat 8:30-da ýatakhananyňyzda duşuşarys.",
+                  "english": "Ertir sagat 8:30-da umumy ýaşaýyş jaýyňyzda duşuşarys.",
                   "mandarin": {
                     "hanzi": "明天八点半在你们宿舍门口见面",
                     "pinyin": "Míngtiān bā diǎn bàn zài nǐmen sùshè ménkǒu jiàn miàn",
@@ -25716,7 +25716,7 @@
                 "hanzi": "考得怎么样？",
                 "pinyin": "Kǎo de zěnmeyàng?"
               },
-              "instruction": "«Nähili tabşyrdyň?» Erbet, aýratyn hem äheňler we iýeroglifler. Nädip?",
+              "instruction": "«Nähili tabşyrdyň?» Erbet, aýratyn hem tonlar we iýeroglifler. Nädip?",
               "options": [
                 {
                   "id": 1,
@@ -26243,7 +26243,7 @@
                 },
                 {
                   "id": 4,
-                  "english": "äheňler",
+                  "english": "tonlar",
                   "hanzi": "声调",
                   "pinyin": "shēngdiào"
                 }
