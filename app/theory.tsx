@@ -360,7 +360,7 @@ function TipsPage({ tips }: { tips: string[] }) {
   return (
     <ScrollView style={styles.pageScroll} contentContainerStyle={styles.pageContent}>
       <ThemedText style={styles.pageLabel}>Maslahatlar</ThemedText>
-      <ThemedText style={styles.pageTitle}>Советы</ThemedText>
+      <ThemedText style={styles.pageTitle}>Şulary ýatda saklaň</ThemedText>
       {tips.map((tip, i) => (
         <ThemedText key={i} style={styles.tipItem}>
           {tip}

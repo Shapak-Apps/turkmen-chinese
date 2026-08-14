@@ -1,6 +1,7 @@
 import { Word } from "@/constants/CourseData";
 import { FontFamily, type ThemeColors } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
+import { T } from "@/lib/strings";
 import { router } from "expo-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
@@ -165,10 +166,10 @@ export default function VocabularyIntroScreen({
     <View style={styles.container}>
       <ConfirmDialog
         visible={exitConfirmVisible}
-        title="Gönükmeden çykmak"
-        description="Hakykatdan hem çykmak isleýärsiňizmi? Öňegidişligiňiz ýatdan çykar."
-        cancelLabel="Ýok"
-        confirmLabel="Çyk"
+        title={T.exitLesson.title}
+        description={T.exitLesson.message}
+        cancelLabel={T.exitLesson.stay}
+        confirmLabel={T.exitLesson.leave}
         destructive
         onCancel={() => setExitConfirmVisible(false)}
         onConfirm={() => {
@@ -195,7 +196,7 @@ export default function VocabularyIntroScreen({
             Sapagyň sözleri
           </ThemedText>
           <ThemedText style={styles.instructionText}>
-            Öwürmek üçin basyň. Bilmeýänleriňizi gaýtalaň.
+            Öwürmek üçin bas. Bilmeýänleriňi gaýtala.
           </ThemedText>
         </View>
 

@@ -26,7 +26,10 @@ const APP_VERSION =
   Constants.expoConfig?.version ?? Constants.manifest?.version ?? "1.0.0";
 
 const APP_NAME = "Hytaý dili 1";
-const TEAM_EMAIL = "shapak.app@gmail.com";
+const TEAM_EMAIL = "shapak.apps@gmail.com";
+const GITHUB_REPO_URL = "https://github.com/Shapak-Apps/turkmen-chinese";
+const GITHUB_ORG_URL = "https://github.com/Shapak-Apps";
+const WEBSITE_URL = "https://shapak-apps.github.io";
 const YEAR = new Date().getFullYear();
 
 type ModalType = "authors" | "series" | null;
@@ -101,6 +104,11 @@ export default function AboutScreen() {
   const openEmail = () => {
     haptics.tap();
     Linking.openURL(`mailto:${TEAM_EMAIL}?subject=${APP_NAME}`).catch(() => {});
+  };
+
+  const openLink = (url: string) => {
+    haptics.tap();
+    Linking.openURL(url).catch(() => {});
   };
 
   return (
@@ -216,9 +224,9 @@ export default function AboutScreen() {
             </Section>
 
             <Section icon="apps" color={colors.warningColor} title="Mümkinçilikler" colors={colors}>
-              <FeatureRow icon="book" text="Boya Chinese kitaby boýunça 31 bap" colors={colors} />
+              <FeatureRow icon="book" text="31 bap (başlangyç dereje)" colors={colors} />
               <FeatureRow icon="checkbox" text="600+ gönükme (8 dürli görnüş)" colors={colors} />
-              <FeatureRow icon="brush" text="Hiýeroglif ýazuwy (768 oflaýn)" colors={colors} />
+              <FeatureRow icon="brush" text="Iýeroglif ýazuwy (768 oflaýn)" colors={colors} />
               <FeatureRow icon="volume-high" text="1632 pinýin ses faýly" colors={colors} />
               <FeatureRow icon="chatbubbles" text="Auto-play dialoglar" colors={colors} />
               <FeatureRow icon="trophy" text="XP we Streak sistemasy" colors={colors} />
@@ -232,6 +240,24 @@ export default function AboutScreen() {
                   color={colors.primaryAccentColor}
                 />
                 <ThemedText style={styles.emailText}>{TEAM_EMAIL}</ThemedText>
+                <Ionicons
+                  name="arrow-forward"
+                  size={14}
+                  color={colors.primaryAccentColor}
+                />
+              </Pressable>
+              <Pressable
+                style={[styles.emailBtn, styles.linkBtnGap]}
+                onPress={() => openLink(GITHUB_REPO_URL)}
+              >
+                <Ionicons
+                  name="logo-github"
+                  size={18}
+                  color={colors.primaryAccentColor}
+                />
+                <ThemedText style={styles.emailText}>
+                  Açyk çeşme kody — GitHub
+                </ThemedText>
                 <Ionicons
                   name="arrow-forward"
                   size={14}
@@ -252,8 +278,8 @@ export default function AboutScreen() {
               <ThemedText style={styles.sectionText}>
                 Programma MIT lisenziýasy bilen açyk çeşmäni esas alýar.
                 {"\n\n"}
-                Mazmun çeşmeleri: Boya Chinese Elementary I (Peking University
-                Press), Twemoji (CC-BY 4.0), Hanzi Writer (MIT), Inter şrift (OFL).
+                Ulanylan çeşmeler: Twemoji (CC-BY 4.0), Hanzi Writer (MIT),
+                Inter şrift (OFL).
               </ThemedText>
             </Section>
           </ScrollView>
@@ -302,6 +328,45 @@ export default function AboutScreen() {
               </ThemedText>
             </Section>
 
+            <Section icon="link" color="#8B5CF6" title="Salgylar" colors={colors}>
+              <Pressable
+                style={styles.emailBtn}
+                onPress={() => openLink(WEBSITE_URL)}
+              >
+                <Ionicons
+                  name="globe-outline"
+                  size={18}
+                  color={colors.primaryAccentColor}
+                />
+                <ThemedText style={styles.emailText}>
+                  shapak-apps.github.io
+                </ThemedText>
+                <Ionicons
+                  name="arrow-forward"
+                  size={14}
+                  color={colors.primaryAccentColor}
+                />
+              </Pressable>
+              <Pressable
+                style={[styles.emailBtn, styles.linkBtnGap]}
+                onPress={() => openLink(GITHUB_ORG_URL)}
+              >
+                <Ionicons
+                  name="logo-github"
+                  size={18}
+                  color={colors.primaryAccentColor}
+                />
+                <ThemedText style={styles.emailText}>
+                  github.com/Shapak-Apps
+                </ThemedText>
+                <Ionicons
+                  name="arrow-forward"
+                  size={14}
+                  color={colors.primaryAccentColor}
+                />
+              </Pressable>
+            </Section>
+
             <Section
               icon="globe"
               color={colors.successColor}
@@ -324,9 +389,8 @@ export default function AboutScreen() {
               colors={colors}
             >
               <ThemedText style={styles.sectionText}>
-                Häzirki programma — hytaý dilini öwretmek üçin doly kurs. Boya
-                Chinese kitaby boýunça 31 bap, 600+ gönükme, hiýeroglif ýazuwy,
-                pinýin sesleri.
+                Häzirki programma — hytaý dilini öwretmek üçin doly kurs.
+                31 bap, 600+ gönükme, iýeroglif ýazuwy, pinýin sesleri.
               </ThemedText>
             </Section>
 
@@ -611,6 +675,9 @@ function createStyles(c: ThemeColors) {
       fontFamily: FontFamily.semibold,
       fontSize: 14,
       color: c.primaryAccentColor,
+    },
+    linkBtnGap: {
+      marginTop: 10,
     },
   });
 }

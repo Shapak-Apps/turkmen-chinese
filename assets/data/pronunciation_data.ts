@@ -54,13 +54,13 @@ export interface SpellingRule {
 // SECTION 1: Introduction
 // ============================================================
 export const INTRO_TEXT =
-  "Китайский слог состоит из трёх частей:\n\n" +
-  "声母 (shēngmǔ) — инициаль (начальный согласный)\n" +
-  "韵母 (yùnmǔ) — финаль (гласная часть)\n" +
-  "声调 (shēngdiào) — тон\n\n" +
-  "Инициаль + Финаль + Тон = Слог\n\n" +
-  "Например: b + a + 4-й тон = bà (папа)\n\n" +
-  "В китайском 21 инициаль и 38 финалей. Их комбинации образуют около 400 слогов, а с 4 тонами — более 1600 вариантов.";
+  "Hytaý bogny üç bölekden durýar:\n\n" +
+  "声母 (shēngmǔ) — başlangyç ses (bognuň başyndaky çekimsiz)\n" +
+  "韵母 (yùnmǔ) — soňky ses (bognuň çekimli bölegi)\n" +
+  "声调 (shēngdiào) — ton\n\n" +
+  "Başlangyç ses + Soňky ses + Ton = Bogun\n\n" +
+  "Meselem: b + a + 4-nji ton = bà (kaka)\n\n" +
+  "Hytaý dilinde 21 başlangyç we 38 soňky ses bar. Olaryň utgaşmasy 400 töweregi bogun, 4 ton bilen bolsa 1600-den gowrak görnüş emele getirýär.";
 
 // ============================================================
 // SECTION 2: 21 Initials (声母)
@@ -183,77 +183,77 @@ export const FINALS: FinalGroup[] = [
 // SECTION 4: 4 Tones (声调)
 // ============================================================
 export const TONES: ToneExample[] = [
-  { tone: "1", description: "Ровный высокий", pinyin: "mā", hanzi: "妈", meaning: "мама", audio: "ma1", pitch: "55" },
-  { tone: "2", description: "Восходящий", pinyin: "má", hanzi: "麻", meaning: "конопля", audio: "ma2", pitch: "35" },
-  { tone: "3", description: "Нисх.-восходящий", pinyin: "mǎ", hanzi: "马", meaning: "лошадь", audio: "ma3", pitch: "214" },
-  { tone: "4", description: "Нисходящий", pinyin: "mà", hanzi: "骂", meaning: "ругать", audio: "ma4", pitch: "51" },
+  { tone: "1", description: "Tekiz, ýokary", pinyin: "mā", hanzi: "妈", meaning: "eje", audio: "ma1", pitch: "55" },
+  { tone: "2", description: "Göterilýän", pinyin: "má", hanzi: "麻", meaning: "kenep", audio: "ma2", pitch: "35" },
+  { tone: "3", description: "Peselip-göterilýän", pinyin: "mǎ", hanzi: "马", meaning: "at", audio: "ma3", pitch: "214" },
+  { tone: "4", description: "Peselýän", pinyin: "mà", hanzi: "骂", meaning: "sögmek", audio: "ma4", pitch: "51" },
 ];
 
 export const TONES_DESCRIPTION =
-  "В китайском языке 4 основных тона. Один и тот же слог с разными тонами — это разные слова!\n\n" +
-  "1-й тон (55) — голос ровный и высокий, как будто поёте одну ноту.\n" +
-  "2-й тон (35) — голос поднимается вверх, как удивлённый вопрос «Да?».\n" +
-  "3-й тон (214) — голос опускается и поднимается, как задумчивое «Хм...».\n" +
-  "4-й тон (51) — голос резко падает, как строгое «Нет!».";
+  "Hytaý dilinde 4 sany esasy ton bar. Şol bir bogun dürli ton bilen aýdylanda başga söz bolýar!\n\n" +
+  "1-nji ton (55) — ses tekiz we ýokary, bir nota aýdyp duran ýaly.\n" +
+  "2-nji ton (35) — ses ýokary galýar, geň galyp «Hä?» diýip soran ýaly.\n" +
+  "3-nji ton (214) — ses aşak düşýär, soň ýokary galýar, oýlanyp «Hmm...» diýen ýaly.\n" +
+  "4-nji ton (51) — ses birden aşak gaçýar, gaty «Ýok!» diýen ýaly.";
 
 // ============================================================
 // SECTION 5: Sound Changes (音变)
 // ============================================================
 export const SOUND_CHANGES: SoundChangeRule[] = [
   {
-    title: "Правило 3-го тона (三声变调)",
+    title: "3-nji tonuň düzgüni (三声变调)",
     explanation:
-      "Когда два 3-х тона идут подряд, первый меняется на 2-й тон.\nНа письме тон не меняется — только при произношении.",
+      "Iki sany 3-nji ton yzly-yzyna gelende, birinjisi 2-nji tona öwrülýär.\nÝazuwda ton üýtgemeýär — diňe aýdylanda üýtgeýär.",
     examples: [
-      { pinyin: "nǐ hǎo → ní hǎo", hanzi: "你好", meaning: "привет", audio: "ni3" },
-      { pinyin: "shǒubiǎo → shóubiǎo", hanzi: "手表", meaning: "часы", audio: "shou3" },
-      { pinyin: "lǎohǔ → láohǔ", hanzi: "老虎", meaning: "тигр", audio: "lao3" },
+      { pinyin: "nǐ hǎo → ní hǎo", hanzi: "你好", meaning: "salam", audio: "ni3" },
+      { pinyin: "shǒubiǎo → shóubiǎo", hanzi: "手表", meaning: "sagat", audio: "shou3" },
+      { pinyin: "lǎohǔ → láohǔ", hanzi: "老虎", meaning: "gaplaň", audio: "lao3" },
     ],
   },
   {
-    title: "Изменение тона 一 (yī)",
+    title: "一 (yī) tonunyň üýtgemegi",
     explanation:
-      "一 (один) обычно произносится yī (1-й тон).\n" +
-      "Перед 4-м тоном → yí (2-й тон).\n" +
-      "Перед 1-м, 2-м, 3-м тоном → yì (4-й тон).",
+      "一 (bir) adatça yī (1-nji ton) bilen aýdylýar.\n" +
+      "4-nji tonuň öňünde → yí (2-nji ton).\n" +
+      "1-nji, 2-nji, 3-nji tonuň öňünde → yì (4-nji ton).",
     examples: [
-      { pinyin: "yī tiān", hanzi: "一天", meaning: "один день", audio: "yi1" },
-      { pinyin: "yì nián", hanzi: "一年", meaning: "один год", audio: "yi4" },
-      { pinyin: "yí bĕn", hanzi: "一本", meaning: "одна (книга)", audio: "yi2" },
-      { pinyin: "yí gè", hanzi: "一个", meaning: "один (штука)", audio: "yi2" },
+      { pinyin: "yī tiān", hanzi: "一天", meaning: "bir gün", audio: "yi1" },
+      { pinyin: "yì nián", hanzi: "一年", meaning: "bir ýyl", audio: "yi4" },
+      { pinyin: "yí bĕn", hanzi: "一本", meaning: "bir (kitap)", audio: "yi2" },
+      { pinyin: "yí gè", hanzi: "一个", meaning: "bir (sany)", audio: "yi2" },
     ],
   },
   {
-    title: "Изменение тона 不 (bù)",
+    title: "不 (bù) tonunyň üýtgemegi",
     explanation:
-      "不 (не) обычно произносится bù (4-й тон).\n" +
-      "Перед 4-м тоном → bú (2-й тон).",
+      "不 (däl) adatça bù (4-nji ton) bilen aýdylýar.\n" +
+      "4-nji tonuň öňünde → bú (2-nji ton).",
     examples: [
-      { pinyin: "bù tīng", hanzi: "不听", meaning: "не слушать", audio: "bu4" },
-      { pinyin: "bù xué", hanzi: "不学", meaning: "не учить", audio: "bu4" },
-      { pinyin: "bú shì", hanzi: "不是", meaning: "не является", audio: "bu2" },
-      { pinyin: "bú qù", hanzi: "不去", meaning: "не идти", audio: "bu2" },
+      { pinyin: "bù tīng", hanzi: "不听", meaning: "diňlemezlik", audio: "bu4" },
+      { pinyin: "bù xué", hanzi: "不学", meaning: "öwrenmezlik", audio: "bu4" },
+      { pinyin: "bú shì", hanzi: "不是", meaning: "däl", audio: "bu2" },
+      { pinyin: "bú qù", hanzi: "不去", meaning: "gitmezlik", audio: "bu2" },
     ],
   },
   {
-    title: "Нейтральный тон (轻声)",
+    title: "Ýeňil ton (轻声)",
     explanation:
-      "Некоторые слоги произносятся коротко и легко, без выраженного тона. Это нейтральный (лёгкий) тон.",
+      "Käbir bogunlar gysga we ýeňil, aýdyň tonsuz aýdylýar. Bu ýeňil ton.",
     examples: [
-      { pinyin: "māma", hanzi: "妈妈", meaning: "мама", audio: "ma1" },
-      { pinyin: "wǒmen", hanzi: "我们", meaning: "мы", audio: "wo3" },
-      { pinyin: "péngyou", hanzi: "朋友", meaning: "друг", audio: "peng2" },
-      { pinyin: "gēge", hanzi: "哥哥", meaning: "старший брат", audio: "ge1" },
+      { pinyin: "māma", hanzi: "妈妈", meaning: "eje", audio: "ma1" },
+      { pinyin: "wǒmen", hanzi: "我们", meaning: "biz", audio: "wo3" },
+      { pinyin: "péngyou", hanzi: "朋友", meaning: "dost", audio: "peng2" },
+      { pinyin: "gēge", hanzi: "哥哥", meaning: "aga", audio: "ge1" },
     ],
   },
   {
-    title: "Эризация (儿化)",
+    title: "R-leşme (儿化)",
     explanation:
-      "Добавление звука «r» в конце слога — характерная черта пекинского произношения.",
+      "Bognuň soňuna «r» sesiniň goşulmagy — Pekin aýdylyşynyň häsiýetli aýratynlygy.",
     examples: [
-      { pinyin: "huà → huàr", hanzi: "画儿", meaning: "картинка", audio: "hua4" },
-      { pinyin: "cuò → cuòr", hanzi: "错儿", meaning: "ошибка", audio: "cuo4" },
-      { pinyin: "xìn → xìnr", hanzi: "信儿", meaning: "сообщение", audio: "xin4" },
+      { pinyin: "huà → huàr", hanzi: "画儿", meaning: "surat", audio: "hua4" },
+      { pinyin: "cuò → cuòr", hanzi: "错儿", meaning: "ýalňyşlyk", audio: "cuo4" },
+      { pinyin: "xìn → xìnr", hanzi: "信儿", meaning: "habar", audio: "xin4" },
     ],
   },
 ];
@@ -264,74 +264,74 @@ export const SOUND_CHANGES: SoundChangeRule[] = [
 export const SPELLING_RULES: SpellingRule[] = [
   {
     rule: "ü → yu",
-    explanation: "Если перед финалью ü нет инициали, добавляем y и убираем точки: ü → yu.",
+    explanation: "Eger ü soňky sesiniň öňünde başlangyç ses ýok bolsa, y goşulýar we nokatlar aýrylýar: ü → yu.",
   },
   {
     rule: "i → yi",
-    explanation: "Если перед финалью i нет инициали, добавляем y: i → yi.",
+    explanation: "Eger i soňky sesiniň öňünde başlangyç ses ýok bolsa, y goşulýar: i → yi.",
   },
   {
     rule: "i... → y...",
-    explanation: "Финали, начинающиеся на i (ia, ie, iao...), без инициали: i меняем на y (ya, ye, yao...).",
+    explanation: "i bilen başlaýan soňky sesler (ia, ie, iao...) başlangyç sessiz gelende: i → y bolýar (ya, ye, yao...).",
   },
   {
     rule: "u → wu",
-    explanation: "Если перед финалью u нет инициали, добавляем w: u → wu.",
+    explanation: "Eger u soňky sesiniň öňünde başlangyç ses ýok bolsa, w goşulýar: u → wu.",
   },
   {
     rule: "u... → w...",
-    explanation: "Финали, начинающиеся на u (ua, uo, uai...), без инициали: u меняем на w (wa, wo, wai...).",
+    explanation: "u bilen başlaýan soňky sesler (ua, uo, uai...) başlangyç sessiz gelende: u → w bolýar (wa, wo, wai...).",
   },
   {
     rule: "j, q, x + ü → ju, qu, xu",
-    explanation: "После j, q, x точки над ü убираются: jü → ju, qü → qu, xü → xu.",
+    explanation: "j, q, x-den soň ü-niň üstündäki nokatlar aýrylýar: jü → ju, qü → qu, xü → xu.",
   },
   {
     rule: "iou → iu, uei → ui, uen → un",
-    explanation: "С инициалью iou сокращается до iu, uei до ui, uen до un: liou → liu, guei → gui, luen → lun.",
+    explanation: "Başlangyç ses bilen gelende iou → iu, uei → ui, uen → un görnüşinde gysgalýar: liou → liu, guei → gui, luen → lun.",
   },
 ];
 
 export const SPELLING_TONE_RULES =
-  "Знак тона ставится на главную гласную (ту, что произносится громче и с самым открытым ртом).\n\n" +
-  "Приоритет: a > o > e > i > u > ü\n\n" +
-  "Если в слоге только одна гласная — тон ставится на неё.\n" +
-  "Если гласных две — тон на ту, что выше в приоритете.\n" +
-  "Исключение: u и i рядом — тон на вторую (liú, guì).";
+  "Ton belgisi esasy çekimliniň üstünde goýulýar (has batly we agzy has giň açyp aýdylýanyň üstünde).\n\n" +
+  "Ileri tutulyş: a > o > e > i > u > ü\n\n" +
+  "Bogunda diňe bir çekimli bar bolsa — ton şonuň üstünde goýulýar.\n" +
+  "Iki çekimli bar bolsa — ton ileri tutulyşda ýokarda duranyň üstünde.\n" +
+  "Kadadan çykma: u bilen i ýanaşyk gelse — ton ikinjisiniň üstünde (liú, guì).";
 
 // ============================================================
 // SECTION 7: Daily Expressions (日常用语)
 // ============================================================
 export const DAILY_EXPRESSIONS: DailyPhrase[] = [
-  { hanzi: "你好。", pinyin: "Nǐ hǎo.", meaning: "Привет. / Как дела?" },
-  { hanzi: "早上好。", pinyin: "Zǎoshang hǎo.", meaning: "Доброе утро." },
-  { hanzi: "下午好。", pinyin: "Xiàwǔ hǎo.", meaning: "Добрый день." },
-  { hanzi: "晚上好。", pinyin: "Wǎnshang hǎo.", meaning: "Добрый вечер." },
-  { hanzi: "晚安。", pinyin: "Wǎn'ān.", meaning: "Спокойной ночи." },
-  { hanzi: "谢谢。", pinyin: "Xièxie.", meaning: "Спасибо." },
-  { hanzi: "不客气。", pinyin: "Bú kèqi.", meaning: "Не за что." },
-  { hanzi: "对不起。", pinyin: "Duìbuqǐ.", meaning: "Извините." },
-  { hanzi: "没关系。", pinyin: "Méi guānxi.", meaning: "Ничего страшного." },
-  { hanzi: "再见。", pinyin: "Zàijiàn.", meaning: "До свидания." },
-  { hanzi: "明天见。", pinyin: "Míngtiān jiàn.", meaning: "До завтра." },
-  { hanzi: "请进。", pinyin: "Qǐng jìn.", meaning: "Входите, пожалуйста." },
-  { hanzi: "认识你很高兴。", pinyin: "Rènshi nǐ hěn gāoxìng.", meaning: "Рад(а) познакомиться." },
+  { hanzi: "你好。", pinyin: "Nǐ hǎo.", meaning: "Salam. / Ýagdaýlaryň nähili?" },
+  { hanzi: "早上好。", pinyin: "Zǎoshang hǎo.", meaning: "Ertiriň haýyrly." },
+  { hanzi: "下午好。", pinyin: "Xiàwǔ hǎo.", meaning: "Gündiziň haýyrly." },
+  { hanzi: "晚上好。", pinyin: "Wǎnshang hǎo.", meaning: "Agşamyň haýyrly." },
+  { hanzi: "晚安。", pinyin: "Wǎn'ān.", meaning: "Gije ýagşy." },
+  { hanzi: "谢谢。", pinyin: "Xièxie.", meaning: "Sag bol." },
+  { hanzi: "不客气。", pinyin: "Bú kèqi.", meaning: "Hiç zat däl." },
+  { hanzi: "对不起。", pinyin: "Duìbuqǐ.", meaning: "Bagyşlaň." },
+  { hanzi: "没关系。", pinyin: "Méi guānxi.", meaning: "Zyýany ýok." },
+  { hanzi: "再见。", pinyin: "Zàijiàn.", meaning: "Sag boluň." },
+  { hanzi: "明天见。", pinyin: "Míngtiān jiàn.", meaning: "Ertire çenli." },
+  { hanzi: "请进。", pinyin: "Qǐng jìn.", meaning: "Geçiň, hoş geldiňiz." },
+  { hanzi: "认识你很高兴。", pinyin: "Rènshi nǐ hěn gāoxìng.", meaning: "Tanyşanyma örän şat." },
 ];
 
 // ============================================================
 // SECTION 8: Classroom Expressions (课堂用语)
 // ============================================================
 export const CLASSROOM_EXPRESSIONS: DailyPhrase[] = [
-  { hanzi: "读生词", pinyin: "dú shēngcí", meaning: "читать новые слова" },
-  { hanzi: "听", pinyin: "tīng", meaning: "слушать" },
-  { hanzi: "听写", pinyin: "tīngxiě", meaning: "диктант" },
-  { hanzi: "作业", pinyin: "zuòyè", meaning: "домашнее задание" },
-  { hanzi: "老师", pinyin: "lǎoshī", meaning: "учитель" },
-  { hanzi: "打开书", pinyin: "dǎkāi shū", meaning: "откройте книгу" },
-  { hanzi: "读课文", pinyin: "dú kèwén", meaning: "читать текст урока" },
-  { hanzi: "跟我读", pinyin: "gēn wǒ dú", meaning: "повторяйте за мной" },
-  { hanzi: "做练习", pinyin: "zuò liànxí", meaning: "делать упражнения" },
-  { hanzi: "再说一遍", pinyin: "zài shuō yí biàn", meaning: "скажите ещё раз" },
+  { hanzi: "读生词", pinyin: "dú shēngcí", meaning: "täze sözleri okamak" },
+  { hanzi: "听", pinyin: "tīng", meaning: "diňlemek" },
+  { hanzi: "听写", pinyin: "tīngxiě", meaning: "diktant" },
+  { hanzi: "作业", pinyin: "zuòyè", meaning: "öý işi" },
+  { hanzi: "老师", pinyin: "lǎoshī", meaning: "mugallym" },
+  { hanzi: "打开书", pinyin: "dǎkāi shū", meaning: "kitaby açyň" },
+  { hanzi: "读课文", pinyin: "dú kèwén", meaning: "sapagyň tekstini okamak" },
+  { hanzi: "跟我读", pinyin: "gēn wǒ dú", meaning: "meniň yzymdan gaýtalaň" },
+  { hanzi: "做练习", pinyin: "zuò liànxí", meaning: "gönükme etmek" },
+  { hanzi: "再说一遍", pinyin: "zài shuō yí biàn", meaning: "ýene bir gezek aýdyň" },
 ];
 
 // ============================================================

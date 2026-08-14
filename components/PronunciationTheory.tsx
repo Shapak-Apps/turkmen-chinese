@@ -103,7 +103,7 @@ function IntroPage() {
   const { colors } = useAppTheme();
   const s = useMemo(() => createStyles(colors), [colors]);
   return (
-    <PageWrapper label="Giriş" title="Как устроен китайский слог">
+    <PageWrapper label="Giriş" title="Hytaý bogny nähili gurlan">
       <Body text={INTRO_TEXT} />
       <View style={s.formulaCard}>
         <ThemedText style={s.formulaText}>声母 + 韵母 + 声调 = 音节</ThemedText>
@@ -117,8 +117,8 @@ function InitialsPage() {
   const { colors } = useAppTheme();
   const s = useMemo(() => createStyles(colors), [colors]);
   return (
-    <PageWrapper label="声母" title="21 инициаль">
-      <Body text="Инициаль — начальный согласный звук слога. Нажмите чтобы услышать." />
+    <PageWrapper label="声母" title="21 başlangyç ses">
+      <Body text="Başlangyç ses (声母) — bognuň başyndaky çekimsiz ses. Eşitmek üçin basyň." />
       {INITIALS.map((group) => (
         <View key={group.name} style={s.groupBlock}>
           <ThemedText style={s.groupName}>
@@ -144,8 +144,8 @@ function FinalsPage() {
   const { colors } = useAppTheme();
   const s = useMemo(() => createStyles(colors), [colors]);
   return (
-    <PageWrapper label="韵母" title="38 финалей">
-      <Body text="Финаль — гласная часть слога. Нажмите чтобы услышать." />
+    <PageWrapper label="韵母" title="38 soňky ses">
+      <Body text="Soňky ses (韵母) — bognuň çekimli bölegi. Eşitmek üçin basyň." />
       {FINALS.map((group) => (
         <View key={group.name} style={s.groupBlock}>
           <ThemedText style={s.groupName}>
@@ -170,7 +170,7 @@ function TonesPage() {
   const { colors } = useAppTheme();
   const s = useMemo(() => createStyles(colors), [colors]);
   return (
-    <PageWrapper label="声调" title="4 тона">
+    <PageWrapper label="声调" title="4 ton">
       <Body text={TONES_DESCRIPTION} />
       <View style={s.toneTable}>
         {TONES.map((t) => (
@@ -197,7 +197,7 @@ function SoundChangesPage() {
   const { colors } = useAppTheme();
   const s = useMemo(() => createStyles(colors), [colors]);
   return (
-    <PageWrapper label="音变" title="Изменения тонов">
+    <PageWrapper label="音变" title="Tonuň üýtgemegi">
       {SOUND_CHANGES.map((rule) => (
         <View key={rule.title} style={s.ruleBlock}>
           <ThemedText style={s.ruleTitle}>{rule.title}</ThemedText>
@@ -222,7 +222,7 @@ function SpellingPage() {
   const { colors } = useAppTheme();
   const s = useMemo(() => createStyles(colors), [colors]);
   return (
-    <PageWrapper label="拼写规则" title="Правила написания пиньинь">
+    <PageWrapper label="拼写规则" title="Pinýin ýazuw düzgünleri">
       {SPELLING_RULES.map((r, i) => (
         <View key={i} style={s.spellingRow}>
           <ThemedText style={s.spellingRule}>{r.rule}</ThemedText>
@@ -230,7 +230,7 @@ function SpellingPage() {
         </View>
       ))}
       <View style={s.divider} />
-      <ThemedText style={s.ruleTitle}>Куда ставить знак тона?</ThemedText>
+      <ThemedText style={s.ruleTitle}>Ton belgisi nirä goýulýar?</ThemedText>
       <Body text={SPELLING_TONE_RULES} />
     </PageWrapper>
   );
@@ -240,8 +240,8 @@ function DailyExpressionsPage() {
   const { colors } = useAppTheme();
   const s = useMemo(() => createStyles(colors), [colors]);
   return (
-    <PageWrapper label="日常用语" title="Повседневные фразы">
-      <Body text="13 базовых фраз, которые пригодятся с первого дня. Нажмите чтобы послушать." />
+    <PageWrapper label="日常用语" title="Gündelik jümleler">
+      <Body text="Ilkinji günden gerek boljak 13 sany esasy jümle. Diňlemek üçin basyň." />
       <View style={s.phraseTable}>
         {DAILY_EXPRESSIONS.map((p, i) => (
           <Pressable key={i} style={s.phraseRow} onPress={() => speakChinese(p.hanzi)}>
@@ -260,7 +260,7 @@ function ClassroomPage() {
   const { colors } = useAppTheme();
   const s = useMemo(() => createStyles(colors), [colors]);
   return (
-    <PageWrapper label="课堂用语" title="Выражения для класса">
+    <PageWrapper label="课堂用语" title="Sapakda ulanylýan sözler">
       <View style={s.phraseTable}>
         {CLASSROOM_EXPRESSIONS.map((p, i) => (
           <Pressable key={i} style={s.phraseRow} onPress={() => speakChinese(p.hanzi)}>
@@ -279,8 +279,8 @@ function StrokesPage() {
   const { colors } = useAppTheme();
   const s = useMemo(() => createStyles(colors), [colors]);
   return (
-    <PageWrapper label="汉字笔画表" title="Таблица черт иероглифов">
-      <Body text="Каждый иероглиф состоит из черт. Вот основные типы:" />
+    <PageWrapper label="汉字笔画表" title="Iýeroglif çyzyklarynyň tablisasy">
+      <Body text="Her iýeroglif çyzyklardan durýar. Ine, esasy görnüşleri:" />
       <View style={s.strokeGrid}>
         {STROKES.map((st, i) => (
           <View key={i} style={s.strokeCell}>

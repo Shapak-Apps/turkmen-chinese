@@ -97,7 +97,7 @@ function WelcomePage({ colors }: { colors: ThemeColors }) {
         Bu programma türkmen dilinde gepleýänler üçin hytaý dilini öwretmek üçin döredildi. Maksadymyz — sada we düşnükli ýol bilen başlangyç derejäni özleşdirmek.
       </ThemedText>
       <ThemedText style={styles.body}>
-        Programma esasan oflaýn işleýär — sözlükler, grammatika, gönükmeler we hiýeroglifler telefonyňyzda saklanýar. Diňe aýdylyş seslerini diňlemek üçin internet gerek bolup biler.
+        Programma esasan oflaýn işleýär — sözlükler, grammatika, gönükmeler we iýeroglifler telefonyňda saklanýar. Diňe aýdylyş seslerini diňlemek üçin internet gerek bolup biler.
       </ThemedText>
       <View style={styles.statsRow}>
         <View style={styles.statBox}>
@@ -110,7 +110,7 @@ function WelcomePage({ colors }: { colors: ThemeColors }) {
         </View>
         <View style={styles.statBox}>
           <ThemedText style={styles.statValue}>768</ThemedText>
-          <ThemedText style={styles.statLabel}>hiýeroglif</ThemedText>
+          <ThemedText style={styles.statLabel}>iýeroglif</ThemedText>
         </View>
         <View style={styles.statBox}>
           <ThemedText style={styles.statValue}>1632</ThemedText>
@@ -129,12 +129,12 @@ function MainScreenPage({ colors }: { colors: ThemeColors }) {
   return (
     <PageWrapper label="Esasy ekran" title="Üç plitka" colors={colors}>
       <ThemedText style={styles.body}>
-        Programmany açanyňyzda «Hytaý dilini öwreniň» ekrany peýda bolar. Onda üç plitka bar:
+        Programmany açanyňda «Hytaý dilini öwren» ekrany peýda bolar. Onda üç plitka bar:
       </ThemedText>
 
       <FeatureCard
         icon="hand-left-outline"
-        title="Hoş geldiňiz"
+        title="Hoş geldiň"
         desc="Programma hakynda we hytaý dili hakynda umumy maglumat. Täze öwrenip başlaýanlar üçin başlangyç nokat."
         colors={colors}
       />
@@ -147,7 +147,7 @@ function MainScreenPage({ colors }: { colors: ThemeColors }) {
       <FeatureCard
         icon="settings-outline"
         title="Sazlamalar"
-        desc="Hiýeroglif ýazuwynyň gatylygy, kömek, režim. Şahsy tertibiňize sazlap bolýar."
+        desc="Iýeroglif ýazuwynyň gatylygy, kömek, režim. Şahsy tertibiňe sazlap bolýar."
         colors={colors}
       />
 
@@ -163,7 +163,7 @@ function ChaptersPage({ colors }: { colors: ThemeColors }) {
   return (
     <PageWrapper label="Sapaklar" title="31 bap" colors={colors}>
       <ThemedText style={styles.body}>
-        Sapaklar Boya Chinese Elementary I okuw kitabynyň gurluşy boýunça düzüldi. Her bap belli bir tema bagyşlanan: salamlaşmak, ýaşaýyş, wagt, maşgala, söwda we beýlekiler.
+        Sapaklar ýönekeýden çylşyrymla tarap yzygiderli düzüldi. Her bap belli bir tema bagyşlanan: salamlaşmak, ýaşaýyş, wagt, maşgala, söwda we beýlekiler.
       </ThemedText>
 
       <View style={styles.chapterCard}>
@@ -171,7 +171,7 @@ function ChaptersPage({ colors }: { colors: ThemeColors }) {
         <View style={styles.chapterContent}>
           <ThemedText style={styles.chapterTitle}>Aýdylyşy (语音)</ThemedText>
           <ThemedText style={styles.chapterDesc}>
-            Pinýin, tonlar, başlangyç we soňlangyç sesler. Diňe teoriýa, 1632 ses faýly bilen.
+            Pinýin, tonlar, başlangyç we soňky sesler. Diňe teoriýa, 1632 ses faýly bilen.
           </ThemedText>
         </View>
       </View>
@@ -205,14 +205,39 @@ function TheoryPage({ colors }: { colors: ThemeColors }) {
         Teoriýa ekrany sahypadan-sahypa süýşürilýär (swipe). Her sahypa aýratyn bir bölüme bagyşlanan:
       </ThemedText>
 
-      <StepRow n="1" title="Giriş" desc="Bapda kim, näme öwreniljekdigi hakda gysga maglumat." colors={colors} />
-      <StepRow n="2" title="Täze sözler" desc="17-22 söz: hiýeroglif + pinýin + türkmen/rus terjimesi. 🖌️ basyň — hiýeroglifiň näçe gezek ýazylýandygy animasiýa bilen görkeziler." colors={colors} />
-      <StepRow n="3" title="Grammatika" desc="Her düzgün aýratyn sahypada: düşündirişi we mysallary." colors={colors} />
-      <StepRow n="4" title="Dialoglar" desc="Hytaýça tekstler, pinýin we terjime. Diňläp, gaýtalap öwreniň." colors={colors} />
-      <StepRow n="5" title="Maslahatlar" desc="Bapy ýatda saklamak we ulanmak boýunça birnäçe maslahat." colors={colors} />
+      <StepRow
+        n="1"
+        title="Giriş"
+        desc="Bapda kim, näme öwreniljekdigi hakda gysga maglumat."
+        colors={colors}
+      />
+      <StepRow
+        n="2"
+        title="Täze sözler"
+        desc="17-22 söz: iýeroglif + pinýin + türkmen/rus terjimesi. 🖌️ basyň — iýeroglifiň näçe gezek ýazylýandygy animasiýa bilen görkeziler."
+        colors={colors}
+      />
+      <StepRow
+        n="3"
+        title="Grammatika"
+        desc="Her düzgün aýratyn sahypada: düşündirişi we mysallary."
+        colors={colors}
+      />
+      <StepRow
+        n="4"
+        title="Dialoglar"
+        desc="Hytaýça tekstler, pinýin we terjime. Diňläp, gaýtalap öwreniň."
+        colors={colors}
+      />
+      <StepRow
+        n="5"
+        title="Maslahatlar"
+        desc="Bapy ýatda saklamak we ulanmak boýunça birnäçe maslahat."
+        colors={colors}
+      />
 
       <ThemedText style={styles.body}>
-        Aşaky panelde «Yza» / «Öňe» düwmeleri, sahypa belgisi (3/7 ýaly) we nokat-görkezijiler bar. Sahypany islän tertipde okap bilersiňiz.
+        Aşaky panelde «Yza» / «Öňe» düwmeleri, sahypa belgisi (3/7 ýaly) we nokat-görkezijiler bar. Sahypany islän tertibiňde okap bilersiň.
       </ThemedText>
     </PageWrapper>
   );
@@ -223,7 +248,7 @@ function ExercisesPage({ colors }: { colors: ThemeColors }) {
   return (
     <PageWrapper label="Gönükmeler" title="Üç ugurly menýu" colors={colors}>
       <ThemedText style={styles.body}>
-        «Gönükmeler» bölümini açanyňyzda menýu peýda bolar. Üç saýlaw bar:
+        «Gönükmeler» bölümini açanyňda menýu peýda bolar. Üç saýlaw bar:
       </ThemedText>
 
       <FeatureCard
@@ -235,13 +260,13 @@ function ExercisesPage({ colors }: { colors: ThemeColors }) {
       <FeatureCard
         icon="checkbox-outline"
         title="Gönükmelere geç"
-        desc="Sekiz görnüşli 20 gönükme: kart, saýlaw, diňle, doldur, jübütle, grammatika, jogap, hiýeroglif. Aşakda her gönükmäniň belgisi (1-20) bar — basyp böküp bolýar."
+        desc="Sekiz görnüşli 20 gönükme: kart, saýlaw, diňle, doldur, jübütle, grammatika, jogap, iýeroglif. Aşakda her gönükmäniň belgisi (1-20) bar — basyp böküp bolýar."
         colors={colors}
       />
       <FeatureCard
         icon="brush-outline"
-        title="Hiýerogliflerini ýaz"
-        desc="Bapdaky ähli hiýeroglifleri barmak bilen ýazmak. Her hiýeroglif aýratyn karta — basanyňda ýazuw režimi açylar."
+        title="Iýerogliflerini ýaz"
+        desc="Bapdaky ähli iýeroglifleri barmak bilen ýazmak. Her iýeroglif aýratyn karta — basanyňda ýazuw režimi açylar."
         colors={colors}
       />
 
@@ -255,29 +280,33 @@ function ExercisesPage({ colors }: { colors: ThemeColors }) {
 function TestAndStrokePage({ colors }: { colors: ThemeColors }) {
   const styles = useMemo(() => createStyles(colors), [colors]);
   return (
-    <PageWrapper label="Synag we ýazuw" title="Bap synagy we hiýeroglif" colors={colors}>
+    <PageWrapper label="Synag we ýazuw" title="Bap synagy we iýeroglif" colors={colors}>
       <View style={styles.bigBlock}>
         <View style={styles.bigBlockHeader}>
           <Ionicons name="checkmark-done-outline" size={24} color={colors.primaryAccentColor} />
           <ThemedText style={styles.bigBlockTitle}>Bap synagy</ThemedText>
         </View>
         <ThemedText style={styles.bigBlockBody}>
-          Sapakda ähli zady öwrenip bolanyňyzdan soň özüňizi barlap bilersiňiz. Bapyň 20 gönükmesinden 15-si tötänleýin saýlanýar.
+          Sapakda ähli zady öwrenip bolanyňdan soň özüňi barlap bilersiň. Bapyň 20 gönükmesinden 15-si tötänleýin saýlanýar.
         </ThemedText>
         <ThemedText style={styles.bigBlockBody}>
-          Synagy birnäçe gezek geçip bilersiňiz — her gezek başgaça soraglar düşer. Sözleri we grammatikany berkitmek üçin amatly.
+          Synagy birnäçe gezek geçip bilersiň — her gezek başgaça soraglar düşer. Sözleri we grammatikany berkitmek üçin amatly.
         </ThemedText>
       </View>
 
       <View style={styles.bigBlock}>
         <View style={styles.bigBlockHeader}>
           <Ionicons name="brush-outline" size={24} color={colors.primaryAccentColor} />
-          <ThemedText style={styles.bigBlockTitle}>Hiýeroglif ýazuwy</ThemedText>
+          <ThemedText style={styles.bigBlockTitle}>Iýeroglif ýazuwy</ThemedText>
         </View>
-        <ThemedText style={styles.bigBlockBody}>Iki ýerde ulanylýar:</ThemedText>
-        <ThemedText style={styles.listItem}>• Teoriýada — sözüň ýanyndaky 🖌️ basyň, hiýeroglifiň ýazylyşy animasiýa bilen görkeziler.</ThemedText>
-        <ThemedText style={styles.listItem}>• Gönükmelerde — barmak bilen ekranda çyzýarsyňyz, her zarbany dogry tertipde.</ThemedText>
-        <ThemedText style={styles.bigBlockBody}>768 hiýeroglif programmanyň içinde saklanýar — internet gerek däl.</ThemedText>
+        <ThemedText style={styles.bigBlockBody}>
+          Iki ýerde ulanylýar:
+        </ThemedText>
+        <ThemedText style={styles.listItem}>• Teoriýada — sözüň ýanyndaky 🖌️ basyň, iýeroglifiň ýazylyşy animasiýa bilen görkeziler.</ThemedText>
+        <ThemedText style={styles.listItem}>• Gönükmelerde — barmak bilen ekranda çyzýarsyň, her çyzygy dogry tertipde.</ThemedText>
+        <ThemedText style={styles.bigBlockBody}>
+          768 iýeroglif programmanyň içinde saklanýar — internet gerek däl.
+        </ThemedText>
       </View>
     </PageWrapper>
   );
@@ -288,7 +317,7 @@ function SettingsPage({ colors }: { colors: ThemeColors }) {
   return (
     <PageWrapper label="Sazlamalar" title="Şahsy tertibi sazlaň" colors={colors}>
       <ThemedText style={styles.body}>
-        Hiýeroglif ýazuwynyň gatylygyny we kömek görnüşini şahsy gerekligiňize görä üýtgedip bolýar. «Sazlamalar» plitkasy esasy ekrandan açylýar.
+        Iýeroglif ýazuwynyň gatylygyny we kömek görnüşini şahsy gerekligiňe görä üýtgedip bolýar. «Sazlamalar» plitkasy esasy ekrandan açylýar.
       </ThemedText>
 
       <View style={styles.settingCard}>
@@ -301,7 +330,9 @@ function SettingsPage({ colors }: { colors: ThemeColors }) {
 
       <View style={styles.settingCard}>
         <ThemedText style={styles.settingTitle}>Kömek görkez</ThemedText>
-        <ThemedText style={styles.settingDesc}>Näçe ýalňyşdan soň kömek (indiki zarbanyň ýolunyň çyzygy) görkezilsin:</ThemedText>
+        <ThemedText style={styles.settingDesc}>
+          Näçe ýalňyşdan soň kömek (indiki çyzygyň ýolunyň çyzygy) görkezilsin:
+        </ThemedText>
         <ThemedText style={styles.listItem}>• 3 ýalňyşdan soň</ThemedText>
         <ThemedText style={styles.listItem}>• 5 ýalňyşdan soň</ThemedText>
         <ThemedText style={styles.listItem}>• Görkezme — kömek hiç haçan görkezilmesin</ThemedText>
@@ -309,8 +340,10 @@ function SettingsPage({ colors }: { colors: ThemeColors }) {
 
       <View style={styles.settingCard}>
         <ThemedText style={styles.settingTitle}>Režim</ThemedText>
-        <ThemedText style={styles.settingDesc}>Ýalňyşlyk näçe gymmat:</ThemedText>
-        <ThemedText style={styles.listItem}>• Öwrenmek — ýalňyşlyklar päsgel bermeýär, dowam edip bilersiňiz</ThemedText>
+        <ThemedText style={styles.settingDesc}>
+          Ýalňyşlyk näçe gymmat:
+        </ThemedText>
+        <ThemedText style={styles.listItem}>• Öwrenmek — ýalňyşlyklar päsgel bermeýär, dowam edip bilersiň</ThemedText>
         <ThemedText style={styles.listItem}>• Synag — köp ýalňyş = synap gaýtadan başlamaly</ThemedText>
       </View>
     </PageWrapper>
@@ -321,13 +354,27 @@ function TipsPage({ colors }: { colors: ThemeColors }) {
   const styles = useMemo(() => createStyles(colors), [colors]);
   return (
     <PageWrapper label="Maslahatlar" title="Nähili öwrenmeli" colors={colors}>
-      <ThemedText style={styles.tipItem}>Her gün azajyk geçiň — günde 10-15 minut köp ýagdaýy birden 2 sagatdan has peýdaly. Yzygiderlik beýnä iň gowusy.</ThemedText>
-      <ThemedText style={styles.tipItem}>Ses bilen gaýtalaň. Diňe okamak ýeterlik däl — hytaýça ses bilen aýdyň, beýniňiz tonlary we ahangy hakydyna alar.</ThemedText>
-      <ThemedText style={styles.tipItem}>Tonlara üns beriň. Bir we şol bir ses dürli tonda dürli many berýär. Ilkibada kyn, soň özbaşdak gelýär.</ThemedText>
-      <ThemedText style={styles.tipItem}>Hiýeroglifleri tertibinde ýazyň. Zarbalaryň dogry tertibi okamak we ýatda saklamak üçin möhüm.</ThemedText>
-      <ThemedText style={styles.tipItem}>Ýalňyşlykdan gorkmaň. Her ýalňyş — öwrenmegiň bir bölegi. Gönükmäni täzeden geçip bilersiňiz.</ThemedText>
-      <ThemedText style={styles.tipItem}>Bap synagyny birnäçe gezek geçiň. Her gezek başga soraglar düşýär — pugta ýatda saklamak üçin iň oňat usul.</ThemedText>
-      <ThemedText style={styles.tipItem}>0-njy bapy äsgermäň — pinýini we tonlary ilki gowy öwrenseňiz, soň ähli sözler aňsatlaşar.</ThemedText>
+      <ThemedText style={styles.tipItem}>
+        Her gün azajyk geçiň — günde 10-15 minut köp ýagdaýy birden 2 sagatdan has peýdaly. Yzygiderlik beýnä iň gowusy.
+      </ThemedText>
+      <ThemedText style={styles.tipItem}>
+        Ses bilen gaýtala. Diňe okamak ýeterlik däl — hytaýça ses bilen aýt, beýniň tonlary we ahangy hakydyna alar.
+      </ThemedText>
+      <ThemedText style={styles.tipItem}>
+        Tonlara üns beriň. Bir we şol bir ses dürli tonda dürli many berýär. Ilkibada kyn, soň özbaşdak gelýär.
+      </ThemedText>
+      <ThemedText style={styles.tipItem}>
+        Iýeroglifleri tertibinde ýazyň. Çyzyklaryň dogry tertibi okamak we ýatda saklamak üçin möhüm.
+      </ThemedText>
+      <ThemedText style={styles.tipItem}>
+        Ýalňyşlykdan gorkma. Her ýalňyş — öwrenmegiň bir bölegi. Gönükmäni täzeden geçip bilersiň.
+      </ThemedText>
+      <ThemedText style={styles.tipItem}>
+        Bap synagyny birnäçe gezek geçiň. Her gezek başga soraglar düşýär — pugta ýatda saklamak üçin iň oňat usul.
+      </ThemedText>
+      <ThemedText style={styles.tipItem}>
+        0-njy bapy äsgermäň — pinýini we tonlary ilki gowy öwrenseňiz, soň ähli sözler aňsatlaşar.
+      </ThemedText>
     </PageWrapper>
   );
 }

@@ -111,7 +111,8 @@ export default function Flashcard({
 function createStyles(c: ThemeColors) {
   return StyleSheet.create({
     card: {
-      width: 340,
+      width: "100%",
+      maxWidth: 340,
       maxHeight: 440,
       height: "100%",
       justifyContent: "center",

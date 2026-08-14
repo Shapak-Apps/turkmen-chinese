@@ -20,7 +20,7 @@ export default function WelcomeScreen() {
           <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
         </Pressable>
         <View style={styles.headerTitleContainer}>
-          <ThemedText style={styles.headerTitle}>Hoş geldiňiz</ThemedText>
+          <ThemedText style={styles.headerTitle}>Hoş geldiň</ThemedText>
         </View>
         <View style={{ width: 40 }} />
       </View>

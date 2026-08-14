@@ -114,7 +114,7 @@ export default function PractiseScreen() {
         <BackHeader title="Gönükmeler" />
         <View style={styles.menuContent}>
           <ThemedText style={styles.menuHeading}>
-            Nireden başlamak isleýärsiňiz?
+            Nireden başlamak isleýärsiň?
           </ThemedText>
 
           <TouchableOpacity
@@ -163,9 +163,9 @@ export default function PractiseScreen() {
                 <Ionicons name="brush-outline" size={24} color={colors.warningColor} />
               </View>
               <View style={styles.menuCardContent}>
-                <ThemedText style={styles.menuCardTitle}>Hiýerogliflerini ýaz</ThemedText>
+                <ThemedText style={styles.menuCardTitle}>Iýerogliflerini ýaz</ThemedText>
                 <ThemedText style={styles.menuCardSubtitle}>
-                  {hanzi.length} hiýeroglif
+                  {hanzi.length} iýeroglif
                 </ThemedText>
               </View>
               <Ionicons name="chevron-forward" size={18} color={colors.subduedTextColor} />
@@ -192,11 +192,11 @@ export default function PractiseScreen() {
   if (mode === "stroke_order") {
     return (
       <SafeAreaView style={styles.container}>
-        <BackHeader title="Hiýerogliflerini ýaz" onBack={() => setMode("menu")} />
+        <BackHeader title="Iýerogliflerini ýaz" onBack={() => setMode("menu")} />
         <StrokeOrderMode
           key={`stroke-${id}`}
           characters={hanzi}
-          instruction="Sapagyň hiýerogliflerini ýaz"
+          instruction="Sapagyň iýerogliflerini ýaz"
           onAnswer={() => setMode("menu")}
         />
       </SafeAreaView>
