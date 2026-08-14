@@ -21,6 +21,25 @@ const SLATE_50 = "#F8FAFC";
 const AMBER_500 = "#D97706";
 const AMBER_50 = "#FFFBEB";
 
+// Dark-mode raw values (Tailwind slate/red/green/amber scale)
+const SLATE_950 = "#020617";
+const SLATE_800 = "#1E293B";
+const SLATE_600 = "#475569";
+const SLATE_400 = "#94A3B8";
+
+const DARK_RED = "#EF4444";
+const DARK_RED_DEEP = "#DC2626";
+const DARK_RED_BG = "#450A0A";
+const DARK_RED_BG_STRONG = "#7F1D1D";
+
+const DARK_GREEN = "#34D399";
+const DARK_GREEN_DEEP = "#059669";
+const DARK_GREEN_BG = "#052E16";
+const DARK_GREEN_BG_STRONG = "#064E3B";
+
+const DARK_AMBER = "#FBBF24";
+const DARK_AMBER_BG = "#451A03";
+
 export const Palette = {
   red: { 50: RED_50, 100: RED_100, 500: RED_500, 600: RED_600 },
   green: { 50: GREEN_50, 100: GREEN_100, 500: GREEN_500, 600: GREEN_600 },
@@ -39,32 +58,6 @@ export const Palette = {
 };
 
 export const Colors = {
-  primaryAccentColor: RED_500,
-  primaryAccentColorDark: RED_600,
-  primaryAccentBg: RED_50,
-  primaryAccentBgStrong: RED_100,
-
-  successColor: GREEN_500,
-  successColorDark: GREEN_600,
-  successBg: GREEN_50,
-  successBgStrong: GREEN_100,
-
-  warningColor: AMBER_500,
-  warningBg: AMBER_50,
-
-  textPrimary: SLATE_900,
-  textSecondary: SLATE_700,
-  subduedTextColor: SLATE_500,
-  textInverse: "#FFFFFF",
-
-  borderColor: SLATE_200,
-  borderColorStrong: SLATE_300,
-  divider: SLATE_100,
-
-  surfacePrimary: "#FFFFFF",
-  surfaceSecondary: SLATE_50,
-  surfaceTertiary: SLATE_100,
-
   light: {
     text: SLATE_900,
     background: "#FFFFFF",
@@ -72,16 +65,75 @@ export const Colors = {
     icon: SLATE_500,
     tabIconDefault: SLATE_500,
     tabIconSelected: RED_500,
+
+    textPrimary: SLATE_900,
+    textSecondary: SLATE_700,
+    subduedTextColor: SLATE_500,
+    textInverse: "#FFFFFF",
+
+    borderColor: SLATE_200,
+    borderColorStrong: SLATE_300,
+    divider: SLATE_100,
+
+    surfacePrimary: "#FFFFFF",
+    surfaceSecondary: SLATE_50,
+    surfaceTertiary: SLATE_100,
+
+    primaryAccentColor: RED_500,
+    primaryAccentColorDark: RED_600,
+    primaryAccentBg: RED_50,
+    primaryAccentBgStrong: RED_100,
+
+    successColor: GREEN_500,
+    successColorDark: GREEN_600,
+    successBg: GREEN_50,
+    successBgStrong: GREEN_100,
+
+    warningColor: AMBER_500,
+    warningBg: AMBER_50,
+
+    scrim: "rgba(15, 23, 42, 0.5)",
   },
+
   dark: {
-    text: "#ECEDEE",
-    background: "#0F172A",
-    tint: "#FFFFFF",
-    icon: "#9BA1A6",
-    tabIconDefault: "#9BA1A6",
-    tabIconSelected: "#FFFFFF",
+    text: SLATE_100,
+    background: SLATE_950,
+    tint: DARK_RED,
+    icon: SLATE_400,
+    tabIconDefault: SLATE_400,
+    tabIconSelected: DARK_RED,
+
+    textPrimary: SLATE_100,
+    textSecondary: SLATE_300,
+    subduedTextColor: SLATE_400,
+    textInverse: "#FFFFFF",
+
+    borderColor: SLATE_700,
+    borderColorStrong: SLATE_600,
+    divider: SLATE_800,
+
+    surfacePrimary: SLATE_900,
+    surfaceSecondary: SLATE_800,
+    surfaceTertiary: SLATE_700,
+
+    primaryAccentColor: DARK_RED,
+    primaryAccentColorDark: DARK_RED_DEEP,
+    primaryAccentBg: DARK_RED_BG,
+    primaryAccentBgStrong: DARK_RED_BG_STRONG,
+
+    successColor: DARK_GREEN,
+    successColorDark: DARK_GREEN_DEEP,
+    successBg: DARK_GREEN_BG,
+    successBgStrong: DARK_GREEN_BG_STRONG,
+
+    warningColor: DARK_AMBER,
+    warningBg: DARK_AMBER_BG,
+
+    scrim: "rgba(2, 6, 23, 0.6)",
   },
 };
+
+export type ThemeColors = typeof Colors.light;
 
 const interFontFamily = Platform.select({
   ios: { regular: "Inter_400Regular", medium: "Inter_500Medium", semibold: "Inter_600SemiBold", bold: "Inter_700Bold" },

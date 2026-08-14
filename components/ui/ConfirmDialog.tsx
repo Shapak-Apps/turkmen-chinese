@@ -1,5 +1,7 @@
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { T } from "@/lib/strings";
+import { useMemo } from "react";
 import { Modal, Pressable, StyleSheet, View } from "react-native";
 import { ThemedText } from "../themed-text";
 
@@ -22,6 +24,9 @@ export default function ConfirmDialog({
   onCancel: () => void;
   destructive?: boolean;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   return (
     <Modal
       visible={visible}
@@ -66,59 +71,61 @@ export default function ConfirmDialog({
   );
 }
 
-const styles = StyleSheet.create({
-  backdrop: {
-    flex: 1,
-    backgroundColor: "rgba(15, 23, 42, 0.5)",
-    justifyContent: "center",
-    padding: 20,
-  },
-  card: {
-    backgroundColor: Colors.surfacePrimary,
-    borderRadius: 18,
-    padding: 20,
-  },
-  title: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-  },
-  description: {
-    fontFamily: FontFamily.regular,
-    fontSize: 14,
-    lineHeight: 20,
-    color: Colors.textSecondary,
-    marginTop: 8,
-  },
-  actions: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    gap: 10,
-    marginTop: 20,
-  },
-  button: {
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 10,
-  },
-  pressed: { opacity: 0.85 },
-  cancel: {
-    backgroundColor: Colors.surfaceTertiary,
-  },
-  cancelText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.textPrimary,
-  },
-  confirm: {
-    backgroundColor: Colors.primaryAccentColor,
-  },
-  destructive: {
-    backgroundColor: Colors.primaryAccentColor,
-  },
-  confirmText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.textInverse,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    backdrop: {
+      flex: 1,
+      backgroundColor: "rgba(15, 23, 42, 0.5)",
+      justifyContent: "center",
+      padding: 20,
+    },
+    card: {
+      backgroundColor: c.surfacePrimary,
+      borderRadius: 18,
+      padding: 20,
+    },
+    title: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.textPrimary,
+    },
+    description: {
+      fontFamily: FontFamily.regular,
+      fontSize: 14,
+      lineHeight: 20,
+      color: c.textSecondary,
+      marginTop: 8,
+    },
+    actions: {
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      gap: 10,
+      marginTop: 20,
+    },
+    button: {
+      paddingVertical: 10,
+      paddingHorizontal: 16,
+      borderRadius: 10,
+    },
+    pressed: { opacity: 0.85 },
+    cancel: {
+      backgroundColor: c.surfaceTertiary,
+    },
+    cancelText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 14,
+      color: c.textPrimary,
+    },
+    confirm: {
+      backgroundColor: c.primaryAccentColor,
+    },
+    destructive: {
+      backgroundColor: c.primaryAccentColor,
+    },
+    confirmText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 14,
+      color: c.textInverse,
+    },
+  });
+}

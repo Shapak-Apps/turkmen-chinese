@@ -1,5 +1,6 @@
 import { Question, SpeakingOption } from "@/constants/CourseData";
-import { Colors } from "@/constants/theme";
+import { type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { haptics } from "@/lib/haptics";
 import { hasCompletedLesson, incrementLessonCompletion } from "@/lib/lessonProgress";
 import { Events, track } from "@/lib/analytics";
@@ -57,6 +58,9 @@ export default function LessonContent({
   mode?: "lesson" | "exam";
   onComplete?: (stats: LessonStats) => void;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [exitConfirmVisible, setExitConfirmVisible] = useState(false);
   const [showMandarin, setShowMandarin] = useState(false);
@@ -590,7 +594,7 @@ export default function LessonContent({
             style={[
               styles.audioSection,
               {
-                backgroundColor: Colors.surfaceSecondary,
+                backgroundColor: colors.surfaceSecondary,
                 minHeight: audioSectionAnimHeight,
                 flex: hasListenedToAudio ? 0 : 1,
                 justifyContent: "center",
@@ -732,27 +736,29 @@ export default function LessonContent({
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.surfacePrimary },
-  content: { flex: 1, paddingHorizontal: 20 },
-  audioSection: {
-    alignItems: "center",
-    marginBottom: 32,
-    padding: 18,
-    borderRadius: 18,
-    marginTop: 18,
-  },
-  optionsSection: {
-    flex: 1,
-    marginBottom: 24,
-  },
-  feedbackWrapper: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-    zIndex: 1000,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: { flex: 1, backgroundColor: c.surfacePrimary },
+    content: { flex: 1, paddingHorizontal: 20 },
+    audioSection: {
+      alignItems: "center",
+      marginBottom: 32,
+      padding: 18,
+      borderRadius: 18,
+      marginTop: 18,
+    },
+    optionsSection: {
+      flex: 1,
+      marginBottom: 24,
+    },
+    feedbackWrapper: {
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      paddingHorizontal: 20,
+      paddingBottom: 20,
+      zIndex: 1000,
+    },
+  });
+}

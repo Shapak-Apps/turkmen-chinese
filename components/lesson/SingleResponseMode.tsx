@@ -1,8 +1,9 @@
 import { SpeakingOption } from "@/constants/CourseData";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Animated,
   StyleSheet,
@@ -20,6 +21,9 @@ export default function SingleResponseMode({
   optionSelectionAnim: Animated.Value;
   onContinue?: () => void;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [showAnswer, setShowAnswer] = useState(false);
 
   return (
@@ -81,73 +85,75 @@ export default function SingleResponseMode({
           <ThemedText style={styles.continueButtonText}>
             {T.common.continue}
           </ThemedText>
-          <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
+          <Ionicons name="arrow-forward" size={18} color={colors.textInverse} />
         </TouchableOpacity>
       )}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  promptContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: 50,
-  },
-  sayItPromptContainer: { position: "absolute", bottom: 20 },
-  sayItPrompt: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-    color: Colors.primaryAccentColor,
-    textAlign: "center",
-  },
-  revealButton: { marginBottom: 8, marginTop: 16, alignItems: "center" },
-  instructionText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    textAlign: "center",
-    color: Colors.subduedTextColor,
-  },
-  optionDetailsHanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 28,
-    color: Colors.primaryAccentColor,
-    marginBottom: 6,
-  },
-  optionDetailsPinyin: {
-    fontFamily: FontFamily.medium,
-    fontSize: 15,
-    color: Colors.textSecondary,
-  },
-  singleResponseContainer: {
-    padding: 20,
-    borderRadius: 16,
-    borderWidth: 1.5,
-    borderColor: Colors.primaryAccentColor,
-    backgroundColor: Colors.primaryAccentBg,
-    alignItems: "center",
-  },
-  singleResponseEnglish: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 17,
-    color: Colors.textPrimary,
-    textAlign: "center",
-  },
-  singleResponseMandarin: { alignItems: "center", marginTop: 12 },
-  continueButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    borderRadius: 14,
-    gap: 8,
-    marginTop: 20,
-    backgroundColor: Colors.primaryAccentColor,
-  },
-  continueButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textInverse,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    promptContainer: {
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: 50,
+    },
+    sayItPromptContainer: { position: "absolute", bottom: 20 },
+    sayItPrompt: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+      color: c.primaryAccentColor,
+      textAlign: "center",
+    },
+    revealButton: { marginBottom: 8, marginTop: 16, alignItems: "center" },
+    instructionText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      textAlign: "center",
+      color: c.subduedTextColor,
+    },
+    optionDetailsHanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 28,
+      color: c.primaryAccentColor,
+      marginBottom: 6,
+    },
+    optionDetailsPinyin: {
+      fontFamily: FontFamily.medium,
+      fontSize: 15,
+      color: c.textSecondary,
+    },
+    singleResponseContainer: {
+      padding: 20,
+      borderRadius: 16,
+      borderWidth: 1.5,
+      borderColor: c.primaryAccentColor,
+      backgroundColor: c.primaryAccentBg,
+      alignItems: "center",
+    },
+    singleResponseEnglish: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 17,
+      color: c.textPrimary,
+      textAlign: "center",
+    },
+    singleResponseMandarin: { alignItems: "center", marginTop: 12 },
+    continueButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 14,
+      paddingHorizontal: 20,
+      borderRadius: 14,
+      gap: 8,
+      marginTop: 20,
+      backgroundColor: c.primaryAccentColor,
+    },
+    continueButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textInverse,
+    },
+  });
+}

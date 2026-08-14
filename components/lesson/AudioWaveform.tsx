@@ -1,8 +1,11 @@
-import { Colors } from "@/constants/theme";
-import { useEffect, useRef } from "react";
+import { useAppTheme } from "@/hooks/use-app-theme";
+import { useEffect, useMemo, useRef } from "react";
 import { Animated, StyleSheet, View } from "react-native";
+import { type ThemeColors } from "@/constants/theme";
 
 export default function AudioWaveform({ isPlaying }: { isPlaying: boolean }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const waveAnims = useRef(
     Array.from({ length: 20 }, () => new Animated.Value(0.3)),
   ).current;
@@ -59,25 +62,27 @@ export default function AudioWaveform({ isPlaying }: { isPlaying: boolean }) {
   );
 }
 
-const styles = StyleSheet.create({
-  waveformContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 10,
-    minHeight: 50,
-  },
-  audioWaveContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 2,
-    paddingHorizontal: 20,
-  },
-  waveBar: {
-    width: 3,
-    backgroundColor: Colors.primaryAccentColor,
-    borderRadius: 1.5,
-    opacity: 0.8,
-    minHeight: 8,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    waveformContainer: {
+      alignItems: "center",
+      justifyContent: "center",
+      marginVertical: 10,
+      minHeight: 50,
+    },
+    audioWaveContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      paddingHorizontal: 20,
+    },
+    waveBar: {
+      width: 3,
+      backgroundColor: c.primaryAccentColor,
+      borderRadius: 1.5,
+      opacity: 0.8,
+      minHeight: 8,
+    },
+  });
+}

@@ -3,7 +3,8 @@ import { ThemedText } from "@/components/themed-text";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { COURSE_DATA } from "@/constants/CourseData";
-import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
+import { FontFamily, Radius, Shadow, Spacing, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { haptics } from "@/lib/haptics";
 import { getAllProgress } from "@/lib/lessonProgress";
 import { ChapterUnlock, getCourseUnlocks } from "@/lib/stepProgress";
@@ -12,7 +13,7 @@ import { useUserName } from "@/lib/user";
 import { useXP } from "@/lib/xp";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useFocusEffect } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   Image,
   Pressable,
@@ -39,7 +40,6 @@ function getNextChapter(completedIds: Set<number>): { id: number; title: string;
       return { id: ch.id, title: cleanTitle, hanzi: firstHanzi };
     }
   }
-  // All done — return chapter 30 as celebration
   const last = COURSE_DATA.chapters.find((c) => c.id === 30);
   return {
     id: 30,
@@ -48,16 +48,16 @@ function getNextChapter(completedIds: Set<number>): { id: number; title: string;
   };
 }
 
-// GitHub-style course map: each chapter is a row of step-squares. Because steps
-// unlock strictly in order, doneCount alone tells us which squares are green and
-// which one is current — no per-step state needed.
 function CourseMap({
   data,
   onOpen,
+  colors,
 }: {
   data: ChapterUnlock[];
   onOpen: (chapterId: number) => void;
+  colors: ThemeColors;
 }) {
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const rows = data.filter((c) => c.total > 0);
   if (rows.length === 0) return null;
 
@@ -102,9 +102,9 @@ function CourseMap({
             })}
           </View>
           {ch.passed ? (
-            <Ionicons name="checkmark-circle" size={16} color={Colors.successColor} />
+            <Ionicons name="checkmark-circle" size={16} color={colors.successColor} />
           ) : !ch.unlocked ? (
-            <Ionicons name="lock-closed" size={13} color={Colors.borderColorStrong} />
+            <Ionicons name="lock-closed" size={13} color={colors.borderColorStrong} />
           ) : null}
         </Pressable>
       ))}
@@ -113,6 +113,9 @@ function CourseMap({
 }
 
 export default function LessonsContent() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [progress, setProgress] = useState<Record<string, number>>({});
   const [courseMap, setCourseMap] = useState<ChapterUnlock[]>([]);
   const { xp, refresh: refreshXP } = useXP();
@@ -147,7 +150,6 @@ export default function LessonsContent() {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
-      {/* Watermark */}
       <View pointerEvents="none" style={styles.watermarkContainer}>
         <ThemedText style={styles.watermark}>学</ThemedText>
       </View>
@@ -156,7 +158,6 @@ export default function LessonsContent() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* Hero with Aman */}
         <View style={styles.heroBlock}>
           <View style={styles.amanRow}>
             <View style={styles.amanAvatar}>
@@ -179,7 +180,7 @@ export default function LessonsContent() {
                 router.push("/(tabs)/profile");
               }}
             >
-              <Ionicons name="trophy" size={14} color={Colors.warningColor} />
+              <Ionicons name="trophy" size={14} color={colors.warningColor} />
               <AnimatedCounter value={xp} style={styles.headerChipValue} />
               <ThemedText style={styles.headerChipUnit}>XP</ThemedText>
             </Pressable>
@@ -200,7 +201,6 @@ export default function LessonsContent() {
           </View>
         </View>
 
-        {/* Stats chips */}
         <View style={styles.statsRow}>
           <View style={styles.statChip}>
             <AnimatedCounter value={completedChapterIds.size} style={styles.statValue} />
@@ -218,7 +218,6 @@ export default function LessonsContent() {
           </View>
         </View>
 
-        {/* Hero "Continue" card */}
         <TouchableOpacity
           style={styles.heroCard}
           activeOpacity={0.9}
@@ -247,12 +246,11 @@ export default function LessonsContent() {
               <ThemedText style={styles.heroActionText}>
                 {isStarting ? "Başla" : "Dowam et"}
               </ThemedText>
-              <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
+              <Ionicons name="arrow-forward" size={18} color={colors.textInverse} />
             </View>
           </View>
         </TouchableOpacity>
 
-        {/* Quick links row */}
         <View style={styles.quickRow}>
           <TouchableOpacity
             style={styles.quickCard}
@@ -262,8 +260,8 @@ export default function LessonsContent() {
             }}
             activeOpacity={0.85}
           >
-            <View style={[styles.quickIcon, { backgroundColor: Colors.primaryAccentBg }]}>
-              <Ionicons name="book-outline" size={22} color={Colors.primaryAccentColor} />
+            <View style={[styles.quickIcon, { backgroundColor: colors.primaryAccentBg }]}>
+              <Ionicons name="book-outline" size={22} color={colors.primaryAccentColor} />
             </View>
             <ThemedText style={styles.quickTitle}>Sapaklar</ThemedText>
             <ThemedText style={styles.quickSubtitle}>0–30</ThemedText>
@@ -277,8 +275,8 @@ export default function LessonsContent() {
             }}
             activeOpacity={0.85}
           >
-            <View style={[styles.quickIcon, { backgroundColor: Colors.successBg }]}>
-              <Ionicons name="hand-left-outline" size={22} color={Colors.successColor} />
+            <View style={[styles.quickIcon, { backgroundColor: colors.successBg }]}>
+              <Ionicons name="hand-left-outline" size={22} color={colors.successColor} />
             </View>
             <ThemedText style={styles.quickTitle}>Hoş geldiňiz</ThemedText>
             <ThemedText style={styles.quickSubtitle}>Başlangyç</ThemedText>
@@ -292,15 +290,14 @@ export default function LessonsContent() {
             }}
             activeOpacity={0.85}
           >
-            <View style={[styles.quickIcon, { backgroundColor: Colors.surfaceTertiary }]}>
-              <Ionicons name="settings-outline" size={22} color={Colors.textSecondary} />
+            <View style={[styles.quickIcon, { backgroundColor: colors.surfaceTertiary }]}>
+              <Ionicons name="settings-outline" size={22} color={colors.textSecondary} />
             </View>
             <ThemedText style={styles.quickTitle}>Sazlamalar</ThemedText>
             <ThemedText style={styles.quickSubtitle}>Tertibi</ThemedText>
           </TouchableOpacity>
         </View>
 
-        {/* GitHub-style course map */}
         <CourseMap
           data={courseMap}
           onOpen={(chapterId) => {
@@ -310,304 +307,306 @@ export default function LessonsContent() {
               params: { chapterId: String(chapterId) },
             });
           }}
+          colors={colors}
         />
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: Colors.surfacePrimary },
-  watermarkContainer: {
-    position: "absolute",
-    top: 60,
-    right: -40,
-    opacity: 0.04,
-  },
-  watermark: {
-    fontFamily: FontFamily.bold,
-    fontSize: 320,
-    color: Colors.primaryAccentColor,
-    lineHeight: 320,
-  },
-  scrollContent: {
-    paddingHorizontal: Spacing["2xl"],
-    paddingBottom: 32,
-  },
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    safeArea: { flex: 1, backgroundColor: c.surfacePrimary },
+    watermarkContainer: {
+      position: "absolute",
+      top: 60,
+      right: -40,
+      opacity: 0.04,
+    },
+    watermark: {
+      fontFamily: FontFamily.bold,
+      fontSize: 320,
+      color: c.primaryAccentColor,
+      lineHeight: 320,
+    },
+    scrollContent: {
+      paddingHorizontal: Spacing["2xl"],
+      paddingBottom: 32,
+    },
 
-  heroBlock: {
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
-  amanRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    marginBottom: 14,
-  },
-  amanAvatar: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    backgroundColor: Colors.primaryAccentBg,
-    borderWidth: 2,
-    borderColor: Colors.primaryAccentColor,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-  },
-  amanImg: { width: "100%", height: "100%", resizeMode: "cover" },
-  speechBubble: {
-    flex: 1,
-    backgroundColor: Colors.surfaceSecondary,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: Radius.lg,
-    position: "relative",
-  },
-  bubbleTail: {
-    position: "absolute",
-    left: -8,
-    top: 20,
-    width: 0,
-    height: 0,
-    borderTopWidth: 8,
-    borderTopColor: "transparent",
-    borderBottomWidth: 8,
-    borderBottomColor: "transparent",
-    borderRightWidth: 10,
-    borderRightColor: Colors.surfaceSecondary,
-  },
-  heroChipsRow: {
-    flexDirection: "row",
-    gap: 8,
-  },
-  headerChip: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 5,
-    backgroundColor: Colors.surfacePrimary,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: Radius.pill,
-    ...Shadow.sm,
-  },
-  headerChipValue: {
-    fontFamily: FontFamily.bold,
-    fontSize: 14,
-    color: Colors.textPrimary,
-  },
-  headerChipUnit: {
-    fontFamily: FontFamily.medium,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-  },
-  streakFire: { fontSize: 14 },
-  greeting: {
-    fontFamily: FontFamily.bold,
-    fontSize: 20,
-    lineHeight: 26,
-    letterSpacing: -0.3,
-    color: Colors.textPrimary,
-    marginBottom: 2,
-  },
-  subtitle: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.textSecondary,
-  },
+    heroBlock: {
+      paddingTop: 20,
+      paddingBottom: 20,
+    },
+    amanRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      marginBottom: 14,
+    },
+    amanAvatar: {
+      width: 72,
+      height: 72,
+      borderRadius: 36,
+      backgroundColor: c.primaryAccentBg,
+      borderWidth: 2,
+      borderColor: c.primaryAccentColor,
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden",
+    },
+    amanImg: { width: "100%", height: "100%", resizeMode: "cover" },
+    speechBubble: {
+      flex: 1,
+      backgroundColor: c.surfaceSecondary,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      borderRadius: Radius.lg,
+      position: "relative",
+    },
+    bubbleTail: {
+      position: "absolute",
+      left: -8,
+      top: 20,
+      width: 0,
+      height: 0,
+      borderTopWidth: 8,
+      borderTopColor: "transparent",
+      borderBottomWidth: 8,
+      borderBottomColor: "transparent",
+      borderRightWidth: 10,
+      borderRightColor: c.surfaceSecondary,
+    },
+    heroChipsRow: {
+      flexDirection: "row",
+      gap: 8,
+    },
+    headerChip: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 5,
+      backgroundColor: c.surfacePrimary,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      borderRadius: Radius.pill,
+      ...Shadow.sm,
+    },
+    headerChipValue: {
+      fontFamily: FontFamily.bold,
+      fontSize: 14,
+      color: c.textPrimary,
+    },
+    headerChipUnit: {
+      fontFamily: FontFamily.medium,
+      fontSize: 11,
+      color: c.subduedTextColor,
+    },
+    streakFire: { fontSize: 14 },
+    greeting: {
+      fontFamily: FontFamily.bold,
+      fontSize: 20,
+      lineHeight: 26,
+      letterSpacing: -0.3,
+      color: c.textPrimary,
+      marginBottom: 2,
+    },
+    subtitle: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.textSecondary,
+    },
 
-  statsRow: {
-    flexDirection: "row",
-    backgroundColor: Colors.surfaceSecondary,
-    borderRadius: Radius.lg,
-    paddingVertical: 14,
-    marginBottom: 20,
-    alignItems: "center",
-  },
-  statChip: {
-    flex: 1,
-    alignItems: "center",
-  },
-  statValue: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    lineHeight: 26,
-    color: Colors.primaryAccentColor,
-    letterSpacing: -0.3,
-  },
-  statLabel: {
-    fontFamily: FontFamily.medium,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-    marginTop: 2,
-  },
-  statDivider: {
-    width: 1,
-    height: 28,
-    backgroundColor: Colors.borderColor,
-  },
+    statsRow: {
+      flexDirection: "row",
+      backgroundColor: c.surfaceSecondary,
+      borderRadius: Radius.lg,
+      paddingVertical: 14,
+      marginBottom: 20,
+      alignItems: "center",
+    },
+    statChip: {
+      flex: 1,
+      alignItems: "center",
+    },
+    statValue: {
+      fontFamily: FontFamily.bold,
+      fontSize: 22,
+      lineHeight: 26,
+      color: c.primaryAccentColor,
+      letterSpacing: -0.3,
+    },
+    statLabel: {
+      fontFamily: FontFamily.medium,
+      fontSize: 11,
+      color: c.subduedTextColor,
+      marginTop: 2,
+    },
+    statDivider: {
+      width: 1,
+      height: 28,
+      backgroundColor: c.borderColor,
+    },
 
-  heroCard: {
-    flexDirection: "row",
-    backgroundColor: Colors.primaryAccentColor,
-    borderRadius: Radius.xl,
-    overflow: "hidden",
-    marginBottom: 24,
-    minHeight: 160,
-    ...Shadow.md,
-  },
-  heroBg: {
-    width: 140,
-    backgroundColor: Colors.primaryAccentColorDark,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  heroHanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 76,
-    lineHeight: 84,
-    color: "rgba(255,255,255,0.95)",
-    textAlign: "center",
-  },
-  heroContent: {
-    flex: 1,
-    padding: 18,
-    justifyContent: "space-between",
-  },
-  heroLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    color: "rgba(255,255,255,0.75)",
-    textTransform: "uppercase",
-    letterSpacing: 1.2,
-  },
-  heroChapter: {
-    fontFamily: FontFamily.bold,
-    fontSize: 13,
-    color: "rgba(255,255,255,0.85)",
-    letterSpacing: 0.5,
-    marginTop: 2,
-  },
-  heroTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 19,
-    lineHeight: 24,
-    color: Colors.textInverse,
-    marginTop: 6,
-    marginBottom: 12,
-  },
-  heroAction: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    alignSelf: "flex-start",
-    backgroundColor: "rgba(255,255,255,0.18)",
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: Radius.pill,
-  },
-  heroActionText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 13,
-    color: Colors.textInverse,
-  },
+    heroCard: {
+      flexDirection: "row",
+      backgroundColor: c.primaryAccentColor,
+      borderRadius: Radius.xl,
+      overflow: "hidden",
+      marginBottom: 24,
+      minHeight: 160,
+      ...Shadow.md,
+    },
+    heroBg: {
+      width: 140,
+      backgroundColor: c.primaryAccentColorDark,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    heroHanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 76,
+      lineHeight: 84,
+      color: "rgba(255,255,255,0.95)",
+      textAlign: "center",
+    },
+    heroContent: {
+      flex: 1,
+      padding: 18,
+      justifyContent: "space-between",
+    },
+    heroLabel: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 11,
+      color: "rgba(255,255,255,0.75)",
+      textTransform: "uppercase",
+      letterSpacing: 1.2,
+    },
+    heroChapter: {
+      fontFamily: FontFamily.bold,
+      fontSize: 13,
+      color: "rgba(255,255,255,0.85)",
+      letterSpacing: 0.5,
+      marginTop: 2,
+    },
+    heroTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 19,
+      lineHeight: 24,
+      color: c.textInverse,
+      marginTop: 6,
+      marginBottom: 12,
+    },
+    heroAction: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 6,
+      alignSelf: "flex-start",
+      backgroundColor: "rgba(255,255,255,0.18)",
+      paddingHorizontal: 14,
+      paddingVertical: 8,
+      borderRadius: Radius.pill,
+    },
+    heroActionText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 13,
+      color: c.textInverse,
+    },
 
-  quickRow: {
-    flexDirection: "row",
-    gap: 10,
-    marginBottom: 24,
-  },
-  quickCard: {
-    flex: 1,
-    backgroundColor: Colors.surfacePrimary,
-    borderRadius: Radius.lg,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    paddingVertical: 14,
-    paddingHorizontal: 12,
-    alignItems: "center",
-    ...Shadow.sm,
-  },
-  quickIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: Radius.md,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 8,
-  },
-  quickTitle: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 13,
-    color: Colors.textPrimary,
-    textAlign: "center",
-  },
-  quickSubtitle: {
-    fontFamily: FontFamily.regular,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-    marginTop: 1,
-  },
+    quickRow: {
+      flexDirection: "row",
+      gap: 10,
+      marginBottom: 24,
+    },
+    quickCard: {
+      flex: 1,
+      backgroundColor: c.surfacePrimary,
+      borderRadius: Radius.lg,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      paddingVertical: 14,
+      paddingHorizontal: 12,
+      alignItems: "center",
+      ...Shadow.sm,
+    },
+    quickIcon: {
+      width: 40,
+      height: 40,
+      borderRadius: Radius.md,
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 8,
+    },
+    quickTitle: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 13,
+      color: c.textPrimary,
+      textAlign: "center",
+    },
+    quickSubtitle: {
+      fontFamily: FontFamily.regular,
+      fontSize: 11,
+      color: c.subduedTextColor,
+      marginTop: 1,
+    },
 
-  // Course map (GitHub-style)
-  mapSection: {
-    backgroundColor: Colors.surfaceSecondary,
-    borderRadius: Radius.lg,
-    padding: 16,
-  },
-  mapHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 14,
-  },
-  mapTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 16,
-    color: Colors.textPrimary,
-  },
-  legendRow: { flexDirection: "row", alignItems: "center", gap: 5 },
-  legendDot: { width: 10, height: 10, borderRadius: 3 },
-  legendText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-    marginRight: 4,
-  },
-  mapRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 6,
-    gap: 10,
-  },
-  mapRowLocked: { opacity: 0.55 },
-  mapRowLabel: {
-    fontFamily: FontFamily.bold,
-    fontSize: 12,
-    color: Colors.subduedTextColor,
-    width: 22,
-    textAlign: "right",
-  },
-  squares: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 4,
-  },
-  square: {
-    width: 14,
-    height: 14,
-    borderRadius: 3,
-    backgroundColor: Colors.borderColor,
-  },
-  squareDone: { backgroundColor: Colors.successColor },
-  squareCurrent: {
-    backgroundColor: Colors.primaryAccentBg,
-    borderWidth: 1.5,
-    borderColor: Colors.primaryAccentColor,
-  },
-  squareLocked: { backgroundColor: Colors.borderColor },
-});
+    mapSection: {
+      backgroundColor: c.surfaceSecondary,
+      borderRadius: Radius.lg,
+      padding: 16,
+    },
+    mapHeader: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 14,
+    },
+    mapTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 16,
+      color: c.textPrimary,
+    },
+    legendRow: { flexDirection: "row", alignItems: "center", gap: 5 },
+    legendDot: { width: 10, height: 10, borderRadius: 3 },
+    legendText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 11,
+      color: c.subduedTextColor,
+      marginRight: 4,
+    },
+    mapRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 6,
+      gap: 10,
+    },
+    mapRowLocked: { opacity: 0.55 },
+    mapRowLabel: {
+      fontFamily: FontFamily.bold,
+      fontSize: 12,
+      color: c.subduedTextColor,
+      width: 22,
+      textAlign: "right",
+    },
+    squares: {
+      flex: 1,
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 4,
+    },
+    square: {
+      width: 14,
+      height: 14,
+      borderRadius: 3,
+      backgroundColor: c.borderColor,
+    },
+    squareDone: { backgroundColor: c.successColor },
+    squareCurrent: {
+      backgroundColor: c.primaryAccentBg,
+      borderWidth: 1.5,
+      borderColor: c.primaryAccentColor,
+    },
+    squareLocked: { backgroundColor: c.borderColor },
+  });
+}

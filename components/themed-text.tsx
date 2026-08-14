@@ -1,7 +1,7 @@
 import { StyleSheet, Text, type TextProps } from "react-native";
 
 import { useThemeColor } from "@/hooks/use-theme-color";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily } from "@/constants/theme";
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
@@ -20,12 +20,13 @@ export function ThemedText({
   ...rest
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+  const linkColor = useThemeColor({}, "tint");
 
   return (
     <Text
       maxFontSizeMultiplier={maxFontSizeMultiplier}
       style={[
-        { color },
+        { color: type === "link" ? linkColor : color },
         type === "default" ? styles.default : undefined,
         type === "title" ? styles.title : undefined,
         type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
@@ -64,6 +65,5 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.medium,
     fontSize: 16,
     lineHeight: 24,
-    color: Colors.primaryAccentColor,
   },
 });

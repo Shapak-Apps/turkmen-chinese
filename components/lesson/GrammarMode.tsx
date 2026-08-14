@@ -2,9 +2,10 @@ import {
   GrammarExample,
   GrammarPractice,
 } from "@/constants/CourseData";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { T } from "@/lib/strings";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Pressable,
   ScrollView,
@@ -27,6 +28,9 @@ export default function GrammarMode({
   practice: GrammarPractice[];
   onAnswer: (correct: boolean) => void;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [showPractice, setShowPractice] = useState(false);
   const [currentPracticeIndex, setCurrentPracticeIndex] = useState(0);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -65,16 +69,16 @@ export default function GrammarMode({
   const getOptionStyle = (id: number) => {
     if (!answered) {
       return id === selectedId
-        ? { borderColor: Colors.primaryAccentColor, backgroundColor: Colors.primaryAccentBg }
-        : { borderColor: Colors.borderColor, backgroundColor: Colors.surfacePrimary };
+        ? { borderColor: colors.primaryAccentColor, backgroundColor: colors.primaryAccentBg }
+        : { borderColor: colors.borderColor, backgroundColor: colors.surfacePrimary };
     }
     if (id === currentPractice.correctOptionId) {
-      return { borderColor: Colors.successColor, backgroundColor: Colors.successBg };
+      return { borderColor: colors.successColor, backgroundColor: colors.successBg };
     }
     if (id === selectedId && id !== currentPractice.correctOptionId) {
-      return { borderColor: Colors.primaryAccentColor, backgroundColor: Colors.primaryAccentBg };
+      return { borderColor: colors.primaryAccentColor, backgroundColor: colors.primaryAccentBg };
     }
-    return { borderColor: Colors.borderColor, backgroundColor: Colors.surfacePrimary, opacity: 0.5 };
+    return { borderColor: colors.borderColor, backgroundColor: colors.surfacePrimary, opacity: 0.5 };
   };
 
   if (!showPractice) {
@@ -102,7 +106,7 @@ export default function GrammarMode({
         </ScrollView>
 
         <TouchableOpacity
-          style={[styles.actionButton, { backgroundColor: Colors.primaryAccentColor }]}
+          style={[styles.actionButton, { backgroundColor: colors.primaryAccentColor }]}
           onPress={handleStartPractice}
           activeOpacity={0.85}
         >
@@ -144,7 +148,7 @@ export default function GrammarMode({
           styles.actionButton,
           {
             backgroundColor:
-              selectedId === null ? Colors.surfaceTertiary : Colors.primaryAccentColor,
+              selectedId === null ? colors.surfaceTertiary : colors.primaryAccentColor,
           },
         ]}
         onPress={answered ? handleNext : handleCheck}
@@ -154,7 +158,7 @@ export default function GrammarMode({
         <ThemedText
           style={[
             styles.actionButtonText,
-            { color: selectedId === null ? Colors.subduedTextColor : Colors.textInverse },
+            { color: selectedId === null ? colors.subduedTextColor : colors.textInverse },
           ]}
         >
           {answered
@@ -168,98 +172,100 @@ export default function GrammarMode({
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, paddingHorizontal: 20 },
-  scrollView: { flex: 1 },
-  ruleTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 24,
-    color: Colors.textPrimary,
-    letterSpacing: -0.4,
-    textAlign: "center",
-    marginVertical: 18,
-  },
-  explanationCard: {
-    backgroundColor: Colors.surfaceSecondary,
-    padding: 18,
-    borderRadius: 14,
-    marginBottom: 18,
-  },
-  explanationText: {
-    fontFamily: FontFamily.regular,
-    fontSize: 15,
-    lineHeight: 22,
-    color: Colors.textSecondary,
-  },
-  examplesSection: { marginBottom: 18 },
-  examplesLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 12,
-    color: Colors.subduedTextColor,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-    marginBottom: 10,
-  },
-  exampleCard: {
-    padding: 14,
-    borderRadius: 12,
-    backgroundColor: Colors.primaryAccentBg,
-    marginBottom: 10,
-  },
-  exampleHanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 20,
-    color: Colors.primaryAccentColor,
-    marginBottom: 4,
-  },
-  examplePinyin: {
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.textPrimary,
-    marginBottom: 4,
-  },
-  exampleEnglish: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-  practiceProgress: { alignItems: "center", paddingVertical: 12 },
-  practiceProgressText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 12,
-    color: Colors.subduedTextColor,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-  },
-  practiceQuestion: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    lineHeight: 26,
-    color: Colors.textPrimary,
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  practiceOption: {
-    padding: 16,
-    borderRadius: 12,
-    borderWidth: 1.5,
-    marginBottom: 10,
-  },
-  practiceOptionText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 15,
-    color: Colors.textPrimary,
-  },
-  actionButton: {
-    paddingVertical: 16,
-    borderRadius: 14,
-    alignItems: "center",
-    marginTop: 16,
-    marginBottom: 20,
-  },
-  actionButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-    color: Colors.textInverse,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: { flex: 1, paddingHorizontal: 20 },
+    scrollView: { flex: 1 },
+    ruleTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 24,
+      color: c.textPrimary,
+      letterSpacing: -0.4,
+      textAlign: "center",
+      marginVertical: 18,
+    },
+    explanationCard: {
+      backgroundColor: c.surfaceSecondary,
+      padding: 18,
+      borderRadius: 14,
+      marginBottom: 18,
+    },
+    explanationText: {
+      fontFamily: FontFamily.regular,
+      fontSize: 15,
+      lineHeight: 22,
+      color: c.textSecondary,
+    },
+    examplesSection: { marginBottom: 18 },
+    examplesLabel: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 12,
+      color: c.subduedTextColor,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+      marginBottom: 10,
+    },
+    exampleCard: {
+      padding: 14,
+      borderRadius: 12,
+      backgroundColor: c.primaryAccentBg,
+      marginBottom: 10,
+    },
+    exampleHanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 20,
+      color: c.primaryAccentColor,
+      marginBottom: 4,
+    },
+    examplePinyin: {
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.textPrimary,
+      marginBottom: 4,
+    },
+    exampleEnglish: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+    practiceProgress: { alignItems: "center", paddingVertical: 12 },
+    practiceProgressText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 12,
+      color: c.subduedTextColor,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+    },
+    practiceQuestion: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      lineHeight: 26,
+      color: c.textPrimary,
+      textAlign: "center",
+      marginBottom: 20,
+    },
+    practiceOption: {
+      padding: 16,
+      borderRadius: 12,
+      borderWidth: 1.5,
+      marginBottom: 10,
+    },
+    practiceOptionText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 15,
+      color: c.textPrimary,
+    },
+    actionButton: {
+      paddingVertical: 16,
+      borderRadius: 14,
+      alignItems: "center",
+      marginTop: 16,
+      marginBottom: 20,
+    },
+    actionButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+      color: c.textInverse,
+    },
+  });
+}

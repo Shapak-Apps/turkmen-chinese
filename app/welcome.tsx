@@ -1,18 +1,23 @@
 import { ThemedText } from "@/components/themed-text";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
-import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
+import { FontFamily, Radius, Shadow, Spacing, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
 import { router } from "expo-router";
+import { useMemo } from "react";
 import { Image, Pressable, StyleSheet, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function WelcomeScreen() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <View style={styles.header}>
         <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton} accessibilityRole="button" accessibilityLabel={T.a11y.back}>
-          <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
+          <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
         </Pressable>
         <View style={styles.headerTitleContainer}>
           <ThemedText style={styles.headerTitle}>Hoş geldiňiz</ThemedText>
@@ -38,8 +43,8 @@ export default function WelcomeScreen() {
           activeOpacity={0.85}
           onPress={() => router.push("/about-app")}
         >
-          <View style={[styles.iconContainer, { backgroundColor: Colors.primaryAccentBg }]}>
-            <Ionicons name="information-circle-outline" size={26} color={Colors.primaryAccentColor} />
+          <View style={[styles.iconContainer, { backgroundColor: colors.primaryAccentBg }]}>
+            <Ionicons name="information-circle-outline" size={26} color={colors.primaryAccentColor} />
           </View>
           <View style={styles.cardContent}>
             <ThemedText style={styles.cardTitle}>Programma hakynda</ThemedText>
@@ -47,7 +52,7 @@ export default function WelcomeScreen() {
               Nädip ulanmaly, sapaklaryň gurluşy
             </ThemedText>
           </View>
-          <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
+          <Ionicons name="chevron-forward" size={18} color={colors.subduedTextColor} />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -55,8 +60,8 @@ export default function WelcomeScreen() {
           activeOpacity={0.85}
           onPress={() => router.push("/about-chinese")}
         >
-          <View style={[styles.iconContainer, { backgroundColor: Colors.successBg }]}>
-            <Ionicons name="language-outline" size={26} color={Colors.successColor} />
+          <View style={[styles.iconContainer, { backgroundColor: colors.successBg }]}>
+            <Ionicons name="language-outline" size={26} color={colors.successColor} />
           </View>
           <View style={styles.cardContent}>
             <ThemedText style={styles.cardTitle}>Hytaý dili hakynda</ThemedText>
@@ -64,110 +69,112 @@ export default function WelcomeScreen() {
               Mandarin, tonlar, pinýin, öwrenmegiň ýollary
             </ThemedText>
           </View>
-          <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
+          <Ionicons name="chevron-forward" size={18} color={colors.subduedTextColor} />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.surfacePrimary,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: Spacing.lg,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.divider,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  headerTitleContainer: {
-    flex: 1,
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: Spacing["2xl"],
-    paddingTop: Spacing["2xl"],
-    gap: 12,
-  },
-  amanIntro: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 14,
-    paddingBottom: 8,
-    marginBottom: 4,
-  },
-  amanCircle: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: Colors.primaryAccentBg,
-    borderWidth: 2,
-    borderColor: Colors.primaryAccentColor,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-  },
-  amanImg: { width: "100%", height: "100%", resizeMode: "cover" },
-  amanText: { flex: 1 },
-  amanGreeting: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-    letterSpacing: -0.3,
-  },
-  amanSub: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-    marginTop: 2,
-  },
-  card: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-    borderRadius: Radius.lg,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    backgroundColor: Colors.surfacePrimary,
-    gap: 14,
-    ...Shadow.sm,
-  },
-  iconContainer: {
-    width: 44,
-    height: 44,
-    borderRadius: Radius.md,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  cardContent: {
-    flex: 1,
-  },
-  cardTitle: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-    color: Colors.textPrimary,
-    marginBottom: 2,
-  },
-  cardSubtitle: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: c.surfacePrimary,
+    },
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: Spacing.lg,
+      paddingVertical: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: c.divider,
+    },
+    backButton: {
+      width: 40,
+      height: 40,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    headerTitleContainer: {
+      flex: 1,
+      alignItems: "center",
+    },
+    headerTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.textPrimary,
+    },
+    content: {
+      flex: 1,
+      paddingHorizontal: Spacing["2xl"],
+      paddingTop: Spacing["2xl"],
+      gap: 12,
+    },
+    amanIntro: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 14,
+      paddingBottom: 8,
+      marginBottom: 4,
+    },
+    amanCircle: {
+      width: 64,
+      height: 64,
+      borderRadius: 32,
+      backgroundColor: c.primaryAccentBg,
+      borderWidth: 2,
+      borderColor: c.primaryAccentColor,
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden",
+    },
+    amanImg: { width: "100%", height: "100%", resizeMode: "cover" },
+    amanText: { flex: 1 },
+    amanGreeting: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.textPrimary,
+      letterSpacing: -0.3,
+    },
+    amanSub: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.subduedTextColor,
+      marginTop: 2,
+    },
+    card: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 16,
+      paddingHorizontal: 16,
+      borderRadius: Radius.lg,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      backgroundColor: c.surfacePrimary,
+      gap: 14,
+      ...Shadow.sm,
+    },
+    iconContainer: {
+      width: 44,
+      height: 44,
+      borderRadius: Radius.md,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    cardContent: {
+      flex: 1,
+    },
+    cardTitle: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+      color: c.textPrimary,
+      marginBottom: 2,
+    },
+    cardSubtitle: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+  });
+}

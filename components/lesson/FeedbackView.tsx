@@ -1,7 +1,9 @@
 import { SpeakingOption } from "@/constants/CourseData";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useMemo } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { ThemedText } from "../themed-text";
 
@@ -22,6 +24,9 @@ export function FeedbackView({
   maxAttempts: number;
   transcription?: { expected: string; said: string };
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const showRetryButton = onRetry && !isCorrect && attemptCount < maxAttempts;
   const showCorrectAnswer = !isCorrect && attemptCount >= maxAttempts;
 
@@ -30,8 +35,8 @@ export function FeedbackView({
       style={[
         styles.container,
         {
-          backgroundColor: isCorrect ? Colors.successBg : Colors.primaryAccentBg,
-          borderColor: isCorrect ? Colors.successColor : Colors.primaryAccentColor,
+          backgroundColor: isCorrect ? colors.successBg : colors.primaryAccentBg,
+          borderColor: isCorrect ? colors.successColor : colors.primaryAccentColor,
         },
       ]}
     >
@@ -39,7 +44,7 @@ export function FeedbackView({
         <Ionicons
           name={isCorrect ? "checkmark-circle" : "close-circle"}
           size={36}
-          color={isCorrect ? Colors.successColor : Colors.primaryAccentColor}
+          color={isCorrect ? colors.successColor : colors.primaryAccentColor}
         />
         <View style={styles.headerText}>
           <ThemedText style={styles.title}>
@@ -75,7 +80,7 @@ export function FeedbackView({
             <ThemedText
               style={[
                 styles.transcriptionText,
-                { color: isCorrect ? Colors.successColor : Colors.primaryAccentColor },
+                { color: isCorrect ? colors.successColor : colors.primaryAccentColor },
               ]}
             >
               {transcription.said.charAt(0).toUpperCase() +
@@ -91,7 +96,7 @@ export function FeedbackView({
             <Ionicons
               name="bulb-outline"
               size={18}
-              color={Colors.successColor}
+              color={colors.successColor}
             />
             <ThemedText style={styles.correctAnswerLabel}>
               {T.feedback.correctResponse}
@@ -121,7 +126,7 @@ export function FeedbackView({
               onPress={onRetry}
               activeOpacity={0.85}
             >
-              <Ionicons name="refresh" size={18} color={Colors.textInverse} />
+              <Ionicons name="refresh" size={18} color={colors.textInverse} />
               <ThemedText style={styles.retryButtonText}>
                 {T.feedback.tryAgainLeft(maxAttempts - attemptCount)}
               </ThemedText>
@@ -146,7 +151,7 @@ export function FeedbackView({
             <ThemedText style={styles.continueButtonText}>
               {isCorrect ? T.common.continue : T.feedback.nextQuestion}
             </ThemedText>
-            <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
+            <Ionicons name="arrow-forward" size={18} color={colors.textInverse} />
           </TouchableOpacity>
         )}
       </View>
@@ -162,8 +167,8 @@ export function FeedbackView({
                   {
                     backgroundColor:
                       i < attemptCount
-                        ? Colors.primaryAccentColor
-                        : Colors.borderColorStrong,
+                        ? colors.primaryAccentColor
+                        : colors.borderColorStrong,
                   },
                 ]}
               />
@@ -175,123 +180,125 @@ export function FeedbackView({
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    borderRadius: 20,
-    borderWidth: 1.5,
-    padding: 20,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 14,
-    marginBottom: 18,
-  },
-  headerText: { flex: 1 },
-  title: {
-    fontFamily: FontFamily.bold,
-    fontSize: 20,
-    color: Colors.textPrimary,
-    marginBottom: 2,
-  },
-  subtitle: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    lineHeight: 18,
-    color: Colors.subduedTextColor,
-  },
-  correctAnswerSection: {
-    backgroundColor: Colors.surfacePrimary,
-    borderRadius: 14,
-    padding: 14,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-  },
-  correctAnswerHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    marginBottom: 10,
-  },
-  correctAnswerLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    textTransform: "uppercase",
-    letterSpacing: 0.8,
-    color: Colors.successColor,
-  },
-  correctAnswerContent: { gap: 6 },
-  correctAnswerEnglish: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.textPrimary,
-    marginBottom: 4,
-  },
-  correctAnswerMandarin: { gap: 2 },
-  correctAnswerHanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 20,
-    color: Colors.primaryAccentColor,
-  },
-  correctAnswerPinyin: {
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.textSecondary,
-  },
-  buttonContainer: { gap: 10 },
-  button: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    borderRadius: 14,
-    gap: 8,
-  },
-  retryButton: { backgroundColor: Colors.primaryAccentColor },
-  retryButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textInverse,
-  },
-  skipButton: {
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: Colors.borderColorStrong,
-  },
-  skipButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textSecondary,
-  },
-  continueButton: { backgroundColor: Colors.successColor },
-  continueButtonAlt: { backgroundColor: Colors.primaryAccentColor },
-  continueButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textInverse,
-  },
-  attemptIndicator: { marginTop: 14, alignItems: "center" },
-  attemptDots: { flexDirection: "row", gap: 6 },
-  attemptDot: { width: 7, height: 7, borderRadius: 4 },
-  transcriptionContainer: {
-    padding: 12,
-    backgroundColor: Colors.surfacePrimary,
-    borderRadius: 10,
-    marginBottom: 14,
-  },
-  transcriptionRow: { flexDirection: "row", marginBottom: 4 },
-  transcriptionLabel: {
-    fontFamily: FontFamily.semibold,
-    width: 80,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-  transcriptionText: {
-    flex: 1,
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.textPrimary,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: {
+      borderRadius: 20,
+      borderWidth: 1.5,
+      padding: 20,
+    },
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 14,
+      marginBottom: 18,
+    },
+    headerText: { flex: 1 },
+    title: {
+      fontFamily: FontFamily.bold,
+      fontSize: 20,
+      color: c.textPrimary,
+      marginBottom: 2,
+    },
+    subtitle: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      lineHeight: 18,
+      color: c.subduedTextColor,
+    },
+    correctAnswerSection: {
+      backgroundColor: c.surfacePrimary,
+      borderRadius: 14,
+      padding: 14,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+    },
+    correctAnswerHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 6,
+      marginBottom: 10,
+    },
+    correctAnswerLabel: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: 0.8,
+      color: c.successColor,
+    },
+    correctAnswerContent: { gap: 6 },
+    correctAnswerEnglish: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 14,
+      color: c.textPrimary,
+      marginBottom: 4,
+    },
+    correctAnswerMandarin: { gap: 2 },
+    correctAnswerHanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 20,
+      color: c.primaryAccentColor,
+    },
+    correctAnswerPinyin: {
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.textSecondary,
+    },
+    buttonContainer: { gap: 10 },
+    button: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 14,
+      paddingHorizontal: 20,
+      borderRadius: 14,
+      gap: 8,
+    },
+    retryButton: { backgroundColor: c.primaryAccentColor },
+    retryButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textInverse,
+    },
+    skipButton: {
+      backgroundColor: "transparent",
+      borderWidth: 1,
+      borderColor: c.borderColorStrong,
+    },
+    skipButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textSecondary,
+    },
+    continueButton: { backgroundColor: c.successColor },
+    continueButtonAlt: { backgroundColor: c.primaryAccentColor },
+    continueButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textInverse,
+    },
+    attemptIndicator: { marginTop: 14, alignItems: "center" },
+    attemptDots: { flexDirection: "row", gap: 6 },
+    attemptDot: { width: 7, height: 7, borderRadius: 4 },
+    transcriptionContainer: {
+      padding: 12,
+      backgroundColor: c.surfacePrimary,
+      borderRadius: 10,
+      marginBottom: 14,
+    },
+    transcriptionRow: { flexDirection: "row", marginBottom: 4 },
+    transcriptionLabel: {
+      fontFamily: FontFamily.semibold,
+      width: 80,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+    transcriptionText: {
+      flex: 1,
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.textPrimary,
+    },
+  });
+}

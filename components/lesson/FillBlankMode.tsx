@@ -1,8 +1,9 @@
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import * as Speech from "expo-speech";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -42,6 +43,9 @@ export default function FillBlankMode({
   options?: BlankOption[];
   onAnswer: (correct: boolean) => void;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -106,20 +110,20 @@ export default function FillBlankMode({
             const isSelected = selectedId === opt.id;
             const isThisCorrect = opt.hanzi === correctAnswer;
 
-            let bgColor = Colors.surfacePrimary;
-            let borderColor = Colors.borderColor;
+            let bgColor = colors.surfacePrimary;
+            let borderColor = colors.borderColor;
 
             if (answered) {
               if (isThisCorrect) {
-                bgColor = Colors.successBg;
-                borderColor = Colors.successColor;
+                bgColor = colors.successBg;
+                borderColor = colors.successColor;
               } else if (isSelected && !isThisCorrect) {
-                bgColor = Colors.primaryAccentBg;
-                borderColor = Colors.primaryAccentColor;
+                bgColor = colors.primaryAccentBg;
+                borderColor = colors.primaryAccentColor;
               }
             } else if (isSelected) {
-              borderColor = Colors.primaryAccentColor;
-              bgColor = Colors.primaryAccentBg;
+              borderColor = colors.primaryAccentColor;
+              bgColor = colors.primaryAccentBg;
             }
 
             return (
@@ -144,8 +148,8 @@ export default function FillBlankMode({
           styles.actionButton,
           {
             backgroundColor: answered
-              ? Colors.primaryAccentColor
-              : Colors.surfaceTertiary,
+              ? colors.primaryAccentColor
+              : colors.surfaceTertiary,
           },
         ]}
         onPress={handleContinue}
@@ -155,7 +159,7 @@ export default function FillBlankMode({
         <ThemedText
           style={[
             styles.actionButtonText,
-            { color: answered ? Colors.textInverse : Colors.subduedTextColor },
+            { color: answered ? colors.textInverse : colors.subduedTextColor },
           ]}
         >
           {T.common.continue}
@@ -165,82 +169,84 @@ export default function FillBlankMode({
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, paddingHorizontal: 20 },
-  instruction: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textPrimary,
-    textAlign: "center",
-    marginBottom: 18,
-    marginTop: 12,
-  },
-  sentenceCard: {
-    backgroundColor: Colors.primaryAccentBg,
-    padding: 24,
-    borderRadius: 16,
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  sentenceText: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    lineHeight: 30,
-    color: Colors.primaryAccentColor,
-    textAlign: "center",
-    marginBottom: 6,
-  },
-  pinyinText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.textSecondary,
-    textAlign: "center",
-  },
-  hintContainer: {
-    backgroundColor: Colors.warningBg,
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 16,
-  },
-  hintText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.warningColor,
-    textAlign: "center",
-  },
-  optionsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    marginBottom: 16,
-  },
-  optionButton: {
-    width: "48%",
-    padding: 18,
-    borderWidth: 1.5,
-    borderRadius: 14,
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  optionHanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 26,
-    color: Colors.primaryAccentColor,
-    marginBottom: 4,
-  },
-  optionPinyin: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-  actionButton: {
-    paddingVertical: 16,
-    borderRadius: 14,
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  actionButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: { flex: 1, paddingHorizontal: 20 },
+    instruction: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textPrimary,
+      textAlign: "center",
+      marginBottom: 18,
+      marginTop: 12,
+    },
+    sentenceCard: {
+      backgroundColor: c.primaryAccentBg,
+      padding: 24,
+      borderRadius: 16,
+      alignItems: "center",
+      marginBottom: 16,
+    },
+    sentenceText: {
+      fontFamily: FontFamily.bold,
+      fontSize: 22,
+      lineHeight: 30,
+      color: c.primaryAccentColor,
+      textAlign: "center",
+      marginBottom: 6,
+    },
+    pinyinText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      color: c.textSecondary,
+      textAlign: "center",
+    },
+    hintContainer: {
+      backgroundColor: c.warningBg,
+      padding: 12,
+      borderRadius: 10,
+      marginBottom: 16,
+    },
+    hintText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.warningColor,
+      textAlign: "center",
+    },
+    optionsGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+      marginBottom: 16,
+    },
+    optionButton: {
+      width: "48%",
+      padding: 18,
+      borderWidth: 1.5,
+      borderRadius: 14,
+      alignItems: "center",
+      marginBottom: 10,
+    },
+    optionHanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 26,
+      color: c.primaryAccentColor,
+      marginBottom: 4,
+    },
+    optionPinyin: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+    actionButton: {
+      paddingVertical: 16,
+      borderRadius: 14,
+      alignItems: "center",
+      marginBottom: 20,
+    },
+    actionButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+    },
+  });
+}

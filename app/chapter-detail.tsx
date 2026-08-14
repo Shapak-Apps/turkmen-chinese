@@ -2,7 +2,8 @@ import { THEORY_DATA } from "@/assets/data/theory_content";
 import { ThemedText } from "@/components/themed-text";
 import { CHAPTER_ILLUSTRATIONS } from "@/constants/ChapterIllustrations";
 import { COURSE_DATA } from "@/constants/CourseData";
-import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
+import { FontFamily, Radius, Shadow, Spacing, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { useBookmarks } from "@/lib/bookmarks";
 import { Events, track } from "@/lib/analytics";
 import { CourseStep, StepSubtype } from "@/lib/courseSteps";
@@ -15,7 +16,7 @@ import {
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -50,6 +51,8 @@ function StepRow({
   isLast: boolean;
   onPress: (step: CourseStep) => void;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const { step, state, done } = item;
   const locked = state === "locked";
   const current = state === "current";
@@ -77,11 +80,11 @@ function StepRow({
         />
         <View style={[styles.circle, circleStyle]}>
           {state === "done" ? (
-            <Ionicons name="checkmark" size={18} color={Colors.textInverse} />
+            <Ionicons name="checkmark" size={18} color={colors.textInverse} />
           ) : locked ? (
-            <Ionicons name="lock-closed" size={14} color={Colors.subduedTextColor} />
+            <Ionicons name="lock-closed" size={14} color={colors.subduedTextColor} />
           ) : (
-            <Ionicons name={STEP_ICONS[step.subtype]} size={16} color={Colors.textInverse} />
+            <Ionicons name={STEP_ICONS[step.subtype]} size={16} color={colors.textInverse} />
           )}
         </View>
         <View
@@ -120,12 +123,12 @@ function StepRow({
           ) : null}
         </View>
         {locked ? (
-          <Ionicons name="lock-closed" size={16} color={Colors.borderColorStrong} />
+          <Ionicons name="lock-closed" size={16} color={colors.borderColorStrong} />
         ) : (
           <Ionicons
             name="chevron-forward"
             size={18}
-            color={current ? Colors.primaryAccentColor : Colors.subduedTextColor}
+            color={current ? colors.primaryAccentColor : colors.subduedTextColor}
           />
         )}
       </Pressable>
@@ -134,6 +137,9 @@ function StepRow({
 }
 
 export default function ChapterDetailScreen() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const { chapterId } = useLocalSearchParams<{ chapterId: string }>();
   const id = chapterId != null ? Number(chapterId) : 1;
   const isPronunciation = id === 0;
@@ -212,7 +218,7 @@ export default function ChapterDetailScreen() {
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <View style={styles.header}>
         <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton} accessibilityRole="button" accessibilityLabel={T.a11y.back}>
-          <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
+          <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
         </Pressable>
         <View style={{ flex: 1 }} />
         <Pressable
@@ -229,7 +235,7 @@ export default function ChapterDetailScreen() {
             name={isBookmarked ? "bookmark" : "bookmark-outline"}
             size={22}
             color={
-              isBookmarked ? Colors.primaryAccentColor : Colors.textSecondary
+              isBookmarked ? colors.primaryAccentColor : colors.textSecondary
             }
           />
         </Pressable>
@@ -316,205 +322,207 @@ export default function ChapterDetailScreen() {
 
 const CIRCLE = 36;
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.surfacePrimary },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: Spacing.lg,
-    paddingVertical: 12,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  bookmarkButton: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  scrollContent: {
-    paddingHorizontal: Spacing["2xl"],
-    paddingBottom: 32,
-  },
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: { flex: 1, backgroundColor: c.surfacePrimary },
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: Spacing.lg,
+      paddingVertical: 12,
+    },
+    backButton: {
+      width: 40,
+      height: 40,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    bookmarkButton: {
+      width: 40,
+      height: 40,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    scrollContent: {
+      paddingHorizontal: Spacing["2xl"],
+      paddingBottom: 32,
+    },
 
-  // Hero
-  hero: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingTop: 8,
-    paddingBottom: 24,
-    gap: 16,
-  },
-  heroLeft: { flex: 1 },
-  heroIllustration: {
-    width: 80,
-    height: 80,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  unitChip: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-    marginBottom: 8,
-  },
-  chapterLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    color: Colors.primaryAccentColor,
-    textTransform: "uppercase",
-    letterSpacing: 1.2,
-    marginBottom: 6,
-  },
-  hanziTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 44,
-    lineHeight: 50,
-    color: Colors.primaryAccentColor,
-    letterSpacing: -1,
-  },
-  pinyinTitle: {
-    fontFamily: FontFamily.medium,
-    fontSize: 18,
-    color: Colors.textSecondary,
-    marginTop: 4,
-  },
-  translation: {
-    fontFamily: FontFamily.regular,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
-    marginTop: 2,
-  },
+    // Hero
+    hero: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingTop: 8,
+      paddingBottom: 24,
+      gap: 16,
+    },
+    heroLeft: { flex: 1 },
+    heroIllustration: {
+      width: 80,
+      height: 80,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    unitChip: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 11,
+      color: c.subduedTextColor,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+      marginBottom: 8,
+    },
+    chapterLabel: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 11,
+      color: c.primaryAccentColor,
+      textTransform: "uppercase",
+      letterSpacing: 1.2,
+      marginBottom: 6,
+    },
+    hanziTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 44,
+      lineHeight: 50,
+      color: c.primaryAccentColor,
+      letterSpacing: -1,
+    },
+    pinyinTitle: {
+      fontFamily: FontFamily.medium,
+      fontSize: 18,
+      color: c.textSecondary,
+      marginTop: 4,
+    },
+    translation: {
+      fontFamily: FontFamily.regular,
+      fontSize: 14,
+      color: c.subduedTextColor,
+      marginTop: 2,
+    },
 
-  // Stats row
-  statsRow: {
-    flexDirection: "row",
-    backgroundColor: Colors.surfaceSecondary,
-    borderRadius: Radius.lg,
-    paddingVertical: 14,
-    marginBottom: 24,
-    alignItems: "center",
-  },
-  statBox: {
-    flex: 1,
-    alignItems: "center",
-  },
-  statValue: {
-    fontFamily: FontFamily.bold,
-    fontSize: 20,
-    lineHeight: 24,
-    color: Colors.textPrimary,
-    letterSpacing: -0.3,
-  },
-  statLabel: {
-    fontFamily: FontFamily.medium,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-    marginTop: 2,
-  },
-  statSep: {
-    width: 1,
-    height: 24,
-    backgroundColor: Colors.borderColor,
-  },
+    // Stats row
+    statsRow: {
+      flexDirection: "row",
+      backgroundColor: c.surfaceSecondary,
+      borderRadius: Radius.lg,
+      paddingVertical: 14,
+      marginBottom: 24,
+      alignItems: "center",
+    },
+    statBox: {
+      flex: 1,
+      alignItems: "center",
+    },
+    statValue: {
+      fontFamily: FontFamily.bold,
+      fontSize: 20,
+      lineHeight: 24,
+      color: c.textPrimary,
+      letterSpacing: -0.3,
+    },
+    statLabel: {
+      fontFamily: FontFamily.medium,
+      fontSize: 11,
+      color: c.subduedTextColor,
+      marginTop: 2,
+    },
+    statSep: {
+      width: 1,
+      height: 24,
+      backgroundColor: c.borderColor,
+    },
 
-  // Lenta
-  lentaHeader: {
-    flexDirection: "row",
-    alignItems: "baseline",
-    justifyContent: "space-between",
-    marginBottom: 12,
-  },
-  lentaTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-  },
-  lentaProgress: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-  lenta: {},
-  stepRow: {
-    flexDirection: "row",
-    alignItems: "stretch",
-  },
-  railCol: {
-    width: CIRCLE,
-    alignItems: "center",
-  },
-  railLine: {
-    width: 2,
-    flex: 1,
-    backgroundColor: Colors.borderColor,
-  },
-  railLineTop: { minHeight: 8 },
-  railLineBottom: { minHeight: 8 },
-  railLineHidden: { backgroundColor: "transparent" },
-  railLineDone: { backgroundColor: Colors.successColor },
-  circle: {
-    width: CIRCLE,
-    height: CIRCLE,
-    borderRadius: CIRCLE / 2,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  circleDone: { backgroundColor: Colors.successColor },
-  circleCurrent: {
-    backgroundColor: Colors.primaryAccentColor,
-    shadowColor: Colors.primaryAccentColor,
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  circleLocked: {
-    backgroundColor: Colors.surfaceSecondary,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-  },
-  stepCard: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: 12,
-    marginVertical: 5,
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderRadius: Radius.lg,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    backgroundColor: Colors.surfacePrimary,
-    gap: 10,
-    ...Shadow.sm,
-  },
-  stepCardCurrent: {
-    borderColor: Colors.primaryAccentColor,
-    backgroundColor: Colors.primaryAccentBg,
-  },
-  stepCardLocked: {
-    backgroundColor: Colors.surfaceSecondary,
-    borderColor: Colors.divider,
-    ...({ shadowOpacity: 0, elevation: 0 } as object),
-  },
-  stepCardContent: { flex: 1 },
-  stepLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-    color: Colors.textPrimary,
-  },
-  stepLabelLocked: { color: Colors.subduedTextColor },
-  stepSubtitle: {
-    fontFamily: FontFamily.regular,
-    fontSize: 12,
-    color: Colors.subduedTextColor,
-    marginTop: 2,
-  },
-});
+    // Lenta
+    lentaHeader: {
+      flexDirection: "row",
+      alignItems: "baseline",
+      justifyContent: "space-between",
+      marginBottom: 12,
+    },
+    lentaTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.textPrimary,
+    },
+    lentaProgress: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+    lenta: {},
+    stepRow: {
+      flexDirection: "row",
+      alignItems: "stretch",
+    },
+    railCol: {
+      width: CIRCLE,
+      alignItems: "center",
+    },
+    railLine: {
+      width: 2,
+      flex: 1,
+      backgroundColor: c.borderColor,
+    },
+    railLineTop: { minHeight: 8 },
+    railLineBottom: { minHeight: 8 },
+    railLineHidden: { backgroundColor: "transparent" },
+    railLineDone: { backgroundColor: c.successColor },
+    circle: {
+      width: CIRCLE,
+      height: CIRCLE,
+      borderRadius: CIRCLE / 2,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    circleDone: { backgroundColor: c.successColor },
+    circleCurrent: {
+      backgroundColor: c.primaryAccentColor,
+      shadowColor: c.primaryAccentColor,
+      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity: 0.3,
+      shadowRadius: 6,
+      elevation: 4,
+    },
+    circleLocked: {
+      backgroundColor: c.surfaceSecondary,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+    },
+    stepCard: {
+      flex: 1,
+      flexDirection: "row",
+      alignItems: "center",
+      marginLeft: 12,
+      marginVertical: 5,
+      paddingVertical: 14,
+      paddingHorizontal: 16,
+      borderRadius: Radius.lg,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      backgroundColor: c.surfacePrimary,
+      gap: 10,
+      ...Shadow.sm,
+    },
+    stepCardCurrent: {
+      borderColor: c.primaryAccentColor,
+      backgroundColor: c.primaryAccentBg,
+    },
+    stepCardLocked: {
+      backgroundColor: c.surfaceSecondary,
+      borderColor: c.divider,
+      ...({ shadowOpacity: 0, elevation: 0 } as object),
+    },
+    stepCardContent: { flex: 1 },
+    stepLabel: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+      color: c.textPrimary,
+    },
+    stepLabelLocked: { color: c.subduedTextColor },
+    stepSubtitle: {
+      fontFamily: FontFamily.regular,
+      fontSize: 12,
+      color: c.subduedTextColor,
+      marginTop: 2,
+    },
+  });
+}

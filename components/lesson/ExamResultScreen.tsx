@@ -1,12 +1,13 @@
 import { CHARACTERS } from "@/constants/CharacterAvatars";
-import { Colors, FontFamily, Radius } from "@/constants/theme";
+import { FontFamily, Radius, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { haptics } from "@/lib/haptics";
 import type { ExamResult } from "@/lib/examResult";
 import { T } from "@/lib/strings";
 import type { TypeBreakdown } from "./LessonContent";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   Animated,
   Image,
@@ -29,9 +30,12 @@ export default function ExamResultScreen({
   onRetake: () => void;
   onContinue: () => void;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const passed = result.passed;
-  const accent = passed ? Colors.successColor : Colors.primaryAccentColor;
-  const accentBg = passed ? Colors.successBg : Colors.primaryAccentBg;
+  const accent = passed ? colors.successColor : colors.primaryAccentColor;
+  const accentBg = passed ? colors.successBg : colors.primaryAccentBg;
 
   const confettiRef = useRef<any>(null);
   const scaleAnim = useRef(new Animated.Value(0)).current;
@@ -82,7 +86,7 @@ export default function ExamResultScreen({
               <Ionicons
                 name={passed ? "checkmark" : "refresh"}
                 size={22}
-                color={Colors.textInverse}
+                color={colors.textInverse}
               />
             </View>
           </View>
@@ -116,12 +120,12 @@ export default function ExamResultScreen({
         {/* Threshold + best score */}
         <Animated.View style={[styles.metaRow, { opacity: fadeAnim }]}>
           <View style={styles.metaItem}>
-            <Ionicons name="flag-outline" size={15} color={Colors.subduedTextColor} />
+            <Ionicons name="flag-outline" size={15} color={colors.subduedTextColor} />
             <ThemedText style={styles.metaText}>{T.exam.thresholdNote}</ThemedText>
           </View>
           {result.attempts > 1 && (
             <View style={styles.metaItem}>
-              <Ionicons name="star-outline" size={15} color={Colors.subduedTextColor} />
+              <Ionicons name="star-outline" size={15} color={colors.subduedTextColor} />
               <ThemedText style={styles.metaText}>
                 {T.exam.bestScore(result.bestAccuracy)}
               </ThemedText>
@@ -146,7 +150,7 @@ export default function ExamResultScreen({
                     <ThemedText
                       style={[
                         styles.breakdownValue,
-                        { color: allCorrect ? Colors.successColor : Colors.textSecondary },
+                        { color: allCorrect ? colors.successColor : colors.textSecondary },
                       ]}
                     >
                       {b.correct}/{b.total}
@@ -154,7 +158,7 @@ export default function ExamResultScreen({
                     <Ionicons
                       name={allCorrect ? "checkmark-circle" : "ellipse-outline"}
                       size={16}
-                      color={allCorrect ? Colors.successColor : Colors.borderColor}
+                      color={allCorrect ? colors.successColor : colors.borderColor}
                     />
                   </View>
                 </View>
@@ -168,30 +172,30 @@ export default function ExamResultScreen({
         {passed ? (
           <>
             <TouchableOpacity
-              style={[styles.primaryButton, { backgroundColor: Colors.successColor }]}
+              style={[styles.primaryButton, { backgroundColor: colors.successColor }]}
               onPress={onContinue}
               activeOpacity={0.85}
             >
               <ThemedText style={styles.primaryButtonText}>{T.common.continue}</ThemedText>
-              <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
+              <Ionicons name="arrow-forward" size={18} color={colors.textInverse} />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.secondaryButton}
               onPress={onRetake}
               activeOpacity={0.85}
             >
-              <Ionicons name="refresh-outline" size={18} color={Colors.textSecondary} />
+              <Ionicons name="refresh-outline" size={18} color={colors.textSecondary} />
               <ThemedText style={styles.secondaryButtonText}>{T.exam.retake}</ThemedText>
             </TouchableOpacity>
           </>
         ) : (
           <>
             <TouchableOpacity
-              style={[styles.primaryButton, { backgroundColor: Colors.primaryAccentColor }]}
+              style={[styles.primaryButton, { backgroundColor: colors.primaryAccentColor }]}
               onPress={onRetake}
               activeOpacity={0.85}
             >
-              <Ionicons name="refresh" size={18} color={Colors.textInverse} />
+              <Ionicons name="refresh" size={18} color={colors.textInverse} />
               <ThemedText style={styles.primaryButtonText}>{T.exam.retake}</ThemedText>
             </TouchableOpacity>
             <TouchableOpacity
@@ -215,10 +219,10 @@ export default function ExamResultScreen({
           fallSpeed={3500}
           explosionSpeed={400}
           colors={[
-            Colors.successColor,
-            Colors.primaryAccentColor,
+            colors.successColor,
+            colors.primaryAccentColor,
             "#FFD700",
-            Colors.warningColor,
+            colors.warningColor,
             "#FF8FA3",
             "#7ED4AD",
           ]}
@@ -226,181 +230,183 @@ export default function ExamResultScreen({
       )}
       <LinearGradient
         style={styles.gradient}
-        colors={[accentBg, Colors.surfacePrimary]}
+        colors={[accentBg, colors.surfacePrimary]}
         pointerEvents="none"
       />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.surfacePrimary },
-  gradient: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 280,
-    zIndex: -1,
-  },
-  scrollView: { flex: 1 },
-  content: { padding: 20, paddingTop: 56, paddingBottom: 200 },
-  badgeContainer: { alignItems: "center", marginBottom: 28 },
-  amanCircle: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    borderWidth: 3,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "visible",
-    marginBottom: 18,
-  },
-  amanImg: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 60,
-    resizeMode: "cover",
-  },
-  statusBadge: {
-    position: "absolute",
-    bottom: -4,
-    right: -4,
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 3,
-    borderColor: Colors.surfacePrimary,
-  },
-  title: {
-    fontFamily: FontFamily.bold,
-    fontSize: 26,
-    color: Colors.textPrimary,
-    letterSpacing: -0.4,
-    marginBottom: 6,
-    textAlign: "center",
-  },
-  message: {
-    fontFamily: FontFamily.medium,
-    fontSize: 15,
-    color: Colors.textSecondary,
-    textAlign: "center",
-    lineHeight: 22,
-  },
-  scoreCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 20,
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    backgroundColor: Colors.surfacePrimary,
-    marginBottom: 14,
-  },
-  scoreIcon: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 16,
-  },
-  scoreText: { flex: 1 },
-  scoreValue: {
-    fontFamily: FontFamily.bold,
-    fontSize: 30,
-    letterSpacing: -0.5,
-    marginBottom: 2,
-  },
-  scoreLabel: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
-  },
-  metaRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 16,
-    marginBottom: 24,
-    paddingHorizontal: 4,
-  },
-  metaItem: { flexDirection: "row", alignItems: "center", gap: 6 },
-  metaText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-  breakdown: {
-    padding: 18,
-    borderRadius: 18,
-    backgroundColor: Colors.surfaceSecondary,
-    marginBottom: 24,
-  },
-  breakdownTitle: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    letterSpacing: 1.2,
-    textTransform: "uppercase",
-    color: Colors.subduedTextColor,
-    marginBottom: 12,
-  },
-  breakdownRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 7,
-  },
-  breakdownLabel: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.textPrimary,
-  },
-  breakdownRight: { flexDirection: "row", alignItems: "center", gap: 8 },
-  breakdownValue: {
-    fontFamily: FontFamily.bold,
-    fontSize: 14,
-  },
-  actionButtons: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 20,
-    paddingBottom: 16,
-    gap: 10,
-    borderTopWidth: 1,
-    borderTopColor: Colors.divider,
-    backgroundColor: Colors.surfacePrimary,
-  },
-  primaryButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 16,
-    borderRadius: Radius.lg,
-    gap: 8,
-  },
-  primaryButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-    color: Colors.textInverse,
-  },
-  secondaryButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 14,
-    borderRadius: Radius.lg,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    backgroundColor: Colors.surfacePrimary,
-    gap: 8,
-  },
-  secondaryButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textSecondary,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: { flex: 1, backgroundColor: c.surfacePrimary },
+    gradient: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      height: 280,
+      zIndex: -1,
+    },
+    scrollView: { flex: 1 },
+    content: { padding: 20, paddingTop: 56, paddingBottom: 200 },
+    badgeContainer: { alignItems: "center", marginBottom: 28 },
+    amanCircle: {
+      width: 120,
+      height: 120,
+      borderRadius: 60,
+      borderWidth: 3,
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "visible",
+      marginBottom: 18,
+    },
+    amanImg: {
+      width: "100%",
+      height: "100%",
+      borderRadius: 60,
+      resizeMode: "cover",
+    },
+    statusBadge: {
+      position: "absolute",
+      bottom: -4,
+      right: -4,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 3,
+      borderColor: c.surfacePrimary,
+    },
+    title: {
+      fontFamily: FontFamily.bold,
+      fontSize: 26,
+      color: c.textPrimary,
+      letterSpacing: -0.4,
+      marginBottom: 6,
+      textAlign: "center",
+    },
+    message: {
+      fontFamily: FontFamily.medium,
+      fontSize: 15,
+      color: c.textSecondary,
+      textAlign: "center",
+      lineHeight: 22,
+    },
+    scoreCard: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: 20,
+      borderRadius: 18,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      backgroundColor: c.surfacePrimary,
+      marginBottom: 14,
+    },
+    scoreIcon: {
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+      alignItems: "center",
+      justifyContent: "center",
+      marginRight: 16,
+    },
+    scoreText: { flex: 1 },
+    scoreValue: {
+      fontFamily: FontFamily.bold,
+      fontSize: 30,
+      letterSpacing: -0.5,
+      marginBottom: 2,
+    },
+    scoreLabel: {
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      color: c.subduedTextColor,
+    },
+    metaRow: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 16,
+      marginBottom: 24,
+      paddingHorizontal: 4,
+    },
+    metaItem: { flexDirection: "row", alignItems: "center", gap: 6 },
+    metaText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+    breakdown: {
+      padding: 18,
+      borderRadius: 18,
+      backgroundColor: c.surfaceSecondary,
+      marginBottom: 24,
+    },
+    breakdownTitle: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 11,
+      letterSpacing: 1.2,
+      textTransform: "uppercase",
+      color: c.subduedTextColor,
+      marginBottom: 12,
+    },
+    breakdownRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingVertical: 7,
+    },
+    breakdownLabel: {
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      color: c.textPrimary,
+    },
+    breakdownRight: { flexDirection: "row", alignItems: "center", gap: 8 },
+    breakdownValue: {
+      fontFamily: FontFamily.bold,
+      fontSize: 14,
+    },
+    actionButtons: {
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      padding: 20,
+      paddingBottom: 16,
+      gap: 10,
+      borderTopWidth: 1,
+      borderTopColor: c.divider,
+      backgroundColor: c.surfacePrimary,
+    },
+    primaryButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 16,
+      borderRadius: Radius.lg,
+      gap: 8,
+    },
+    primaryButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+      color: c.textInverse,
+    },
+    secondaryButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 14,
+      borderRadius: Radius.lg,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      backgroundColor: c.surfacePrimary,
+      gap: 8,
+    },
+    secondaryButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textSecondary,
+    },
+  });
+}

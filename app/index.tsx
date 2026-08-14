@@ -1,10 +1,11 @@
-import { Colors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { hasOnboarded } from "@/lib/onboarding";
 import { Redirect } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 export default function AppEntry() {
+  const { colors } = useAppTheme();
   const [target, setTarget] = useState<"/(tabs)/lessons" | "/onboarding" | null>(null);
 
   useEffect(() => {
@@ -15,8 +16,8 @@ export default function AppEntry() {
 
   if (target === null) {
     return (
-      <View style={styles.container}>
-        <ActivityIndicator color={Colors.primaryAccentColor} />
+      <View style={[styles.container, { backgroundColor: colors.surfacePrimary }]}>
+        <ActivityIndicator color={colors.primaryAccentColor} />
       </View>
     );
   }
@@ -27,7 +28,6 @@ export default function AppEntry() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.surfacePrimary,
     alignItems: "center",
     justifyContent: "center",
   },

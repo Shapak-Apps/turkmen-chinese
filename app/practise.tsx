@@ -4,7 +4,8 @@ import StrokeOrderMode from "@/components/lesson/StrokeOrderMode";
 import VocabularyIntroScreen from "@/components/lesson/VocabularyIntroScreen";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { COURSE_DATA } from "@/constants/CourseData";
-import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
+import { FontFamily, Radius, Shadow, Spacing, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { T } from "@/lib/strings";
 import {
   getChapterUniqueHanzi,
@@ -26,6 +27,8 @@ function BackHeader({
   title: string;
   onBack?: () => void;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   return (
     <View style={styles.header}>
       <Pressable
@@ -35,7 +38,7 @@ function BackHeader({
         accessibilityRole="button"
         accessibilityLabel={T.a11y.back}
       >
-        <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
+        <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
       </Pressable>
       <View style={styles.headerTitleContainer}>
         <ThemedText style={styles.headerTitle}>{title}</ThemedText>
@@ -46,6 +49,9 @@ function BackHeader({
 }
 
 export default function PractiseScreen() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const { lessonId, chapterId } = useLocalSearchParams<{
     lessonId?: string;
     chapterId?: string;
@@ -116,8 +122,8 @@ export default function PractiseScreen() {
             activeOpacity={0.85}
             onPress={() => setMode("vocabulary")}
           >
-            <View style={[styles.menuIcon, { backgroundColor: Colors.primaryAccentBg }]}>
-              <Ionicons name="library-outline" size={24} color={Colors.primaryAccentColor} />
+            <View style={[styles.menuIcon, { backgroundColor: colors.primaryAccentBg }]}>
+              <Ionicons name="library-outline" size={24} color={colors.primaryAccentColor} />
             </View>
             <View style={styles.menuCardContent}>
               <ThemedText style={styles.menuCardTitle}>Sapagyň sözleri</ThemedText>
@@ -127,7 +133,7 @@ export default function PractiseScreen() {
                   : "Sözleri gaýtala"}
               </ThemedText>
             </View>
-            <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
+            <Ionicons name="chevron-forward" size={18} color={colors.subduedTextColor} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -135,8 +141,8 @@ export default function PractiseScreen() {
             activeOpacity={0.85}
             onPress={() => setMode("exercises")}
           >
-            <View style={[styles.menuIcon, { backgroundColor: Colors.successBg }]}>
-              <Ionicons name="checkbox-outline" size={24} color={Colors.successColor} />
+            <View style={[styles.menuIcon, { backgroundColor: colors.successBg }]}>
+              <Ionicons name="checkbox-outline" size={24} color={colors.successColor} />
             </View>
             <View style={styles.menuCardContent}>
               <ThemedText style={styles.menuCardTitle}>Gönükmelere geç</ThemedText>
@@ -144,7 +150,7 @@ export default function PractiseScreen() {
                 {questions.length} gönükme
               </ThemedText>
             </View>
-            <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
+            <Ionicons name="chevron-forward" size={18} color={colors.subduedTextColor} />
           </TouchableOpacity>
 
           {hanzi.length > 0 && (
@@ -153,8 +159,8 @@ export default function PractiseScreen() {
               activeOpacity={0.85}
               onPress={() => setMode("stroke_order")}
             >
-              <View style={[styles.menuIcon, { backgroundColor: Colors.warningBg }]}>
-                <Ionicons name="brush-outline" size={24} color={Colors.warningColor} />
+              <View style={[styles.menuIcon, { backgroundColor: colors.warningBg }]}>
+                <Ionicons name="brush-outline" size={24} color={colors.warningColor} />
               </View>
               <View style={styles.menuCardContent}>
                 <ThemedText style={styles.menuCardTitle}>Hiýerogliflerini ýaz</ThemedText>
@@ -162,7 +168,7 @@ export default function PractiseScreen() {
                   {hanzi.length} hiýeroglif
                 </ThemedText>
               </View>
-              <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
+              <Ionicons name="chevron-forward" size={18} color={colors.subduedTextColor} />
             </TouchableOpacity>
           )}
         </View>
@@ -208,111 +214,113 @@ export default function PractiseScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.surfacePrimary,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: Spacing.lg,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.divider,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  headerTitleContainer: {
-    flex: 1,
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-  },
-  placeholder: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 40,
-    gap: 14,
-  },
-  placeholderAvatar: {
-    width: 96,
-    height: 96,
-    borderRadius: 48,
-    backgroundColor: Colors.primaryAccentBg,
-    borderWidth: 2,
-    borderColor: Colors.primaryAccentColor,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    marginBottom: 8,
-  },
-  placeholderImg: { width: "100%", height: "100%", resizeMode: "cover" },
-  placeholderTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 20,
-    color: Colors.textPrimary,
-    textAlign: "center",
-  },
-  placeholderText: {
-    fontFamily: FontFamily.regular,
-    fontSize: 15,
-    color: Colors.subduedTextColor,
-    textAlign: "center",
-    lineHeight: 22,
-  },
-  menuContent: {
-    flex: 1,
-    padding: Spacing["2xl"],
-    paddingTop: 32,
-    gap: 12,
-  },
-  menuHeading: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    color: Colors.textPrimary,
-    marginBottom: 16,
-    letterSpacing: -0.3,
-  },
-  menuCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-    borderRadius: Radius.lg,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    backgroundColor: Colors.surfacePrimary,
-    gap: 14,
-    ...Shadow.sm,
-  },
-  menuIcon: {
-    width: 44,
-    height: 44,
-    borderRadius: Radius.md,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  menuCardContent: {
-    flex: 1,
-  },
-  menuCardTitle: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-    color: Colors.textPrimary,
-    marginBottom: 2,
-  },
-  menuCardSubtitle: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: c.surfacePrimary,
+    },
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: Spacing.lg,
+      paddingVertical: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: c.divider,
+    },
+    backButton: {
+      width: 40,
+      height: 40,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    headerTitleContainer: {
+      flex: 1,
+      alignItems: "center",
+    },
+    headerTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.textPrimary,
+    },
+    placeholder: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 40,
+      gap: 14,
+    },
+    placeholderAvatar: {
+      width: 96,
+      height: 96,
+      borderRadius: 48,
+      backgroundColor: c.primaryAccentBg,
+      borderWidth: 2,
+      borderColor: c.primaryAccentColor,
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden",
+      marginBottom: 8,
+    },
+    placeholderImg: { width: "100%", height: "100%", resizeMode: "cover" },
+    placeholderTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 20,
+      color: c.textPrimary,
+      textAlign: "center",
+    },
+    placeholderText: {
+      fontFamily: FontFamily.regular,
+      fontSize: 15,
+      color: c.subduedTextColor,
+      textAlign: "center",
+      lineHeight: 22,
+    },
+    menuContent: {
+      flex: 1,
+      padding: Spacing["2xl"],
+      paddingTop: 32,
+      gap: 12,
+    },
+    menuHeading: {
+      fontFamily: FontFamily.bold,
+      fontSize: 22,
+      color: c.textPrimary,
+      marginBottom: 16,
+      letterSpacing: -0.3,
+    },
+    menuCard: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 16,
+      paddingHorizontal: 16,
+      borderRadius: Radius.lg,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      backgroundColor: c.surfacePrimary,
+      gap: 14,
+      ...Shadow.sm,
+    },
+    menuIcon: {
+      width: 44,
+      height: 44,
+      borderRadius: Radius.md,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    menuCardContent: {
+      flex: 1,
+    },
+    menuCardTitle: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+      color: c.textPrimary,
+      marginBottom: 2,
+    },
+    menuCardSubtitle: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+  });
+}

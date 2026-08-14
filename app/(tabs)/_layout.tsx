@@ -1,18 +1,21 @@
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
 import React from "react";
 
 export default function TabLayout() {
+  const { colors } = useAppTheme();
+
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: Colors.primaryAccentColor,
-        tabBarInactiveTintColor: Colors.subduedTextColor,
+        tabBarActiveTintColor: colors.primaryAccentColor,
+        tabBarInactiveTintColor: colors.subduedTextColor,
         tabBarStyle: {
-          backgroundColor: Colors.surfacePrimary,
-          borderTopColor: Colors.divider,
+          backgroundColor: colors.surfacePrimary,
+          borderTopColor: colors.divider,
           borderTopWidth: 1,
           height: 60,
           paddingTop: 6,

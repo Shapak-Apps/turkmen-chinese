@@ -1,5 +1,6 @@
 import { Word } from "@/constants/CourseData";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { router } from "expo-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
@@ -76,6 +77,9 @@ export default function VocabularyIntroScreen({
   onStartLesson: () => void;
   onExit?: () => void;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const deck = useMemo(() => buildDeck(words), [words]);
   const [state, setState] = useState<StudyState>(() =>
     initializeStudyState(deck),
@@ -252,69 +256,71 @@ export default function VocabularyIntroScreen({
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.surfacePrimary },
-  content: { flex: 1, paddingHorizontal: 20, paddingTop: 28 },
-  instructionContainer: { marginBottom: 24, paddingHorizontal: 8 },
-  instructionTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    color: Colors.textPrimary,
-    letterSpacing: -0.3,
-    marginBottom: 6,
-    textAlign: "center",
-  },
-  instructionText: {
-    fontFamily: FontFamily.regular,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
-    textAlign: "center",
-    lineHeight: 20,
-  },
-  flashcardContainer: {
-    flex: 1,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  bottomActions: { marginTop: "auto", paddingTop: 16, gap: 14 },
-  gradeButtons: { flexDirection: "row", width: "100%", gap: 12 },
-  gradeButton: {
-    flex: 1,
-    paddingVertical: 16,
-    borderRadius: 14,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  againButton: {
-    backgroundColor: Colors.surfaceTertiary,
-  },
-  gotItButton: {
-    backgroundColor: Colors.successColor,
-  },
-  disabledButton: { opacity: 0.4 },
-  pressedButton: { opacity: 0.85, transform: [{ scale: 0.98 }] },
-  gradeButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-    color: Colors.textPrimary,
-  },
-  gradeButtonTextWhite: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-    color: Colors.textInverse,
-  },
-  skipButton: {
-    width: "100%",
-    paddingVertical: 14,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  skipButtonPressed: { opacity: 0.6 },
-  skipButtonText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 15,
-    color: Colors.subduedTextColor,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: { flex: 1, backgroundColor: c.surfacePrimary },
+    content: { flex: 1, paddingHorizontal: 20, paddingTop: 28 },
+    instructionContainer: { marginBottom: 24, paddingHorizontal: 8 },
+    instructionTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 22,
+      color: c.textPrimary,
+      letterSpacing: -0.3,
+      marginBottom: 6,
+      textAlign: "center",
+    },
+    instructionText: {
+      fontFamily: FontFamily.regular,
+      fontSize: 14,
+      color: c.subduedTextColor,
+      textAlign: "center",
+      lineHeight: 20,
+    },
+    flashcardContainer: {
+      flex: 1,
+      width: "100%",
+      justifyContent: "center",
+      alignItems: "center",
+      marginBottom: 12,
+    },
+    bottomActions: { marginTop: "auto", paddingTop: 16, gap: 14 },
+    gradeButtons: { flexDirection: "row", width: "100%", gap: 12 },
+    gradeButton: {
+      flex: 1,
+      paddingVertical: 16,
+      borderRadius: 14,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    againButton: {
+      backgroundColor: c.surfaceTertiary,
+    },
+    gotItButton: {
+      backgroundColor: c.successColor,
+    },
+    disabledButton: { opacity: 0.4 },
+    pressedButton: { opacity: 0.85, transform: [{ scale: 0.98 }] },
+    gradeButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+      color: c.textPrimary,
+    },
+    gradeButtonTextWhite: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+      color: c.textInverse,
+    },
+    skipButton: {
+      width: "100%",
+      paddingVertical: 14,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    skipButtonPressed: { opacity: 0.6 },
+    skipButtonText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 15,
+      color: c.subduedTextColor,
+    },
+  });
+}

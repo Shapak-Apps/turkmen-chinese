@@ -1,9 +1,10 @@
 import { Word } from "@/constants/CourseData";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Dimensions,
   Pressable,
@@ -48,6 +49,9 @@ export default function SentenceBreakdownCard({
   };
   disabled?: boolean;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const insets = useSafeAreaInsets();
   const translateY = useSharedValue(CLOSED_POSITION);
   const context = useSharedValue({ y: 0 });
@@ -211,7 +215,7 @@ export default function SentenceBreakdownCard({
         </Pressable>
 
         <View style={styles.peekContent}>
-          <Ionicons name="help-circle-outline" size={20} color={Colors.subduedTextColor} />
+          <Ionicons name="help-circle-outline" size={20} color={colors.subduedTextColor} />
           <ThemedText style={styles.peekText}>
             Swipe up for detailed help
           </ThemedText>
@@ -241,7 +245,7 @@ export default function SentenceBreakdownCard({
                 <Ionicons
                   name={isPlaying ? "pause" : "play"}
                   size={20}
-                  color={Colors.primaryAccentColor}
+                  color={colors.primaryAccentColor}
                 />
               </Pressable>
             </View>
@@ -298,125 +302,127 @@ export default function SentenceBreakdownCard({
   return <GestureDetector gesture={panGesture}>{cardInner}</GestureDetector>;
 }
 
-const styles = StyleSheet.create({
-  cardContainer: {
-    position: "absolute",
-    bottom: -CARD_MIN_HEIGHT,
-    left: 0,
-    right: 0,
-    backgroundColor: Colors.surfacePrimary,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    borderTopWidth: 1,
-    borderColor: Colors.divider,
-    shadowColor: "#0F172A",
-    shadowOffset: { width: 0, height: -6 },
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    elevation: 8,
-    zIndex: 0,
-  },
-  handleContainer: {
-    alignItems: "center",
-    paddingVertical: 12,
-  },
-  handle: {
-    width: 40,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: Colors.borderColorStrong,
-  },
-  peekContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingBottom: 10,
-  },
-  peekText: {
-    marginLeft: 8,
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
-  },
-  fullContent: { paddingHorizontal: 24, paddingTop: 10 },
-  title: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-    marginBottom: 5,
-  },
-  breakdownItem: { marginBottom: 28 },
-  label: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-    marginBottom: 6,
-  },
-  interactiveSentenceContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-  },
-  pinyinValue: {
-    fontFamily: FontFamily.medium,
-    fontSize: 17,
-    color: Colors.textPrimary,
-    lineHeight: 28,
-  },
-  hanziValue: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    color: Colors.primaryAccentColor,
-    lineHeight: 34,
-  },
-  englishValue: {
-    fontFamily: FontFamily.regular,
-    fontSize: 16,
-    color: Colors.textPrimary,
-    lineHeight: 24,
-  },
-  breakdownText: {
-    fontFamily: FontFamily.regular,
-    fontSize: 14,
-    color: Colors.textSecondary,
-    lineHeight: 22,
-  },
-  tooltipContainer: {
-    position: "absolute",
-    backgroundColor: Colors.textPrimary,
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    alignItems: "center",
-    marginBottom: 6,
-  },
-  tooltipText: {
-    fontFamily: FontFamily.medium,
-    color: Colors.textInverse,
-    fontSize: 13,
-    textAlign: "center",
-  },
-  selectedWord: {
-    paddingHorizontal: 2,
-    textDecorationLine: "underline",
-    textDecorationColor: Colors.primaryAccentColor,
-    textDecorationStyle: "solid",
-  },
-  wordHintContainer: { marginBottom: 18 },
-  wordHintText: {
-    fontFamily: FontFamily.regular,
-    fontSize: 12,
-    color: Colors.subduedTextColor,
-    fontStyle: "italic",
-  },
-  playButton: {
-    marginLeft: 10,
-    backgroundColor: Colors.primaryAccentBg,
-    borderRadius: 14,
-    padding: 6,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    cardContainer: {
+      position: "absolute",
+      bottom: -CARD_MIN_HEIGHT,
+      left: 0,
+      right: 0,
+      backgroundColor: c.surfacePrimary,
+      borderTopLeftRadius: 24,
+      borderTopRightRadius: 24,
+      borderTopWidth: 1,
+      borderColor: c.divider,
+      shadowColor: "#0F172A",
+      shadowOffset: { width: 0, height: -6 },
+      shadowOpacity: 0.06,
+      shadowRadius: 12,
+      elevation: 8,
+      zIndex: 0,
+    },
+    handleContainer: {
+      alignItems: "center",
+      paddingVertical: 12,
+    },
+    handle: {
+      width: 40,
+      height: 4,
+      borderRadius: 2,
+      backgroundColor: c.borderColorStrong,
+    },
+    peekContent: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingBottom: 10,
+    },
+    peekText: {
+      marginLeft: 8,
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      color: c.subduedTextColor,
+    },
+    fullContent: { paddingHorizontal: 24, paddingTop: 10 },
+    title: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.textPrimary,
+      marginBottom: 5,
+    },
+    breakdownItem: { marginBottom: 28 },
+    label: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 11,
+      color: c.subduedTextColor,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+      marginBottom: 6,
+    },
+    interactiveSentenceContainer: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center",
+    },
+    pinyinValue: {
+      fontFamily: FontFamily.medium,
+      fontSize: 17,
+      color: c.textPrimary,
+      lineHeight: 28,
+    },
+    hanziValue: {
+      fontFamily: FontFamily.bold,
+      fontSize: 22,
+      color: c.primaryAccentColor,
+      lineHeight: 34,
+    },
+    englishValue: {
+      fontFamily: FontFamily.regular,
+      fontSize: 16,
+      color: c.textPrimary,
+      lineHeight: 24,
+    },
+    breakdownText: {
+      fontFamily: FontFamily.regular,
+      fontSize: 14,
+      color: c.textSecondary,
+      lineHeight: 22,
+    },
+    tooltipContainer: {
+      position: "absolute",
+      backgroundColor: c.textPrimary,
+      borderRadius: 8,
+      paddingVertical: 8,
+      paddingHorizontal: 12,
+      alignItems: "center",
+      marginBottom: 6,
+    },
+    tooltipText: {
+      fontFamily: FontFamily.medium,
+      color: c.textInverse,
+      fontSize: 13,
+      textAlign: "center",
+    },
+    selectedWord: {
+      paddingHorizontal: 2,
+      textDecorationLine: "underline",
+      textDecorationColor: c.primaryAccentColor,
+      textDecorationStyle: "solid",
+    },
+    wordHintContainer: { marginBottom: 18 },
+    wordHintText: {
+      fontFamily: FontFamily.regular,
+      fontSize: 12,
+      color: c.subduedTextColor,
+      fontStyle: "italic",
+    },
+    playButton: {
+      marginLeft: 10,
+      backgroundColor: c.primaryAccentBg,
+      borderRadius: 14,
+      padding: 6,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+  });
+}

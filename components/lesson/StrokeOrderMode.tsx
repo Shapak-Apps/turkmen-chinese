@@ -1,4 +1,5 @@
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import HANZI_DATA from "@/assets/data/hanzi_data.json";
 import {
   HINT_VALUES,
@@ -11,7 +12,7 @@ import {
 } from "@jamsch/react-native-hanzi-writer";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Modal,
@@ -52,6 +53,8 @@ function WriterModal({
   onComplete,
   onClose,
 }: WriterModalProps) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   return (
     <Modal
       visible={char !== null}
@@ -62,7 +65,7 @@ function WriterModal({
       <View style={styles.modalContainer}>
         <View style={styles.modalHeader}>
           <Pressable onPress={onClose} hitSlop={20} style={styles.closeButton}>
-            <Ionicons name="close" size={26} color={Colors.textPrimary} />
+            <Ionicons name="close" size={26} color={colors.textPrimary} />
           </Pressable>
           <View style={{ flex: 1 }} />
         </View>
@@ -97,6 +100,8 @@ function WriterBody({
   alreadyDone,
   onComplete,
 }: WriterBodyProps) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const writer = useHanziWriter({
     character: char,
     loader: loadCharacterData,
@@ -133,7 +138,7 @@ function WriterBody({
           <Ionicons
             name="volume-high"
             size={24}
-            color={Colors.primaryAccentColor}
+            color={colors.primaryAccentColor}
           />
         </TouchableOpacity>
       </View>
@@ -146,27 +151,27 @@ function WriterBody({
             <View style={styles.loadingBox}>
               <ActivityIndicator
                 size="large"
-                color={Colors.primaryAccentColor}
+                color={colors.primaryAccentColor}
               />
               <ThemedText style={styles.mutedText}>Ýüklenýär...</ThemedText>
             </View>
           }
           error={
             <View style={styles.loadingBox}>
-              <Ionicons name="alert-circle-outline" size={36} color={Colors.borderColorStrong} />
+              <Ionicons name="alert-circle-outline" size={36} color={colors.borderColorStrong} />
               <ThemedText style={styles.mutedText}>
                 Bu hiýeroglif üçin maglumat ýok
               </ThemedText>
             </View>
           }
         >
-          <HanziWriter.GridLines color={Colors.borderColor} width={1} />
+          <HanziWriter.GridLines color={colors.borderColor} width={1} />
           <HanziWriter.Svg>
-            <HanziWriter.Outline color={Colors.surfaceTertiary} />
-            <HanziWriter.Character color={Colors.primaryAccentColor} />
+            <HanziWriter.Outline color={colors.surfaceTertiary} />
+            <HanziWriter.Character color={colors.primaryAccentColor} />
             <HanziWriter.QuizStrokes />
             <HanziWriter.QuizMistakeHighlighter
-              color={Colors.warningColor}
+              color={colors.warningColor}
               strokeDuration={400}
             />
           </HanziWriter.Svg>
@@ -179,14 +184,14 @@ function WriterBody({
         </ThemedText>
       ) : justCompleted ? (
         <View style={styles.doneBox}>
-          <Ionicons name="checkmark-circle" size={26} color={Colors.successColor} />
+          <Ionicons name="checkmark-circle" size={26} color={colors.successColor} />
           <ThemedText style={styles.doneText}>
             Ýazyldy! Ýalňyş: {mistakes}
           </ThemedText>
         </View>
       ) : (
         <TouchableOpacity style={styles.writeButton} onPress={startQuiz}>
-          <Ionicons name="brush-outline" size={20} color={Colors.textInverse} />
+          <Ionicons name="brush-outline" size={20} color={colors.textInverse} />
           <ThemedText style={styles.writeButtonText}>
             {alreadyDone ? "Täzeden ýaz" : "Ýaz"}
           </ThemedText>
@@ -207,6 +212,8 @@ export default function StrokeOrderMode({
   instruction,
   onAnswer,
 }: Props) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const { settings, loaded } = useSettings();
   const [activeChar, setActiveChar] = useState<string | null>(null);
   const [doneChars, setDoneChars] = useState<Set<string>>(new Set());
@@ -223,7 +230,7 @@ export default function StrokeOrderMode({
   if (!loaded) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" color={Colors.primaryAccentColor} />
+        <ActivityIndicator size="large" color={colors.primaryAccentColor} />
       </View>
     );
   }
@@ -307,7 +314,7 @@ export default function StrokeOrderMode({
                 </ThemedText>
                 {isDone && (
                   <View style={styles.cardCheck}>
-                    <Ionicons name="checkmark" size={14} color={Colors.textInverse} />
+                    <Ionicons name="checkmark" size={14} color={colors.textInverse} />
                   </View>
                 )}
               </Pressable>
@@ -346,190 +353,192 @@ export default function StrokeOrderMode({
 
 const CARD_SIZE = 84;
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.surfacePrimary },
-  centered: { flex: 1, alignItems: "center", justifyContent: "center" },
-  scroll: { flex: 1 },
-  scrollContent: { padding: 20, paddingBottom: 20 },
-  instruction: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textPrimary,
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  progressRow: { alignItems: "center", marginBottom: 20, gap: 8 },
-  progressText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-  progressBar: {
-    width: "100%",
-    height: 6,
-    backgroundColor: Colors.surfaceTertiary,
-    borderRadius: 3,
-    overflow: "hidden",
-  },
-  progressFill: {
-    height: "100%",
-    backgroundColor: Colors.successColor,
-    borderRadius: 3,
-  },
-  grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 12,
-    justifyContent: "flex-start",
-  },
-  card: {
-    width: CARD_SIZE,
-    height: CARD_SIZE,
-    borderRadius: 16,
-    backgroundColor: Colors.surfacePrimary,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    position: "relative",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0F172A",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.05,
-        shadowRadius: 6,
-      },
-      android: { elevation: 1 },
-    }),
-  },
-  cardDone: {
-    backgroundColor: Colors.successBg,
-    borderColor: Colors.successColor,
-  },
-  cardChar: {
-    fontFamily: FontFamily.bold,
-    fontSize: 38,
-    color: Colors.primaryAccentColor,
-  },
-  cardCharDone: {
-    color: Colors.successColorDark,
-  },
-  cardCheck: {
-    position: "absolute",
-    top: -6,
-    right: -6,
-    width: 22,
-    height: 22,
-    borderRadius: 11,
-    backgroundColor: Colors.successColor,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 2,
-    borderColor: Colors.surfacePrimary,
-  },
-  bottomBar: {
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: Colors.divider,
-    backgroundColor: Colors.surfacePrimary,
-  },
-  continueButton: {
-    backgroundColor: Colors.subduedTextColor,
-    paddingVertical: 16,
-    borderRadius: 14,
-    alignItems: "center",
-  },
-  continueButtonDisabled: { backgroundColor: Colors.borderColorStrong },
-  continueButtonHighlight: { backgroundColor: Colors.successColor },
-  continueButtonText: {
-    fontFamily: FontFamily.semibold,
-    color: Colors.textInverse,
-    fontSize: 16,
-  },
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: { flex: 1, backgroundColor: c.surfacePrimary },
+    centered: { flex: 1, alignItems: "center", justifyContent: "center" },
+    scroll: { flex: 1 },
+    scrollContent: { padding: 20, paddingBottom: 20 },
+    instruction: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textPrimary,
+      textAlign: "center",
+      marginBottom: 20,
+    },
+    progressRow: { alignItems: "center", marginBottom: 20, gap: 8 },
+    progressText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+    progressBar: {
+      width: "100%",
+      height: 6,
+      backgroundColor: c.surfaceTertiary,
+      borderRadius: 3,
+      overflow: "hidden",
+    },
+    progressFill: {
+      height: "100%",
+      backgroundColor: c.successColor,
+      borderRadius: 3,
+    },
+    grid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 12,
+      justifyContent: "flex-start",
+    },
+    card: {
+      width: CARD_SIZE,
+      height: CARD_SIZE,
+      borderRadius: 16,
+      backgroundColor: c.surfacePrimary,
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      position: "relative",
+      ...Platform.select({
+        ios: {
+          shadowColor: "#0F172A",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.05,
+          shadowRadius: 6,
+        },
+        android: { elevation: 1 },
+      }),
+    },
+    cardDone: {
+      backgroundColor: c.successBg,
+      borderColor: c.successColor,
+    },
+    cardChar: {
+      fontFamily: FontFamily.bold,
+      fontSize: 38,
+      color: c.primaryAccentColor,
+    },
+    cardCharDone: {
+      color: c.successColorDark,
+    },
+    cardCheck: {
+      position: "absolute",
+      top: -6,
+      right: -6,
+      width: 22,
+      height: 22,
+      borderRadius: 11,
+      backgroundColor: c.successColor,
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 2,
+      borderColor: c.surfacePrimary,
+    },
+    bottomBar: {
+      padding: 16,
+      borderTopWidth: 1,
+      borderTopColor: c.divider,
+      backgroundColor: c.surfacePrimary,
+    },
+    continueButton: {
+      backgroundColor: c.subduedTextColor,
+      paddingVertical: 16,
+      borderRadius: 14,
+      alignItems: "center",
+    },
+    continueButtonDisabled: { backgroundColor: c.borderColorStrong },
+    continueButtonHighlight: { backgroundColor: c.successColor },
+    continueButtonText: {
+      fontFamily: FontFamily.semibold,
+      color: c.textInverse,
+      fontSize: 16,
+    },
 
-  modalContainer: { flex: 1, backgroundColor: Colors.surfacePrimary },
-  modalHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.divider,
-  },
-  closeButton: { width: 40, height: 40, alignItems: "center", justifyContent: "center" },
-  writerBody: {
-    flex: 1,
-    alignItems: "center",
-    paddingTop: 20,
-    paddingHorizontal: 20,
-  },
-  charHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 14,
-    marginBottom: 16,
-  },
-  charTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 40,
-    color: Colors.primaryAccentColor,
-  },
-  speakerButton: { padding: 8 },
-  writerWrapper: {
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    borderRadius: 16,
-    overflow: "hidden",
-    backgroundColor: Colors.surfaceSecondary,
-  },
-  writer: { width: 300, height: 300 },
-  loadingBox: {
-    width: 300,
-    height: 300,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 12,
-  },
-  mutedText: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-    textAlign: "center",
-  },
-  mistakesText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-    marginTop: 16,
-  },
-  writeButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    backgroundColor: Colors.primaryAccentColor,
-    paddingVertical: 14,
-    paddingHorizontal: 32,
-    borderRadius: 14,
-    marginTop: 20,
-  },
-  writeButtonText: {
-    fontFamily: FontFamily.semibold,
-    color: Colors.textInverse,
-    fontSize: 16,
-  },
-  doneBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    marginTop: 20,
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    backgroundColor: Colors.successBg,
-    borderRadius: 14,
-  },
-  doneText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.successColorDark,
-  },
-});
+    modalContainer: { flex: 1, backgroundColor: c.surfacePrimary },
+    modalHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: c.divider,
+    },
+    closeButton: { width: 40, height: 40, alignItems: "center", justifyContent: "center" },
+    writerBody: {
+      flex: 1,
+      alignItems: "center",
+      paddingTop: 20,
+      paddingHorizontal: 20,
+    },
+    charHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 14,
+      marginBottom: 16,
+    },
+    charTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 40,
+      color: c.primaryAccentColor,
+    },
+    speakerButton: { padding: 8 },
+    writerWrapper: {
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      borderRadius: 16,
+      overflow: "hidden",
+      backgroundColor: c.surfaceSecondary,
+    },
+    writer: { width: 300, height: 300 },
+    loadingBox: {
+      width: 300,
+      height: 300,
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 12,
+    },
+    mutedText: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.subduedTextColor,
+      textAlign: "center",
+    },
+    mistakesText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.subduedTextColor,
+      marginTop: 16,
+    },
+    writeButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 10,
+      backgroundColor: c.primaryAccentColor,
+      paddingVertical: 14,
+      paddingHorizontal: 32,
+      borderRadius: 14,
+      marginTop: 20,
+    },
+    writeButtonText: {
+      fontFamily: FontFamily.semibold,
+      color: c.textInverse,
+      fontSize: 16,
+    },
+    doneBox: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 10,
+      marginTop: 20,
+      paddingVertical: 14,
+      paddingHorizontal: 20,
+      backgroundColor: c.successBg,
+      borderRadius: 14,
+    },
+    doneText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.successColorDark,
+    },
+  });
+}

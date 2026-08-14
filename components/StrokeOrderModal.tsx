@@ -1,11 +1,12 @@
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import HANZI_DATA from "@/assets/data/hanzi_data.json";
-import { Colors, FontFamily } from "@/constants/theme";
 import {
   HanziWriter,
   useHanziWriter,
 } from "@jamsch/react-native-hanzi-writer";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Modal,
@@ -29,6 +30,8 @@ async function loadCharacterData(char: string): Promise<CharacterJson> {
 }
 
 function CharacterView({ char }: { char: string }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const writer = useHanziWriter({
     character: char,
     loader: loadCharacterData,
@@ -44,21 +47,21 @@ function CharacterView({ char }: { char: string }) {
           style={styles.writer}
           loading={
             <View style={styles.loadingBox}>
-              <ActivityIndicator size="large" color={Colors.primaryAccentColor} />
+              <ActivityIndicator size="large" color={colors.primaryAccentColor} />
               <Text style={styles.loadingText} maxFontSizeMultiplier={1.3}>Ýüklenýär...</Text>
             </View>
           }
           error={
             <View style={styles.loadingBox}>
-              <Ionicons name="alert-circle-outline" size={36} color={Colors.borderColorStrong} />
+              <Ionicons name="alert-circle-outline" size={36} color={colors.borderColorStrong} />
               <Text style={styles.errorText} maxFontSizeMultiplier={1.3}>Bu hiýeroglif üçin maglumat ýok</Text>
             </View>
           }
         >
-          <HanziWriter.GridLines color={Colors.borderColor} width={1} />
+          <HanziWriter.GridLines color={colors.borderColor} width={1} />
           <HanziWriter.Svg>
-            <HanziWriter.Outline color={Colors.surfaceTertiary} />
-            <HanziWriter.Character color={Colors.primaryAccentColor} />
+            <HanziWriter.Outline color={colors.surfaceTertiary} />
+            <HanziWriter.Character color={colors.primaryAccentColor} />
           </HanziWriter.Svg>
         </HanziWriter>
       </View>
@@ -76,7 +79,7 @@ function CharacterView({ char }: { char: string }) {
             })
           }
         >
-          <Ionicons name="play" size={18} color={Colors.textInverse} />
+          <Ionicons name="play" size={18} color={colors.textInverse} />
           <Text style={styles.animateButtonText} maxFontSizeMultiplier={1.3}>Ýazylyşy</Text>
         </Pressable>
       </View>
@@ -95,6 +98,8 @@ export default function StrokeOrderModal({
   characters,
   onClose,
 }: StrokeOrderModalProps) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const char = characters[currentIndex];
@@ -119,7 +124,7 @@ export default function StrokeOrderModal({
             }}
             hitSlop={10}
           >
-            <Ionicons name="close" size={20} color={Colors.textPrimary} />
+            <Ionicons name="close" size={20} color={colors.textPrimary} />
           </Pressable>
 
           {char && <CharacterView key={char} char={char} />}
@@ -139,8 +144,8 @@ export default function StrokeOrderModal({
                   size={20}
                   color={
                     currentIndex === 0
-                      ? Colors.borderColorStrong
-                      : Colors.primaryAccentColor
+                      ? colors.borderColorStrong
+                      : colors.primaryAccentColor
                   }
                 />
               </Pressable>
@@ -163,8 +168,8 @@ export default function StrokeOrderModal({
                   size={20}
                   color={
                     currentIndex === characters.length - 1
-                      ? Colors.borderColorStrong
-                      : Colors.primaryAccentColor
+                      ? colors.borderColorStrong
+                      : colors.primaryAccentColor
                   }
                 />
               </Pressable>
@@ -176,115 +181,117 @@ export default function StrokeOrderModal({
   );
 }
 
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: "rgba(15, 23, 42, 0.6)",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 28,
-  },
-  modal: {
-    backgroundColor: Colors.surfacePrimary,
-    borderRadius: 20,
-    padding: 24,
-    width: "100%",
-    maxWidth: 360,
-    alignItems: "center",
-  },
-  closeButton: {
-    position: "absolute",
-    top: 12,
-    right: 12,
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: Colors.surfaceTertiary,
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 10,
-  },
-  charContainer: {
-    alignItems: "center",
-    width: "100%",
-  },
-  charTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 36,
-    color: Colors.primaryAccentColor,
-    marginBottom: 12,
-    marginTop: 8,
-  },
-  writerWrapper: {
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    borderRadius: 14,
-    overflow: "hidden",
-    backgroundColor: Colors.surfaceSecondary,
-  },
-  writer: {
-    width: 280,
-    height: 280,
-  },
-  loadingBox: {
-    width: 280,
-    height: 280,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 12,
-  },
-  loadingText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-  errorText: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-    textAlign: "center",
-    paddingHorizontal: 20,
-  },
-  buttonRow: {
-    flexDirection: "row",
-    gap: 12,
-    marginTop: 16,
-  },
-  animateButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    backgroundColor: Colors.primaryAccentColor,
-    paddingVertical: 10,
-    paddingHorizontal: 18,
-    borderRadius: 12,
-  },
-  pressed: { opacity: 0.85 },
-  animateButtonText: {
-    fontFamily: FontFamily.semibold,
-    color: Colors.textInverse,
-    fontSize: 15,
-  },
-  charNav: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 16,
-    marginTop: 16,
-  },
-  charNavButton: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: Colors.surfaceTertiary,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  charNavButtonDisabled: {
-    opacity: 0.4,
-  },
-  charNavText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 13,
-    color: Colors.textSecondary,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    overlay: {
+      flex: 1,
+      backgroundColor: "rgba(15, 23, 42, 0.6)",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 28,
+    },
+    modal: {
+      backgroundColor: c.surfacePrimary,
+      borderRadius: 20,
+      padding: 24,
+      width: "100%",
+      maxWidth: 360,
+      alignItems: "center",
+    },
+    closeButton: {
+      position: "absolute",
+      top: 12,
+      right: 12,
+      width: 32,
+      height: 32,
+      borderRadius: 16,
+      backgroundColor: c.surfaceTertiary,
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: 10,
+    },
+    charContainer: {
+      alignItems: "center",
+      width: "100%",
+    },
+    charTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 36,
+      color: c.primaryAccentColor,
+      marginBottom: 12,
+      marginTop: 8,
+    },
+    writerWrapper: {
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      borderRadius: 14,
+      overflow: "hidden",
+      backgroundColor: c.surfaceSecondary,
+    },
+    writer: {
+      width: 280,
+      height: 280,
+    },
+    loadingBox: {
+      width: 280,
+      height: 280,
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 12,
+    },
+    loadingText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+    errorText: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.subduedTextColor,
+      textAlign: "center",
+      paddingHorizontal: 20,
+    },
+    buttonRow: {
+      flexDirection: "row",
+      gap: 12,
+      marginTop: 16,
+    },
+    animateButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 6,
+      backgroundColor: c.primaryAccentColor,
+      paddingVertical: 10,
+      paddingHorizontal: 18,
+      borderRadius: 12,
+    },
+    pressed: { opacity: 0.85 },
+    animateButtonText: {
+      fontFamily: FontFamily.semibold,
+      color: c.textInverse,
+      fontSize: 15,
+    },
+    charNav: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 16,
+      marginTop: 16,
+    },
+    charNavButton: {
+      width: 32,
+      height: 32,
+      borderRadius: 16,
+      backgroundColor: c.surfaceTertiary,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    charNavButtonDisabled: {
+      opacity: 0.4,
+    },
+    charNavText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 13,
+      color: c.textSecondary,
+    },
+  });
+}

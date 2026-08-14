@@ -1,10 +1,11 @@
 import { FlashcardOption } from "@/constants/CourseData";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Pressable,
   ScrollView,
@@ -35,6 +36,9 @@ export default function FlashcardMode({
   correctOptionId: number;
   onAnswer: (correct: boolean) => void;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
   const wiggle = useSharedValue(0);
@@ -77,24 +81,24 @@ export default function FlashcardMode({
   const getOptionStyle = (id: number) => {
     if (!answered) {
       return id === selectedId
-        ? { borderColor: Colors.primaryAccentColor, backgroundColor: Colors.primaryAccentBg }
-        : { borderColor: Colors.borderColor, backgroundColor: Colors.surfacePrimary };
+        ? { borderColor: colors.primaryAccentColor, backgroundColor: colors.primaryAccentBg }
+        : { borderColor: colors.borderColor, backgroundColor: colors.surfacePrimary };
     }
     if (id === correctOptionId) {
       return {
-        borderColor: Colors.successColor,
-        backgroundColor: Colors.successBg,
+        borderColor: colors.successColor,
+        backgroundColor: colors.successBg,
       };
     }
     if (id === selectedId && id !== correctOptionId) {
       return {
-        borderColor: Colors.primaryAccentColor,
-        backgroundColor: Colors.primaryAccentBg,
+        borderColor: colors.primaryAccentColor,
+        backgroundColor: colors.primaryAccentBg,
       };
     }
     return {
-      borderColor: Colors.borderColor,
-      backgroundColor: Colors.surfacePrimary,
+      borderColor: colors.borderColor,
+      backgroundColor: colors.surfacePrimary,
       opacity: 0.5,
     };
   };
@@ -103,7 +107,7 @@ export default function FlashcardMode({
     <View style={styles.container}>
       <Animated.View style={[styles.wordSection, wiggleStyle]}>
         <TouchableOpacity onPress={playAudio} style={styles.speakerButton} accessibilityRole="button" accessibilityLabel={T.a11y.playAudio}>
-          <Ionicons name="volume-high" size={22} color={Colors.primaryAccentColor} />
+          <Ionicons name="volume-high" size={22} color={colors.primaryAccentColor} />
         </TouchableOpacity>
         <ThemedText style={styles.hanziText}>{hanzi}</ThemedText>
         <ThemedText style={styles.pinyinText}>{pinyin}</ThemedText>
@@ -137,8 +141,8 @@ export default function FlashcardMode({
           {
             backgroundColor:
               selectedId === null
-                ? Colors.surfaceTertiary
-                : Colors.primaryAccentColor,
+                ? colors.surfaceTertiary
+                : colors.primaryAccentColor,
           },
         ]}
         onPress={answered ? handleContinue : handleCheck}
@@ -148,7 +152,7 @@ export default function FlashcardMode({
         <ThemedText
           style={[
             styles.actionButtonText,
-            { color: selectedId === null ? Colors.subduedTextColor : Colors.textInverse },
+            { color: selectedId === null ? colors.subduedTextColor : colors.textInverse },
           ]}
         >
           {answered ? T.common.continue : T.common.check}
@@ -158,75 +162,77 @@ export default function FlashcardMode({
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-  wordSection: {
-    alignItems: "center",
-    paddingVertical: 28,
-    backgroundColor: Colors.primaryAccentBg,
-    borderRadius: 18,
-    marginBottom: 18,
-  },
-  speakerButton: { marginBottom: 8 },
-  hanziText: {
-    fontFamily: FontFamily.bold,
-    fontSize: 52,
-    lineHeight: 60,
-    color: Colors.primaryAccentColor,
-    marginBottom: 4,
-  },
-  pinyinText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 18,
-    color: Colors.textSecondary,
-  },
-  instruction: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
-    textAlign: "center",
-    marginBottom: 16,
-  },
-  optionsScroll: { flex: 1 },
-  optionsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 12,
-  },
-  optionCard: {
-    width: "47%",
-    padding: 16,
-    borderRadius: 14,
-    borderWidth: 1.5,
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: 76,
-  },
-  optionEnglish: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textPrimary,
-    textAlign: "center",
-  },
-  optionChinese: {
-    fontFamily: FontFamily.regular,
-    fontSize: 12,
-    color: Colors.subduedTextColor,
-    marginTop: 4,
-    textAlign: "center",
-  },
-  actionButton: {
-    paddingVertical: 16,
-    borderRadius: 14,
-    alignItems: "center",
-    marginTop: 16,
-    marginBottom: 20,
-  },
-  actionButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingHorizontal: 20,
+    },
+    wordSection: {
+      alignItems: "center",
+      paddingVertical: 28,
+      backgroundColor: c.primaryAccentBg,
+      borderRadius: 18,
+      marginBottom: 18,
+    },
+    speakerButton: { marginBottom: 8 },
+    hanziText: {
+      fontFamily: FontFamily.bold,
+      fontSize: 52,
+      lineHeight: 60,
+      color: c.primaryAccentColor,
+      marginBottom: 4,
+    },
+    pinyinText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 18,
+      color: c.textSecondary,
+    },
+    instruction: {
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      color: c.subduedTextColor,
+      textAlign: "center",
+      marginBottom: 16,
+    },
+    optionsScroll: { flex: 1 },
+    optionsGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 12,
+    },
+    optionCard: {
+      width: "47%",
+      padding: 16,
+      borderRadius: 14,
+      borderWidth: 1.5,
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: 76,
+    },
+    optionEnglish: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textPrimary,
+      textAlign: "center",
+    },
+    optionChinese: {
+      fontFamily: FontFamily.regular,
+      fontSize: 12,
+      color: c.subduedTextColor,
+      marginTop: 4,
+      textAlign: "center",
+    },
+    actionButton: {
+      paddingVertical: 16,
+      borderRadius: 14,
+      alignItems: "center",
+      marginTop: 16,
+      marginBottom: 20,
+    },
+    actionButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+    },
+  });
+}

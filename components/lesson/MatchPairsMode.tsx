@@ -1,5 +1,6 @@
 import { MatchPair } from "@/constants/CourseData";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -20,6 +21,9 @@ export default function MatchPairsMode({
   pairs: MatchPair[];
   onAnswer: (correct: boolean) => void;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [selectedLeft, setSelectedLeft] = useState<number | null>(null);
   const [selectedRight, setSelectedRight] = useState<number | null>(null);
   const [matchedIds, setMatchedIds] = useState<Set<number>>(new Set());
@@ -89,23 +93,23 @@ export default function MatchPairsMode({
 
     if (isMatched)
       return {
-        borderColor: Colors.successColor,
-        backgroundColor: Colors.successBg,
+        borderColor: colors.successColor,
+        backgroundColor: colors.successBg,
         opacity: 0.7,
       };
     if (isWrong)
       return {
-        borderColor: Colors.primaryAccentColor,
-        backgroundColor: Colors.primaryAccentBg,
+        borderColor: colors.primaryAccentColor,
+        backgroundColor: colors.primaryAccentBg,
       };
     if (isSelected)
       return {
-        borderColor: Colors.primaryAccentColor,
-        backgroundColor: Colors.primaryAccentBg,
+        borderColor: colors.primaryAccentColor,
+        backgroundColor: colors.primaryAccentBg,
       };
     return {
-      borderColor: Colors.borderColor,
-      backgroundColor: Colors.surfacePrimary,
+      borderColor: colors.borderColor,
+      backgroundColor: colors.surfacePrimary,
     };
   };
 
@@ -153,47 +157,49 @@ export default function MatchPairsMode({
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, paddingHorizontal: 20 },
-  instruction: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textPrimary,
-    textAlign: "center",
-    marginBottom: 18,
-    marginTop: 12,
-  },
-  columnsContainer: { flexDirection: "row", gap: 12, flex: 1 },
-  column: { flex: 1, gap: 10 },
-  card: {
-    padding: 14,
-    borderRadius: 12,
-    borderWidth: 1.5,
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: 56,
-  },
-  cardHanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    color: Colors.primaryAccentColor,
-  },
-  cardPinyin: {
-    fontFamily: FontFamily.regular,
-    fontSize: 12,
-    color: Colors.subduedTextColor,
-    marginTop: 2,
-  },
-  cardEnglish: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.textPrimary,
-    textAlign: "center",
-  },
-  progressContainer: { alignItems: "center", paddingVertical: 16 },
-  progressText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: { flex: 1, paddingHorizontal: 20 },
+    instruction: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textPrimary,
+      textAlign: "center",
+      marginBottom: 18,
+      marginTop: 12,
+    },
+    columnsContainer: { flexDirection: "row", gap: 12, flex: 1 },
+    column: { flex: 1, gap: 10 },
+    card: {
+      padding: 14,
+      borderRadius: 12,
+      borderWidth: 1.5,
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: 56,
+    },
+    cardHanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 22,
+      color: c.primaryAccentColor,
+    },
+    cardPinyin: {
+      fontFamily: FontFamily.regular,
+      fontSize: 12,
+      color: c.subduedTextColor,
+      marginTop: 2,
+    },
+    cardEnglish: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 14,
+      color: c.textPrimary,
+      textAlign: "center",
+    },
+    progressContainer: { alignItems: "center", paddingVertical: 16 },
+    progressText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+  });
+}

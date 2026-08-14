@@ -1,13 +1,14 @@
 import { ThemedText } from "@/components/themed-text";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
-import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
+import { FontFamily, Radius, Shadow, Spacing, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { haptics } from "@/lib/haptics";
 import { Events, track } from "@/lib/analytics";
 import { markOnboarded } from "@/lib/onboarding";
 import { setUserName } from "@/lib/user";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import {
   Dimensions,
   FlatList,
@@ -31,6 +32,8 @@ interface SlideData {
 }
 
 function WelcomeIllustration() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   return (
     <View style={styles.heroCircle}>
       <Image source={CHARACTERS.aman.source} style={styles.heroImg} />
@@ -42,25 +45,27 @@ function WelcomeIllustration() {
 }
 
 function StructureIllustration() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   return (
     <View style={styles.structureGrid}>
-      <View style={[styles.structureCard, { backgroundColor: Colors.primaryAccentBg }]}>
-        <View style={[styles.structureIcon, { backgroundColor: Colors.primaryAccentColor }]}>
-          <Ionicons name="book" size={26} color={Colors.textInverse} />
+      <View style={[styles.structureCard, { backgroundColor: colors.primaryAccentBg }]}>
+        <View style={[styles.structureIcon, { backgroundColor: colors.primaryAccentColor }]}>
+          <Ionicons name="book" size={26} color={colors.textInverse} />
         </View>
         <ThemedText style={styles.structureLabel}>Teoriýa</ThemedText>
       </View>
-      <Ionicons name="arrow-down" size={20} color={Colors.subduedTextColor} />
-      <View style={[styles.structureCard, { backgroundColor: Colors.successBg }]}>
-        <View style={[styles.structureIcon, { backgroundColor: Colors.successColor }]}>
-          <Ionicons name="pencil" size={26} color={Colors.textInverse} />
+      <Ionicons name="arrow-down" size={20} color={colors.subduedTextColor} />
+      <View style={[styles.structureCard, { backgroundColor: colors.successBg }]}>
+        <View style={[styles.structureIcon, { backgroundColor: colors.successColor }]}>
+          <Ionicons name="pencil" size={26} color={colors.textInverse} />
         </View>
         <ThemedText style={styles.structureLabel}>Gönükmeler</ThemedText>
       </View>
-      <Ionicons name="arrow-down" size={20} color={Colors.subduedTextColor} />
-      <View style={[styles.structureCard, { backgroundColor: Colors.warningBg }]}>
-        <View style={[styles.structureIcon, { backgroundColor: Colors.warningColor }]}>
-          <Ionicons name="trophy" size={26} color={Colors.textInverse} />
+      <Ionicons name="arrow-down" size={20} color={colors.subduedTextColor} />
+      <View style={[styles.structureCard, { backgroundColor: colors.warningBg }]}>
+        <View style={[styles.structureIcon, { backgroundColor: colors.warningColor }]}>
+          <Ionicons name="trophy" size={26} color={colors.textInverse} />
         </View>
         <ThemedText style={styles.structureLabel}>Bap synagy</ThemedText>
       </View>
@@ -69,16 +74,18 @@ function StructureIllustration() {
 }
 
 function GamificationIllustration() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   return (
     <View style={styles.gameRow}>
-      <View style={[styles.gameCard, { backgroundColor: Colors.warningBg }]}>
+      <View style={[styles.gameCard, { backgroundColor: colors.warningBg }]}>
         <View style={styles.gameIconBig}>
-          <Ionicons name="trophy" size={36} color={Colors.warningColor} />
+          <Ionicons name="trophy" size={36} color={colors.warningColor} />
         </View>
         <ThemedText style={styles.gameValue}>+10</ThemedText>
         <ThemedText style={styles.gameLabel}>XP / jogap</ThemedText>
       </View>
-      <View style={[styles.gameCard, { backgroundColor: Colors.primaryAccentBg }]}>
+      <View style={[styles.gameCard, { backgroundColor: colors.primaryAccentBg }]}>
         <View style={styles.gameIconBig}>
           <ThemedText style={{ fontSize: 36 }}>🔥</ThemedText>
         </View>
@@ -90,11 +97,13 @@ function GamificationIllustration() {
 }
 
 function ReadyIllustration() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   return (
     <View style={styles.heroCircle}>
       <Image source={CHARACTERS.aman.source} style={styles.heroImg} />
       <View style={styles.readyBadge}>
-        <Ionicons name="rocket" size={22} color={Colors.textInverse} />
+        <Ionicons name="rocket" size={22} color={colors.textInverse} />
       </View>
     </View>
   );
@@ -131,6 +140,9 @@ const SLIDES: SlideData[] = [
 ];
 
 export default function OnboardingScreen() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nameInput, setNameInput] = useState("");
   const flatListRef = useRef<FlatList>(null);
@@ -216,7 +228,7 @@ export default function OnboardingScreen() {
                 <TextInput
                   style={styles.nameInput}
                   placeholder="Adyňy ýaz..."
-                  placeholderTextColor={Colors.subduedTextColor}
+                  placeholderTextColor={colors.subduedTextColor}
                   value={nameInput}
                   onChangeText={setNameInput}
                   autoCapitalize="words"
@@ -257,7 +269,7 @@ export default function OnboardingScreen() {
           <Ionicons
             name={isLast ? "rocket" : "arrow-forward"}
             size={18}
-            color={Colors.textInverse}
+            color={colors.textInverse}
           />
         </Pressable>
       </View>
@@ -265,213 +277,215 @@ export default function OnboardingScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.surfacePrimary },
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: { flex: 1, backgroundColor: c.surfacePrimary },
 
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: Spacing.lg,
-    paddingVertical: 12,
-  },
-  dots: {
-    flexDirection: "row",
-    gap: 6,
-  },
-  dot: {
-    width: 7,
-    height: 7,
-    borderRadius: 4,
-    backgroundColor: Colors.borderColor,
-  },
-  dotActive: {
-    backgroundColor: Colors.primaryAccentColor,
-    width: 20,
-  },
-  skipBtn: {
-    width: 60,
-    alignItems: "flex-end",
-  },
-  skipText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
-  },
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingHorizontal: Spacing.lg,
+      paddingVertical: 12,
+    },
+    dots: {
+      flexDirection: "row",
+      gap: 6,
+    },
+    dot: {
+      width: 7,
+      height: 7,
+      borderRadius: 4,
+      backgroundColor: c.borderColor,
+    },
+    dotActive: {
+      backgroundColor: c.primaryAccentColor,
+      width: 20,
+    },
+    skipBtn: {
+      width: 60,
+      alignItems: "flex-end",
+    },
+    skipText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 14,
+      color: c.subduedTextColor,
+    },
 
-  slide: {
-    paddingHorizontal: Spacing["2xl"],
-    paddingTop: 20,
-    alignItems: "center",
-  },
-  illustrationWrap: {
-    height: 260,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 28,
-  },
-  slideTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 26,
-    lineHeight: 32,
-    color: Colors.textPrimary,
-    textAlign: "center",
-    letterSpacing: -0.4,
-    marginBottom: 12,
-  },
-  slideSubtitle: {
-    fontFamily: FontFamily.regular,
-    fontSize: 15,
-    lineHeight: 22,
-    color: Colors.textSecondary,
-    textAlign: "center",
-    paddingHorizontal: 8,
-  },
+    slide: {
+      paddingHorizontal: Spacing["2xl"],
+      paddingTop: 20,
+      alignItems: "center",
+    },
+    illustrationWrap: {
+      height: 260,
+      width: "100%",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 28,
+    },
+    slideTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 26,
+      lineHeight: 32,
+      color: c.textPrimary,
+      textAlign: "center",
+      letterSpacing: -0.4,
+      marginBottom: 12,
+    },
+    slideSubtitle: {
+      fontFamily: FontFamily.regular,
+      fontSize: 15,
+      lineHeight: 22,
+      color: c.textSecondary,
+      textAlign: "center",
+      paddingHorizontal: 8,
+    },
 
-  bottomBar: {
-    paddingHorizontal: Spacing["2xl"],
-    paddingTop: 12,
-  },
-  ctaBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 8,
-    backgroundColor: Colors.primaryAccentColor,
-    paddingVertical: 16,
-    borderRadius: Radius.lg,
-    ...Shadow.md,
-  },
-  ctaPressed: { opacity: 0.85, transform: [{ scale: 0.98 }] },
-  ctaBtnDisabled: { opacity: 0.4 },
-  ctaText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 17,
-    color: Colors.textInverse,
-  },
+    bottomBar: {
+      paddingHorizontal: Spacing["2xl"],
+      paddingTop: 12,
+    },
+    ctaBtn: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 8,
+      backgroundColor: c.primaryAccentColor,
+      paddingVertical: 16,
+      borderRadius: Radius.lg,
+      ...Shadow.md,
+    },
+    ctaPressed: { opacity: 0.85, transform: [{ scale: 0.98 }] },
+    ctaBtnDisabled: { opacity: 0.4 },
+    ctaText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 17,
+      color: c.textInverse,
+    },
 
-  nameInputWrap: {
-    width: "100%",
-    paddingHorizontal: 8,
-    marginTop: 20,
-  },
-  nameInput: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-    backgroundColor: Colors.surfaceSecondary,
-    borderRadius: Radius.lg,
-    paddingHorizontal: 18,
-    paddingVertical: 16,
-    borderWidth: 2,
-    borderColor: Colors.borderColor,
-    textAlign: "center",
-  },
+    nameInputWrap: {
+      width: "100%",
+      paddingHorizontal: 8,
+      marginTop: 20,
+    },
+    nameInput: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 18,
+      color: c.textPrimary,
+      backgroundColor: c.surfaceSecondary,
+      borderRadius: Radius.lg,
+      paddingHorizontal: 18,
+      paddingVertical: 16,
+      borderWidth: 2,
+      borderColor: c.borderColor,
+      textAlign: "center",
+    },
 
-  /* Welcome / Ready illustrations */
-  heroCircle: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    backgroundColor: Colors.primaryAccentBg,
-    borderWidth: 4,
-    borderColor: Colors.primaryAccentColor,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "visible",
-  },
-  heroImg: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 100,
-    resizeMode: "cover",
-  },
-  waveBadge: {
-    position: "absolute",
-    right: -8,
-    bottom: -8,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: Colors.surfacePrimary,
-    borderWidth: 2,
-    borderColor: Colors.primaryAccentColor,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  waveBadgeText: { fontSize: 28 },
-  readyBadge: {
-    position: "absolute",
-    right: -4,
-    bottom: -4,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: Colors.successColor,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 3,
-    borderColor: Colors.surfacePrimary,
-  },
+    /* Welcome / Ready illustrations */
+    heroCircle: {
+      width: 200,
+      height: 200,
+      borderRadius: 100,
+      backgroundColor: c.primaryAccentBg,
+      borderWidth: 4,
+      borderColor: c.primaryAccentColor,
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "visible",
+    },
+    heroImg: {
+      width: "100%",
+      height: "100%",
+      borderRadius: 100,
+      resizeMode: "cover",
+    },
+    waveBadge: {
+      position: "absolute",
+      right: -8,
+      bottom: -8,
+      width: 56,
+      height: 56,
+      borderRadius: 28,
+      backgroundColor: c.surfacePrimary,
+      borderWidth: 2,
+      borderColor: c.primaryAccentColor,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    waveBadgeText: { fontSize: 28 },
+    readyBadge: {
+      position: "absolute",
+      right: -4,
+      bottom: -4,
+      width: 56,
+      height: 56,
+      borderRadius: 28,
+      backgroundColor: c.successColor,
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 3,
+      borderColor: c.surfacePrimary,
+    },
 
-  /* Structure illustration */
-  structureGrid: {
-    alignItems: "center",
-    gap: 8,
-  },
-  structureCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 18,
-    borderRadius: Radius.md,
-    gap: 12,
-    minWidth: 200,
-  },
-  structureIcon: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  structureLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textPrimary,
-  },
+    /* Structure illustration */
+    structureGrid: {
+      alignItems: "center",
+      gap: 8,
+    },
+    structureCard: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 10,
+      paddingHorizontal: 18,
+      borderRadius: Radius.md,
+      gap: 12,
+      minWidth: 200,
+    },
+    structureIcon: {
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    structureLabel: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textPrimary,
+    },
 
-  /* Gamification illustration */
-  gameRow: {
-    flexDirection: "row",
-    gap: 14,
-  },
-  gameCard: {
-    width: 120,
-    paddingVertical: 18,
-    borderRadius: Radius.lg,
-    alignItems: "center",
-  },
-  gameIconBig: {
-    width: 68,
-    height: 68,
-    borderRadius: 34,
-    backgroundColor: Colors.surfacePrimary,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 8,
-  },
-  gameValue: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    color: Colors.textPrimary,
-    letterSpacing: -0.3,
-  },
-  gameLabel: {
-    fontFamily: FontFamily.medium,
-    fontSize: 12,
-    color: Colors.subduedTextColor,
-    marginTop: 2,
-  },
-});
+    /* Gamification illustration */
+    gameRow: {
+      flexDirection: "row",
+      gap: 14,
+    },
+    gameCard: {
+      width: 120,
+      paddingVertical: 18,
+      borderRadius: Radius.lg,
+      alignItems: "center",
+    },
+    gameIconBig: {
+      width: 68,
+      height: 68,
+      borderRadius: 34,
+      backgroundColor: c.surfacePrimary,
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 8,
+    },
+    gameValue: {
+      fontFamily: FontFamily.bold,
+      fontSize: 22,
+      color: c.textPrimary,
+      letterSpacing: -0.3,
+    },
+    gameLabel: {
+      fontFamily: FontFamily.medium,
+      fontSize: 12,
+      color: c.subduedTextColor,
+      marginTop: 2,
+    },
+  });
+}

@@ -1,5 +1,6 @@
 import { ThemedText } from "@/components/themed-text";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import {
   INTRO_TEXT,
   INITIALS,
@@ -16,7 +17,7 @@ import {
 import { Audio } from "expo-av";
 import * as Speech from "expo-speech";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import {
   Dimensions,
   FlatList,
@@ -54,23 +55,39 @@ function speakChinese(text: string) {
   Speech.speak(text, { language: "zh-CN", rate: 0.8 });
 }
 
+function toneColor(tone: string, c: ThemeColors) {
+  switch (tone) {
+    case "1": return c.primaryAccentColor;
+    case "2": return c.successColor;
+    case "3": return "#1D4ED8";
+    case "4": return "#7C3AED";
+    default: return c.subduedTextColor;
+  }
+}
+
 // ── UI Components ──────────────────────────────────────────
 
 function Body({ text }: { text: string }) {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return <ThemedText style={s.body}>{text}</ThemedText>;
 }
 
 function AudioCell({ label, sub, onPress }: { label: string; sub?: string; onPress: () => void }) {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <Pressable style={s.audioCell} onPress={onPress}>
       <ThemedText style={s.audioCellLabel}>{label}</ThemedText>
       {sub ? <ThemedText style={s.audioCellSub}>{sub}</ThemedText> : null}
-      <Ionicons name="volume-medium-outline" size={14} color={Colors.subduedTextColor} />
+      <Ionicons name="volume-medium-outline" size={14} color={colors.subduedTextColor} />
     </Pressable>
   );
 }
 
 function PageWrapper({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <ScrollView style={s.pageScroll} contentContainerStyle={s.pageContent}>
       <ThemedText style={s.pageLabel}>{label}</ThemedText>
@@ -83,6 +100,8 @@ function PageWrapper({ label, title, children }: { label: string; title: string;
 // ── Page components ───────────────────────────────────────
 
 function IntroPage() {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <PageWrapper label="Giriş" title="Как устроен китайский слог">
       <Body text={INTRO_TEXT} />
@@ -95,6 +114,8 @@ function IntroPage() {
 }
 
 function InitialsPage() {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <PageWrapper label="声母" title="21 инициаль">
       <Body text="Инициаль — начальный согласный звук слога. Нажмите чтобы услышать." />
@@ -120,6 +141,8 @@ function InitialsPage() {
 }
 
 function FinalsPage() {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <PageWrapper label="韵母" title="38 финалей">
       <Body text="Финаль — гласная часть слога. Нажмите чтобы услышать." />
@@ -144,13 +167,15 @@ function FinalsPage() {
 }
 
 function TonesPage() {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <PageWrapper label="声调" title="4 тона">
       <Body text={TONES_DESCRIPTION} />
       <View style={s.toneTable}>
         {TONES.map((t) => (
           <Pressable key={t.tone} style={s.toneRow} onPress={() => playPinyin(t.audio)}>
-            <View style={[s.toneBadge, { backgroundColor: toneColor(t.tone) }]}>
+            <View style={[s.toneBadge, { backgroundColor: toneColor(t.tone, colors) }]}>
               <ThemedText style={s.toneBadgeText}>{t.tone}</ThemedText>
             </View>
             <View style={s.toneInfo}>
@@ -160,7 +185,7 @@ function TonesPage() {
             <ThemedText style={s.toneHanzi}>{t.hanzi}</ThemedText>
             <ThemedText style={s.tonePinyin}>{t.pinyin}</ThemedText>
             <ThemedText style={s.toneMeaning}>{t.meaning}</ThemedText>
-            <Ionicons name="volume-medium-outline" size={16} color={Colors.subduedTextColor} />
+            <Ionicons name="volume-medium-outline" size={16} color={colors.subduedTextColor} />
           </Pressable>
         ))}
       </View>
@@ -169,6 +194,8 @@ function TonesPage() {
 }
 
 function SoundChangesPage() {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <PageWrapper label="音变" title="Изменения тонов">
       {SOUND_CHANGES.map((rule) => (
@@ -181,7 +208,7 @@ function SoundChangesPage() {
                 <ThemedText style={s.ruleExHanzi}>{ex.hanzi}</ThemedText>
                 <ThemedText style={s.ruleExPinyin}>{ex.pinyin}</ThemedText>
                 <ThemedText style={s.ruleExMeaning}>{ex.meaning}</ThemedText>
-                <Ionicons name="volume-medium-outline" size={14} color={Colors.subduedTextColor} />
+                <Ionicons name="volume-medium-outline" size={14} color={colors.subduedTextColor} />
               </Pressable>
             ))}
           </View>
@@ -192,6 +219,8 @@ function SoundChangesPage() {
 }
 
 function SpellingPage() {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <PageWrapper label="拼写规则" title="Правила написания пиньинь">
       {SPELLING_RULES.map((r, i) => (
@@ -208,6 +237,8 @@ function SpellingPage() {
 }
 
 function DailyExpressionsPage() {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <PageWrapper label="日常用语" title="Повседневные фразы">
       <Body text="13 базовых фраз, которые пригодятся с первого дня. Нажмите чтобы послушать." />
@@ -217,7 +248,7 @@ function DailyExpressionsPage() {
             <ThemedText style={s.phraseHanzi}>{p.hanzi}</ThemedText>
             <ThemedText style={s.phrasePinyin}>{p.pinyin}</ThemedText>
             <ThemedText style={s.phraseMeaning}>{p.meaning}</ThemedText>
-            <Ionicons name="volume-medium-outline" size={14} color={Colors.subduedTextColor} />
+            <Ionicons name="volume-medium-outline" size={14} color={colors.subduedTextColor} />
           </Pressable>
         ))}
       </View>
@@ -226,6 +257,8 @@ function DailyExpressionsPage() {
 }
 
 function ClassroomPage() {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <PageWrapper label="课堂用语" title="Выражения для класса">
       <View style={s.phraseTable}>
@@ -234,7 +267,7 @@ function ClassroomPage() {
             <ThemedText style={s.phraseHanzi}>{p.hanzi}</ThemedText>
             <ThemedText style={s.phrasePinyin}>{p.pinyin}</ThemedText>
             <ThemedText style={s.phraseMeaning}>{p.meaning}</ThemedText>
-            <Ionicons name="volume-medium-outline" size={14} color={Colors.subduedTextColor} />
+            <Ionicons name="volume-medium-outline" size={14} color={colors.subduedTextColor} />
           </Pressable>
         ))}
       </View>
@@ -243,6 +276,8 @@ function ClassroomPage() {
 }
 
 function StrokesPage() {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   return (
     <PageWrapper label="汉字笔画表" title="Таблица черт иероглифов">
       <Body text="Каждый иероглиф состоит из черт. Вот основные типы:" />
@@ -274,6 +309,8 @@ const PAGES: { key: string; render: () => React.ReactNode }[] = [
 ];
 
 export default function PronunciationTheory() {
+  const { colors } = useAppTheme();
+  const s = useMemo(() => createStyles(colors), [colors]);
   const [currentPage, setCurrentPage] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const insets = useSafeAreaInsets();
@@ -326,7 +363,7 @@ export default function PronunciationTheory() {
           <Ionicons
             name="chevron-back"
             size={18}
-            color={currentPage === 0 ? Colors.borderColorStrong : Colors.primaryAccentColor}
+            color={currentPage === 0 ? colors.borderColorStrong : colors.primaryAccentColor}
           />
           <ThemedText style={[s.navButtonText, currentPage === 0 && s.navButtonTextDisabled]}>
             Yza
@@ -360,7 +397,7 @@ export default function PronunciationTheory() {
           <Ionicons
             name="chevron-forward"
             size={18}
-            color={currentPage === PAGES.length - 1 ? Colors.borderColorStrong : Colors.primaryAccentColor}
+            color={currentPage === PAGES.length - 1 ? colors.borderColorStrong : colors.primaryAccentColor}
           />
         </Pressable>
       </View>
@@ -368,309 +405,300 @@ export default function PronunciationTheory() {
   );
 }
 
-function toneColor(tone: string) {
-  switch (tone) {
-    case "1": return Colors.primaryAccentColor;
-    case "2": return Colors.successColor;
-    case "3": return "#1D4ED8";
-    case "4": return "#7C3AED";
-    default: return Colors.subduedTextColor;
-  }
-}
-
 // ── Styles ─────────────────────────────────────────────────
 
-const s = StyleSheet.create({
-  pageScroll: { flex: 1 },
-  pageContent: { padding: 20, paddingBottom: 20 },
-  pageLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 12,
-    color: Colors.primaryAccentColor,
-    textTransform: "uppercase",
-    letterSpacing: 1.2,
-    marginBottom: 8,
-  },
-  pageTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 26,
-    lineHeight: 32,
-    letterSpacing: -0.4,
-    color: Colors.textPrimary,
-    marginBottom: 16,
-  },
-  body: {
-    fontFamily: FontFamily.regular,
-    fontSize: 15,
-    lineHeight: 24,
-    color: Colors.textSecondary,
-    marginBottom: 12,
-  },
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    pageScroll: { flex: 1 },
+    pageContent: { padding: 20, paddingBottom: 20 },
+    pageLabel: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 12,
+      color: c.primaryAccentColor,
+      textTransform: "uppercase",
+      letterSpacing: 1.2,
+      marginBottom: 8,
+    },
+    pageTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 26,
+      lineHeight: 32,
+      letterSpacing: -0.4,
+      color: c.textPrimary,
+      marginBottom: 16,
+    },
+    body: {
+      fontFamily: FontFamily.regular,
+      fontSize: 15,
+      lineHeight: 24,
+      color: c.textSecondary,
+      marginBottom: 12,
+    },
 
-  formulaCard: {
-    alignItems: "center",
-    padding: 20,
-    borderRadius: 16,
-    backgroundColor: Colors.primaryAccentBg,
-    marginVertical: 8,
-  },
-  formulaText: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    color: Colors.primaryAccentColor,
-  },
-  formulaSub: {
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-    marginTop: 4,
-  },
+    formulaCard: {
+      alignItems: "center",
+      padding: 20,
+      borderRadius: 16,
+      backgroundColor: c.primaryAccentBg,
+      marginVertical: 8,
+    },
+    formulaText: {
+      fontFamily: FontFamily.bold,
+      fontSize: 22,
+      color: c.primaryAccentColor,
+    },
+    formulaSub: {
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.subduedTextColor,
+      marginTop: 4,
+    },
 
-  groupBlock: { marginBottom: 16 },
-  groupName: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.textPrimary,
-    marginBottom: 10,
-  },
-  cellGrid: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+    groupBlock: { marginBottom: 16 },
+    groupName: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 14,
+      color: c.textPrimary,
+      marginBottom: 10,
+    },
+    cellGrid: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
 
-  audioCell: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 14,
-    borderRadius: 12,
-    backgroundColor: Colors.surfaceSecondary,
-    minWidth: 64,
-    gap: 2,
-  },
-  audioCellLabel: {
-    fontFamily: FontFamily.bold,
-    fontSize: 20,
-    color: Colors.primaryAccentColor,
-  },
-  audioCellSub: {
-    fontFamily: FontFamily.medium,
-    fontSize: 11,
-    color: Colors.textSecondary,
-  },
+    audioCell: {
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 10,
+      paddingHorizontal: 14,
+      borderRadius: 12,
+      backgroundColor: c.surfaceSecondary,
+      minWidth: 64,
+      gap: 2,
+    },
+    audioCellLabel: {
+      fontFamily: FontFamily.bold,
+      fontSize: 20,
+      color: c.primaryAccentColor,
+    },
+    audioCellSub: {
+      fontFamily: FontFamily.medium,
+      fontSize: 11,
+      color: c.textSecondary,
+    },
 
-  toneTable: {
-    borderRadius: 12,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    marginTop: 8,
-  },
-  toneRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.divider,
-    gap: 8,
-  },
-  toneBadge: {
-    width: 26,
-    height: 26,
-    borderRadius: 13,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  toneBadgeText: {
-    fontFamily: FontFamily.bold,
-    color: Colors.textInverse,
-    fontSize: 13,
-  },
-  toneInfo: { flex: 1 },
-  toneDesc: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 13,
-    color: Colors.textPrimary,
-  },
-  tonePitch: {
-    fontFamily: FontFamily.regular,
-    fontSize: 11,
-    color: Colors.subduedTextColor,
-  },
-  toneHanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    color: Colors.primaryAccentColor,
-    width: 30,
-    textAlign: "center",
-  },
-  tonePinyin: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.textPrimary,
-    width: 40,
-  },
-  toneMeaning: {
-    fontFamily: FontFamily.regular,
-    fontSize: 12,
-    color: Colors.subduedTextColor,
-    width: 56,
-    textAlign: "right",
-  },
+    toneTable: {
+      borderRadius: 12,
+      overflow: "hidden",
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      marginTop: 8,
+    },
+    toneRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 12,
+      paddingHorizontal: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: c.divider,
+      gap: 8,
+    },
+    toneBadge: {
+      width: 26,
+      height: 26,
+      borderRadius: 13,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    toneBadgeText: {
+      fontFamily: FontFamily.bold,
+      color: c.textInverse,
+      fontSize: 13,
+    },
+    toneInfo: { flex: 1 },
+    toneDesc: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 13,
+      color: c.textPrimary,
+    },
+    tonePitch: {
+      fontFamily: FontFamily.regular,
+      fontSize: 11,
+      color: c.subduedTextColor,
+    },
+    toneHanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 22,
+      color: c.primaryAccentColor,
+      width: 30,
+      textAlign: "center",
+    },
+    tonePinyin: {
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      color: c.textPrimary,
+      width: 40,
+    },
+    toneMeaning: {
+      fontFamily: FontFamily.regular,
+      fontSize: 12,
+      color: c.subduedTextColor,
+      width: 56,
+      textAlign: "right",
+    },
 
-  ruleBlock: {
-    marginBottom: 16,
-    padding: 14,
-    borderRadius: 14,
-    backgroundColor: Colors.warningBg,
-  },
-  ruleTitle: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textPrimary,
-    marginBottom: 10,
-  },
-  ruleExamples: {
-    borderRadius: 10,
-    overflow: "hidden",
-    backgroundColor: Colors.surfacePrimary,
-  },
-  ruleExRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.divider,
-    gap: 8,
-  },
-  ruleExHanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.primaryAccentColor,
-    width: 50,
-  },
-  ruleExPinyin: {
-    flex: 1,
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.textPrimary,
-  },
-  ruleExMeaning: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
+    ruleBlock: {
+      marginBottom: 16,
+      padding: 14,
+      borderRadius: 14,
+      backgroundColor: c.warningBg,
+    },
+    ruleTitle: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textPrimary,
+      marginBottom: 10,
+    },
+    ruleExamples: {
+      borderRadius: 10,
+      overflow: "hidden",
+      backgroundColor: c.surfacePrimary,
+    },
+    ruleExRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: c.divider,
+      gap: 8,
+    },
+    ruleExHanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.primaryAccentColor,
+      width: 50,
+    },
+    ruleExPinyin: {
+      flex: 1,
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.textPrimary,
+    },
+    ruleExMeaning: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
 
-  spellingRow: {
-    padding: 12,
-    borderRadius: 10,
-    backgroundColor: Colors.surfaceSecondary,
-    marginBottom: 8,
-  },
-  spellingRule: {
-    fontFamily: FontFamily.bold,
-    fontSize: 15,
-    color: Colors.primaryAccentColor,
-    marginBottom: 4,
-  },
-  spellingExpl: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    lineHeight: 20,
-    color: Colors.textSecondary,
-  },
-  divider: { height: 1, backgroundColor: Colors.divider, marginVertical: 16 },
+    spellingRow: {
+      padding: 12,
+      borderRadius: 10,
+      backgroundColor: c.surfaceSecondary,
+      marginBottom: 8,
+    },
+    spellingRule: {
+      fontFamily: FontFamily.bold,
+      fontSize: 15,
+      color: c.primaryAccentColor,
+      marginBottom: 4,
+    },
+    spellingExpl: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      lineHeight: 20,
+      color: c.textSecondary,
+    },
+    divider: { height: 1, backgroundColor: c.divider, marginVertical: 16 },
 
-  phraseTable: {
-    borderRadius: 12,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-  },
-  phraseRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.divider,
-    gap: 6,
-  },
-  phraseHanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.primaryAccentColor,
-    width: 90,
-  },
-  phrasePinyin: {
-    flex: 1,
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.textPrimary,
-  },
-  phraseMeaning: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-    textAlign: "right",
-  },
+    phraseTable: {
+      borderRadius: 12,
+      overflow: "hidden",
+      borderWidth: 1,
+      borderColor: c.borderColor,
+    },
+    phraseRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: c.divider,
+      gap: 6,
+    },
+    phraseHanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.primaryAccentColor,
+      width: 90,
+    },
+    phrasePinyin: {
+      flex: 1,
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.textPrimary,
+    },
+    phraseMeaning: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.subduedTextColor,
+      textAlign: "right",
+    },
 
-  strokeGrid: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
-  strokeCell: {
-    alignItems: "center",
-    padding: 10,
-    borderRadius: 12,
-    backgroundColor: Colors.surfaceSecondary,
-    width: "22%",
-  },
-  strokeChar: {
-    fontFamily: FontFamily.bold,
-    fontSize: 28,
-    color: Colors.primaryAccentColor,
-  },
-  strokeName: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    color: Colors.textPrimary,
-    marginTop: 4,
-  },
-  strokePinyin: {
-    fontFamily: FontFamily.regular,
-    fontSize: 10,
-    color: Colors.subduedTextColor,
-  },
-
-  bottomNav: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: Colors.divider,
-    backgroundColor: Colors.surfacePrimary,
-  },
-  navButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-    gap: 4,
-  },
-  navButtonDisabled: { opacity: 0.4 },
-  navButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.primaryAccentColor,
-  },
-  navButtonTextDisabled: { color: Colors.borderColorStrong },
-  pageIndicator: { alignItems: "center", gap: 6 },
-  pageNumber: {
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-  },
-  dots: { flexDirection: "row", gap: 6 },
-  dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: Colors.borderColorStrong },
-  dotActive: { backgroundColor: Colors.primaryAccentColor, width: 20 },
-});
+    strokeGrid: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+    strokeCell: {
+      alignItems: "center",
+      padding: 10,
+      borderRadius: 12,
+      backgroundColor: c.surfaceSecondary,
+      width: "22%",
+    },
+    strokeChar: {
+      fontFamily: FontFamily.bold,
+      fontSize: 28,
+      color: c.primaryAccentColor,
+    },
+    strokeName: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 11,
+      color: c.textPrimary,
+      marginTop: 4,
+    },
+    strokePinyin: {
+      fontFamily: FontFamily.regular,
+      fontSize: 10,
+      color: c.subduedTextColor,
+    },
+    bottomNav: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingHorizontal: 16,
+      paddingTop: 12,
+      borderTopWidth: 1,
+      borderTopColor: c.divider,
+      backgroundColor: c.surfacePrimary,
+    },
+    navButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 8,
+      paddingHorizontal: 12,
+      borderRadius: 10,
+      gap: 4,
+    },
+    navButtonDisabled: { opacity: 0.4 },
+    navButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.primaryAccentColor,
+    },
+    navButtonTextDisabled: { color: c.borderColorStrong },
+    pageIndicator: { alignItems: "center", gap: 6 },
+    pageNumber: {
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.subduedTextColor,
+    },
+    dots: { flexDirection: "row", gap: 6 },
+    dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: c.borderColorStrong },
+    dotActive: { backgroundColor: c.primaryAccentColor, width: 20 },
+  });
+}

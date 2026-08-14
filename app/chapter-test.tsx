@@ -3,7 +3,8 @@ import LessonContent, { LessonStats } from "@/components/lesson/LessonContent";
 import { ThemedText } from "@/components/themed-text";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { COURSE_DATA, Question } from "@/constants/CourseData";
-import { Colors, FontFamily, Spacing } from "@/constants/theme";
+import { FontFamily, Spacing, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { ExamResult, saveExamResult } from "@/lib/examResult";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -23,11 +24,12 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
-function BackHeader({ title }: { title: string }) {
+function BackHeader({ title, colors }: { title: string; colors: ThemeColors }) {
+  const styles = useMemo(() => createStyles(colors), [colors]);
   return (
     <View style={styles.header}>
       <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton} accessibilityRole="button" accessibilityLabel={T.a11y.back}>
-        <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
+        <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
       </Pressable>
       <View style={styles.headerTitleContainer}>
         <ThemedText style={styles.headerTitle}>{title}</ThemedText>
@@ -46,6 +48,9 @@ function leaveTest() {
 }
 
 export default function ChapterTestScreen() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const { chapterId } = useLocalSearchParams<{ chapterId: string }>();
   // Bumping this re-shuffles questions and remounts the runner for a retake.
   const [attemptKey, setAttemptKey] = useState(0);
@@ -87,7 +92,7 @@ export default function ChapterTestScreen() {
   if (questions.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
-        <BackHeader title="Synag" />
+        <BackHeader title="Synag" colors={colors} />
         <View style={styles.placeholder}>
           <View style={styles.placeholderAvatar}>
             <Image source={CHARACTERS.aman.source} style={styles.placeholderImg} />
@@ -127,65 +132,67 @@ export default function ChapterTestScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.surfacePrimary,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: Spacing.lg,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.divider,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  headerTitleContainer: {
-    flex: 1,
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-  },
-  placeholder: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 40,
-    gap: 14,
-  },
-  placeholderAvatar: {
-    width: 96,
-    height: 96,
-    borderRadius: 48,
-    backgroundColor: Colors.warningBg,
-    borderWidth: 2,
-    borderColor: Colors.warningColor,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    marginBottom: 8,
-  },
-  placeholderImg: { width: "100%", height: "100%", resizeMode: "cover" },
-  placeholderTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 20,
-    color: Colors.textPrimary,
-    textAlign: "center",
-  },
-  placeholderText: {
-    fontFamily: FontFamily.regular,
-    fontSize: 15,
-    color: Colors.subduedTextColor,
-    textAlign: "center",
-    lineHeight: 22,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: c.surfacePrimary,
+    },
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: Spacing.lg,
+      paddingVertical: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: c.divider,
+    },
+    backButton: {
+      width: 40,
+      height: 40,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    headerTitleContainer: {
+      flex: 1,
+      alignItems: "center",
+    },
+    headerTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.textPrimary,
+    },
+    placeholder: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 40,
+      gap: 14,
+    },
+    placeholderAvatar: {
+      width: 96,
+      height: 96,
+      borderRadius: 48,
+      backgroundColor: c.warningBg,
+      borderWidth: 2,
+      borderColor: c.warningColor,
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden",
+      marginBottom: 8,
+    },
+    placeholderImg: { width: "100%", height: "100%", resizeMode: "cover" },
+    placeholderTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 20,
+      color: c.textPrimary,
+      textAlign: "center",
+    },
+    placeholderText: {
+      fontFamily: FontFamily.regular,
+      fontSize: 15,
+      color: c.subduedTextColor,
+      textAlign: "center",
+      lineHeight: 22,
+    },
+  });
+}

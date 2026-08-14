@@ -1,6 +1,7 @@
 import { Word } from "@/constants/CourseData";
-import { Colors, FontFamily } from "@/constants/theme";
-import { useRef, useState } from "react";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
+import { useMemo, useRef, useState } from "react";
 import { Animated, Pressable, StyleSheet, View } from "react-native";
 import { ThemedText } from "../themed-text";
 
@@ -11,6 +12,9 @@ export default function Flashcard({
   word: Word;
   direction: "en-zh" | "zh-en";
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [isFlipped, setIsFlipped] = useState(false);
   const flipAnimation = useRef(new Animated.Value(0)).current;
 
@@ -104,72 +108,74 @@ export default function Flashcard({
   );
 }
 
-const styles = StyleSheet.create({
-  card: {
-    width: 340,
-    maxHeight: 440,
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    backfaceVisibility: "hidden",
-    borderRadius: 24,
-    shadowColor: "#0F172A",
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.08,
-    shadowRadius: 18,
-    elevation: 6,
-    paddingHorizontal: 32,
-    paddingVertical: 48,
-  },
-  cardFront: {
-    backgroundColor: Colors.surfacePrimary,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-  },
-  cardBack: {
-    backgroundColor: Colors.primaryAccentColor,
-    position: "absolute",
-    top: 0,
-  },
-  mandarinContent: {
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 12,
-    width: "100%",
-  },
-  pinyin: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 36,
-    lineHeight: 44,
-    color: Colors.textSecondary,
-    textAlign: "center",
-    maxWidth: "90%",
-  },
-  hanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 56,
-    lineHeight: 64,
-    color: Colors.primaryAccentColor,
-    textAlign: "center",
-    maxWidth: "90%",
-  },
-  mandarinBackText: {
-    color: Colors.textInverse,
-  },
-  englishFront: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 32,
-    lineHeight: 40,
-    color: Colors.textPrimary,
-    textAlign: "center",
-    maxWidth: "90%",
-  },
-  englishBack: {
-    fontFamily: FontFamily.medium,
-    fontSize: 30,
-    lineHeight: 38,
-    color: Colors.textInverse,
-    textAlign: "center",
-    maxWidth: "90%",
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    card: {
+      width: 340,
+      maxHeight: 440,
+      height: "100%",
+      justifyContent: "center",
+      alignItems: "center",
+      backfaceVisibility: "hidden",
+      borderRadius: 24,
+      shadowColor: "#0F172A",
+      shadowOffset: { width: 0, height: 6 },
+      shadowOpacity: 0.08,
+      shadowRadius: 18,
+      elevation: 6,
+      paddingHorizontal: 32,
+      paddingVertical: 48,
+    },
+    cardFront: {
+      backgroundColor: c.surfacePrimary,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+    },
+    cardBack: {
+      backgroundColor: c.primaryAccentColor,
+      position: "absolute",
+      top: 0,
+    },
+    mandarinContent: {
+      justifyContent: "center",
+      alignItems: "center",
+      gap: 12,
+      width: "100%",
+    },
+    pinyin: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 36,
+      lineHeight: 44,
+      color: c.textSecondary,
+      textAlign: "center",
+      maxWidth: "90%",
+    },
+    hanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 56,
+      lineHeight: 64,
+      color: c.primaryAccentColor,
+      textAlign: "center",
+      maxWidth: "90%",
+    },
+    mandarinBackText: {
+      color: c.textInverse,
+    },
+    englishFront: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 32,
+      lineHeight: 40,
+      color: c.textPrimary,
+      textAlign: "center",
+      maxWidth: "90%",
+    },
+    englishBack: {
+      fontFamily: FontFamily.medium,
+      fontSize: 30,
+      lineHeight: 38,
+      color: c.textInverse,
+      textAlign: "center",
+      maxWidth: "90%",
+    },
+  });
+}

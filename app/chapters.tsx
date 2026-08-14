@@ -2,14 +2,15 @@ import { THEORY_DATA } from "@/assets/data/theory_content";
 import { ThemedText } from "@/components/themed-text";
 import { CHAPTER_ILLUSTRATIONS } from "@/constants/ChapterIllustrations";
 import { COURSE_DATA } from "@/constants/CourseData";
-import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
+import { FontFamily, Radius, Shadow, Spacing, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { useBookmarks } from "@/lib/bookmarks";
 import { haptics } from "@/lib/haptics";
 import { getAllProgress } from "@/lib/lessonProgress";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
 import { router, useFocusEffect } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -35,6 +36,9 @@ function getChapterTranslation(fallbackTitle: string): string {
 }
 
 export default function ChaptersScreen() {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [progress, setProgress] = useState<Record<string, number>>({});
   const [showBookmarksOnly, setShowBookmarksOnly] = useState(false);
   const { bookmarks } = useBookmarks();
@@ -64,7 +68,7 @@ export default function ChaptersScreen() {
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <View style={styles.header}>
         <Pressable onPress={() => router.back()} hitSlop={20} style={styles.backButton} accessibilityRole="button" accessibilityLabel={T.a11y.back}>
-          <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
+          <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
         </Pressable>
         <View style={styles.headerTitleContainer}>
           <ThemedText style={styles.headerTitle}>Sapaklar</ThemedText>
@@ -97,8 +101,8 @@ export default function ChaptersScreen() {
                 size={14}
                 color={
                   showBookmarksOnly
-                    ? Colors.textInverse
-                    : Colors.primaryAccentColor
+                    ? colors.textInverse
+                    : colors.primaryAccentColor
                 }
               />
               <ThemedText
@@ -194,7 +198,7 @@ export default function ChaptersScreen() {
                             <Ionicons
                               name="checkmark"
                               size={12}
-                              color={Colors.textInverse}
+                              color={colors.textInverse}
                             />
                           </View>
                         )}
@@ -202,7 +206,7 @@ export default function ChaptersScreen() {
                           <Ionicons
                             name="bookmark"
                             size={14}
-                            color={Colors.primaryAccentColor}
+                            color={colors.primaryAccentColor}
                             style={{ marginLeft: "auto" }}
                           />
                         )}
@@ -237,188 +241,190 @@ export default function ChaptersScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.surfacePrimary,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: Spacing.lg,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.divider,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  headerTitleContainer: { flex: 1, alignItems: "center" },
-  headerTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-  },
-  headerSubtitle: {
-    fontFamily: FontFamily.medium,
-    fontSize: 12,
-    color: Colors.primaryAccentColor,
-    marginTop: 2,
-  },
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: c.surfacePrimary,
+    },
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: Spacing.lg,
+      paddingVertical: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: c.divider,
+    },
+    backButton: {
+      width: 40,
+      height: 40,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    headerTitleContainer: { flex: 1, alignItems: "center" },
+    headerTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.textPrimary,
+    },
+    headerSubtitle: {
+      fontFamily: FontFamily.medium,
+      fontSize: 12,
+      color: c.primaryAccentColor,
+      marginTop: 2,
+    },
 
-  scrollContent: {
-    paddingHorizontal: Spacing.lg,
-    paddingTop: 16,
-    paddingBottom: 32,
-  },
-  filterRow: {
-    flexDirection: "row",
-    marginBottom: 16,
-  },
-  filterChip: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    borderRadius: Radius.pill,
-    backgroundColor: Colors.primaryAccentBg,
-    borderWidth: 1,
-    borderColor: Colors.primaryAccentColor + "40",
-  },
-  filterChipActive: {
-    backgroundColor: Colors.primaryAccentColor,
-    borderColor: Colors.primaryAccentColor,
-  },
-  filterChipText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 12,
-    color: Colors.primaryAccentColor,
-  },
-  filterChipTextActive: {
-    color: Colors.textInverse,
-  },
+    scrollContent: {
+      paddingHorizontal: Spacing.lg,
+      paddingTop: 16,
+      paddingBottom: 32,
+    },
+    filterRow: {
+      flexDirection: "row",
+      marginBottom: 16,
+    },
+    filterChip: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 6,
+      paddingHorizontal: 12,
+      paddingVertical: 7,
+      borderRadius: Radius.pill,
+      backgroundColor: c.primaryAccentBg,
+      borderWidth: 1,
+      borderColor: c.primaryAccentColor + "40",
+    },
+    filterChipActive: {
+      backgroundColor: c.primaryAccentColor,
+      borderColor: c.primaryAccentColor,
+    },
+    filterChipText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 12,
+      color: c.primaryAccentColor,
+    },
+    filterChipTextActive: {
+      color: c.textInverse,
+    },
 
-  // Unit sections
-  unitSection: {
-    marginBottom: 24,
-  },
-  unitHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-    marginBottom: 12,
-    paddingHorizontal: 4,
-  },
-  unitTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 12,
-    color: Colors.primaryAccentColor,
-    textTransform: "uppercase",
-    letterSpacing: 1.2,
-  },
-  unitSubtitle: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-    color: Colors.textPrimary,
-    marginTop: 3,
-  },
-  unitProgress: {
-    backgroundColor: Colors.surfaceSecondary,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: Radius.pill,
-  },
-  unitProgressText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 12,
-    color: Colors.textSecondary,
-  },
+    // Unit sections
+    unitSection: {
+      marginBottom: 24,
+    },
+    unitHeader: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "flex-end",
+      marginBottom: 12,
+      paddingHorizontal: 4,
+    },
+    unitTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 12,
+      color: c.primaryAccentColor,
+      textTransform: "uppercase",
+      letterSpacing: 1.2,
+    },
+    unitSubtitle: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+      color: c.textPrimary,
+      marginTop: 3,
+    },
+    unitProgress: {
+      backgroundColor: c.surfaceSecondary,
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      borderRadius: Radius.pill,
+    },
+    unitProgressText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 12,
+      color: c.textSecondary,
+    },
 
-  // Chapter cards
-  chapterCard: {
-    flexDirection: "row",
-    alignItems: "stretch",
-    borderRadius: Radius.lg,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    backgroundColor: Colors.surfacePrimary,
-    marginBottom: 10,
-    overflow: "hidden",
-    minHeight: 80,
-    ...Shadow.sm,
-  },
-  chapterCardCurrent: {
-    borderColor: Colors.primaryAccentColor,
-    borderWidth: 2,
-    ...Shadow.md,
-  },
-  chapterCardCompleted: {
-    backgroundColor: Colors.surfaceSecondary,
-  },
-  cardPressed: {
-    opacity: 0.85,
-  },
+    // Chapter cards
+    chapterCard: {
+      flexDirection: "row",
+      alignItems: "stretch",
+      borderRadius: Radius.lg,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      backgroundColor: c.surfacePrimary,
+      marginBottom: 10,
+      overflow: "hidden",
+      minHeight: 80,
+      ...Shadow.sm,
+    },
+    chapterCardCurrent: {
+      borderColor: c.primaryAccentColor,
+      borderWidth: 2,
+      ...Shadow.md,
+    },
+    chapterCardCompleted: {
+      backgroundColor: c.surfaceSecondary,
+    },
+    cardPressed: {
+      opacity: 0.85,
+    },
 
-  chapterContent: {
-    flex: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    justifyContent: "center",
-    gap: 4,
-  },
-  chapterTopRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  chapterNumberBadge: {
-    backgroundColor: Colors.surfaceTertiary,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: Radius.sm,
-  },
-  chapterNumberText: {
-    fontFamily: FontFamily.bold,
-    fontSize: 11,
-    color: Colors.textSecondary,
-  },
-  currentBadge: {
-    backgroundColor: Colors.primaryAccentColor,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: Radius.sm,
-  },
-  currentBadgeText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    color: Colors.textInverse,
-  },
-  completedBadge: {
-    width: 18,
-    height: 18,
-    borderRadius: 9,
-    backgroundColor: Colors.successColor,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  chapterTranslation: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.successColor,
-  },
-  illustrationBox: {
-    width: 72,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 8,
-  },
-  chapterMeta: {
-    fontFamily: FontFamily.regular,
-    fontSize: 12,
-    color: Colors.subduedTextColor,
-  },
-});
+    chapterContent: {
+      flex: 1,
+      paddingHorizontal: 16,
+      paddingVertical: 14,
+      justifyContent: "center",
+      gap: 4,
+    },
+    chapterTopRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
+    },
+    chapterNumberBadge: {
+      backgroundColor: c.surfaceTertiary,
+      paddingHorizontal: 8,
+      paddingVertical: 2,
+      borderRadius: Radius.sm,
+    },
+    chapterNumberText: {
+      fontFamily: FontFamily.bold,
+      fontSize: 11,
+      color: c.textSecondary,
+    },
+    currentBadge: {
+      backgroundColor: c.primaryAccentColor,
+      paddingHorizontal: 8,
+      paddingVertical: 2,
+      borderRadius: Radius.sm,
+    },
+    currentBadgeText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 11,
+      color: c.textInverse,
+    },
+    completedBadge: {
+      width: 18,
+      height: 18,
+      borderRadius: 9,
+      backgroundColor: c.successColor,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    chapterTranslation: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.successColor,
+    },
+    illustrationBox: {
+      width: 72,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: 8,
+    },
+    chapterMeta: {
+      fontFamily: FontFamily.regular,
+      fontSize: 12,
+      color: c.subduedTextColor,
+    },
+  });
+}

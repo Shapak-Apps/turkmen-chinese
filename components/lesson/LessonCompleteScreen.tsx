@@ -1,11 +1,12 @@
 import { CHARACTERS } from "@/constants/CharacterAvatars";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import { addXP, XP_REWARDS } from "@/lib/xp";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import {
   Animated,
   Image,
@@ -29,6 +30,9 @@ export default function LessonCompleteScreen({
   onReview: () => void;
   awardXp?: boolean;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const confettiRef = useRef<any>(null);
   const xpForAnswers = lessonStats.correctAnswers * XP_REWARDS.CORRECT_ANSWER;
   const xpForCompletion = XP_REWARDS.LESSON_COMPLETE;
@@ -71,9 +75,9 @@ export default function LessonCompleteScreen({
   };
 
   const getPerformanceColor = () => {
-    if (lessonStats.accuracy >= 75) return Colors.successColor;
-    if (lessonStats.accuracy >= 60) return Colors.warningColor;
-    return Colors.primaryAccentColor;
+    if (lessonStats.accuracy >= 75) return colors.successColor;
+    if (lessonStats.accuracy >= 60) return colors.warningColor;
+    return colors.primaryAccentColor;
   };
 
   return (
@@ -92,7 +96,7 @@ export default function LessonCompleteScreen({
           <View style={styles.amanCircle}>
             <Image source={CHARACTERS.aman.source} style={styles.amanImg} />
             <View style={styles.trophyBadge}>
-              <Ionicons name="trophy" size={22} color={Colors.textInverse} />
+              <Ionicons name="trophy" size={22} color={colors.textInverse} />
             </View>
           </View>
           <ThemedText style={styles.completeTitle}>{T.complete.title}</ThemedText>
@@ -129,7 +133,7 @@ export default function LessonCompleteScreen({
         <Animated.View style={[styles.xpCard, { opacity: fadeAnim }]}>
           <View style={styles.xpHeader}>
             <View style={styles.xpIconBox}>
-              <Ionicons name="trophy" size={22} color={Colors.warningColor} />
+              <Ionicons name="trophy" size={22} color={colors.warningColor} />
             </View>
             <View style={styles.xpTotalCol}>
               <ThemedText style={styles.xpLabel}>{T.complete.inThisLesson}</ThemedText>
@@ -166,7 +170,7 @@ export default function LessonCompleteScreen({
           lessonStats.wrongQuestions.length > 0 && (
             <Animated.View style={[styles.wrongSection, { opacity: fadeAnim }]}>
               <View style={styles.wrongHeader}>
-                <Ionicons name="alert-circle" size={22} color={Colors.primaryAccentColor} />
+                <Ionicons name="alert-circle" size={22} color={colors.primaryAccentColor} />
                 <ThemedText style={styles.wrongTitle}>{T.complete.reviewTitle}</ThemedText>
               </View>
               <ThemedText style={styles.wrongSubtitle}>
@@ -179,7 +183,7 @@ export default function LessonCompleteScreen({
                     <Ionicons
                       name="close-circle"
                       size={20}
-                      color={Colors.primaryAccentColor}
+                      color={colors.primaryAccentColor}
                     />
                   </View>
                   <View style={styles.questionContent}>
@@ -197,7 +201,7 @@ export default function LessonCompleteScreen({
                   </View>
                   {question.attempts > 0 && (
                     <View style={styles.attemptsIndicator}>
-                      <Ionicons name="refresh" size={14} color={Colors.primaryAccentColor} />
+                      <Ionicons name="refresh" size={14} color={colors.primaryAccentColor} />
                       <ThemedText style={styles.attemptsText}>
                         {question.attempts}
                       </ThemedText>
@@ -212,7 +216,7 @@ export default function LessonCompleteScreen({
       <Animated.View style={[styles.actionButtons, { opacity: fadeAnim }]}>
         <TouchableOpacity style={styles.primaryButton} onPress={onContinue} activeOpacity={0.85}>
           <ThemedText style={styles.primaryButtonText}>{T.common.continue}</ThemedText>
-          <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
+          <Ionicons name="arrow-forward" size={18} color={colors.textInverse} />
         </TouchableOpacity>
 
         {lessonStats.wrongQuestions &&
@@ -225,7 +229,7 @@ export default function LessonCompleteScreen({
               <Ionicons
                 name="refresh-outline"
                 size={18}
-                color={Colors.primaryAccentColor}
+                color={colors.primaryAccentColor}
               />
               <ThemedText style={styles.secondaryButtonText}>
                 {T.complete.reviewMistakes}
@@ -243,291 +247,293 @@ export default function LessonCompleteScreen({
         fallSpeed={3500}
         explosionSpeed={400}
         colors={[
-          Colors.primaryAccentColor,
-          Colors.successColor,
+          colors.primaryAccentColor,
+          colors.successColor,
           "#FFD700",
-          Colors.warningColor,
+          colors.warningColor,
           "#FF8FA3",
           "#7ED4AD",
         ]}
       />
       <LinearGradient
         style={styles.gradient}
-        colors={[Colors.successBg, Colors.surfacePrimary]}
+        colors={[colors.successBg, colors.surfacePrimary]}
         pointerEvents="none"
       />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.surfacePrimary },
-  gradient: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 280,
-    zIndex: -1,
-  },
-  scrollView: { flex: 1 },
-  content: { padding: 20, paddingTop: 56, paddingBottom: 200 },
-  badgeContainer: { alignItems: "center", marginBottom: 28 },
-  badgeGradient: {
-    width: 104,
-    height: 104,
-    borderRadius: 52,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 18,
-    backgroundColor: Colors.successColor,
-    shadowColor: Colors.successColor,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.25,
-    shadowRadius: 16,
-    elevation: 8,
-  },
-  amanCircle: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: Colors.successBg,
-    borderWidth: 3,
-    borderColor: Colors.successColor,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "visible",
-    marginBottom: 18,
-    shadowColor: Colors.successColor,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 14,
-    elevation: 6,
-  },
-  amanImg: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 60,
-    resizeMode: "cover",
-  },
-  trophyBadge: {
-    position: "absolute",
-    bottom: -4,
-    right: -4,
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: Colors.warningColor,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 3,
-    borderColor: Colors.surfacePrimary,
-  },
-  completeTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 26,
-    color: Colors.textPrimary,
-    letterSpacing: -0.4,
-    marginBottom: 6,
-    textAlign: "center",
-  },
-  performanceMessage: {
-    fontFamily: FontFamily.medium,
-    fontSize: 15,
-    color: Colors.textSecondary,
-    textAlign: "center",
-  },
-  accuracyCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 20,
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    backgroundColor: Colors.surfacePrimary,
-    marginBottom: 28,
-  },
-  accuracyIcon: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 16,
-  },
-  accuracyText: { flex: 1 },
-  accuracyValue: {
-    fontFamily: FontFamily.bold,
-    fontSize: 28,
-    color: Colors.textPrimary,
-    letterSpacing: -0.5,
-    marginBottom: 2,
-  },
-  accuracyLabel: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
-  },
-  xpCard: {
-    padding: 18,
-    borderRadius: 18,
-    backgroundColor: Colors.warningBg,
-    borderWidth: 1,
-    borderColor: Colors.warningColor + "30",
-    marginBottom: 24,
-  },
-  xpHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 14,
-  },
-  xpIconBox: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: Colors.surfacePrimary,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  xpTotalCol: { flex: 1 },
-  xpLabel: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 11,
-    letterSpacing: 1.2,
-    color: Colors.warningColor,
-    marginBottom: 2,
-  },
-  xpValue: {
-    fontFamily: FontFamily.bold,
-    fontSize: 28,
-    color: Colors.textPrimary,
-    letterSpacing: -0.5,
-  },
-  xpBreakdown: {
-    marginTop: 14,
-    paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: Colors.warningColor + "30",
-    gap: 6,
-  },
-  xpRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  xpRowLabel: {
-    fontFamily: FontFamily.medium,
-    fontSize: 13,
-    color: Colors.textSecondary,
-  },
-  xpRowValue: {
-    fontFamily: FontFamily.bold,
-    fontSize: 14,
-    color: Colors.textPrimary,
-  },
-  xpBonusLabel: { color: Colors.warningColor },
-  xpBonusValue: { color: Colors.warningColor },
-  wrongSection: { marginBottom: 24 },
-  wrongHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    marginBottom: 4,
-  },
-  wrongTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-  },
-  wrongSubtitle: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    color: Colors.subduedTextColor,
-    marginBottom: 14,
-  },
-  wrongQuestionCard: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    padding: 14,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: Colors.primaryAccentBgStrong,
-    backgroundColor: Colors.primaryAccentBg,
-    marginBottom: 10,
-  },
-  wrongIndicator: { marginRight: 10, marginTop: 1 },
-  questionContent: { flex: 1, marginRight: 8 },
-  questionEnglish: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.textPrimary,
-    marginBottom: 6,
-  },
-  questionMandarin: { gap: 2 },
-  questionPinyin: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.textSecondary,
-  },
-  questionHanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 16,
-    color: Colors.primaryAccentColor,
-  },
-  attemptsIndicator: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-    backgroundColor: Colors.primaryAccentBgStrong,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 8,
-  },
-  attemptsText: {
-    fontFamily: FontFamily.bold,
-    fontSize: 12,
-    color: Colors.primaryAccentColor,
-  },
-  actionButtons: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 20,
-    paddingBottom: 16,
-    gap: 10,
-    borderTopWidth: 1,
-    borderTopColor: Colors.divider,
-    backgroundColor: Colors.surfacePrimary,
-  },
-  primaryButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 16,
-    borderRadius: 14,
-    gap: 8,
-    backgroundColor: Colors.successColor,
-  },
-  primaryButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 16,
-    color: Colors.textInverse,
-  },
-  secondaryButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 14,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    backgroundColor: Colors.surfacePrimary,
-    gap: 8,
-  },
-  secondaryButtonText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 15,
-    color: Colors.primaryAccentColor,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    container: { flex: 1, backgroundColor: c.surfacePrimary },
+    gradient: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      height: 280,
+      zIndex: -1,
+    },
+    scrollView: { flex: 1 },
+    content: { padding: 20, paddingTop: 56, paddingBottom: 200 },
+    badgeContainer: { alignItems: "center", marginBottom: 28 },
+    badgeGradient: {
+      width: 104,
+      height: 104,
+      borderRadius: 52,
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 18,
+      backgroundColor: c.successColor,
+      shadowColor: c.successColor,
+      shadowOffset: { width: 0, height: 8 },
+      shadowOpacity: 0.25,
+      shadowRadius: 16,
+      elevation: 8,
+    },
+    amanCircle: {
+      width: 120,
+      height: 120,
+      borderRadius: 60,
+      backgroundColor: c.successBg,
+      borderWidth: 3,
+      borderColor: c.successColor,
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "visible",
+      marginBottom: 18,
+      shadowColor: c.successColor,
+      shadowOffset: { width: 0, height: 8 },
+      shadowOpacity: 0.2,
+      shadowRadius: 14,
+      elevation: 6,
+    },
+    amanImg: {
+      width: "100%",
+      height: "100%",
+      borderRadius: 60,
+      resizeMode: "cover",
+    },
+    trophyBadge: {
+      position: "absolute",
+      bottom: -4,
+      right: -4,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      backgroundColor: c.warningColor,
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 3,
+      borderColor: c.surfacePrimary,
+    },
+    completeTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 26,
+      color: c.textPrimary,
+      letterSpacing: -0.4,
+      marginBottom: 6,
+      textAlign: "center",
+    },
+    performanceMessage: {
+      fontFamily: FontFamily.medium,
+      fontSize: 15,
+      color: c.textSecondary,
+      textAlign: "center",
+    },
+    accuracyCard: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: 20,
+      borderRadius: 18,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      backgroundColor: c.surfacePrimary,
+      marginBottom: 28,
+    },
+    accuracyIcon: {
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+      alignItems: "center",
+      justifyContent: "center",
+      marginRight: 16,
+    },
+    accuracyText: { flex: 1 },
+    accuracyValue: {
+      fontFamily: FontFamily.bold,
+      fontSize: 28,
+      color: c.textPrimary,
+      letterSpacing: -0.5,
+      marginBottom: 2,
+    },
+    accuracyLabel: {
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      color: c.subduedTextColor,
+    },
+    xpCard: {
+      padding: 18,
+      borderRadius: 18,
+      backgroundColor: c.warningBg,
+      borderWidth: 1,
+      borderColor: c.warningColor + "30",
+      marginBottom: 24,
+    },
+    xpHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 14,
+    },
+    xpIconBox: {
+      width: 48,
+      height: 48,
+      borderRadius: 24,
+      backgroundColor: c.surfacePrimary,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    xpTotalCol: { flex: 1 },
+    xpLabel: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 11,
+      letterSpacing: 1.2,
+      color: c.warningColor,
+      marginBottom: 2,
+    },
+    xpValue: {
+      fontFamily: FontFamily.bold,
+      fontSize: 28,
+      color: c.textPrimary,
+      letterSpacing: -0.5,
+    },
+    xpBreakdown: {
+      marginTop: 14,
+      paddingTop: 12,
+      borderTopWidth: 1,
+      borderTopColor: c.warningColor + "30",
+      gap: 6,
+    },
+    xpRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    xpRowLabel: {
+      fontFamily: FontFamily.medium,
+      fontSize: 13,
+      color: c.textSecondary,
+    },
+    xpRowValue: {
+      fontFamily: FontFamily.bold,
+      fontSize: 14,
+      color: c.textPrimary,
+    },
+    xpBonusLabel: { color: c.warningColor },
+    xpBonusValue: { color: c.warningColor },
+    wrongSection: { marginBottom: 24 },
+    wrongHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
+      marginBottom: 4,
+    },
+    wrongTitle: {
+      fontFamily: FontFamily.bold,
+      fontSize: 18,
+      color: c.textPrimary,
+    },
+    wrongSubtitle: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      color: c.subduedTextColor,
+      marginBottom: 14,
+    },
+    wrongQuestionCard: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      padding: 14,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: c.primaryAccentBgStrong,
+      backgroundColor: c.primaryAccentBg,
+      marginBottom: 10,
+    },
+    wrongIndicator: { marginRight: 10, marginTop: 1 },
+    questionContent: { flex: 1, marginRight: 8 },
+    questionEnglish: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.textPrimary,
+      marginBottom: 6,
+    },
+    questionMandarin: { gap: 2 },
+    questionPinyin: {
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      color: c.textSecondary,
+    },
+    questionHanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 16,
+      color: c.primaryAccentColor,
+    },
+    attemptsIndicator: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 4,
+      backgroundColor: c.primaryAccentBgStrong,
+      paddingHorizontal: 8,
+      paddingVertical: 4,
+      borderRadius: 8,
+    },
+    attemptsText: {
+      fontFamily: FontFamily.bold,
+      fontSize: 12,
+      color: c.primaryAccentColor,
+    },
+    actionButtons: {
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      padding: 20,
+      paddingBottom: 16,
+      gap: 10,
+      borderTopWidth: 1,
+      borderTopColor: c.divider,
+      backgroundColor: c.surfacePrimary,
+    },
+    primaryButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 16,
+      borderRadius: 14,
+      gap: 8,
+      backgroundColor: c.successColor,
+    },
+    primaryButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 16,
+      color: c.textInverse,
+    },
+    secondaryButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 14,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: c.borderColor,
+      backgroundColor: c.surfacePrimary,
+      gap: 8,
+    },
+    secondaryButtonText: {
+      fontFamily: FontFamily.semibold,
+      fontSize: 15,
+      color: c.primaryAccentColor,
+    },
+  });
+}

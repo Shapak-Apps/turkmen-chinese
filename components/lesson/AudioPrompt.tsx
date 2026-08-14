@@ -1,9 +1,10 @@
 import type { Question } from "@/constants/CourseData";
-import { Colors, FontFamily } from "@/constants/theme";
+import { FontFamily, type ThemeColors } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import React from "react";
+import React, { useMemo } from "react";
 import {
   Animated,
   Platform,
@@ -40,7 +41,10 @@ export default function AudioPrompt({
   listeningScale: Animated.Value;
   fadeAnim: Animated.Value;
 }) {
+  const { colors } = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const playbackDisabled = isPlaying || hasListenedToAudio;
+
   return (
     <>
       <Pressable
@@ -72,8 +76,8 @@ export default function AudioPrompt({
             styles.playButton,
             {
               backgroundColor: playbackDisabled
-                ? Colors.primaryAccentBgStrong
-                : Colors.primaryAccentColor,
+                ? colors.primaryAccentBgStrong
+                : colors.primaryAccentColor,
               transform: [{ scale: scaleAnim }],
             },
           ]}
@@ -151,77 +155,79 @@ export default function AudioPrompt({
   );
 }
 
-const styles = StyleSheet.create({
-  playButton: {
-    width: 76,
-    height: 76,
-    borderRadius: 38,
-    backgroundColor: Colors.primaryAccentColor,
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 10,
-    ...Platform.select({
-      ios: {
-        shadowColor: Colors.primaryAccentColor,
-        shadowOffset: { width: 0, height: 6 },
-        shadowOpacity: 0.3,
-        shadowRadius: 12,
-      },
-      android: {
-        elevation: 6,
-      },
-    }),
-  },
-  mandarinText: {
-    alignItems: "center",
-    padding: 16,
-    borderRadius: 12,
-  },
-  pinyin: {
-    fontFamily: FontFamily.medium,
-    fontSize: 16,
-    color: Colors.textSecondary,
-    marginBottom: 6,
-  },
-  hanzi: {
-    fontFamily: FontFamily.bold,
-    fontSize: 22,
-    color: Colors.primaryAccentColor,
-  },
-  revealButton: {
-    marginBottom: 8,
-    marginTop: 16,
-    alignItems: "center",
-  },
-  revealButtonText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    color: Colors.subduedTextColor,
-    marginBottom: 4,
-  },
-  promptTextContainer: { alignItems: "center" },
-  listeningPrompt: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-    minHeight: 60,
-  },
-  instructionContainer: { alignItems: "center" },
-  listeningContainer: {
-    position: "absolute",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  instructionText: {
-    fontFamily: FontFamily.medium,
-    fontSize: 14,
-    textAlign: "center",
-    color: Colors.subduedTextColor,
-  },
-  instructionHint: {
-    fontFamily: FontFamily.regular,
-    fontSize: 13,
-    textAlign: "center",
-    color: Colors.subduedTextColor,
-  },
-});
+function createStyles(c: ThemeColors) {
+  return StyleSheet.create({
+    playButton: {
+      width: 76,
+      height: 76,
+      borderRadius: 38,
+      backgroundColor: c.primaryAccentColor,
+      justifyContent: "center",
+      alignItems: "center",
+      marginVertical: 10,
+      ...Platform.select({
+        ios: {
+          shadowColor: c.primaryAccentColor,
+          shadowOffset: { width: 0, height: 6 },
+          shadowOpacity: 0.3,
+          shadowRadius: 12,
+        },
+        android: {
+          elevation: 6,
+        },
+      }),
+    },
+    mandarinText: {
+      alignItems: "center",
+      padding: 16,
+      borderRadius: 12,
+    },
+    pinyin: {
+      fontFamily: FontFamily.medium,
+      fontSize: 16,
+      color: c.textSecondary,
+      marginBottom: 6,
+    },
+    hanzi: {
+      fontFamily: FontFamily.bold,
+      fontSize: 22,
+      color: c.primaryAccentColor,
+    },
+    revealButton: {
+      marginBottom: 8,
+      marginTop: 16,
+      alignItems: "center",
+    },
+    revealButtonText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      color: c.subduedTextColor,
+      marginBottom: 4,
+    },
+    promptTextContainer: { alignItems: "center" },
+    listeningPrompt: {
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 20,
+      minHeight: 60,
+    },
+    instructionContainer: { alignItems: "center" },
+    listeningContainer: {
+      position: "absolute",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    instructionText: {
+      fontFamily: FontFamily.medium,
+      fontSize: 14,
+      textAlign: "center",
+      color: c.subduedTextColor,
+    },
+    instructionHint: {
+      fontFamily: FontFamily.regular,
+      fontSize: 13,
+      textAlign: "center",
+      color: c.subduedTextColor,
+    },
+  });
+}
