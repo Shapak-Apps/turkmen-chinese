@@ -8,7 +8,11 @@ export const StreakDataSchema = z.object({
 });
 
 // bookmarked_chapters
-export const BookmarkedChaptersSchema = z.array(z.number());
+export const BookmarkedChaptersSchema = z
+  .array(z.unknown())
+  .transform((val) =>
+    val.filter((v): v is number => typeof v === "number"),
+  );
 
 // lesson_progress
 export const LessonProgressSchema = z.record(z.string(), z.number());

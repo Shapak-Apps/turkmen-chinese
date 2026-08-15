@@ -121,10 +121,10 @@ const QuestionSchema = z.discriminatedUnion("type", [
 ]);
 
 const LessonSchema = z.object({
-  id: z.string(),
+  id: z.union([z.string(), z.number()]).transform((v) => String(v)),
   title: z.string(),
   icon: IconSchema,
-  completionCount: z.number(),
+  completionCount: z.number().default(0),
   questions: z.array(QuestionSchema),
 });
 
