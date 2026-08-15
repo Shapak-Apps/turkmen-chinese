@@ -1,18 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
+import { getValidated } from "@/storage/safeStorage";
+import { BookmarkedChaptersSchema } from "@/storage/schemas";
 
 const BOOKMARKS_KEY = "bookmarked_chapters";
 
 async function read(): Promise<number[]> {
-  try {
-    const raw = await AsyncStorage.getItem(BOOKMARKS_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter((v): v is number => typeof v === "number");
-  } catch {
-    return [];
-  }
+  return getValidated(BOOKMARKS_KEY, BookmarkedChaptersSchema, []);
 }
 
 async function write(ids: number[]): Promise<void> {
@@ -30,7 +24,6 @@ export async function isBookmarked(chapterId: number): Promise<boolean> {
   return list.includes(chapterId);
 }
 
-/** Returns the new bookmarked state (true if added, false if removed). */
 export async function toggleBookmark(chapterId: number): Promise<boolean> {
   const list = await read();
   const idx = list.indexOf(chapterId);

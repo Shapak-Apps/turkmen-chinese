@@ -3,6 +3,7 @@ import { initAnalytics } from "@/lib/analyticsProvider";
 import { syncStreakReminder } from "@/lib/notifications";
 import { getSettings } from "@/lib/settings";
 import { checkAndResetIfNeeded } from "@/lib/streak";
+import { runMigrations } from "@/storage/migrations";
 import {
   Inter_400Regular,
   Inter_500Medium,
@@ -14,7 +15,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
@@ -32,12 +33,17 @@ export default function RootLayout() {
     Inter_600SemiBold,
     Inter_700Bold,
   });
+  const [migrated, setMigrated] = useState(false);
 
   useEffect(() => {
-    if (loaded || error) {
+    runMigrations().finally(() => setMigrated(true));
+  }, []);
+
+  useEffect(() => {
+    if ((loaded || error) && migrated) {
       SplashScreen.hideAsync().catch(() => {});
     }
-  }, [loaded, error]);
+  }, [loaded, error, migrated]);
 
   useEffect(() => {
     initAnalytics();
@@ -46,7 +52,7 @@ export default function RootLayout() {
     void getSettings().then((s) => syncStreakReminder(s.remindersEnabled));
   }, []);
 
-  if (!loaded && !error) {
+  if ((!loaded && !error) || !migrated) {
     return (
       <View style={styles.loading}>
         <ActivityIndicator size="large" color="#fff" />
@@ -67,9 +73,7 @@ export default function RootLayout() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: { flex: 1 },
   loading: {
     flex: 1,
     backgroundColor: "#B91C1C",

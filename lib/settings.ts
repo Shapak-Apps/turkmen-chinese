@@ -1,5 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
+import { getValidated } from "@/storage/safeStorage";
+import { SettingsSchema } from "@/storage/schemas";
 
 const SETTINGS_KEY = "app_settings";
 
@@ -34,13 +36,7 @@ export const HINT_VALUES: Record<HintThreshold, number> = {
 };
 
 export async function getSettings(): Promise<Settings> {
-  try {
-    const raw = await AsyncStorage.getItem(SETTINGS_KEY);
-    if (!raw) return DEFAULT_SETTINGS;
-    return { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
-  } catch {
-    return DEFAULT_SETTINGS;
-  }
+  return getValidated(SETTINGS_KEY, SettingsSchema, DEFAULT_SETTINGS);
 }
 
 export async function saveSettings(settings: Settings): Promise<void> {

@@ -1,4 +1,5 @@
 import courseData from "@/assets/data/course_content.json";
+import { CourseDataSchema } from "./courseDataSchema";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export interface CourseData {
@@ -188,4 +189,8 @@ export type Question =
   | GrammarQuestion
   | StrokeOrderQuestion;
 
-export const COURSE_DATA = courseData as unknown as CourseData;
+const result = CourseDataSchema.safeParse(courseData);
+if (!result.success) {
+  throw new Error("course_content.json невалиден:\n" + result.error.message);
+}
+export const COURSE_DATA: CourseData = result.data;

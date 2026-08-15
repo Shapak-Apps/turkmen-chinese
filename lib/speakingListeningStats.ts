@@ -1,4 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getValidated } from "@/storage/safeStorage";
+import { SpeakingListeningStatsSchema } from "@/storage/schemas";
 
 const STATS_KEY = "speaking_listening_stats";
 
@@ -19,21 +21,8 @@ const getDefaultStats = (): SpeakingListeningStats => ({
   conversationTurns: 0,
 });
 
-const readStats = async (): Promise<SpeakingListeningStats> => {
-  try {
-    const raw = await AsyncStorage.getItem(STATS_KEY);
-    if (!raw) return getDefaultStats();
-    const parsed = JSON.parse(raw) as Partial<SpeakingListeningStats>;
-    return {
-      lastUpdate: parsed.lastUpdate ?? new Date().toISOString(),
-      questionsAnswered: parsed.questionsAnswered ?? 0,
-      questionsListened: parsed.questionsListened ?? 0,
-      conversationTurns: parsed.conversationTurns ?? 0,
-    };
-  } catch {
-    return getDefaultStats();
-  }
-};
+const readStats = async (): Promise<SpeakingListeningStats> =>
+  getValidated(STATS_KEY, SpeakingListeningStatsSchema, getDefaultStats());
 
 const writeStats = async (stats: SpeakingListeningStats) => {
   try {
@@ -64,10 +53,6 @@ export const recordConversationTurn = async () => {
   await writeStats(stats);
 };
 
-/**
- * All-time totals, with minutes DERIVED from the canonical counters so the
- * fields can never be clobbered by mixing assignment and increment.
- */
 export const getStats = async () => {
   const stats = await readStats();
   const minutesSpoken =
