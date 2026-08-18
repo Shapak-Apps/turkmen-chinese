@@ -45,12 +45,12 @@ export default function AboutScreen() {
 
   const openEmail = () => {
     haptics.tap();
-    Linking.openURL(`mailto:${TEAM_EMAIL}?subject=${APP_NAME}`).catch(() => { });
+    Linking.openURL(`mailto:${TEAM_EMAIL}?subject=${APP_NAME}`).catch(() => {});
   };
 
   const openLink = (url: string) => {
     haptics.tap();
-    Linking.openURL(url).catch(() => { });
+    Linking.openURL(url).catch(() => {});
   };
 
   return (
