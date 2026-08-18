@@ -61,7 +61,8 @@ export default function LessonCompleteScreen({
         useNativeDriver: true,
       }),
     ]).start();
-  }, [awardXp, earnedXP, fadeAnim, scaleAnim]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const getPerformanceMessage = () => {
     if (lessonStats.accuracy >= 90) return T.complete.perfExcellent;

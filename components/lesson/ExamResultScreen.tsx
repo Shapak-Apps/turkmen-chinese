@@ -61,7 +61,8 @@ export default function ExamResultScreen({
         useNativeDriver: true,
       }),
     ]).start();
-  }, [fadeAnim, passed, scaleAnim]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <View style={styles.container}>

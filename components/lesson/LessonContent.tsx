@@ -107,7 +107,6 @@ export default function LessonContent({
   // Grant the per-correct-answer XP only while the lesson is still rewardable.
   // Exams are assessments, not practice — they never award XP (also prevents
   // farming XP by retaking the exam).
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const awardCorrectXp = () => {
     if (mode === "exam") return;
     if (rewardableRef.current) void addXP(XP_REWARDS.CORRECT_ANSWER);
@@ -193,7 +192,8 @@ export default function LessonContent({
         }
       }
     }
-  }, [showResult, isCorrect, attemptCount, currentQuestion.id, awardCorrectXp, wrongQuestions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showResult, isCorrect, attemptCount, currentQuestion.id]);
 
   useEffect(() => {
     if (isSpeechPlaying && !hasStartedFirstPlay && !hasListenedToAudio) {

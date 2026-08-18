@@ -43,7 +43,8 @@ export default function AnimatedCounter({
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
-  }, [value, duration, displayValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, duration]);
 
   return (
     <Text style={style} maxFontSizeMultiplier={1.3}>
