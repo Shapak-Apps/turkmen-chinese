@@ -1,5 +1,4 @@
 import courseData from "@/assets/data/course_content.json";
-import { CourseDataSchema } from "./courseDataSchema";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export interface CourseData {
@@ -189,8 +188,6 @@ export type Question =
   | GrammarQuestion
   | StrokeOrderQuestion;
 
-const result = CourseDataSchema.safeParse(courseData);
-if (!result.success) {
-  throw new Error("course_content.json невалиден:\n" + result.error.message);
-}
-export const COURSE_DATA: CourseData = result.data;
+// Bundled content is validated in CI by lib/__tests__/courseData.test.ts —
+// parsing the 895 KB bundle on the JS thread at every cold start is not worth it.
+export const COURSE_DATA = courseData as unknown as CourseData;

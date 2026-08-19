@@ -69,6 +69,7 @@ const QuestionSchema = z.discriminatedUnion("type", [
     id: z.number(),
     mandarin: MandarinPromptSchema,
     options: z.tuple([SpeakingOptionSchema]),
+    instruction: z.string().optional(),
   }),
   z.object({
     type: z.literal("listening_mc"),
@@ -76,6 +77,7 @@ const QuestionSchema = z.discriminatedUnion("type", [
     mandarin: MandarinPhraseSchema,
     options: z.array(ListeningOptionSchema),
     correctOptionId: z.number(),
+    instruction: z.string().optional(),
   }),
   z.object({
     type: z.literal("flashcard"),
@@ -108,7 +110,7 @@ const QuestionSchema = z.discriminatedUnion("type", [
     rule: z.object({
       title: z.string(),
       explanation: z.string(),
-      examples: z.array(WordSchema), // hanzi/pinyin/english
+      examples: z.array(WordSchema),
     }),
     practice: z.array(GrammarPracticeSchema),
   }),
@@ -124,6 +126,7 @@ const LessonSchema = z.object({
   id: z.union([z.string(), z.number()]).transform((v) => String(v)),
   title: z.string(),
   icon: IconSchema,
+  description: z.string().optional(),
   completionCount: z.number().default(0),
   questions: z.array(QuestionSchema),
 });
@@ -131,6 +134,7 @@ const LessonSchema = z.object({
 const ChapterSchema = z.object({
   id: z.number(),
   title: z.string(),
+  description: z.string().optional(),
   lessons: z.array(LessonSchema),
   review: LessonSchema.optional(),
 });
