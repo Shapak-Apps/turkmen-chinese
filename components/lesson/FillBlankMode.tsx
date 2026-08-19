@@ -61,7 +61,7 @@ export default function FillBlankMode({
         withTiming(0, { duration: 60 }),
       );
     }
-  }, [answered, isCorrect]);
+  }, [answered, isCorrect, wiggle]);
 
   const displaySentence = sentence.replace(blankedWord, "______");
   const displayPinyin = sentencePinyin;

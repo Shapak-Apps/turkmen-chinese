@@ -61,6 +61,7 @@ export default function LessonCompleteScreen({
         useNativeDriver: true,
       }),
     ]).start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getPerformanceMessage = () => {
@@ -126,40 +127,40 @@ export default function LessonCompleteScreen({
 
         {/* XP Earned — hidden on replays/reviews where no XP is granted */}
         {awardXp && (
-        <Animated.View style={[styles.xpCard, { opacity: fadeAnim }]}>
-          <View style={styles.xpHeader}>
-            <View style={styles.xpIconBox}>
-              <Ionicons name="trophy" size={22} color={Colors.warningColor} />
-            </View>
-            <View style={styles.xpTotalCol}>
-              <ThemedText style={styles.xpLabel}>{T.complete.inThisLesson}</ThemedText>
-              <ThemedText style={styles.xpValue}>+{totalLessonXP} XP</ThemedText>
-            </View>
-          </View>
-
-          <View style={styles.xpBreakdown}>
-            <View style={styles.xpRow}>
-              <ThemedText style={styles.xpRowLabel}>
-                {T.complete.correctAnswers(lessonStats.correctAnswers)}
-              </ThemedText>
-              <ThemedText style={styles.xpRowValue}>+{xpForAnswers}</ThemedText>
-            </View>
-            <View style={styles.xpRow}>
-              <ThemedText style={styles.xpRowLabel}>{T.complete.lessonComplete}</ThemedText>
-              <ThemedText style={styles.xpRowValue}>+{xpForCompletion}</ThemedText>
-            </View>
-            {xpForPerfect > 0 && (
-              <View style={styles.xpRow}>
-                <ThemedText style={[styles.xpRowLabel, styles.xpBonusLabel]}>
-                  {T.complete.bonus100}
-                </ThemedText>
-                <ThemedText style={[styles.xpRowValue, styles.xpBonusValue]}>
-                  +{xpForPerfect}
-                </ThemedText>
+          <Animated.View style={[styles.xpCard, { opacity: fadeAnim }]}>
+            <View style={styles.xpHeader}>
+              <View style={styles.xpIconBox}>
+                <Ionicons name="trophy" size={22} color={Colors.warningColor} />
               </View>
-            )}
-          </View>
-        </Animated.View>
+              <View style={styles.xpTotalCol}>
+                <ThemedText style={styles.xpLabel}>{T.complete.inThisLesson}</ThemedText>
+                <ThemedText style={styles.xpValue}>+{totalLessonXP} XP</ThemedText>
+              </View>
+            </View>
+
+            <View style={styles.xpBreakdown}>
+              <View style={styles.xpRow}>
+                <ThemedText style={styles.xpRowLabel}>
+                  {T.complete.correctAnswers(lessonStats.correctAnswers)}
+                </ThemedText>
+                <ThemedText style={styles.xpRowValue}>+{xpForAnswers}</ThemedText>
+              </View>
+              <View style={styles.xpRow}>
+                <ThemedText style={styles.xpRowLabel}>{T.complete.lessonComplete}</ThemedText>
+                <ThemedText style={styles.xpRowValue}>+{xpForCompletion}</ThemedText>
+              </View>
+              {xpForPerfect > 0 && (
+                <View style={styles.xpRow}>
+                  <ThemedText style={[styles.xpRowLabel, styles.xpBonusLabel]}>
+                    {T.complete.bonus100}
+                  </ThemedText>
+                  <ThemedText style={[styles.xpRowValue, styles.xpBonusValue]}>
+                    +{xpForPerfect}
+                  </ThemedText>
+                </View>
+              )}
+            </View>
+          </Animated.View>
         )}
 
         {lessonStats.wrongQuestions &&

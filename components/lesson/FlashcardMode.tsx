@@ -53,7 +53,7 @@ export default function FlashcardMode({
         withTiming(0, { duration: 60 }),
       );
     }
-  }, [answered]);
+  }, [answered, correctOptionId, selectedId, wiggle]);
 
   const handleSelect = (id: number) => {
     if (answered) return;
