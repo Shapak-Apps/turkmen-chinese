@@ -58,8 +58,8 @@ export default function SentenceBreakdownCard({
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
   const cardRef = useRef<Animated.View>(null);
   const tooltipWidthRef = useRef<number>(0);
-  const hanziWordRefs = useRef<Array<View | null>>([]);
-  const pinyinWordRefs = useRef<Array<View | null>>([]);
+  const hanziWordRefs = useRef<(View | null)[]>([]);
+  const pinyinWordRefs = useRef<(View | null)[]>([]);
   const [selectedWord, setSelectedWord] = useState<{
     type: "hanzi" | "pinyin";
     index: number;

@@ -40,7 +40,7 @@ export default function AudioWaveform({ isPlaying }: { isPlaying: boolean }) {
         }).start();
       });
     }
-  }, [isPlaying]);
+  }, [isPlaying, waveAnims]);
 
   return (
     <View style={styles.waveformContainer}>

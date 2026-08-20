@@ -19,6 +19,7 @@ export default function AnimatedCounter({
   const startValueRef = useRef(0);
   const rafRef = useRef<number | null>(null);
 
+
   useEffect(() => {
     startValueRef.current = displayValue;
     startTimeRef.current = null;
@@ -42,6 +43,7 @@ export default function AnimatedCounter({
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, duration]);
 
   return (

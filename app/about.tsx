@@ -2,8 +2,8 @@ import { ThemedText } from "@/components/themed-text";
 import { FontFamily, Radius, Shadow, Spacing, type ThemeColors } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
 import { haptics } from "@/lib/haptics";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import Constants from "expo-constants";
 import { router } from "expo-router";
 import { useMemo, useState } from "react";
@@ -279,7 +279,7 @@ export default function AboutScreen() {
                 Programma MIT lisenziýasy bilen açyk çeşmäni esas alýar.
                 {"\n\n"}
                 Ulanylan çeşmeler: Twemoji (CC-BY 4.0), Hanzi Writer (MIT),
-                Inter şrift (OFL).
+                Inter şrift (OFL), Pinýin sesleri: mp3-chinese-pinyin-sound (Unlicense).
               </ThemedText>
             </Section>
           </ScrollView>
