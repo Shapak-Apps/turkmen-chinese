@@ -20,7 +20,7 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 
-SplashScreen.preventAutoHideAsync().catch(() => { });
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export const unstable_settings = {
   anchor: "(tabs)",
@@ -41,17 +41,17 @@ export default function RootLayout() {
 
   useEffect(() => {
     if ((loaded || error) && migrated) {
-      SplashScreen.hideAsync().catch(() => { });
+      SplashScreen.hideAsync().catch(() => {});
     }
   }, [loaded, error, migrated]);
 
-useEffect(() => {
-  if (!migrated) return;
-  initAnalytics();
-  track(Events.AppOpen);
-  void checkAndResetIfNeeded();
-  void getSettings().then((s) => syncStreakReminder(s.remindersEnabled));
-}, [migrated]);
+  useEffect(() => {
+    if (!migrated) return;
+    initAnalytics();
+    track(Events.AppOpen);
+    void checkAndResetIfNeeded();
+    void getSettings().then((s) => syncStreakReminder(s.remindersEnabled));
+  }, [migrated]);
 
   if ((!loaded && !error) || !migrated) {
     return (

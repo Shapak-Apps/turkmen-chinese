@@ -2,9 +2,9 @@ import { z } from "zod";
 
 // streak_data
 export const StreakDataSchema = z.object({
-  lastActiveDate: z.string().nullable().default(null),
-  currentStreak: z.number().default(0),
-  longestStreak: z.number().default(0),
+  lastActiveDate: z.string().nullable().catch(null),
+  currentStreak: z.number().catch(0),
+  longestStreak: z.number().catch(0),
 });
 
 // bookmarked_chapters — нечисловые записи отфильтровываются, список выживает
@@ -27,10 +27,10 @@ export const LessonProgressSchema = z
 
 // speaking_listening_stats
 export const SpeakingListeningStatsSchema = z.object({
-  lastUpdate: z.string().default(() => new Date().toISOString()),
-  questionsAnswered: z.number().default(0),
-  questionsListened: z.number().default(0),
-  conversationTurns: z.number().default(0),
+  lastUpdate: z.string().catch(() => new Date().toISOString()),
+  questionsAnswered: z.number().catch(0),
+  questionsListened: z.number().catch(0),
+  conversationTurns: z.number().catch(0),
 });
 
 // app_settings — одно невалидное поле фолбэчится само, остальные три выживают

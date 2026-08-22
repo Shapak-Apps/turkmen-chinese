@@ -13,9 +13,9 @@ import { StepProgressSchema } from "@/lib/storage/schemas";
 // Прогресс и РАЗБЛОКИРОВКА шагов (Stepik-гейтинг).
 //
 // Источники истины переиспользуются, чтобы не плодить дубли:
-// • экзамен → examResult (passed)
-// • практика → lessonProgress (`chapter-${id}` завершён)
-// • теория → НОВОЕ хранилище здесь (раньше «долистал теорию» нигде не трекалось)
+//   • экзамен → examResult (passed)
+//   • практика → lessonProgress (`chapter-${id}` завершён)
+//   • теория → НОВОЕ хранилище здесь (раньше «долистал теорию» нигде не трекалось)
 //
 // Гейтинг строгий: внутри главы шаги открываются по порядку; следующая глава
 // открывается после сдачи экзамена предыдущей (главы без экзамена пропускаются
@@ -83,7 +83,7 @@ export const isChapterUnlocked = (
 
 const STORAGE_KEY = "step_progress";
 
-type TheoryProgress = Record<string, string[]>;
+type TheoryProgress = Record<string, string[]>; // chapterId -> completed theory step keys
 
 const readAll = async (): Promise<TheoryProgress> =>
   getValidated(STORAGE_KEY, StepProgressSchema, {});
@@ -171,6 +171,8 @@ export const getCourseUnlocks = async (): Promise<ChapterUnlock[]> => {
     readAll(),
     getAllExamResults(),
   ]);
+  // lessonProgress (практика) читаем единым проходом ниже через hasCompletedLesson,
+  // но чтобы не дёргать его в цикле, соберём практику параллельно.
   const practiceDoneFlags = await Promise.all(
     ids.map((id) => hasCompletedLesson(`chapter-${id}`)),
   );
