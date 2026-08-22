@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getValidated } from "@/storage/safeStorage";
-import { SpeakingListeningStatsSchema } from "@/storage/schemas";
+import { getValidated } from "@/lib/storage/safeStorage";
+import { SpeakingListeningStatsSchema } from "@/lib/storage/schemas";
 
 const STATS_KEY = "speaking_listening_stats";
 

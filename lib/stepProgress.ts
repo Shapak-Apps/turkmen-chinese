@@ -6,8 +6,8 @@ import {
 } from "@/lib/courseSteps";
 import { hasCompletedLesson } from "@/lib/lessonProgress";
 import { getAllExamResults } from "@/lib/examResult";
-import { getValidated } from "@/storage/safeStorage";
-import { StepProgressSchema } from "@/storage/schemas";
+import { getValidated } from "@/lib/storage/safeStorage";
+import { StepProgressSchema } from "@/lib/storage/schemas";
 
 export type StepState = "done" | "current" | "locked";
 

@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getValidated } from "@/storage/safeStorage";
-import { LessonProgressSchema } from "@/storage/schemas";
+import { getValidated } from "@/lib/storage/safeStorage";
+import { LessonProgressSchema } from "@/lib/storage/schemas";
 
 const STATS_KEY = "lesson_progress";
 

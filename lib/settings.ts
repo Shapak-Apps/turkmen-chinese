@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import { getValidated } from "@/storage/safeStorage";
-import { SettingsSchema } from "@/storage/schemas";
+import { getValidated } from "@/lib/storage/safeStorage";
+import { SettingsSchema } from "@/lib/storage/schemas";
 
 const SETTINGS_KEY = "app_settings";
 

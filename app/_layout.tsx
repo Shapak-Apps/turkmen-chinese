@@ -3,7 +3,7 @@ import { initAnalytics } from "@/lib/analyticsProvider";
 import { syncStreakReminder } from "@/lib/notifications";
 import { getSettings } from "@/lib/settings";
 import { checkAndResetIfNeeded } from "@/lib/streak";
-import { runMigrations } from "@/storage/migrations";
+import { runMigrations } from "@/lib/storage/migrations";
 import {
   Inter_400Regular,
   Inter_500Medium,
@@ -20,7 +20,7 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 
-SplashScreen.preventAutoHideAsync().catch(() => {});
+SplashScreen.preventAutoHideAsync().catch(() => { });
 
 export const unstable_settings = {
   anchor: "(tabs)",
@@ -41,7 +41,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     if ((loaded || error) && migrated) {
-      SplashScreen.hideAsync().catch(() => {});
+      SplashScreen.hideAsync().catch(() => { });
     }
   }, [loaded, error, migrated]);
 

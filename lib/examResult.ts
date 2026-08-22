@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getValidated } from "@/storage/safeStorage";
-import { ExamResultsSchema } from "@/storage/schemas";
+import { getValidated } from "@/lib/storage/safeStorage";
+import { ExamResultsSchema } from "@/lib/storage/schemas";
 
 export const EXAM_PASS_THRESHOLD = 70;
 
