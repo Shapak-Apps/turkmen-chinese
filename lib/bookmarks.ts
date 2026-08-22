@@ -1,6 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
-import { getValidated } from "@/lib/storage/safeStorage";
+import { getValidated, setJson } from "@/lib/storage/safeStorage";
 import { BookmarkedChaptersSchema } from "@/lib/storage/schemas";
 
 const BOOKMARKS_KEY = "bookmarked_chapters";
@@ -10,9 +9,7 @@ async function read(): Promise<number[]> {
 }
 
 async function write(ids: number[]): Promise<void> {
-  try {
-    await AsyncStorage.setItem(BOOKMARKS_KEY, JSON.stringify(ids));
-  } catch { }
+  await setJson(BOOKMARKS_KEY, ids);
 }
 
 export async function getBookmarks(): Promise<number[]> {
@@ -24,6 +21,7 @@ export async function isBookmarked(chapterId: number): Promise<boolean> {
   return list.includes(chapterId);
 }
 
+/** Returns the new bookmarked state (true if added, false if removed). */
 export async function toggleBookmark(chapterId: number): Promise<boolean> {
   const list = await read();
   const idx = list.indexOf(chapterId);

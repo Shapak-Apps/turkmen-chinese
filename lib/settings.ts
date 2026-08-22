@@ -1,6 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import { getValidated } from "@/lib/storage/safeStorage";
+import { getValidated, setJson } from "@/lib/storage/safeStorage";
 import { SettingsSchema } from "@/lib/storage/schemas";
 
 const SETTINGS_KEY = "app_settings";
@@ -40,11 +39,7 @@ export async function getSettings(): Promise<Settings> {
 }
 
 export async function saveSettings(settings: Settings): Promise<void> {
-  try {
-    await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
-  } catch (err) {
-    console.warn("settings: failed to save", err);
-  }
+  await setJson(SETTINGS_KEY, settings);
 }
 
 export function useSettings() {

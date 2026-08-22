@@ -1,5 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getValidated } from "@/lib/storage/safeStorage";
+import { getValidated, setJson } from "@/lib/storage/safeStorage";
 import { SpeakingListeningStatsSchema } from "@/lib/storage/schemas";
 
 const STATS_KEY = "speaking_listening_stats";
@@ -25,11 +24,7 @@ const readStats = async (): Promise<SpeakingListeningStats> =>
   getValidated(STATS_KEY, SpeakingListeningStatsSchema, getDefaultStats());
 
 const writeStats = async (stats: SpeakingListeningStats) => {
-  try {
-    await AsyncStorage.setItem(STATS_KEY, JSON.stringify(stats));
-  } catch (err) {
-    console.warn("speakingListeningStats: failed to write", err);
-  }
+  await setJson(STATS_KEY, stats);
 };
 
 export const recordQuestionAnswered = async () => {
@@ -53,6 +48,10 @@ export const recordConversationTurn = async () => {
   await writeStats(stats);
 };
 
+/**
+ * All-time totals, with minutes DERIVED from the canonical counters so the
+ * fields can never be clobbered by mixing assignment and increment.
+ */
 export const getStats = async () => {
   const stats = await readStats();
   const minutesSpoken =

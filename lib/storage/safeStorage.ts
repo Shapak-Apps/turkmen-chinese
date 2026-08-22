@@ -13,10 +13,10 @@ export async function getValidated<T>(
     const res = schema.safeParse(JSON.parse(raw));
     if (res.success) return res.data;
 
-    console.warn(`[storage] невалидные данные в ключе "${key}" — fallback`);
+    console.warn(`safeStorage: invalid data in key "${key}", falling back`);
     return fallback;
   } catch (err) {
-    console.warn(`[storage] ошибка чтения ключа "${key}"`, err);
+    console.warn(`safeStorage: failed to read key "${key}"`, err);
     return fallback;
   }
 }
@@ -25,6 +25,6 @@ export async function setJson(key: string, value: unknown): Promise<void> {
   try {
     await AsyncStorage.setItem(key, JSON.stringify(value));
   } catch (err) {
-    console.warn(`[storage] ошибка записи ключа "${key}"`, err);
+    console.warn(`safeStorage: failed to write key "${key}"`, err);
   }
 }

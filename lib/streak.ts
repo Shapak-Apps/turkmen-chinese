@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
-import { getValidated } from "@/lib/storage/safeStorage";
+import { getValidated, setJson } from "@/lib/storage/safeStorage";
 import { StreakDataSchema } from "@/lib/storage/schemas";
 
 const STREAK_KEY = "streak_data";
@@ -33,15 +33,17 @@ async function read(): Promise<StreakData> {
 }
 
 async function write(data: StreakData): Promise<void> {
-  try {
-    await AsyncStorage.setItem(STREAK_KEY, JSON.stringify(data));
-  } catch { }
+  await setJson(STREAK_KEY, data);
 }
 
 export async function getStreak(): Promise<StreakData> {
   return read();
 }
 
+/**
+ * Call on app start. Resets currentStreak to 0 if last active was more than 1 day ago.
+ * Returns whether streak was reset.
+ */
 export async function checkAndResetIfNeeded(): Promise<{
   data: StreakData;
   wasReset: boolean;
@@ -65,6 +67,10 @@ export async function checkAndResetIfNeeded(): Promise<{
   return { data: reset, wasReset: true };
 }
 
+/**
+ * Call when user completes a correct action. Increments streak only on first activity of the day.
+ * Returns updated data and whether the streak grew this call.
+ */
 export async function markActiveDay(): Promise<{
   data: StreakData;
   grew: boolean;
@@ -92,7 +98,7 @@ export async function markActiveDay(): Promise<{
 export async function resetStreak(): Promise<void> {
   try {
     await AsyncStorage.removeItem(STREAK_KEY);
-  } catch { }
+  } catch {}
 }
 
 export function useStreak() {
