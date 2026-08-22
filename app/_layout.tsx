@@ -45,12 +45,13 @@ export default function RootLayout() {
     }
   }, [loaded, error, migrated]);
 
-  useEffect(() => {
-    initAnalytics();
-    track(Events.AppOpen);
-    void checkAndResetIfNeeded();
-    void getSettings().then((s) => syncStreakReminder(s.remindersEnabled));
-  }, []);
+useEffect(() => {
+  if (!migrated) return;
+  initAnalytics();
+  track(Events.AppOpen);
+  void checkAndResetIfNeeded();
+  void getSettings().then((s) => syncStreakReminder(s.remindersEnabled));
+}, [migrated]);
 
   if ((!loaded && !error) || !migrated) {
     return (
