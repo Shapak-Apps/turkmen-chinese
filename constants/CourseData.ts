@@ -32,10 +32,10 @@ export interface Chapter {
 }
 
 export interface Lesson {
-  id: string;
+  id: number; // в course_content.json все 30 id — числа
   title: string;
   icon: keyof typeof Ionicons.glyphMap;
-  completionCount: number;
+  completionCount?: number; // в JSON этого поля нет вообще
   questions: Question[];
 }
 
@@ -188,4 +188,6 @@ export type Question =
   | GrammarQuestion
   | StrokeOrderQuestion;
 
+// Bundled content is validated in CI by lib/__tests__/courseData.test.ts —
+// parsing the 895 KB bundle on the JS thread at every cold start is not worth it.
 export const COURSE_DATA = courseData as unknown as CourseData;

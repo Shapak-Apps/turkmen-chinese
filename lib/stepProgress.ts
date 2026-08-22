@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   buildChapterSteps,
   CourseStep,
@@ -7,14 +6,16 @@ import {
 } from "@/lib/courseSteps";
 import { hasCompletedLesson } from "@/lib/lessonProgress";
 import { getAllExamResults } from "@/lib/examResult";
+import { getValidated, setJson } from "@/lib/storage/safeStorage";
+import { StepProgressSchema } from "@/lib/storage/schemas";
 
 // ============================================================
 // Прогресс и РАЗБЛОКИРОВКА шагов (Stepik-гейтинг).
 //
 // Источники истины переиспользуются, чтобы не плодить дубли:
-//   • экзамен  → examResult (passed)
+//   • экзамен → examResult (passed)
 //   • практика → lessonProgress (`chapter-${id}` завершён)
-//   • теория   → НОВОЕ хранилище здесь (раньше «долистал теорию» нигде не трекалось)
+//   • теория → НОВОЕ хранилище здесь (раньше «долистал теорию» нигде не трекалось)
 //
 // Гейтинг строгий: внутри главы шаги открываются по порядку; следующая глава
 // открывается после сдачи экзамена предыдущей (главы без экзамена пропускаются
@@ -84,22 +85,11 @@ const STORAGE_KEY = "step_progress";
 
 type TheoryProgress = Record<string, string[]>; // chapterId -> completed theory step keys
 
-const readAll = async (): Promise<TheoryProgress> => {
-  try {
-    const raw = await AsyncStorage.getItem(STORAGE_KEY);
-    if (!raw) return {};
-    return JSON.parse(raw) as TheoryProgress;
-  } catch {
-    return {};
-  }
-};
+const readAll = async (): Promise<TheoryProgress> =>
+  getValidated(STORAGE_KEY, StepProgressSchema, {});
 
 const writeAll = async (data: TheoryProgress) => {
-  try {
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  } catch (err) {
-    console.warn("stepProgress: failed to write", err);
-  }
+  await setJson(STORAGE_KEY, data);
 };
 
 /** Отметить теоретический шаг пройденным (долистал до конца). Идемпотентно. */

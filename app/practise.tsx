@@ -72,7 +72,7 @@ export default function PractiseScreen() {
       const allLessons = COURSE_DATA.chapters.flatMap((c) =>
         c.review ? [...c.lessons, c.review] : c.lessons,
       );
-      const currentLesson = allLessons.find((l) => l.id === lessonId);
+      const currentLesson = allLessons.find((l) => l.id === Number(lessonId));
       const lessonQuestions = currentLesson ? currentLesson.questions : [];
       return {
         questions: lessonQuestions,
