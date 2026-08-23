@@ -1,5 +1,6 @@
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily } from "@/constants/theme";
+import { useReduceMotion } from "@/hooks/use-reduce-motion";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import { addXP, XP_REWARDS } from "@/lib/xp";
@@ -29,6 +30,7 @@ export default function LessonCompleteScreen({
   onReview: () => void;
   awardXp?: boolean;
 }) {
+  const reduceMotion = useReduceMotion();
   const confettiRef = useRef<any>(null);
   const xpForAnswers = lessonStats.correctAnswers * XP_REWARDS.CORRECT_ANSWER;
   const xpForCompletion = XP_REWARDS.LESSON_COMPLETE;
@@ -235,23 +237,25 @@ export default function LessonCompleteScreen({
           )}
       </Animated.View>
 
-      <ConfettiCannon
-        ref={confettiRef}
-        count={250}
-        origin={{ x: -10, y: 0 }}
-        autoStart={false}
-        fadeOut
-        fallSpeed={3500}
-        explosionSpeed={400}
-        colors={[
-          Colors.primaryAccentColor,
-          Colors.successColor,
-          "#FFD700",
-          Colors.warningColor,
-          "#FF8FA3",
-          "#7ED4AD",
-        ]}
-      />
+      {!reduceMotion && (
+        <ConfettiCannon
+          ref={confettiRef}
+          count={250}
+          origin={{ x: -10, y: 0 }}
+          autoStart={false}
+          fadeOut
+          fallSpeed={3500}
+          explosionSpeed={400}
+          colors={[
+            Colors.primaryAccentColor,
+            Colors.successColor,
+            "#FFD700",
+            Colors.warningColor,
+            "#FF8FA3",
+            "#7ED4AD",
+          ]}
+        />
+      )}
       <LinearGradient
         style={styles.gradient}
         colors={[Colors.successBg, Colors.surfacePrimary]}
@@ -395,7 +399,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.semibold,
     fontSize: 11,
     letterSpacing: 1.2,
-    color: Colors.warningColor,
+    color: Colors.warningTextColor,
     marginBottom: 2,
   },
   xpValue: {
@@ -426,8 +430,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.textPrimary,
   },
-  xpBonusLabel: { color: Colors.warningColor },
-  xpBonusValue: { color: Colors.warningColor },
+  xpBonusLabel: { color: Colors.warningTextColor },
+  xpBonusValue: { color: Colors.warningTextColor },
   wrongSection: { marginBottom: 24 },
   wrongHeader: {
     flexDirection: "row",

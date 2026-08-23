@@ -1,5 +1,6 @@
 import { FlashcardOption } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
+import { useReduceMotion } from "@/hooks/use-reduce-motion";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -37,6 +38,7 @@ export default function FlashcardMode({
 }) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
+  const reduceMotion = useReduceMotion();
   const wiggle = useSharedValue(0);
 
   const wiggleStyle = useAnimatedStyle(() => ({
@@ -45,6 +47,7 @@ export default function FlashcardMode({
 
   useEffect(() => {
     if (answered && selectedId !== correctOptionId) {
+      if (reduceMotion) return;
       wiggle.value = withSequence(
         withTiming(-10, { duration: 60 }),
         withTiming(10, { duration: 60 }),
@@ -53,7 +56,7 @@ export default function FlashcardMode({
         withTiming(0, { duration: 60 }),
       );
     }
-  }, [answered, correctOptionId, selectedId, wiggle]);
+  }, [answered, correctOptionId, reduceMotion, selectedId, wiggle]);
 
   const handleSelect = (id: number) => {
     if (answered) return;

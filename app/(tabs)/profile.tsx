@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
   xpLabel: {
     fontFamily: FontFamily.semibold,
     fontSize: 11,
-    color: Colors.warningColor,
+    color: Colors.warningTextColor,
     letterSpacing: 1.2,
     marginBottom: 2,
   },

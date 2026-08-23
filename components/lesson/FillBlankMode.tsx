@@ -1,4 +1,5 @@
 import { Colors, FontFamily } from "@/constants/theme";
+import { useReduceMotion } from "@/hooks/use-reduce-motion";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import * as Speech from "expo-speech";
@@ -45,6 +46,7 @@ export default function FillBlankMode({
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const reduceMotion = useReduceMotion();
   const wiggle = useSharedValue(0);
 
   const wiggleStyle = useAnimatedStyle(() => ({
@@ -53,6 +55,7 @@ export default function FillBlankMode({
 
   useEffect(() => {
     if (answered && !isCorrect) {
+      if (reduceMotion) return;
       wiggle.value = withSequence(
         withTiming(-10, { duration: 60 }),
         withTiming(10, { duration: 60 }),
@@ -61,7 +64,7 @@ export default function FillBlankMode({
         withTiming(0, { duration: 60 }),
       );
     }
-  }, [answered, isCorrect, wiggle]);
+  }, [answered, isCorrect, reduceMotion, wiggle]);
 
   const displaySentence = sentence.replace(blankedWord, "______");
   const displayPinyin = sentencePinyin;
@@ -205,7 +208,7 @@ const styles = StyleSheet.create({
   hintText: {
     fontFamily: FontFamily.medium,
     fontSize: 13,
-    color: Colors.warningColor,
+    color: Colors.warningTextColor,
     textAlign: "center",
   },
   optionsGrid: {

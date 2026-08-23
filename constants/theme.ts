@@ -19,6 +19,7 @@ const SLATE_100 = "#F1F5F9";
 const SLATE_50 = "#F8FAFC";
 
 const AMBER_500 = "#D97706";
+const AMBER_700 = "#B45309";
 const AMBER_50 = "#FFFBEB";
 
 export const Palette = {
@@ -33,7 +34,7 @@ export const Palette = {
     700: SLATE_700,
     900: SLATE_900,
   },
-  amber: { 50: AMBER_50, 500: AMBER_500 },
+  amber: { 50: AMBER_50, 500: AMBER_500, 700: AMBER_700 },
   white: "#FFFFFF",
   black: "#000000",
 };
@@ -50,6 +51,10 @@ export const Colors = {
   successBgStrong: GREEN_100,
 
   warningColor: AMBER_500,
+  // Text needs the darker amber: AMBER_500 on white is 3.19:1 and fails WCAG AA
+  // for small text. AMBER_700 is 5.02:1 on white and 4.84:1 on warningBg.
+  // Icons, borders and fills keep AMBER_500 — 4.5:1 does not apply to them.
+  warningTextColor: AMBER_700,
   warningBg: AMBER_50,
 
   textPrimary: SLATE_900,

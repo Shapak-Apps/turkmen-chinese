@@ -1,6 +1,7 @@
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily, Radius } from "@/constants/theme";
 import type { ExamResult } from "@/lib/examResult";
+import { useReduceMotion } from "@/hooks/use-reduce-motion";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -33,6 +34,7 @@ export default function ExamResultScreen({
   const accent = passed ? Colors.successColor : Colors.primaryAccentColor;
   const accentBg = passed ? Colors.successBg : Colors.primaryAccentBg;
 
+  const reduceMotion = useReduceMotion();
   const confettiRef = useRef<any>(null);
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -206,7 +208,7 @@ export default function ExamResultScreen({
         )}
       </Animated.View>
 
-      {passed && (
+      {passed && !reduceMotion && (
         <ConfettiCannon
           ref={confettiRef}
           count={250}
