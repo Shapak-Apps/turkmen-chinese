@@ -1,5 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
+import { getValidated, setJson } from "@/lib/storage/safeStorage";
+import { StreakDataSchema } from "@/lib/storage/schemas";
 
 const STREAK_KEY = "streak_data";
 
@@ -27,24 +29,11 @@ function yesterdayKey(): string {
 }
 
 async function read(): Promise<StreakData> {
-  try {
-    const raw = await AsyncStorage.getItem(STREAK_KEY);
-    if (!raw) return { ...DEFAULT };
-    const parsed = JSON.parse(raw) as Partial<StreakData>;
-    return {
-      lastActiveDate: parsed.lastActiveDate ?? null,
-      currentStreak: parsed.currentStreak ?? 0,
-      longestStreak: parsed.longestStreak ?? 0,
-    };
-  } catch {
-    return { ...DEFAULT };
-  }
+  return getValidated(STREAK_KEY, StreakDataSchema, { ...DEFAULT });
 }
 
 async function write(data: StreakData): Promise<void> {
-  try {
-    await AsyncStorage.setItem(STREAK_KEY, JSON.stringify(data));
-  } catch {}
+  await setJson(STREAK_KEY, data);
 }
 
 export async function getStreak(): Promise<StreakData> {

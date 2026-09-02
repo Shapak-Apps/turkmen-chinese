@@ -14,22 +14,17 @@
 
 ```bash
 npm install
-npm start
+npx expo run:android
 ```
 
-`npm start` Expo development serverini başladýar.
-
-Zerur bolsa, aşakdaky buýruklary hem ulanyp bilersiňiz:
-
-```bash
-npm run android
-npm run ios
-npm run web
-```
+Bu ýeke-täk işleýän ýol. Programma nätiw modullary ulanýar (bildiriş, faýl saýlaýjy,
+iýeroglif ýazuwy), şonuň üçin **Expo Go bilen işlemeýär**, we web görnüşi hem ýok.
+`npx expo run:android` dev-build ýygnaýar we enjama gurnaýar; soňra Metro-ny täzeden
+başlatmak üçin `npx expo start --dev-client` ýeterlik.
 
 ### Kurs mazmuny
 
-Kurs 30 bapdan ybarat.
+Kursda 31 bap bar: 0-njy bap — aýdylyş, 1–30-njy baplar — esasy okuw materialy.
 
 - Teoriýa: `assets/data/theory_content.ts`
 - Türgenleşikler: `assets/data/course_content.json`
@@ -76,22 +71,17 @@ MIT
 
 ```bash
 npm install
-npm start
+npx expo run:android
 ```
 
-`npm start` starts the Expo development server.
-
-If needed, you can also run:
-
-```bash
-npm run android
-npm run ios
-npm run web
-```
+This is the only working way. The app uses native modules (notifications, document
+picker, hanzi writer), so **Expo Go does not work** and there is no web build.
+`npx expo run:android` builds a dev client and installs it; after that
+`npx expo start --dev-client` is enough to restart Metro.
 
 ### Content organization
 
-The course contains 30 chapters.
+The course has 31 chapters: chapter 0 is pronunciation, chapters 1-30 are the main course.
 
 - Theory: `assets/data/theory_content.ts`
 - Exercises: `assets/data/course_content.json`

@@ -2,9 +2,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
+import { runMigrations, SCHEMA_VERSION_KEY } from "@/lib/storage/migrations";
 
 const APP_ID = "turkmen-chinese";
-const BACKUP_VERSION = 1;
+// v2 carries the storage schema version, so a restored file can be migrated.
+const BACKUP_VERSION = 2;
+
+// The schema version a v1 file was written at: versioning shipped together
+// with format v2, so anything older can only have come from schema 1.
+const LEGACY_SCHEMA_VERSION = "1";
 
 // Every AsyncStorage key that holds user progress/state worth backing up.
 const BACKUP_KEYS = [
@@ -12,10 +18,13 @@ const BACKUP_KEYS = [
   "streak_data",
   "bookmarked_chapters",
   "lesson_progress",
+  "exam_results",
+  "step_progress",
   "speaking_listening_stats",
   "user_name",
   "app_settings",
   "has_onboarded",
+  SCHEMA_VERSION_KEY,
 ];
 
 export interface BackupFile {
@@ -60,9 +69,17 @@ export function parseBackup(json: string): BackupFile | null {
 
 /** Only known keys with string values are restored — ignores anything else. */
 export function restoreEntries(backup: BackupFile): [string, string][] {
-  return BACKUP_KEYS.filter(
+  const entries = BACKUP_KEYS.filter(
     (k) => typeof backup.data[k] === "string",
   ).map((k) => [k, backup.data[k]] as [string, string]);
+
+  // A file without a schema version predates versioning. Without this the
+  // device keeps its own, newer version, runMigrations sees nothing to do and
+  // the restored data stays in the old shape — which validation then discards.
+  if (typeof backup.data[SCHEMA_VERSION_KEY] !== "string") {
+    entries.push([SCHEMA_VERSION_KEY, LEGACY_SCHEMA_VERSION]);
+  }
+  return entries;
 }
 
 // ── I/O ─────────────────────────────────────────────────────
@@ -98,6 +115,9 @@ export async function importProgress(): Promise<BackupResult> {
     if (!backup) return { ok: false, reason: "invalid" };
     const entries = restoreEntries(backup);
     if (entries.length > 0) await AsyncStorage.multiSet(entries);
+    // The restored data carries the version it was written at, so migrate it
+    // now instead of waiting for the next cold start.
+    await runMigrations();
     return { ok: true };
   } catch {
     return { ok: false, reason: "error" };

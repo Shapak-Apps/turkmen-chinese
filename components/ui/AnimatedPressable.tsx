@@ -1,3 +1,4 @@
+import { useReduceMotion } from "@/hooks/use-reduce-motion";
 import { haptics } from "@/lib/haptics";
 import React from "react";
 import { Pressable, PressableProps } from "react-native";
@@ -22,6 +23,7 @@ export default function AnimatedPressable({
   children,
   ...rest
 }: Props) {
+  const reduceMotion = useReduceMotion();
   const scale = useSharedValue(1);
 
   const animatedStyle = useAnimatedStyle(() => ({
@@ -31,10 +33,14 @@ export default function AnimatedPressable({
   return (
     <AnimatedPressableBase
       onPressIn={() => {
-        scale.value = withSpring(scaleTo, { damping: 18, stiffness: 350 });
+        scale.value = reduceMotion
+          ? scaleTo
+          : withSpring(scaleTo, { damping: 18, stiffness: 350 });
       }}
       onPressOut={() => {
-        scale.value = withSpring(1, { damping: 14, stiffness: 280 });
+        scale.value = reduceMotion
+          ? 1
+          : withSpring(1, { damping: 14, stiffness: 280 });
       }}
       onPress={(e) => {
         if (haptic !== "none") haptics[haptic]();

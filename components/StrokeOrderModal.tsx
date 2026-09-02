@@ -51,7 +51,7 @@ function CharacterView({ char }: { char: string }) {
           error={
             <View style={styles.loadingBox}>
               <Ionicons name="alert-circle-outline" size={36} color={Colors.borderColorStrong} />
-              <Text style={styles.errorText} maxFontSizeMultiplier={1.3}>Bu hiýeroglif üçin maglumat ýok</Text>
+              <Text style={styles.errorText} maxFontSizeMultiplier={1.3}>Bu iýeroglif üçin maglumat ýok</Text>
             </View>
           }
         >

@@ -105,14 +105,14 @@ const SLIDES: SlideData[] = [
     key: "welcome",
     title: "Salam! Men Aman 👋",
     subtitle:
-      "Bu programma bilen siz hytaý dilini özbaşdak öwrenip bilersiňiz. Doly oflaýn — internet gerek däl.",
+      "Bu programma bilen sen hytaý dilini özbaşdak öwrenip bilersiň. Doly oflaýn — internet gerek däl.",
     illustration: <WelcomeIllustration />,
   },
   {
     key: "structure",
     title: "Sapaklar 3 bölekden",
     subtitle:
-      "Her bap üçin: ilki teoriýa (sözler, grammatika, dialoglar) → soň gönükmeler → soň özüňizi synaň.",
+      "Her bap üçin: ilki teoriýa (sözler, grammatika, dialoglar) → soň gönükmeler → soň özüňi syna.",
     illustration: <StructureIllustration />,
   },
   {

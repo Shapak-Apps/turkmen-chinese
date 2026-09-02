@@ -1,5 +1,6 @@
 import { Word } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
+import { useReduceMotion } from "@/hooks/use-reduce-motion";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
@@ -49,13 +50,14 @@ export default function SentenceBreakdownCard({
   disabled?: boolean;
 }) {
   const insets = useSafeAreaInsets();
+  const reduceMotion = useReduceMotion();
   const translateY = useSharedValue(CLOSED_POSITION);
   const context = useSharedValue({ y: 0 });
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
   const cardRef = useRef<Animated.View>(null);
   const tooltipWidthRef = useRef<number>(0);
-  const hanziWordRefs = useRef<Array<View | null>>([]);
-  const pinyinWordRefs = useRef<Array<View | null>>([]);
+  const hanziWordRefs = useRef<(View | null)[]>([]);
+  const pinyinWordRefs = useRef<(View | null)[]>([]);
   const [selectedWord, setSelectedWord] = useState<{
     type: "hanzi" | "pinyin";
     index: number;
@@ -76,6 +78,10 @@ export default function SentenceBreakdownCard({
 
   const closeCard = () => {
     "worklet";
+    if (reduceMotion) {
+      translateY.value = CLOSED_POSITION;
+      return;
+    }
     translateY.value = withSpring(CLOSED_POSITION, {
       damping: 30,
       stiffness: 200,
@@ -85,6 +91,10 @@ export default function SentenceBreakdownCard({
 
   const openCard = () => {
     "worklet";
+    if (reduceMotion) {
+      translateY.value = OPEN_POSITION;
+      return;
+    }
     translateY.value = withSpring(OPEN_POSITION, {
       damping: 30,
       stiffness: 200,

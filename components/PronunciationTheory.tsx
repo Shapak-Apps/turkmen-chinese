@@ -121,8 +121,8 @@ function InitialsPage() {
 
 function FinalsPage() {
   return (
-    <PageWrapper label="韵母" title="38 soňlangyç ses">
-      <Body text="Soňlangyç ses (韵母) — bognuň çekimli bölegi. Eşitmek üçin basyň." />
+    <PageWrapper label="韵母" title="38 soňky ses">
+      <Body text="Soňky ses (韵母) — bognuň çekimli bölegi. Eşitmek üçin basyň." />
       {FINALS.map((group) => (
         <View key={group.name} style={s.groupBlock}>
           <ThemedText style={s.groupName}>
@@ -244,8 +244,8 @@ function ClassroomPage() {
 
 function StrokesPage() {
   return (
-    <PageWrapper label="汉字笔画表" title="Hiýeroglif zarbalarynyň tablisasy">
-      <Body text="Her hiýeroglif zarbalardan durýar. Ine, esasy görnüşleri:" />
+    <PageWrapper label="汉字笔画表" title="Iýeroglif çyzyklarynyň tablisasy">
+      <Body text="Her iýeroglif çyzyklardan durýar. Ine, esasy görnüşleri:" />
       <View style={s.strokeGrid}>
         {STROKES.map((st, i) => (
           <View key={i} style={s.strokeCell}>

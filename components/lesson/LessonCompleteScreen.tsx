@@ -1,5 +1,6 @@
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily } from "@/constants/theme";
+import { useReduceMotion } from "@/hooks/use-reduce-motion";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import { addXP, XP_REWARDS } from "@/lib/xp";
@@ -29,6 +30,7 @@ export default function LessonCompleteScreen({
   onReview: () => void;
   awardXp?: boolean;
 }) {
+  const reduceMotion = useReduceMotion();
   const confettiRef = useRef<any>(null);
   const xpForAnswers = lessonStats.correctAnswers * XP_REWARDS.CORRECT_ANSWER;
   const xpForCompletion = XP_REWARDS.LESSON_COMPLETE;
@@ -61,6 +63,7 @@ export default function LessonCompleteScreen({
         useNativeDriver: true,
       }),
     ]).start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getPerformanceMessage = () => {
@@ -126,40 +129,40 @@ export default function LessonCompleteScreen({
 
         {/* XP Earned — hidden on replays/reviews where no XP is granted */}
         {awardXp && (
-        <Animated.View style={[styles.xpCard, { opacity: fadeAnim }]}>
-          <View style={styles.xpHeader}>
-            <View style={styles.xpIconBox}>
-              <Ionicons name="trophy" size={22} color={Colors.warningColor} />
-            </View>
-            <View style={styles.xpTotalCol}>
-              <ThemedText style={styles.xpLabel}>{T.complete.inThisLesson}</ThemedText>
-              <ThemedText style={styles.xpValue}>+{totalLessonXP} XP</ThemedText>
-            </View>
-          </View>
-
-          <View style={styles.xpBreakdown}>
-            <View style={styles.xpRow}>
-              <ThemedText style={styles.xpRowLabel}>
-                {T.complete.correctAnswers(lessonStats.correctAnswers)}
-              </ThemedText>
-              <ThemedText style={styles.xpRowValue}>+{xpForAnswers}</ThemedText>
-            </View>
-            <View style={styles.xpRow}>
-              <ThemedText style={styles.xpRowLabel}>{T.complete.lessonComplete}</ThemedText>
-              <ThemedText style={styles.xpRowValue}>+{xpForCompletion}</ThemedText>
-            </View>
-            {xpForPerfect > 0 && (
-              <View style={styles.xpRow}>
-                <ThemedText style={[styles.xpRowLabel, styles.xpBonusLabel]}>
-                  {T.complete.bonus100}
-                </ThemedText>
-                <ThemedText style={[styles.xpRowValue, styles.xpBonusValue]}>
-                  +{xpForPerfect}
-                </ThemedText>
+          <Animated.View style={[styles.xpCard, { opacity: fadeAnim }]}>
+            <View style={styles.xpHeader}>
+              <View style={styles.xpIconBox}>
+                <Ionicons name="trophy" size={22} color={Colors.warningColor} />
               </View>
-            )}
-          </View>
-        </Animated.View>
+              <View style={styles.xpTotalCol}>
+                <ThemedText style={styles.xpLabel}>{T.complete.inThisLesson}</ThemedText>
+                <ThemedText style={styles.xpValue}>+{totalLessonXP} XP</ThemedText>
+              </View>
+            </View>
+
+            <View style={styles.xpBreakdown}>
+              <View style={styles.xpRow}>
+                <ThemedText style={styles.xpRowLabel}>
+                  {T.complete.correctAnswers(lessonStats.correctAnswers)}
+                </ThemedText>
+                <ThemedText style={styles.xpRowValue}>+{xpForAnswers}</ThemedText>
+              </View>
+              <View style={styles.xpRow}>
+                <ThemedText style={styles.xpRowLabel}>{T.complete.lessonComplete}</ThemedText>
+                <ThemedText style={styles.xpRowValue}>+{xpForCompletion}</ThemedText>
+              </View>
+              {xpForPerfect > 0 && (
+                <View style={styles.xpRow}>
+                  <ThemedText style={[styles.xpRowLabel, styles.xpBonusLabel]}>
+                    {T.complete.bonus100}
+                  </ThemedText>
+                  <ThemedText style={[styles.xpRowValue, styles.xpBonusValue]}>
+                    +{xpForPerfect}
+                  </ThemedText>
+                </View>
+              )}
+            </View>
+          </Animated.View>
         )}
 
         {lessonStats.wrongQuestions &&
@@ -234,23 +237,25 @@ export default function LessonCompleteScreen({
           )}
       </Animated.View>
 
-      <ConfettiCannon
-        ref={confettiRef}
-        count={250}
-        origin={{ x: -10, y: 0 }}
-        autoStart={false}
-        fadeOut
-        fallSpeed={3500}
-        explosionSpeed={400}
-        colors={[
-          Colors.primaryAccentColor,
-          Colors.successColor,
-          "#FFD700",
-          Colors.warningColor,
-          "#FF8FA3",
-          "#7ED4AD",
-        ]}
-      />
+      {!reduceMotion && (
+        <ConfettiCannon
+          ref={confettiRef}
+          count={250}
+          origin={{ x: -10, y: 0 }}
+          autoStart={false}
+          fadeOut
+          fallSpeed={3500}
+          explosionSpeed={400}
+          colors={[
+            Colors.primaryAccentColor,
+            Colors.successColor,
+            "#FFD700",
+            Colors.warningColor,
+            "#FF8FA3",
+            "#7ED4AD",
+          ]}
+        />
+      )}
       <LinearGradient
         style={styles.gradient}
         colors={[Colors.successBg, Colors.surfacePrimary]}
@@ -394,7 +399,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.semibold,
     fontSize: 11,
     letterSpacing: 1.2,
-    color: Colors.warningColor,
+    color: Colors.warningTextColor,
     marginBottom: 2,
   },
   xpValue: {
@@ -425,8 +430,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.textPrimary,
   },
-  xpBonusLabel: { color: Colors.warningColor },
-  xpBonusValue: { color: Colors.warningColor },
+  xpBonusLabel: { color: Colors.warningTextColor },
+  xpBonusValue: { color: Colors.warningTextColor },
   wrongSection: { marginBottom: 24 },
   wrongHeader: {
     flexDirection: "row",

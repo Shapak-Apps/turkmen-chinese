@@ -25,6 +25,9 @@ expo-env.d.ts
 *.key
 *.mobileprovision
 
+# release signing (real passwords; keystore.properties.example stays in git)
+keystore.properties
+
 # Metro
 .metro-health-check*
 

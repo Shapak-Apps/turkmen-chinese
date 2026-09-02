@@ -1,4 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getValidated, setJson } from "@/lib/storage/safeStorage";
+import { SpeakingListeningStatsSchema } from "@/lib/storage/schemas";
 
 const STATS_KEY = "speaking_listening_stats";
 
@@ -19,28 +20,11 @@ const getDefaultStats = (): SpeakingListeningStats => ({
   conversationTurns: 0,
 });
 
-const readStats = async (): Promise<SpeakingListeningStats> => {
-  try {
-    const raw = await AsyncStorage.getItem(STATS_KEY);
-    if (!raw) return getDefaultStats();
-    const parsed = JSON.parse(raw) as Partial<SpeakingListeningStats>;
-    return {
-      lastUpdate: parsed.lastUpdate ?? new Date().toISOString(),
-      questionsAnswered: parsed.questionsAnswered ?? 0,
-      questionsListened: parsed.questionsListened ?? 0,
-      conversationTurns: parsed.conversationTurns ?? 0,
-    };
-  } catch {
-    return getDefaultStats();
-  }
-};
+const readStats = async (): Promise<SpeakingListeningStats> =>
+  getValidated(STATS_KEY, SpeakingListeningStatsSchema, getDefaultStats());
 
 const writeStats = async (stats: SpeakingListeningStats) => {
-  try {
-    await AsyncStorage.setItem(STATS_KEY, JSON.stringify(stats));
-  } catch (err) {
-    console.warn("speakingListeningStats: failed to write", err);
-  }
+  await setJson(STATS_KEY, stats);
 };
 
 export const recordQuestionAnswered = async () => {

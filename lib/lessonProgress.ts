@@ -1,4 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getValidated, setJson } from "@/lib/storage/safeStorage";
+import { LessonProgressSchema } from "@/lib/storage/schemas";
 
 const STATS_KEY = "lesson_progress";
 
@@ -6,23 +7,11 @@ export interface LessonProgress {
   [lessonId: string]: number; // lessonID -> completionCount
 }
 
-const readProgress = async (): Promise<LessonProgress> => {
-  try {
-    const raw = await AsyncStorage.getItem(STATS_KEY);
-    if (!raw) return {};
-
-    return JSON.parse(raw) as LessonProgress;
-  } catch {
-    return {};
-  }
-};
+const readProgress = async (): Promise<LessonProgress> =>
+  getValidated(STATS_KEY, LessonProgressSchema, {});
 
 const writeProgress = async (data: LessonProgress) => {
-  try {
-    await AsyncStorage.setItem(STATS_KEY, JSON.stringify(data));
-  } catch (err) {
-    console.warn("lessonProgress: failed to write", err);
-  }
+  await setJson(STATS_KEY, data);
 };
 
 export const incrementLessonCompletion = async (lessonId: string) => {

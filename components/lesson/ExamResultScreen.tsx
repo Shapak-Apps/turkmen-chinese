@@ -1,9 +1,9 @@
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily, Radius } from "@/constants/theme";
-import { haptics } from "@/lib/haptics";
 import type { ExamResult } from "@/lib/examResult";
+import { useReduceMotion } from "@/hooks/use-reduce-motion";
+import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
-import type { TypeBreakdown } from "./LessonContent";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useRef } from "react";
@@ -17,6 +17,7 @@ import {
 } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
 import { ThemedText } from "../themed-text";
+import type { TypeBreakdown } from "./LessonContent";
 
 export default function ExamResultScreen({
   result,
@@ -33,6 +34,7 @@ export default function ExamResultScreen({
   const accent = passed ? Colors.successColor : Colors.primaryAccentColor;
   const accentBg = passed ? Colors.successBg : Colors.primaryAccentBg;
 
+  const reduceMotion = useReduceMotion();
   const confettiRef = useRef<any>(null);
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -61,6 +63,7 @@ export default function ExamResultScreen({
         useNativeDriver: true,
       }),
     ]).start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -205,7 +208,7 @@ export default function ExamResultScreen({
         )}
       </Animated.View>
 
-      {passed && (
+      {passed && !reduceMotion && (
         <ConfettiCannon
           ref={confettiRef}
           count={250}

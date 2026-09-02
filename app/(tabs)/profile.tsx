@@ -18,7 +18,6 @@ import {
   ScrollView,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -377,7 +376,7 @@ const styles = StyleSheet.create({
   xpLabel: {
     fontFamily: FontFamily.semibold,
     fontSize: 11,
-    color: Colors.warningColor,
+    color: Colors.warningTextColor,
     letterSpacing: 1.2,
     marginBottom: 2,
   },

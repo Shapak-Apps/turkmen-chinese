@@ -1,24 +1,15 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
+import { getValidated, setJson } from "@/lib/storage/safeStorage";
+import { BookmarkedChaptersSchema } from "@/lib/storage/schemas";
 
 const BOOKMARKS_KEY = "bookmarked_chapters";
 
 async function read(): Promise<number[]> {
-  try {
-    const raw = await AsyncStorage.getItem(BOOKMARKS_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter((v): v is number => typeof v === "number");
-  } catch {
-    return [];
-  }
+  return getValidated(BOOKMARKS_KEY, BookmarkedChaptersSchema, []);
 }
 
 async function write(ids: number[]): Promise<void> {
-  try {
-    await AsyncStorage.setItem(BOOKMARKS_KEY, JSON.stringify(ids));
-  } catch {}
+  await setJson(BOOKMARKS_KEY, ids);
 }
 
 export async function getBookmarks(): Promise<number[]> {

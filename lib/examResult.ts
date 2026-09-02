@@ -1,4 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getValidated, setJson } from "@/lib/storage/safeStorage";
+import { ExamResultsSchema } from "@/lib/storage/schemas";
 
 // ============================================================
 // Результаты экзаменов глав (Bap synagy).
@@ -41,22 +42,11 @@ export const computeAccuracy = (correct: number, total: number): number =>
 export const isPassingScore = (accuracy: number): boolean =>
   accuracy >= EXAM_PASS_THRESHOLD;
 
-const readAll = async (): Promise<ExamResults> => {
-  try {
-    const raw = await AsyncStorage.getItem(STORAGE_KEY);
-    if (!raw) return {};
-    return JSON.parse(raw) as ExamResults;
-  } catch {
-    return {};
-  }
-};
+const readAll = async (): Promise<ExamResults> =>
+  getValidated(STORAGE_KEY, ExamResultsSchema, {});
 
 const writeAll = async (data: ExamResults) => {
-  try {
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  } catch (err) {
-    console.warn("examResult: failed to write", err);
-  }
+  await setJson(STORAGE_KEY, data);
 };
 
 /**

@@ -56,11 +56,11 @@ export interface SpellingRule {
 export const INTRO_TEXT =
   "Hytaý bogny üç bölekden durýar:\n\n" +
   "声母 (shēngmǔ) — başlangyç ses (bognuň başyndaky çekimsiz)\n" +
-  "韵母 (yùnmǔ) — soňlangyç ses (bognuň çekimli bölegi)\n" +
+  "韵母 (yùnmǔ) — soňky ses (bognuň çekimli bölegi)\n" +
   "声调 (shēngdiào) — ton\n\n" +
-  "Başlangyç ses + Soňlangyç ses + Ton = Bogun\n\n" +
+  "Başlangyç ses + Soňky ses + Ton = Bogun\n\n" +
   "Meselem: b + a + 4-nji ton = bà (kaka)\n\n" +
-  "Hytaý dilinde 21 başlangyç we 38 soňlangyç ses bar. Olaryň utgaşmasy 400 töweregi bogun, 4 ton bilen bolsa 1600-den gowrak görnüş emele getirýär.";
+  "Hytaý dilinde 21 başlangyç we 38 soňky ses bar. Olaryň utgaşmasy 400 töweregi bogun, 4 ton bilen bolsa 1600-den gowrak görnüş emele getirýär.";
 
 // ============================================================
 // SECTION 2: 21 Initials (声母)
@@ -183,15 +183,15 @@ export const FINALS: FinalGroup[] = [
 // SECTION 4: 4 Tones (声调)
 // ============================================================
 export const TONES: ToneExample[] = [
-  { tone: "1", description: "Deň, ýokary", pinyin: "mā", hanzi: "妈", meaning: "eje", audio: "ma1", pitch: "55" },
+  { tone: "1", description: "Tekiz, ýokary", pinyin: "mā", hanzi: "妈", meaning: "eje", audio: "ma1", pitch: "55" },
   { tone: "2", description: "Göterilýän", pinyin: "má", hanzi: "麻", meaning: "kenep", audio: "ma2", pitch: "35" },
-  { tone: "3", description: "Inip-göterilýän", pinyin: "mǎ", hanzi: "马", meaning: "at", audio: "ma3", pitch: "214" },
-  { tone: "4", description: "Inýän", pinyin: "mà", hanzi: "骂", meaning: "sögmek", audio: "ma4", pitch: "51" },
+  { tone: "3", description: "Peselip-göterilýän", pinyin: "mǎ", hanzi: "马", meaning: "at", audio: "ma3", pitch: "214" },
+  { tone: "4", description: "Peselýän", pinyin: "mà", hanzi: "骂", meaning: "sögmek", audio: "ma4", pitch: "51" },
 ];
 
 export const TONES_DESCRIPTION =
   "Hytaý dilinde 4 sany esasy ton bar. Şol bir bogun dürli ton bilen aýdylanda başga söz bolýar!\n\n" +
-  "1-nji ton (55) — ses deň we ýokary, bir nota aýdyp duran ýaly.\n" +
+  "1-nji ton (55) — ses tekiz we ýokary, bir nota aýdyp duran ýaly.\n" +
   "2-nji ton (35) — ses ýokary galýar, geň galyp «Hä?» diýip soran ýaly.\n" +
   "3-nji ton (214) — ses aşak düşýär, soň ýokary galýar, oýlanyp «Hmm...» diýen ýaly.\n" +
   "4-nji ton (51) — ses birden aşak gaçýar, gaty «Ýok!» diýen ýaly.";
@@ -236,9 +236,9 @@ export const SOUND_CHANGES: SoundChangeRule[] = [
     ],
   },
   {
-    title: "Bitarap ton (轻声)",
+    title: "Ýeňil ton (轻声)",
     explanation:
-      "Käbir bogunlar gysga we ýeňil, aýdyň tonsuz aýdylýar. Bu bitarap (ýeňil) ton.",
+      "Käbir bogunlar gysga we ýeňil, aýdyň tonsuz aýdylýar. Bu ýeňil ton.",
     examples: [
       { pinyin: "māma", hanzi: "妈妈", meaning: "eje", audio: "ma1" },
       { pinyin: "wǒmen", hanzi: "我们", meaning: "biz", audio: "wo3" },
@@ -247,7 +247,7 @@ export const SOUND_CHANGES: SoundChangeRule[] = [
     ],
   },
   {
-    title: "Erizasiýa (儿化)",
+    title: "R-leşme (儿化)",
     explanation:
       "Bognuň soňuna «r» sesiniň goşulmagy — Pekin aýdylyşynyň häsiýetli aýratynlygy.",
     examples: [
@@ -264,23 +264,23 @@ export const SOUND_CHANGES: SoundChangeRule[] = [
 export const SPELLING_RULES: SpellingRule[] = [
   {
     rule: "ü → yu",
-    explanation: "Eger ü soňlangyç sesiniň öňünde başlangyç ses ýok bolsa, y goşulýar we nokatlar aýrylýar: ü → yu.",
+    explanation: "Eger ü soňky sesiniň öňünde başlangyç ses ýok bolsa, y goşulýar we nokatlar aýrylýar: ü → yu.",
   },
   {
     rule: "i → yi",
-    explanation: "Eger i soňlangyç sesiniň öňünde başlangyç ses ýok bolsa, y goşulýar: i → yi.",
+    explanation: "Eger i soňky sesiniň öňünde başlangyç ses ýok bolsa, y goşulýar: i → yi.",
   },
   {
     rule: "i... → y...",
-    explanation: "i bilen başlaýan soňlangyç sesler (ia, ie, iao...) başlangyç sessiz gelende: i → y bolýar (ya, ye, yao...).",
+    explanation: "i bilen başlaýan soňky sesler (ia, ie, iao...) başlangyç sessiz gelende: i → y bolýar (ya, ye, yao...).",
   },
   {
     rule: "u → wu",
-    explanation: "Eger u soňlangyç sesiniň öňünde başlangyç ses ýok bolsa, w goşulýar: u → wu.",
+    explanation: "Eger u soňky sesiniň öňünde başlangyç ses ýok bolsa, w goşulýar: u → wu.",
   },
   {
     rule: "u... → w...",
-    explanation: "u bilen başlaýan soňlangyç sesler (ua, uo, uai...) başlangyç sessiz gelende: u → w bolýar (wa, wo, wai...).",
+    explanation: "u bilen başlaýan soňky sesler (ua, uo, uai...) başlangyç sessiz gelende: u → w bolýar (wa, wo, wai...).",
   },
   {
     rule: "j, q, x + ü → ju, qu, xu",
@@ -294,9 +294,9 @@ export const SPELLING_RULES: SpellingRule[] = [
 
 export const SPELLING_TONE_RULES =
   "Ton belgisi esasy çekimliniň üstünde goýulýar (has batly we agzy has giň açyp aýdylýanyň üstünde).\n\n" +
-  "Nobat: a > o > e > i > u > ü\n\n" +
+  "Ileri tutulyş: a > o > e > i > u > ü\n\n" +
   "Bogunda diňe bir çekimli bar bolsa — ton şonuň üstünde goýulýar.\n" +
-  "Iki çekimli bar bolsa — ton nobatda ýokarda duranyň üstünde.\n" +
+  "Iki çekimli bar bolsa — ton ileri tutulyşda ýokarda duranyň üstünde.\n" +
   "Kadadan çykma: u bilen i ýanaşyk gelse — ton ikinjisiniň üstünde (liú, guì).";
 
 // ============================================================
@@ -304,14 +304,14 @@ export const SPELLING_TONE_RULES =
 // ============================================================
 export const DAILY_EXPRESSIONS: DailyPhrase[] = [
   { hanzi: "你好。", pinyin: "Nǐ hǎo.", meaning: "Salam. / Ýagdaýlaryň nähili?" },
-  { hanzi: "早上好。", pinyin: "Zǎoshang hǎo.", meaning: "Säheriň haýyrly." },
+  { hanzi: "早上好。", pinyin: "Zǎoshang hǎo.", meaning: "Ertiriň haýyrly." },
   { hanzi: "下午好。", pinyin: "Xiàwǔ hǎo.", meaning: "Gündiziň haýyrly." },
   { hanzi: "晚上好。", pinyin: "Wǎnshang hǎo.", meaning: "Agşamyň haýyrly." },
   { hanzi: "晚安。", pinyin: "Wǎn'ān.", meaning: "Gije ýagşy." },
   { hanzi: "谢谢。", pinyin: "Xièxie.", meaning: "Sag bol." },
   { hanzi: "不客气。", pinyin: "Bú kèqi.", meaning: "Hiç zat däl." },
   { hanzi: "对不起。", pinyin: "Duìbuqǐ.", meaning: "Bagyşlaň." },
-  { hanzi: "没关系。", pinyin: "Méi guānxi.", meaning: "Hiç zat däl, möhüm däl." },
+  { hanzi: "没关系。", pinyin: "Méi guānxi.", meaning: "Zyýany ýok." },
   { hanzi: "再见。", pinyin: "Zàijiàn.", meaning: "Sag boluň." },
   { hanzi: "明天见。", pinyin: "Míngtiān jiàn.", meaning: "Ertire çenli." },
   { hanzi: "请进。", pinyin: "Qǐng jìn.", meaning: "Geçiň, hoş geldiňiz." },

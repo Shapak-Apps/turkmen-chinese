@@ -102,14 +102,14 @@ function DifferencesPage() {
         <ThemedText style={styles.factIcon}>&#128292;</ThemedText>
         <View style={styles.factContent}>
           <ThemedText style={styles.factTitle}>Elipbiý ýok</ThemedText>
-          <ThemedText style={styles.factDesc}>Hytaý dilinde hiýeroglifler (汉字) ulanylýar. Her hiýeroglif — bu söz ýa-da sözüň bir bölegi. Esasy hiýeroglifleriň sany 3 500 töweregi, gazet okamak üçin şonça-da ýeterlik. HSK 1-2 üçin bary-ýogy 300 çemesi hiýeroglifi bilmek gerek.</ThemedText>
+          <ThemedText style={styles.factDesc}>Hytaý dilinde iýeroglifler (汉字) ulanylýar. Her iýeroglif — bu söz ýa-da sözüň bir bölegi. Esasy iýeroglifleriň sany 3 500 töweregi, gazet okamak üçin şonça-da ýeterlik. HSK 1-2 üçin bary-ýogy 300 çemesi iýeroglifi bilmek gerek.</ThemedText>
         </View>
       </View>
       <View style={styles.factCard}>
         <ThemedText style={styles.factIcon}>&#127925;</ThemedText>
         <View style={styles.factContent}>
           <ThemedText style={styles.factTitle}>Tonly dil</ThemedText>
-          <ThemedText style={styles.factDesc}>Şol bir ses dürli tonlar bilen aýdylanda düýbünden başga sözleri aňladýar. Jemi 4 ton we 1 bitarap ton bar. Başlaýanlar üçin iň öwrenişilmedik bölegi şu, ýöne maşk bilen çalt özleşdirilýär.</ThemedText>
+          <ThemedText style={styles.factDesc}>Şol bir ses dürli tonlar bilen aýdylanda düýbünden başga sözleri aňladýar. Jemi 4 ton we 1 ýeňil ton bar. Başlaýanlar üçin iň öwrenişilmedik bölegi şu, ýöne maşk bilen çalt özleşdirilýär.</ThemedText>
         </View>
       </View>
       <View style={styles.factCard}>
@@ -123,7 +123,7 @@ function DifferencesPage() {
         <ThemedText style={styles.factIcon}>&#128300;</ThemedText>
         <View style={styles.factContent}>
           <ThemedText style={styles.factTitle}>Logikaly sözler</ThemedText>
-          <ThemedText style={styles.factDesc}>Hytaý sözleriniň köpüsi ýönekeý böleklerden düzülýär. Meselem: 电 (elektrik) + 脑 (beýni) = 电脑 (kompýuter). 火 (ot) + 车 (ulag) = 火车 (otly). Esasy hiýeroglifleri bilseňiz, çylşyrymly sözleriň manysyny çaklap bolýar.</ThemedText>
+          <ThemedText style={styles.factDesc}>Hytaý sözleriniň köpüsi ýönekeý böleklerden düzülýär. Meselem: 电 (elektrik) + 脑 (beýni) = 电脑 (kompýuter). 火 (ot) + 车 (ulag) = 火车 (otly). Esasy iýeroglifleri bilseňiz, çylşyrymly sözleriň manysyny çaklap bolýar.</ThemedText>
         </View>
       </View>
       <View style={styles.factCard}>
@@ -144,16 +144,16 @@ function TonesPage() {
         Tonlar — aýdylyşyň iň möhüm bölegi. «ma» diýen bir bogun 4 dürli sözi aňladyp biler:
       </ThemedText>
       <View style={styles.toneTable}>
-        <ToneRow tone="1-nji — deň" pinyin="m&#257;" hanzi="&#22920;" meaning="eje" />
+        <ToneRow tone="1-nji — tekiz" pinyin="m&#257;" hanzi="&#22920;" meaning="eje" />
         <ToneRow tone="2-nji — göterilýän" pinyin="m&#225;" hanzi="&#40635;" meaning="kenep" />
-        <ToneRow tone="3-nji — inip-göterilýän" pinyin="m&#462;" hanzi="&#39532;" meaning="at" />
-        <ToneRow tone="4-nji — inýän" pinyin="m&#224;" hanzi="&#39554;" meaning="sögmek" />
+        <ToneRow tone="3-nji — peselip-göterilýän" pinyin="m&#462;" hanzi="&#39532;" meaning="at" />
+        <ToneRow tone="4-nji — peselýän" pinyin="m&#224;" hanzi="&#39554;" meaning="sögmek" />
       </View>
       <ThemedText style={styles.body}>
-        Birinji ton (&#257;) — ses deň we ýokary, bir nota aýdyp duran ýaly. Ikinji ton (&#225;) — ses ýokary galýar, geň galyp «Hä?» diýip soran ýaly. Üçünji ton (&#462;) — ses ilki aşak düşýär, soň ýokary galýar, oýlanyp «Hmm...» diýen ýaly. Dördünji ton (&#224;) — ses birden aşak gaçýar, gaty buýruk bilen «Ýok!» diýen ýaly.
+        Birinji ton (&#257;) — ses tekiz we ýokary, bir nota aýdyp duran ýaly. Ikinji ton (&#225;) — ses ýokary galýar, geň galyp «Hä?» diýip soran ýaly. Üçünji ton (&#462;) — ses ilki aşak düşýär, soň ýokary galýar, oýlanyp «Hmm...» diýen ýaly. Dördünji ton (&#224;) — ses birden aşak gaçýar, gaty buýruk bilen «Ýok!» diýen ýaly.
       </ThemedText>
       <ThemedText style={styles.body}>
-        Ýene bitarap (ýeňil) ton bar — ol gysga we basymsyz, käbir sözleriň soňunda ulanylýar. Meselem: 妈妈 (m&#257;ma) — ikinji bogun ýeňil, aýdyň tonsuz aýdylýar.
+        Ýene ýeňil ton bar — ol gysga we basymsyz, käbir sözleriň soňunda ulanylýar. Meselem: 妈妈 (m&#257;ma) — ikinji bogun ýeňil, aýdyň tonsuz aýdylýar.
       </ThemedText>
       <ThemedText style={styles.body}>
         Alada etmäň! Maşk bilen tonlar tebigy bolup gidýär. Bu programma olary eşitmäge we tapawutlandyrmaga kömek eder.
@@ -183,7 +183,7 @@ function PinyinPage() {
       <ThemedText style={styles.listItem}>&#8226; «sh» — «ş» ýaly</ThemedText>
       <ThemedText style={styles.listItem}>&#8226; «r» — ýumşak «ž» ýaly</ThemedText>
       <ThemedText style={styles.body}>
-        Bu programmada her söz hiýeroglifi (汉字) we pinýini bilen görkezilýär — aýdylyşy ädimme-ädim öwrenip bilersiňiz.
+        Bu programmada her söz iýeroglifi (汉字) we pinýini bilen görkezilýär — aýdylyşy ädimme-ädim öwrenip bilersiň.
       </ThemedText>
     </PageWrapper>
   );
@@ -191,19 +191,19 @@ function PinyinPage() {
 
 function CharactersPage() {
   return (
-    <PageWrapper label="汉字" title="Hiýeroglifler nähili gurlan">
+    <PageWrapper label="汉字" title="Iýeroglifler nähili gurlan">
       <ThemedText style={styles.body}>
-        Hiýeroglifler zarbalardan (çyzyklardan) durýar. Esasy zarbalar 8 sany: keseligine, dikligine, çepe egilýän, saga egilýän, nokat, çeňňek, döwük we ýokary galýan.
+        Iýeroglifler çyzyklardan (çyzyklardan) durýar. Esasy çyzyklar 8 sany: keseligine, dikligine, çepe egilýän, saga egilýän, nokat, çeňňek, döwük we ýokary galýan.
       </ThemedText>
       <ThemedText style={styles.body}>
-        Köp hiýeroglifiň düzüminde açar (radikal) bar — bu manyny ýaňzydýan bölek. Mysallar:
+        Köp iýeroglifiň düzüminde radikal (kök) bar — bu manyny ýaňzydýan bölek. Mysallar:
       </ThemedText>
       <ThemedText style={styles.listItem}>&#8226; 氵(suw) — sözlerde: 河 (derýa), 海 (deňiz), 湖 (köl)</ThemedText>
       <ThemedText style={styles.listItem}>&#8226; 木 (agaç) — sözlerde: 林 (tokaý), 森 (gür tokaý), 桌 (stol)</ThemedText>
       <ThemedText style={styles.listItem}>&#8226; 口 (agyz) — sözlerde: 吃 (iýmek), 喝 (içmek), 叫 (çagyrmak)</ThemedText>
       <ThemedText style={styles.listItem}>&#8226; 女 (aýal) — sözlerde: 妈 (eje), 姐 (uýa), 好 (gowy)</ThemedText>
       <ThemedText style={styles.body}>
-        Zarbalaryň ýazylyş tertibi möhüm! Umumy düzgün: ýokardan aşak, çepden saga. Dogry tertip çalt ýazmaga we hiýeroglifleri tanamaga kömek edýär.
+        Çyzyklaryň ýazylyş tertibi möhüm! Umumy düzgün: ýokardan aşak, çepden saga. Dogry tertip çalt ýazmaga we iýeroglifleri tanamaga kömek edýär.
       </ThemedText>
     </PageWrapper>
   );
@@ -213,7 +213,7 @@ function NumbersPage() {
   return (
     <PageWrapper label="数字" title="Hytaý sanlary">
       <ThemedText style={styles.body}>
-        Hytaý sanlary örän logikaly. 1-10 öwrenseňiz, 99-a çenli sanap bilersiňiz:
+        Hytaý sanlary örän logikaly. 1-10 öwrenseň, 99-a çenli sanap bilersiň:
       </ThemedText>
       <View style={styles.numbersGrid}>
         {[
@@ -230,7 +230,7 @@ function NumbersPage() {
         ))}
       </View>
       <ThemedText style={styles.body}>
-        Kada ýönekeý — ilki onluklary, soň birlikleri aýdýarsyňyz:
+        Kada ýönekeý — ilki onluklary, soň birlikleri aýdýarsyň:
       </ThemedText>
       <ThemedText style={styles.listItem}>&#8226; 11 = 十一 (sh&#237; y&#299;) — «on-bir»</ThemedText>
       <ThemedText style={styles.listItem}>&#8226; 20 = 二十 (&#232;r sh&#237;) — «iki-on»</ThemedText>
@@ -316,7 +316,7 @@ function TipsPage() {
   return (
     <PageWrapper label="建议" title="Öwreniş boýunça maslahatlar">
       <ThemedText style={styles.tipItem}>Tonlary ilkinji günden ünsli diňläň. Ýalňyş endikleri soň düzetmek kyn. Her mysaldan soň ses bilen gaýtalaň.</ThemedText>
-      <ThemedText style={styles.tipItem}>Hiýeroglifleri kem-kemden öwreniň. Birbada 100 sanysyny ýat tutjak bolmaň. Günde 5 hiýeroglif, ýöne berk — bir hepdede unudyljak 50-den has gowudyr.</ThemedText>
+      <ThemedText style={styles.tipItem}>Iýeroglifleri kem-kemden öwreniň. Birbada 100 sanysyny ýat tutjak bolmaň. Günde 5 iýeroglif, ýöne berk — bir hepdede unudyljak 50-den has gowudyr.</ThemedText>
       <ThemedText style={styles.tipItem}>Her gün, azyndan 10 minut geçiň. Yzygiderlik uzyn sapaklardan möhümdir. Beýni arakesmeli, ýygy gaýtalamada has gowy ýatda saklaýar.</ThemedText>
       <ThemedText style={styles.tipItem}>Ýalňyşdan gorkmaň. Her ýalňyş — öwrenmegiň bir pursaty. Hytaýlylar daşary ýurtlular olaryň dilinde gepleşjek bolanda hemişe begenýärler.</ThemedText>
       <ThemedText style={styles.tipItem}>Gönükmeleri gaýtadan geçiň. Synagda 100%-den az ýygnasaňyz — yzyna dolanyp, ýene bir gezek geçiň. Gaýtalamak — ýatda saklamagyň açary.</ThemedText>

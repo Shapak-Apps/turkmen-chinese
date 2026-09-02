@@ -1,8 +1,8 @@
 import { ThemedText } from "@/components/themed-text";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import Constants from "expo-constants";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -173,7 +173,7 @@ export default function AboutScreen() {
             <Section icon="apps" color={Colors.warningColor} title="Mümkinçilikler">
               <FeatureRow icon="book" text="31 bap (başlangyç dereje)" />
               <FeatureRow icon="checkbox" text="600+ gönükme (8 dürli görnüş)" />
-              <FeatureRow icon="brush" text="Hiýeroglif ýazuwy (768 oflaýn)" />
+              <FeatureRow icon="brush" text="Iýeroglif ýazuwy (768 oflaýn)" />
               <FeatureRow icon="volume-high" text="1632 pinýin ses faýly" />
               <FeatureRow icon="chatbubbles" text="Auto-play dialoglar" />
               <FeatureRow icon="trophy" text="XP we Streak sistemasy" />
@@ -227,7 +227,7 @@ export default function AboutScreen() {
                 Programma MIT lisenziýasy bilen açyk çeşmäni esas alýar.
                 {"\n\n"}
                 Ulanylan çeşmeler: Twemoji (CC-BY 4.0), Hanzi Writer (MIT),
-                Inter şrift (OFL).
+                Inter şrift (OFL), Pinýin sesleri: mp3-chinese-pinyin-sound (Unlicense).
               </ThemedText>
             </Section>
           </ScrollView>
@@ -340,7 +340,7 @@ export default function AboutScreen() {
             >
               <ThemedText style={styles.sectionText}>
                 Häzirki programma — hytaý dilini öwretmek üçin doly kurs.
-                31 bap, 600+ gönükme, hiýeroglif ýazuwy, pinýin sesleri.
+                31 bap, 600+ gönükme, iýeroglif ýazuwy, pinýin sesleri.
               </ThemedText>
             </Section>
 
