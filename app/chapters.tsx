@@ -11,7 +11,7 @@ import { T } from "@/lib/strings";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface Unit {
   range: [number, number];
@@ -38,6 +38,7 @@ export default function ChaptersScreen() {
   const [progress, setProgress] = useState<Record<string, number>>({});
   const [showBookmarksOnly, setShowBookmarksOnly] = useState(false);
   const { bookmarks } = useBookmarks();
+  const insets = useSafeAreaInsets();
 
   useFocusEffect(
     useCallback(() => {
@@ -76,7 +77,7 @@ export default function ChaptersScreen() {
       </View>
 
       <ScrollView
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: 32 + insets.bottom }]}
         showsVerticalScrollIndicator={false}
       >
         {/* Filter row */}
@@ -272,7 +273,6 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: Spacing.lg,
     paddingTop: 16,
-    paddingBottom: 32,
   },
   filterRow: {
     flexDirection: "row",
