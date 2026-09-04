@@ -339,7 +339,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: Spacing["2xl"],
-    paddingBottom: 32,
   },
 
   // Hero
