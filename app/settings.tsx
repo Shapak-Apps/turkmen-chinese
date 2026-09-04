@@ -14,7 +14,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
 import { router } from "expo-router";
 import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Switch, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface Option<T extends string> {
   value: T;
@@ -50,6 +50,7 @@ function Segmented<T extends string>({ options, value, onChange }: SegmentedProp
 
 export default function SettingsScreen() {
   const { settings, updateSetting, loaded } = useSettings();
+  const insets = useSafeAreaInsets();
 
   const leniencyOptions: Option<Leniency>[] = [
     { value: "easy", label: "Aňsat" },
@@ -85,7 +86,7 @@ export default function SettingsScreen() {
           <ActivityIndicator size="large" color={Colors.primaryAccentColor} />
         </View>
       ) : (
-        <ScrollView contentContainerStyle={styles.scrollContent}>
+        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: 40 + insets.bottom }]}>
           <ThemedText style={styles.sectionTitle}>Iýeroglif ýazuwy</ThemedText>
 
           <View style={styles.settingBlock}>
@@ -284,7 +285,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: Spacing.lg,
-    paddingBottom: 40,
   },
   sectionTitle: {
     fontFamily: FontFamily.semibold,
