@@ -39,6 +39,8 @@ export default function ExamResultScreen({
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
+  // Mount-only effect: haptics and the confetti timer.
+  // Must stay on [] so these side effects fire exactly once.
   useEffect(() => {
     if (passed) {
       haptics.success();
@@ -49,7 +51,14 @@ export default function ExamResultScreen({
     } else {
       haptics.error();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  // Entrance animation, keyed on reduceMotion. The hook starts as false and
+  // flips once AccessibilityInfo resolves, so this effect re-runs on the flip:
+  // with the setting on we snap straight to the final state (setValue stops
+  // the spring that started on the first frame), with it off the spring plays.
+  useEffect(() => {
     if (reduceMotion) {
       scaleAnim.setValue(1);
       fadeAnim.setValue(1);
@@ -68,8 +77,7 @@ export default function ExamResultScreen({
         }),
       ]).start();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reduceMotion, scaleAnim, fadeAnim]);
 
   return (
     <View style={styles.container}>
