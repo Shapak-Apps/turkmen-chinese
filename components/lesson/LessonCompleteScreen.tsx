@@ -50,19 +50,24 @@ export default function LessonCompleteScreen({
       haptics.heavy();
     }, 400);
 
-    Animated.parallel([
-      Animated.spring(scaleAnim, {
-        toValue: 1,
-        tension: 50,
-        friction: 7,
-        useNativeDriver: true,
-      }),
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 600,
-        useNativeDriver: true,
-      }),
-    ]).start();
+    if (reduceMotion) {
+      scaleAnim.setValue(1);
+      fadeAnim.setValue(1);
+    } else {
+      Animated.parallel([
+        Animated.spring(scaleAnim, {
+          toValue: 1,
+          tension: 50,
+          friction: 7,
+          useNativeDriver: true,
+        }),
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 600,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
