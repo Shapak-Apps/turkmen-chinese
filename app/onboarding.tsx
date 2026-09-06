@@ -105,7 +105,7 @@ const SLIDES: SlideData[] = [
     key: "welcome",
     title: "Salam! Men Aman 👋",
     subtitle:
-      "Bu programma bilen sen hytaý dilini özbaşdak öwrenip bilersiň. Doly oflaýn — internet gerek däl.",
+      "Bu programma bilen sen hytaý dilini özbaşdak öwrenip bilersiň. Programma esasan oflaýn işleýär — sözlükler, grammatika, gönükmeler we iýeroglifler telefonyňda saklanýar. Diňe aýdylyş seslerini diňlemek üçin internet gerek bolup biler.",
     illustration: <WelcomeIllustration />,
   },
   {
