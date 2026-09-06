@@ -149,7 +149,7 @@ function ChaptersPage() {
         <View style={styles.chapterContent}>
           <ThemedText style={styles.chapterTitle}>Aýdylyşy (语音)</ThemedText>
           <ThemedText style={styles.chapterDesc}>
-            Pinýin, tonlar, başlangyç we soňky sesler. Diňe teoriýa, 1632 ses faýly bilen.
+            Pinýin, tonlar, başlangyç we soňky sesler. Diňe teoriýa, 1632 pinýin sesi bilen.
           </ThemedText>
         </View>
       </View>
