@@ -23,7 +23,9 @@ export default function AnimatedPressable({
   children,
   ...rest
 }: Props) {
-  const reduceMotion = useReduceMotion();
+  // Input-driven animation: the OS read resolves long before the first tap,
+  // so "not known yet" is consciously treated as "off" here.
+  const reduceMotion = useReduceMotion() === true;
   const scale = useSharedValue(1);
 
   const animatedStyle = useAnimatedStyle(() => ({

@@ -42,23 +42,34 @@ export default function LessonCompleteScreen({
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  // Mount-only effect: haptics, XP and the confetti timer.
+  // Mount-only effect: haptics and XP.
   // Must stay on [] so these side effects fire exactly once.
   useEffect(() => {
     haptics.success();
     if (awardXp) void addXP(earnedXP);
     setTimeout(() => {
-      confettiRef.current?.start();
       haptics.heavy();
     }, 400);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Entrance animation, keyed on reduceMotion. The hook starts as false and
-  // flips once AccessibilityInfo resolves, so this effect re-runs on the flip:
-  // with the setting on we snap straight to the final state (setValue stops
-  // the spring that started on the first frame), with it off the spring plays.
+  // Confetti: held while the setting is unknown, fired only once it is known
+  // off, ~400 ms into the screen as before. The cannon is rendered in exactly
+  // that same known-off state, so the ref is live when the timer hits.
   useEffect(() => {
+    if (reduceMotion !== false) return;
+    const timer = setTimeout(() => {
+      confettiRef.current?.start();
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [reduceMotion]);
+
+  // Entrance animation, held while the setting is unknown: guessing on the
+  // first frame is the bug this hook exists to prevent. Known off -> the
+  // spring plays from the very first known frame; known on -> snap straight
+  // to the final state, with no started-then-interrupted spring.
+  useEffect(() => {
+    if (reduceMotion === null) return;
     if (reduceMotion) {
       scaleAnim.setValue(1);
       fadeAnim.setValue(1);
@@ -250,7 +261,7 @@ export default function LessonCompleteScreen({
           )}
       </Animated.View>
 
-      {!reduceMotion && (
+      {reduceMotion === false && (
         <ConfettiCannon
           ref={confettiRef}
           count={250}
