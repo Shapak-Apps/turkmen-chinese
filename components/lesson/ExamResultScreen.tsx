@@ -1,7 +1,7 @@
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily, Radius } from "@/constants/theme";
-import type { ExamResult } from "@/lib/examResult";
 import { useReduceMotion } from "@/hooks/use-reduce-motion";
+import type { ExamResult } from "@/lib/examResult";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -39,44 +39,61 @@ export default function ExamResultScreen({
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  // Mount-only effect: haptics and the confetti timer.
+  // Mount-only effect: result haptic.
   // Must stay on [] so these side effects fire exactly once.
   useEffect(() => {
     if (passed) {
       haptics.success();
-      setTimeout(() => {
-        confettiRef.current?.start();
-        haptics.heavy();
-      }, 400);
     } else {
       haptics.error();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Entrance animation, keyed on reduceMotion. The hook starts as false and
-  // flips once AccessibilityInfo resolves, so this effect re-runs on the flip:
-  // with the setting on we snap straight to the final state (setValue stops
-  // the spring that started on the first frame), with it off the spring plays.
   useEffect(() => {
+    if (!passed || reduceMotion !== false) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      confettiRef.current?.start();
+      haptics.heavy();
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [passed, reduceMotion]);
+
+  // Wait for the initial accessibility setting before either displaying the
+  // final state immediately or starting the entrance animation.
+  useEffect(() => {
+    if (reduceMotion === null) {
+      return;
+    }
+
     if (reduceMotion) {
       scaleAnim.setValue(1);
       fadeAnim.setValue(1);
-    } else {
-      Animated.parallel([
-        Animated.spring(scaleAnim, {
-          toValue: 1,
-          tension: 50,
-          friction: 7,
-          useNativeDriver: true,
-        }),
-        Animated.timing(fadeAnim, {
-          toValue: 1,
-          duration: 600,
-          useNativeDriver: true,
-        }),
-      ]).start();
+      return;
     }
+
+    const animation = Animated.parallel([
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        tension: 50,
+        friction: 7,
+        useNativeDriver: true,
+      }),
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]);
+
+    animation.start();
+
+    return () => animation.stop();
   }, [reduceMotion, scaleAnim, fadeAnim]);
 
   return (
@@ -221,7 +238,7 @@ export default function ExamResultScreen({
         )}
       </Animated.View>
 
-      {passed && !reduceMotion && (
+      {passed && reduceMotion === false && (
         <ConfettiCannon
           ref={confettiRef}
           count={250}

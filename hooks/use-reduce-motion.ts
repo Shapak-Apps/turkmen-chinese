@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { AccessibilityInfo } from "react-native";
 
 /**
- * Whether the OS "reduce motion" setting is on. Starts as false and flips once
- * the initial read resolves, so animations that fire on mount are gated by the
- * value from the previous render — acceptable here: the animated screens all
- * run their effects after user input, not on the first frame.
+ * Whether the OS "reduce motion" setting is enabled.
+ * Returns null while the initial asynchronous setting read is pending.
+ * Callers that animate on mount must handle null explicitly; interaction-driven
+ * callers may treat null as false because the setting normally resolves first.
  */
-export function useReduceMotion(): boolean {
-  const [reduceMotion, setReduceMotion] = useState(false);
+export function useReduceMotion(): boolean | null {
+  const [reduceMotion, setReduceMotion] = useState<boolean | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -17,7 +17,9 @@ export function useReduceMotion(): boolean {
       .then((enabled) => {
         if (active) setReduceMotion(enabled);
       })
-      .catch(() => {});
+      .catch(() => {
+        if (active) setReduceMotion(true);
+      });
 
     const sub = AccessibilityInfo.addEventListener(
       "reduceMotionChanged",

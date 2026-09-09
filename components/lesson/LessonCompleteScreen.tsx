@@ -42,41 +42,58 @@ export default function LessonCompleteScreen({
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  // Mount-only effect: haptics, XP and the confetti timer.
+  // Mount-only effect: completion haptic and XP award.
   // Must stay on [] so these side effects fire exactly once.
   useEffect(() => {
     haptics.success();
     if (awardXp) void addXP(earnedXP);
-    setTimeout(() => {
-      confettiRef.current?.start();
-      haptics.heavy();
-    }, 400);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Entrance animation, keyed on reduceMotion. The hook starts as false and
-  // flips once AccessibilityInfo resolves, so this effect re-runs on the flip:
-  // with the setting on we snap straight to the final state (setValue stops
-  // the spring that started on the first frame), with it off the spring plays.
   useEffect(() => {
+    if (reduceMotion !== false) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      confettiRef.current?.start();
+      haptics.heavy();
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [reduceMotion]);
+
+  // Wait for the initial accessibility setting before either displaying the
+  // final state immediately or starting the entrance animation.
+  useEffect(() => {
+    if (reduceMotion === null) {
+      return;
+    }
+
     if (reduceMotion) {
       scaleAnim.setValue(1);
       fadeAnim.setValue(1);
-    } else {
-      Animated.parallel([
-        Animated.spring(scaleAnim, {
-          toValue: 1,
-          tension: 50,
-          friction: 7,
-          useNativeDriver: true,
-        }),
-        Animated.timing(fadeAnim, {
-          toValue: 1,
-          duration: 600,
-          useNativeDriver: true,
-        }),
-      ]).start();
+      return;
     }
+
+    const animation = Animated.parallel([
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        tension: 50,
+        friction: 7,
+        useNativeDriver: true,
+      }),
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]);
+
+    animation.start();
+
+    return () => animation.stop();
   }, [reduceMotion, scaleAnim, fadeAnim]);
 
   const getPerformanceMessage = () => {
@@ -250,7 +267,7 @@ export default function LessonCompleteScreen({
           )}
       </Animated.View>
 
-      {!reduceMotion && (
+      {reduceMotion === false && (
         <ConfettiCannon
           ref={confettiRef}
           count={250}
