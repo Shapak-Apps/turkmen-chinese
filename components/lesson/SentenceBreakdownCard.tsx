@@ -50,7 +50,9 @@ export default function SentenceBreakdownCard({
   disabled?: boolean;
 }) {
   const insets = useSafeAreaInsets();
-  const reduceMotion = useReduceMotion();
+  // Input-driven animation: the OS read resolves long before the first tap,
+  // so "not known yet" is consciously treated as "off" here.
+  const reduceMotion = useReduceMotion() === true;
   const translateY = useSharedValue(CLOSED_POSITION);
   const context = useSharedValue({ y: 0 });
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
