@@ -1,15 +1,15 @@
-import { Colors, FontFamily } from "@/constants/theme";
 import HANZI_DATA from "@/assets/data/hanzi_data.json";
+import { Colors, FontFamily } from "@/constants/theme";
 import {
   HINT_VALUES,
   LENIENCY_VALUES,
   useSettings,
 } from "@/lib/settings";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import {
   HanziWriter,
   useHanziWriter,
 } from "@jamsch/react-native-hanzi-writer";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
 import { useEffect, useState } from "react";
 import {
@@ -320,13 +320,24 @@ export default function StrokeOrderMode({
         <TouchableOpacity
           style={[
             styles.continueButton,
-            !canContinue && styles.continueButtonDisabled,
-            allDone && styles.continueButtonHighlight,
+            {
+              backgroundColor: !canContinue
+                ? Colors.surfaceTertiary
+                : allDone
+                  ? Colors.successColor
+                  : Colors.primaryAccentColor,
+            },
           ]}
           onPress={handleContinue}
           disabled={!canContinue}
+          activeOpacity={0.85}
         >
-          <ThemedText style={styles.continueButtonText}>
+          <ThemedText
+            style={[
+              styles.continueButtonText,
+              { color: !canContinue ? Colors.subduedTextColor : Colors.textInverse },
+            ]}
+          >
             {allDone ? "Hemmesi ýazyldy — dowam et" : "Dowam et"}
           </ThemedText>
         </TouchableOpacity>
@@ -434,16 +445,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.surfacePrimary,
   },
   continueButton: {
-    backgroundColor: Colors.subduedTextColor,
     paddingVertical: 16,
     borderRadius: 14,
     alignItems: "center",
   },
-  continueButtonDisabled: { backgroundColor: Colors.borderColorStrong },
-  continueButtonHighlight: { backgroundColor: Colors.successColor },
   continueButtonText: {
     fontFamily: FontFamily.semibold,
-    color: Colors.textInverse,
     fontSize: 16,
   },
 
