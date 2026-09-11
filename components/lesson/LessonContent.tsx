@@ -83,6 +83,7 @@ export default function LessonContent({
   >({});
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [wrongQuestions, setWrongQuestions] = useState<Set<number>>(new Set());
+  const [correctQuestions, setCorrectQuestions] = useState<Set<number>>(new Set());
   const [visitedIndices, setVisitedIndices] = useState<Set<number>>(() => new Set([0]));
 
   const wrongIndices = useMemo(() => {
@@ -92,6 +93,14 @@ export default function LessonContent({
     });
     return s;
   }, [questions, wrongQuestions]);
+
+  const correctIndices = useMemo(() => {
+    const s = new Set<number>();
+    questions.forEach((q, i) => {
+      if (correctQuestions.has(q.id)) s.add(i);
+    });
+    return s;
+  }, [questions, correctQuestions]);
 
   // Suppress XP rewards if this lesson was already completed in a past session.
   useEffect(() => {
@@ -177,6 +186,7 @@ export default function LessonContent({
           (attemptCount > 0 && wrongQuestions.has(currentQuestion.id))
         ) {
           setCorrectAnswersCount((prev) => prev + 1);
+          setCorrectQuestions((prev) => new Set(prev).add(currentQuestion.id));
           awardCorrectXp();
           void markActiveDay();
         }
@@ -401,6 +411,7 @@ export default function LessonContent({
     if (correct) {
       haptics.success();
       setCorrectAnswersCount((prev) => prev + 1);
+      setCorrectQuestions((prev) => new Set(prev).add(currentQuestion.id));
       void recordQuestionAnswered();
       awardCorrectXp();
       void markActiveDay();
@@ -492,6 +503,7 @@ export default function LessonContent({
           setQuestionAttempts({});
           setCorrectAnswersCount(0);
           setWrongQuestions(new Set());
+          setCorrectQuestions(new Set());
           setVisitedIndices(new Set([0]));
           resetState();
         }}
@@ -727,6 +739,7 @@ export default function LessonContent({
         currentIndex={currentQuestionIndex}
         visitedIndices={visitedIndices}
         wrongIndices={wrongIndices}
+        correctIndices={correctIndices}
         onJumpTo={jumpToQuestion}
       />
     </View>

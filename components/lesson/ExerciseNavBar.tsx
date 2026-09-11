@@ -8,6 +8,7 @@ interface Props {
   currentIndex: number;
   visitedIndices: Set<number>;
   wrongIndices: Set<number>;
+  correctIndices: Set<number>;
   onJumpTo: (index: number) => void;
 }
 
@@ -19,6 +20,7 @@ export default function ExerciseNavBar({
   currentIndex,
   visitedIndices,
   wrongIndices,
+  correctIndices,
   onJumpTo,
 }: Props) {
   const scrollRef = useRef<ScrollView>(null);
@@ -43,6 +45,7 @@ export default function ExerciseNavBar({
           const isCurrent = i === currentIndex;
           const isVisited = visitedIndices.has(i);
           const isWrong = wrongIndices.has(i);
+          const isCorrect = correctIndices.has(i);
 
           return (
             <Pressable
@@ -50,16 +53,17 @@ export default function ExerciseNavBar({
               onPress={() => onJumpTo(i)}
               style={[
                 styles.circle,
-                isVisited && !isWrong && styles.circleCorrect,
+                isCorrect && styles.circleCorrect,
                 isWrong && styles.circleWrong,
+                !isCorrect && !isWrong && isVisited && styles.circleVisited,
                 isCurrent && styles.circleCurrent,
               ]}
             >
               <ThemedText
                 style={[
                   styles.number,
-                  (isVisited || isWrong) && styles.numberLight,
-                  isCurrent && !isVisited && !isWrong && styles.numberCurrent,
+                  (isCorrect || isWrong) && styles.numberLight,
+                  isCurrent && !isCorrect && !isWrong && styles.numberCurrent,
                 ]}
               >
                 {i + 1}
@@ -97,6 +101,9 @@ const styles = StyleSheet.create({
   circleCurrent: {
     borderColor: Colors.primaryAccentColor,
     backgroundColor: Colors.primaryAccentBg,
+  },
+  circleVisited: {
+    backgroundColor: Colors.surfaceTertiary,
   },
   circleCorrect: {
     backgroundColor: Colors.successColor,
