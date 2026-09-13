@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
   optionDetailsHanzi: {
     fontFamily: FontFamily.bold,
     fontSize: 28,
+    lineHeight: 35,
     color: Colors.primaryAccentColor,
     marginBottom: 6,
   },

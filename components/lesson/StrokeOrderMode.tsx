@@ -1,15 +1,15 @@
-import { Colors, FontFamily } from "@/constants/theme";
 import HANZI_DATA from "@/assets/data/hanzi_data.json";
+import { Colors, FontFamily } from "@/constants/theme";
 import {
   HINT_VALUES,
   LENIENCY_VALUES,
   useSettings,
 } from "@/lib/settings";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import {
   HanziWriter,
   useHanziWriter,
 } from "@jamsch/react-native-hanzi-writer";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
 import { useEffect, useState } from "react";
 import {
@@ -409,6 +409,7 @@ const styles = StyleSheet.create({
   cardChar: {
     fontFamily: FontFamily.bold,
     fontSize: 38,
+    lineHeight: 48,
     color: Colors.primaryAccentColor,
   },
   cardCharDone: {
@@ -472,6 +473,7 @@ const styles = StyleSheet.create({
   charTitle: {
     fontFamily: FontFamily.bold,
     fontSize: 40,
+    lineHeight: 50,
     color: Colors.primaryAccentColor,
   },
   speakerButton: { padding: 8 },

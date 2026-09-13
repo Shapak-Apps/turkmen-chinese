@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
   optionHanzi: {
     fontFamily: FontFamily.bold,
     fontSize: 26,
+    lineHeight: 33,
     color: Colors.primaryAccentColor,
     marginBottom: 4,
   },

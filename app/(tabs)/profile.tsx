@@ -344,6 +344,7 @@ const styles = StyleSheet.create({
   heroName: {
     fontFamily: FontFamily.bold,
     fontSize: 26,
+    lineHeight: 33,
     color: Colors.textPrimary,
     letterSpacing: -0.4,
   },
@@ -383,6 +384,7 @@ const styles = StyleSheet.create({
   xpValue: {
     fontFamily: FontFamily.bold,
     fontSize: 32,
+    lineHeight: 40,
     color: Colors.textPrimary,
     letterSpacing: -0.5,
   },
@@ -473,6 +475,7 @@ const styles = StyleSheet.create({
   statValue: {
     fontFamily: FontFamily.bold,
     fontSize: 26,
+    lineHeight: 33,
     color: Colors.textPrimary,
     letterSpacing: -0.5,
   },
