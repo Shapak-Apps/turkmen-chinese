@@ -2,14 +2,17 @@ import { MatchPair } from "@/constants/CourseData";
 import { Colors, FontFamily } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
-import { useEffect, useMemo, useRef, useState } from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { useMemo, useRef, useState } from "react";
 import {
   Animated,
   Pressable,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { ThemedText } from "../themed-text";
+import { FeedbackBanner } from "./FeedbackBanner";
 
 export default function MatchPairsMode({
   instruction,
@@ -25,6 +28,9 @@ export default function MatchPairsMode({
   const [matchedIds, setMatchedIds] = useState<Set<number>>(new Set());
   const [wrongPair, setWrongPair] = useState<{ left: number; right: number } | null>(null);
   const [mistakes, setMistakes] = useState(0);
+  // Guards the continue button so onAnswer can fire only once, even on a
+  // double tap.
+  const [answered, setAnswered] = useState(false);
 
   const wrongAnim = useRef(new Animated.Value(0)).current;
 
@@ -32,14 +38,15 @@ export default function MatchPairsMode({
     return [...pairs].sort(() => Math.random() - 0.5);
   }, [pairs]);
 
-  useEffect(() => {
-    if (matchedIds.size === pairs.length && pairs.length > 0) {
-      const timer = setTimeout(() => {
-        onAnswer(mistakes === 0);
-      }, 600);
-      return () => clearTimeout(timer);
-    }
-  }, [matchedIds, pairs.length, mistakes, onAnswer]);
+  // Derived on every render, on purpose: with no completion effect there is
+  // nothing that can re-fire onAnswer when LessonContent re-renders (#28).
+  const completed = matchedIds.size === pairs.length && pairs.length > 0;
+
+  const handleContinue = () => {
+    if (answered) return;
+    setAnswered(true);
+    onAnswer(mistakes === 0);
+  };
 
   const handleLeftPress = (id: number) => {
     if (matchedIds.has(id)) return;
@@ -149,6 +156,25 @@ export default function MatchPairsMode({
           {T.practice.matched(matchedIds.size, pairs.length)}
         </ThemedText>
       </View>
+
+      {/* The grid stays on screen so the learner keeps seeing the pairs they
+          just matched; banner and continue sit below it, like the options
+          stay visible above the banner in flashcard/fill_blank. */}
+      {completed && (
+        <View style={styles.feedbackContainer}>
+          <FeedbackBanner isCorrect={mistakes === 0} />
+          <TouchableOpacity
+            style={styles.continueButton}
+            onPress={handleContinue}
+            activeOpacity={0.85}
+          >
+            <ThemedText style={styles.continueButtonText}>
+              {T.common.continue}
+            </ThemedText>
+            <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 }
@@ -195,5 +221,21 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.semibold,
     fontSize: 13,
     color: Colors.subduedTextColor,
+  },
+  feedbackContainer: { paddingBottom: 8 },
+  continueButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 16,
+    borderRadius: 14,
+    gap: 8,
+    backgroundColor: Colors.primaryAccentColor,
+    marginBottom: 20,
+  },
+  continueButtonText: {
+    fontFamily: FontFamily.semibold,
+    fontSize: 16,
+    color: Colors.textInverse,
   },
 });

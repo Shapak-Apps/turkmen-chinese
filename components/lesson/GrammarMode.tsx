@@ -13,6 +13,7 @@ import {
   View,
 } from "react-native";
 import { ThemedText } from "../themed-text";
+import { FeedbackBanner } from "./FeedbackBanner";
 
 export default function GrammarMode({
   rule,
@@ -34,6 +35,7 @@ export default function GrammarMode({
   const [allCorrect, setAllCorrect] = useState(true);
 
   const currentPractice = practice[currentPracticeIndex];
+  const isCurrentCorrect = answered && selectedId === currentPractice.correctOptionId;
 
   const handleStartPractice = () => {
     setShowPractice(true);
@@ -138,6 +140,8 @@ export default function GrammarMode({
           </Pressable>
         ))}
       </ScrollView>
+
+      {answered && <FeedbackBanner isCorrect={isCurrentCorrect} />}
 
       <TouchableOpacity
         style={[

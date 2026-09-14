@@ -17,6 +17,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { ThemedText } from "../themed-text";
+import { FeedbackBanner } from "./FeedbackBanner";
 
 interface BlankOption {
   id: number;
@@ -143,6 +144,8 @@ export default function FillBlankMode({
           })}
         </View>
       )}
+
+      {answered && <FeedbackBanner isCorrect={isCorrect} />}
 
       <TouchableOpacity
         style={[

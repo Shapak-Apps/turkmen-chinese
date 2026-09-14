@@ -20,6 +20,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { ThemedText } from "../themed-text";
+import { FeedbackBanner } from "./FeedbackBanner";
 
 export default function FlashcardMode({
   hanzi,
@@ -135,6 +136,10 @@ export default function FlashcardMode({
           </Pressable>
         ))}
       </ScrollView>
+
+      {answered && (
+        <FeedbackBanner isCorrect={selectedId === correctOptionId} />
+      )}
 
       <TouchableOpacity
         style={[
