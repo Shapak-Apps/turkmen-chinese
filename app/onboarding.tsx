@@ -1,8 +1,8 @@
 import { ThemedText } from "@/components/themed-text";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
-import { haptics } from "@/lib/haptics";
 import { Events, track } from "@/lib/analytics";
+import { haptics } from "@/lib/haptics";
 import { markOnboarded } from "@/lib/onboarding";
 import { setUserName } from "@/lib/user";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -400,7 +400,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  waveBadgeText: { fontSize: 28 },
+  waveBadgeText: { fontSize: 28, lineHeight: 35 },
   readyBadge: {
     position: "absolute",
     right: -4,

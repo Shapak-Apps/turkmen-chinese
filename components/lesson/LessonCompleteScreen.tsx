@@ -355,6 +355,7 @@ const styles = StyleSheet.create({
   completeTitle: {
     fontFamily: FontFamily.bold,
     fontSize: 26,
+    lineHeight: 33,
     color: Colors.textPrimary,
     letterSpacing: -0.4,
     marginBottom: 6,
@@ -388,6 +389,7 @@ const styles = StyleSheet.create({
   accuracyValue: {
     fontFamily: FontFamily.bold,
     fontSize: 28,
+    lineHeight: 35,
     color: Colors.textPrimary,
     letterSpacing: -0.5,
     marginBottom: 2,
@@ -429,6 +431,7 @@ const styles = StyleSheet.create({
   xpValue: {
     fontFamily: FontFamily.bold,
     fontSize: 28,
+    lineHeight: 35,
     color: Colors.textPrimary,
     letterSpacing: -0.5,
   },

@@ -1,7 +1,7 @@
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily, Radius } from "@/constants/theme";
-import type { ExamResult } from "@/lib/examResult";
 import { useReduceMotion } from "@/hooks/use-reduce-motion";
+import type { ExamResult } from "@/lib/examResult";
 import { haptics } from "@/lib/haptics";
 import { T } from "@/lib/strings";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -303,6 +303,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: FontFamily.bold,
     fontSize: 26,
+    lineHeight: 33,
     color: Colors.textPrimary,
     letterSpacing: -0.4,
     marginBottom: 6,
@@ -337,6 +338,7 @@ const styles = StyleSheet.create({
   scoreValue: {
     fontFamily: FontFamily.bold,
     fontSize: 30,
+    lineHeight: 38,
     letterSpacing: -0.5,
     marginBottom: 2,
   },

@@ -420,6 +420,7 @@ const styles = StyleSheet.create({
   cardChar: {
     fontFamily: FontFamily.bold,
     fontSize: 38,
+    lineHeight: 48,
     color: Colors.primaryAccentColor,
   },
   cardCharDone: {
@@ -479,6 +480,7 @@ const styles = StyleSheet.create({
   charTitle: {
     fontFamily: FontFamily.bold,
     fontSize: 40,
+    lineHeight: 50,
     color: Colors.primaryAccentColor,
   },
   speakerButton: { padding: 8 },

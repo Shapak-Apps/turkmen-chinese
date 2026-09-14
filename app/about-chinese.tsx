@@ -1,7 +1,7 @@
 import { ThemedText } from "@/components/themed-text";
 import { Colors, FontFamily } from "@/constants/theme";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
 import { useCallback, useRef, useState } from "react";
 import {
@@ -496,7 +496,7 @@ const styles = StyleSheet.create({
     gap: 12,
     alignItems: "flex-start",
   },
-  factIcon: { fontSize: 28 },
+  factIcon: { fontSize: 28, lineHeight: 35 },
   factContent: { flex: 1 },
   factTitle: {
     fontFamily: FontFamily.semibold,
@@ -561,6 +561,7 @@ const styles = StyleSheet.create({
   exampleHanzi: {
     fontFamily: FontFamily.bold,
     fontSize: 36,
+    lineHeight: 45,
     color: Colors.primaryAccentColor,
   },
   examplePinyin: {
