@@ -13,7 +13,6 @@ import {
   Pressable,
   ScrollView,
   StyleSheet,
-  TouchableOpacity,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -31,7 +30,7 @@ const GITHUB_ORG_URL = "https://github.com/Shapak-Apps";
 const WEBSITE_URL = "https://shapak-apps.github.io";
 const YEAR = new Date().getFullYear();
 
-type ModalType = "authors" | "series" | null;
+type ModalType = "series" | null;
 
 export default function AboutScreen() {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
@@ -82,36 +81,11 @@ export default function AboutScreen() {
           </View>
         </View>
 
-        {/* Menu */}
+        {/* Menu — only the series modal now */}
         <View style={styles.menuContainer}>
-          <TouchableOpacity
-            style={styles.menuItem}
-            onPress={() => openModal("authors")}
-            activeOpacity={0.7}
-          >
-            <View style={styles.menuLeft}>
-              <View
-                style={[
-                  styles.menuIcon,
-                  { backgroundColor: Colors.primaryAccentBg },
-                ]}
-              >
-                <Ionicons name="people" size={22} color={Colors.primaryAccentColor} />
-              </View>
-              <View style={styles.menuText}>
-                <ThemedText style={styles.menuTitle}>Awtorlar barada</ThemedText>
-                <ThemedText style={styles.menuSubtitle}>Kim döretdi</ThemedText>
-              </View>
-            </View>
-            <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
-          </TouchableOpacity>
-
-          <View style={styles.menuDivider} />
-
-          <TouchableOpacity
+          <Pressable
             style={styles.menuItem}
             onPress={() => openModal("series")}
-            activeOpacity={0.7}
           >
             <View style={styles.menuLeft}>
               <View style={[styles.menuIcon, styles.menuIconShapak]}>
@@ -127,8 +101,79 @@ export default function AboutScreen() {
               </View>
             </View>
             <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
+
+        {/* Authors content — now directly on the screen */}
+        <Section icon="flag" color={Colors.successColor} title="Wezipe">
+          <ThemedText style={styles.sectionText}>
+            Şapak — Türkmenistanyň Mary welaýaty, Mary şäherinde ýerleşýän
+            döredijiler topary tarapyndan döredildi.
+            {"\n\n"}
+            Biziň maksadymyz — Türkmenistanyň ilatyna daşary ýurt dillerini
+            öwrenmegi has aňsat we elýeterli etmekdir. Bu programma serimiziň
+            ikinji programmasy bolup, hytaý diline bagyşlanan.
+          </ThemedText>
+        </Section>
+
+        <Section icon="apps" color={Colors.warningColor} title="Mümkinçilikler">
+          <FeatureRow icon="book" text="31 bap (başlangyç dereje)" />
+          <FeatureRow icon="checkbox" text="600+ gönükme (8 dürli görnüş)" />
+          <FeatureRow icon="brush" text="Iýeroglif ýazuwy (768 oflaýn)" />
+          <FeatureRow icon="volume-high" text="1632 pinýin sesi" />
+          <FeatureRow icon="chatbubbles" text="Auto-play dialoglar" />
+          <FeatureRow icon="trophy" text="XP we Streak sistemasy" />
+        </Section>
+
+        <Section icon="mail" color="#8B5CF6" title="Habarlaşmak">
+          <Pressable style={styles.emailBtn} onPress={openEmail}>
+            <Ionicons
+              name="mail-outline"
+              size={18}
+              color={Colors.primaryAccentColor}
+            />
+            <ThemedText style={styles.emailText}>{TEAM_EMAIL}</ThemedText>
+            <Ionicons
+              name="arrow-forward"
+              size={14}
+              color={Colors.primaryAccentColor}
+            />
+          </Pressable>
+          <Pressable
+            style={[styles.emailBtn, styles.linkBtnGap]}
+            onPress={() => openLink(GITHUB_REPO_URL)}
+          >
+            <Ionicons
+              name="logo-github"
+              size={18}
+              color={Colors.primaryAccentColor}
+            />
+            <ThemedText style={styles.emailText}>
+              Açyk çeşme kody — GitHub
+            </ThemedText>
+            <Ionicons
+              name="arrow-forward"
+              size={14}
+              color={Colors.primaryAccentColor}
+            />
+          </Pressable>
+          <ThemedText style={styles.sectionHint}>
+            Teklipler, ýalňyşlyklar ýa-da soraglar üçin ýazyň.
+          </ThemedText>
+        </Section>
+
+        <Section
+          icon="document-text"
+          color={Colors.subduedTextColor}
+          title="Lisenziýa"
+        >
+          <ThemedText style={styles.sectionText}>
+            Programma MIT lisenziýasy bilen açyk çeşmäni esas alýar.
+            {"\n\n"}
+            Ulanylan çeşmeler: Twemoji (CC-BY 4.0), Hanzi Writer (MIT),
+            Inter şrift (OFL), Pinýin sesleri: mp3-chinese-pinyin-sound (Unlicense).
+          </ThemedText>
+        </Section>
 
         <View style={styles.footer}>
           <ThemedText style={styles.footerText}>
@@ -137,103 +182,7 @@ export default function AboutScreen() {
         </View>
       </ScrollView>
 
-      {/* Modals */}
-      <Modal
-        visible={activeModal === "authors"}
-        animationType="slide"
-        presentationStyle="pageSheet"
-        onRequestClose={closeModal}
-      >
-        <SafeAreaView style={styles.modalContainer}>
-          <View style={styles.modalHeader}>
-            <Pressable onPress={closeModal} hitSlop={12} style={styles.modalClose}>
-              <Ionicons name="close" size={24} color={Colors.textPrimary} />
-            </Pressable>
-            <ThemedText style={styles.modalTitle}>Awtorlar barada</ThemedText>
-            <View style={{ width: 40 }} />
-          </View>
-
-          <ScrollView
-            contentContainerStyle={styles.modalScroll}
-            showsVerticalScrollIndicator={false}
-          >
-            {/* Mission */}
-            <Section icon="flag" color={Colors.successColor} title="Wezipe">
-              <ThemedText style={styles.sectionText}>
-                Şapak — Türkmenistanyň Mary welaýaty, Mary şäherinde ýerleşýän
-                döredijiler topary tarapyndan döredildi.
-                {"\n\n"}
-                Biziň maksadymyz — Türkmenistanyň ilatyna daşary ýurt dillerini
-                öwrenmegi has aňsat we elýeterli etmekdir. Bu programma serimiziň
-                ikinji programmasy bolup, hytaý diline bagyşlanan.
-              </ThemedText>
-            </Section>
-
-            {/* Features */}
-            <Section icon="apps" color={Colors.warningColor} title="Mümkinçilikler">
-              <FeatureRow icon="book" text="31 bap (başlangyç dereje)" />
-              <FeatureRow icon="checkbox" text="600+ gönükme (8 dürli görnüş)" />
-              <FeatureRow icon="brush" text="Iýeroglif ýazuwy (768 oflaýn)" />
-              <FeatureRow icon="volume-high" text="1632 pinýin sesi" />
-              <FeatureRow icon="chatbubbles" text="Auto-play dialoglar" />
-              <FeatureRow icon="trophy" text="XP we Streak sistemasy" />
-            </Section>
-
-            {/* Contact */}
-            <Section icon="mail" color="#8B5CF6" title="Habarlaşmak">
-              <Pressable style={styles.emailBtn} onPress={openEmail}>
-                <Ionicons
-                  name="mail-outline"
-                  size={18}
-                  color={Colors.primaryAccentColor}
-                />
-                <ThemedText style={styles.emailText}>{TEAM_EMAIL}</ThemedText>
-                <Ionicons
-                  name="arrow-forward"
-                  size={14}
-                  color={Colors.primaryAccentColor}
-                />
-              </Pressable>
-              <Pressable
-                style={[styles.emailBtn, styles.linkBtnGap]}
-                onPress={() => openLink(GITHUB_REPO_URL)}
-              >
-                <Ionicons
-                  name="logo-github"
-                  size={18}
-                  color={Colors.primaryAccentColor}
-                />
-                <ThemedText style={styles.emailText}>
-                  Açyk çeşme kody — GitHub
-                </ThemedText>
-                <Ionicons
-                  name="arrow-forward"
-                  size={14}
-                  color={Colors.primaryAccentColor}
-                />
-              </Pressable>
-              <ThemedText style={styles.sectionHint}>
-                Teklipler, ýalňyşlyklar ýa-da soraglar üçin ýazyň.
-              </ThemedText>
-            </Section>
-
-            {/* License */}
-            <Section
-              icon="document-text"
-              color={Colors.subduedTextColor}
-              title="Lisenziýa"
-            >
-              <ThemedText style={styles.sectionText}>
-                Programma MIT lisenziýasy bilen açyk çeşmäni esas alýar.
-                {"\n\n"}
-                Ulanylan çeşmeler: Twemoji (CC-BY 4.0), Hanzi Writer (MIT),
-                Inter şrift (OFL), Pinýin sesleri: mp3-chinese-pinyin-sound (Unlicense).
-              </ThemedText>
-            </Section>
-          </ScrollView>
-        </SafeAreaView>
-      </Modal>
-
+      {/* Series modal — kept as is */}
       <Modal
         visible={activeModal === "series"}
         animationType="slide"
@@ -253,7 +202,6 @@ export default function AboutScreen() {
             contentContainerStyle={styles.modalScroll}
             showsVerticalScrollIndicator={false}
           >
-            {/* Brand block */}
             <View style={styles.seriesHero}>
               <Image source={SHAPAK_LOGO} style={styles.seriesLogo} />
               <ThemedText style={styles.seriesTagline}>
@@ -261,7 +209,6 @@ export default function AboutScreen() {
               </ThemedText>
             </View>
 
-            {/* About series */}
             <Section
               icon="information-circle"
               color={Colors.primaryAccentColor}
@@ -277,7 +224,6 @@ export default function AboutScreen() {
               </ThemedText>
             </Section>
 
-            {/* Links */}
             <Section icon="link" color="#8B5CF6" title="Salgylar">
               <Pressable
                 style={styles.emailBtn}
@@ -317,7 +263,6 @@ export default function AboutScreen() {
               </Pressable>
             </Section>
 
-            {/* App 1 — Ykjam Terjime */}
             <Section
               icon="globe"
               color={Colors.successColor}
@@ -330,7 +275,6 @@ export default function AboutScreen() {
               </ThemedText>
             </Section>
 
-            {/* App 2 — This one */}
             <Section
               icon="school"
               color={Colors.primaryAccentColor}
@@ -344,7 +288,6 @@ export default function AboutScreen() {
               </ThemedText>
             </Section>
 
-            {/* Coming soon */}
             <Section icon="rocket" color={Colors.warningColor} title="Indiki">
               <ThemedText style={styles.sectionText}>
                 Toplumyň beýleki programmalary işjeň döredilýär. Iňlis dili,
@@ -524,11 +467,6 @@ const styles = StyleSheet.create({
     color: Colors.subduedTextColor,
     marginTop: 2,
   },
-  menuDivider: {
-    height: 1,
-    backgroundColor: Colors.divider,
-    marginLeft: 70,
-  },
 
   footer: {
     alignItems: "center",
@@ -540,7 +478,6 @@ const styles = StyleSheet.create({
     color: Colors.subduedTextColor,
   },
 
-  // Modals
   modalContainer: { flex: 1, backgroundColor: Colors.surfaceSecondary },
   modalHeader: {
     flexDirection: "row",

@@ -66,6 +66,23 @@ export default function WelcomeScreen() {
           </View>
           <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.card}
+          activeOpacity={0.85}
+          onPress={() => router.push("/about")}
+        >
+          <View style={[styles.iconContainer, { backgroundColor: Colors.warningBg }]}>
+            <Ionicons name="person-circle-outline" size={26} color={Colors.warningColor} />
+          </View>
+          <View style={styles.cardContent}>
+            <ThemedText style={styles.cardTitle}>Awtor we wersiýa</ThemedText>
+            <ThemedText style={styles.cardSubtitle}>
+              Awtorlar, habarlaşmak, wersiýa
+            </ThemedText>
+          </View>
+          <Ionicons name="chevron-forward" size={18} color={Colors.subduedTextColor} />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

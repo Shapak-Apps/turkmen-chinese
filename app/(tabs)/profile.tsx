@@ -216,7 +216,7 @@ export default function ProfileScreen() {
             <MenuItem
               icon="person-circle-outline"
               title="Awtor we wersiýa"
-              subtitle="Programma barada maglumat"
+              subtitle="Awtorlar, habarlaşmak, wersiýa"
               onPress={() => router.push("/about")}
               isLast
             />
