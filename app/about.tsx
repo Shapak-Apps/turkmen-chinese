@@ -262,25 +262,6 @@ export default function AboutScreen() {
                 />
               </Pressable>
             </Section>
-
-            <Section
-              icon="school"
-              color={Colors.primaryAccentColor}
-              title={APP_NAME}
-              highlight
-            >
-              <ThemedText style={styles.sectionText}>
-                Häzirki programma — hytaý dilini öwretmek üçin doly kurs.
-                31 bap, 600+ gönükme, iýeroglif ýazuwy, pinýin sesleri.
-              </ThemedText>
-            </Section>
-
-            <Section icon="rocket" color={Colors.warningColor} title="Indiki">
-              <ThemedText style={styles.sectionText}>
-                Toplumyň beýleki programmalary işjeň döredilýär. Iňlis dili,
-                rus dili we beýleki diller boýunça programmalara garaşyň.
-              </ThemedText>
-            </Section>
           </ScrollView>
         </SafeAreaView>
       </Modal>
