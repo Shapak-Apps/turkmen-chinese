@@ -117,8 +117,8 @@ export default function AboutScreen() {
             döredijiler topary tarapyndan döredildi.
             {"\n\n"}
             Biziň maksadymyz — Türkmenistanyň ilatyna daşary ýurt dillerini
-            öwrenmegi has aňsat we elýeterli etmekdir. Bu programma serimiziň
-            ikinji programmasy bolup, hytaý diline bagyşlanan.
+            öwrenmegi has aňsat we elýeterli etmekdir. Bu programma hytaý
+            diline bagyşlanan.
           </ThemedText>
         </Section>
 
@@ -305,27 +305,18 @@ function Section({
   icon,
   color,
   title,
-  badge,
-  highlight,
   children,
 }: {
   icon: keyof typeof Ionicons.glyphMap;
   color: string;
   title: string;
-  badge?: string;
-  highlight?: boolean;
   children: React.ReactNode;
 }) {
   return (
-    <View style={[styles.sectionCard, highlight && styles.sectionCardHighlight]}>
+    <View style={styles.sectionCard}>
       <View style={styles.sectionHeader}>
         <Ionicons name={icon} size={20} color={color} />
         <ThemedText style={styles.sectionTitle}>{title}</ThemedText>
-        {badge && (
-          <View style={styles.sectionBadge}>
-            <ThemedText style={styles.sectionBadgeText}>{badge}</ThemedText>
-          </View>
-        )}
       </View>
       {children}
     </View>
@@ -536,10 +527,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.borderColor,
   },
-  sectionCardHighlight: {
-    borderColor: Colors.primaryAccentColor,
-    borderWidth: 2,
-  },
   sectionHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -551,17 +538,6 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.bold,
     fontSize: 15,
     color: Colors.textPrimary,
-  },
-  sectionBadge: {
-    backgroundColor: Colors.primaryAccentBg,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: Radius.sm,
-  },
-  sectionBadgeText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 10,
-    color: Colors.primaryAccentColor,
   },
   sectionText: {
     fontFamily: FontFamily.regular,
