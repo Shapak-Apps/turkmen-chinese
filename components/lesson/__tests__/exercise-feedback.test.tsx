@@ -28,6 +28,12 @@ jest.mock("expo-speech", () => ({
   stop: jest.fn(),
 }));
 
+// The first test in this file pays the one-time warm-up of the React Native
+// test renderer, which can exceed the default 5s budget on a cold or loaded
+// machine while every later test finishes in well under a second. Raised here
+// only — the global testTimeout stays at 5s so real hangs still fail fast.
+jest.setTimeout(15000);
+
 describe("FlashcardMode feedback banner", () => {
   const options = [
     { id: 1, hanzi: "水", english: "water", pinyin: "shuǐ" },
