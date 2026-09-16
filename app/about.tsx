@@ -31,7 +31,7 @@ const WEBSITE_URL = "https://shapak-apps.github.io";
 
 const CONTRIBUTORS = [
   { name: "Aýnazar Sylyýew", url: "https://github.com/aynazar-sylyyew-dev" },
-  { name: "Bahram Amanow", url: "https://github.com/Bahram2006" },
+  { name: "Bahram Myradow", url: "https://github.com/Bahram2006" },
 ];
 
 const YEAR = new Date().getFullYear();
