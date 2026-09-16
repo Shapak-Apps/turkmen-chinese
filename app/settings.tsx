@@ -1,4 +1,5 @@
 import { ThemedText } from "@/components/themed-text";
+import RenameModal from "@/components/ui/RenameModal";
 import { Colors, FontFamily, Radius, Spacing } from "@/constants/theme";
 import { exportProgress, importProgress } from "@/lib/backup";
 import { haptics } from "@/lib/haptics";
@@ -10,9 +11,11 @@ import {
   StrokeMode,
   useSettings,
 } from "@/lib/settings";
+import { useUserName } from "@/lib/user";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
 import { router } from "expo-router";
+import { useState } from "react";
 import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Switch, View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -50,6 +53,8 @@ function Segmented<T extends string>({ options, value, onChange }: SegmentedProp
 
 export default function SettingsScreen() {
   const { settings, updateSetting, loaded } = useSettings();
+  const { name, save: saveName } = useUserName();
+  const [renameOpen, setRenameOpen] = useState(false);
   const insets = useSafeAreaInsets();
 
   const leniencyOptions: Option<Leniency>[] = [
@@ -68,6 +73,11 @@ export default function SettingsScreen() {
     { value: "learn", label: "Öwrenmek" },
     { value: "test", label: "Synag" },
   ];
+
+  const openRename = () => {
+    haptics.tap();
+    setRenameOpen(true);
+  };
 
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
@@ -217,6 +227,34 @@ export default function SettingsScreen() {
               styles.actionRow,
               pressed && styles.actionRowPressed,
             ]}
+            onPress={openRename}
+          >
+            <View style={styles.actionIcon}>
+              <Ionicons
+                name="pencil"
+                size={22}
+                color={Colors.primaryAccentColor}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <ThemedText style={styles.actionTitle}>
+                Adyňy üýtget
+              </ThemedText>
+              <ThemedText style={styles.actionSubtitle}>
+                {name ?? "Öwreniji"}
+              </ThemedText>
+            </View>
+            <Ionicons
+              name="chevron-forward"
+              size={18}
+              color={Colors.subduedTextColor}
+            />
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.actionRow,
+              pressed && styles.actionRowPressed,
+            ]}
             onPress={async () => {
               haptics.tap();
               await resetOnboarding();
@@ -246,6 +284,13 @@ export default function SettingsScreen() {
           </Pressable>
         </ScrollView>
       )}
+
+      <RenameModal
+        visible={renameOpen}
+        currentName={name}
+        onClose={() => setRenameOpen(false)}
+        onSave={saveName}
+      />
     </SafeAreaView>
   );
 }
@@ -361,6 +406,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.borderColor,
     gap: 12,
+    marginBottom: 10,
   },
   actionRowPressed: {
     backgroundColor: Colors.surfaceSecondary,

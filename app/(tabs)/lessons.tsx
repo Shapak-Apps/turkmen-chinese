@@ -1,6 +1,7 @@
 import { THEORY_DATA } from "@/assets/data/theory_content";
 import { ThemedText } from "@/components/themed-text";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import RenameModal from "@/components/ui/RenameModal";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { COURSE_DATA } from "@/constants/CourseData";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
@@ -115,9 +116,10 @@ function CourseMap({
 export default function LessonsContent() {
   const [progress, setProgress] = useState<Record<string, number>>({});
   const [courseMap, setCourseMap] = useState<ChapterUnlock[]>([]);
+  const [renameOpen, setRenameOpen] = useState(false);
   const { xp, refresh: refreshXP } = useXP();
   const streak = useStreak();
-  const { name, refresh: refreshName } = useUserName();
+  const { name, refresh: refreshName, save: saveName } = useUserName();
 
   useFocusEffect(
     useCallback(() => {
@@ -128,6 +130,11 @@ export default function LessonsContent() {
       refreshName();
     }, [refreshXP, streak, refreshName]),
   );
+
+  const openRename = () => {
+    haptics.tap();
+    setRenameOpen(true);
+  };
 
   const completedChapterIds = new Set<number>();
   Object.entries(progress).forEach(([key, count]) => {
@@ -162,13 +169,25 @@ export default function LessonsContent() {
             <View style={styles.amanAvatar}>
               <Image source={CHARACTERS.aman.source} style={styles.amanImg} />
             </View>
-            <View style={styles.speechBubble}>
+            <Pressable
+              style={styles.speechBubble}
+              onPress={openRename}
+              accessibilityRole="button"
+              accessibilityLabel="Adyňy üýtget"
+            >
               <View style={styles.bubbleTail} />
-              <ThemedText style={styles.greeting}>{greeting}!</ThemedText>
+              <View style={styles.greetingRow}>
+                <ThemedText style={styles.greeting}>{greeting}!</ThemedText>
+                <Ionicons
+                  name="pencil"
+                  size={14}
+                  color={Colors.subduedTextColor}
+                />
+              </View>
               <ThemedText style={styles.subtitle}>
                 Okuwy dowam edýäris!
               </ThemedText>
-            </View>
+            </Pressable>
           </View>
 
           <View style={styles.heroChipsRow}>
@@ -312,6 +331,13 @@ export default function LessonsContent() {
           }}
         />
       </ScrollView>
+
+      <RenameModal
+        visible={renameOpen}
+        currentName={name}
+        onClose={() => setRenameOpen(false)}
+        onSave={saveName}
+      />
     </SafeAreaView>
   );
 }
@@ -405,13 +431,18 @@ const styles = StyleSheet.create({
     color: Colors.subduedTextColor,
   },
   streakFire: { fontSize: 14 },
+  greetingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginBottom: 2,
+  },
   greeting: {
     fontFamily: FontFamily.bold,
     fontSize: 20,
     lineHeight: 26,
     letterSpacing: -0.3,
     color: Colors.textPrimary,
-    marginBottom: 2,
   },
   subtitle: {
     fontFamily: FontFamily.regular,
