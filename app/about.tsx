@@ -264,22 +264,9 @@ export default function AboutScreen() {
             </Section>
 
             <Section
-              icon="globe"
-              color={Colors.successColor}
-              title="Şapak — Ykjam Terjime"
-              badge="1-nji programma"
-            >
-              <ThemedText style={styles.sectionText}>
-                Toplumyň ilkinji programmasy — 31 dilli gepleşik kitaby, tekst
-                we sesli terjimeçi, AI kömekçileri.
-              </ThemedText>
-            </Section>
-
-            <Section
               icon="school"
               color={Colors.primaryAccentColor}
               title={APP_NAME}
-              badge="2-nji programma"
               highlight
             >
               <ThemedText style={styles.sectionText}>
