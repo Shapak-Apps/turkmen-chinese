@@ -43,10 +43,7 @@ export default function RenameModal({
             animationType="fade"
             onRequestClose={onClose}
         >
-            <Pressable
-                style={styles.modalBackdrop}
-                onPress={onClose}
-            >
+            <Pressable style={styles.modalBackdrop} onPress={onClose}>
                 <Pressable
                     style={styles.modalCard}
                     onPress={(e) => e.stopPropagation()}

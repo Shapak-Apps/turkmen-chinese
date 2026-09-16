@@ -173,7 +173,7 @@ export default function LessonsContent() {
               style={styles.speechBubble}
               onPress={openRename}
               accessibilityRole="button"
-              accessibilityLabel="Adyňy üýtget"
+              accessibilityHint="Adyňy üýtget"
             >
               <View style={styles.bubbleTail} />
               <View style={styles.greetingRow}>
@@ -443,6 +443,7 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     letterSpacing: -0.3,
     color: Colors.textPrimary,
+    flexShrink: 1,
   },
   subtitle: {
     fontFamily: FontFamily.regular,

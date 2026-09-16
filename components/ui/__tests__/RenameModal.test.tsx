@@ -2,7 +2,8 @@
 import RenameModal from "@/components/ui/RenameModal";
 import { fireEvent, render } from "@testing-library/react-native";
 
-jest.setTimeout(10000);
+// 15000ms: the first test in a file pays the warm-up of the test renderer
+jest.setTimeout(15000);
 
 jest.mock("@/lib/haptics", () => ({
     haptics: { tap: jest.fn(), success: jest.fn(), error: jest.fn(), heavy: jest.fn() },
