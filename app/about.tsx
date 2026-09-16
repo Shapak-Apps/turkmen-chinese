@@ -28,6 +28,12 @@ const TEAM_EMAIL = "shapak.apps@gmail.com";
 const GITHUB_REPO_URL = "https://github.com/Shapak-Apps/turkmen-chinese";
 const GITHUB_ORG_URL = "https://github.com/Shapak-Apps";
 const WEBSITE_URL = "https://shapak-apps.github.io";
+
+const CONTRIBUTORS = [
+  { name: "Aýnazar Sylyýew", url: "https://github.com/aynazar-sylyyew-dev" },
+  { name: "Bahram Amanow", url: "https://github.com/Bahram2006" },
+];
+
 const YEAR = new Date().getFullYear();
 
 type ModalType = "series" | null;
@@ -123,6 +129,32 @@ export default function AboutScreen() {
           <FeatureRow icon="volume-high" text="1632 pinýin sesi" />
           <FeatureRow icon="chatbubbles" text="Auto-play dialoglar" />
           <FeatureRow icon="trophy" text="XP we Streak sistemasy" />
+        </Section>
+
+        <Section
+          icon="people"
+          color={Colors.primaryAccentColor}
+          title="Goşant goşanlar"
+        >
+          {CONTRIBUTORS.map((person, index) => (
+            <Pressable
+              key={person.url}
+              style={[styles.emailBtn, index > 0 && styles.linkBtnGap]}
+              onPress={() => openLink(person.url)}
+            >
+              <Ionicons
+                name="logo-github"
+                size={18}
+                color={Colors.primaryAccentColor}
+              />
+              <ThemedText style={styles.emailText}>{person.name}</ThemedText>
+              <Ionicons
+                name="arrow-forward"
+                size={14}
+                color={Colors.primaryAccentColor}
+              />
+            </Pressable>
+          ))}
         </Section>
 
         <Section icon="mail" color="#8B5CF6" title="Habarlaşmak">
