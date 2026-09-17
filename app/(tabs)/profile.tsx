@@ -1,6 +1,7 @@
 import { THEORY_DATA } from "@/assets/data/theory_content";
 import { ThemedText } from "@/components/themed-text";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import RenameModal from "@/components/ui/RenameModal";
 import { CHARACTERS } from "@/constants/CharacterAvatars";
 import { Colors, FontFamily, Radius, Shadow, Spacing } from "@/constants/theme";
 import { haptics } from "@/lib/haptics";
@@ -13,11 +14,9 @@ import { router, useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
 import {
   Image,
-  Modal,
   Pressable,
   ScrollView,
   StyleSheet,
-  TextInput,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -28,7 +27,6 @@ export default function ProfileScreen() {
   const { name, refresh: refreshName, save: saveName } = useUserName();
   const [progress, setProgress] = useState<Record<string, number>>({});
   const [renameOpen, setRenameOpen] = useState(false);
-  const [nameDraft, setNameDraft] = useState("");
 
   useFocusEffect(
     useCallback(() => {
@@ -41,19 +39,7 @@ export default function ProfileScreen() {
 
   const openRename = () => {
     haptics.tap();
-    setNameDraft(name ?? "");
     setRenameOpen(true);
-  };
-
-  const confirmRename = async () => {
-    const trimmed = nameDraft.trim();
-    if (trimmed.length === 0) {
-      setRenameOpen(false);
-      return;
-    }
-    haptics.success();
-    await saveName(trimmed);
-    setRenameOpen(false);
   };
 
   const completedChapterIds = new Set<number>();
@@ -224,50 +210,12 @@ export default function ProfileScreen() {
         </View>
       </ScrollView>
 
-      <Modal
+      <RenameModal
         visible={renameOpen}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setRenameOpen(false)}
-      >
-        <Pressable
-          style={styles.modalBackdrop}
-          onPress={() => setRenameOpen(false)}
-        >
-          <Pressable
-            style={styles.modalCard}
-            onPress={(e) => e.stopPropagation()}
-          >
-            <ThemedText style={styles.modalTitle}>Adyňy üýtget</ThemedText>
-            <TextInput
-              style={styles.modalInput}
-              value={nameDraft}
-              onChangeText={setNameDraft}
-              autoFocus
-              maxLength={20}
-              autoCapitalize="words"
-              returnKeyType="done"
-              onSubmitEditing={confirmRename}
-              placeholder="Adyňy ýaz..."
-              placeholderTextColor={Colors.subduedTextColor}
-            />
-            <View style={styles.modalActions}>
-              <Pressable
-                style={[styles.modalBtn, styles.modalBtnSecondary]}
-                onPress={() => setRenameOpen(false)}
-              >
-                <ThemedText style={styles.modalBtnSecondaryText}>Goý</ThemedText>
-              </Pressable>
-              <Pressable
-                style={[styles.modalBtn, styles.modalBtnPrimary]}
-                onPress={confirmRename}
-              >
-                <ThemedText style={styles.modalBtnPrimaryText}>Sakla</ThemedText>
-              </Pressable>
-            </View>
-          </Pressable>
-        </Pressable>
-      </Modal>
+        currentName={name}
+        onClose={() => setRenameOpen(false)}
+        onSave={saveName}
+      />
     </SafeAreaView>
   );
 }
@@ -554,57 +502,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: Colors.subduedTextColor,
     marginTop: 2,
-  },
-
-  modalBackdrop: {
-    flex: 1,
-    backgroundColor: "rgba(15, 23, 42, 0.5)",
-    justifyContent: "center",
-    padding: 24,
-  },
-  modalCard: {
-    backgroundColor: Colors.surfacePrimary,
-    borderRadius: Radius.lg,
-    padding: 20,
-  },
-  modalTitle: {
-    fontFamily: FontFamily.bold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-    marginBottom: 14,
-  },
-  modalInput: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 17,
-    color: Colors.textPrimary,
-    backgroundColor: Colors.surfaceSecondary,
-    borderRadius: Radius.md,
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    borderWidth: 2,
-    borderColor: Colors.borderColor,
-  },
-  modalActions: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    gap: 10,
-    marginTop: 18,
-  },
-  modalBtn: {
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: Radius.md,
-  },
-  modalBtnSecondary: { backgroundColor: Colors.surfaceTertiary },
-  modalBtnSecondaryText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.textPrimary,
-  },
-  modalBtnPrimary: { backgroundColor: Colors.primaryAccentColor },
-  modalBtnPrimaryText: {
-    fontFamily: FontFamily.semibold,
-    fontSize: 14,
-    color: Colors.textInverse,
   },
 });
