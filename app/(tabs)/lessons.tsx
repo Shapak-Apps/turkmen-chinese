@@ -176,14 +176,10 @@ export default function LessonsContent() {
               accessibilityHint="Adyňy üýtget"
             >
               <View style={styles.bubbleTail} />
-              <View style={styles.greetingRow}>
-                <ThemedText style={styles.greeting}>{greeting}!</ThemedText>
-                <Ionicons
-                  name="pencil"
-                  size={14}
-                  color={Colors.subduedTextColor}
-                />
-              </View>
+              <ThemedText style={styles.greeting}>
+                {greeting}!{" "}
+                <Ionicons name="pencil" size={14} color={Colors.subduedTextColor} />
+              </ThemedText>
               <ThemedText style={styles.subtitle}>
                 Okuwy dowam edýäris!
               </ThemedText>
@@ -431,19 +427,12 @@ const styles = StyleSheet.create({
     color: Colors.subduedTextColor,
   },
   streakFire: { fontSize: 14 },
-  greetingRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    marginBottom: 2,
-  },
   greeting: {
     fontFamily: FontFamily.bold,
     fontSize: 20,
     lineHeight: 26,
     letterSpacing: -0.3,
     color: Colors.textPrimary,
-    flexShrink: 1,
   },
   subtitle: {
     fontFamily: FontFamily.regular,
