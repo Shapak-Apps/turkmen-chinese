@@ -433,6 +433,7 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     letterSpacing: -0.3,
     color: Colors.textPrimary,
+    marginBottom: 2,
   },
   subtitle: {
     fontFamily: FontFamily.regular,
