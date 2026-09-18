@@ -3,8 +3,5 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
-  },
-  "deno.enablePaths": ["./supabase/functions"],
-  "deno.enable": true,
-  "typescript.tsserver.experimental.enableProjectDiagnostics": false
+  }
 }

@@ -9,7 +9,6 @@ import { T } from "@/lib/strings";
 import {
   getChapterUniqueHanzi,
   getChapterVocabulary,
-  getUniqueWordsFromQuestions,
 } from "@/lib/vocabulary";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useLocalSearchParams } from "expo-router";
@@ -46,8 +45,7 @@ function BackHeader({
 }
 
 export default function PractiseScreen() {
-  const { lessonId, chapterId } = useLocalSearchParams<{
-    lessonId?: string;
+  const { chapterId } = useLocalSearchParams<{
     chapterId?: string;
   }>();
   const [mode, setMode] = useState<Mode>("menu");
@@ -68,22 +66,8 @@ export default function PractiseScreen() {
       };
     }
 
-    if (lessonId) {
-      const allLessons = COURSE_DATA.chapters.flatMap((c) =>
-        c.review ? [...c.lessons, c.review] : c.lessons,
-      );
-      const currentLesson = allLessons.find((l) => l.id === Number(lessonId));
-      const lessonQuestions = currentLesson ? currentLesson.questions : [];
-      return {
-        questions: lessonQuestions,
-        id: lessonId,
-        words: getUniqueWordsFromQuestions(lessonQuestions),
-        hanzi: [],
-      };
-    }
-
     return { questions: [], id: "", words: [], hanzi: [] };
-  }, [chapterId, lessonId]);
+  }, [chapterId]);
 
   if (questions.length === 0) {
     return (
