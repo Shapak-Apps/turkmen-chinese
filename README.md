@@ -74,8 +74,8 @@ npm install
 npx expo run:android
 ```
 
-This is the only working way. The app uses native modules (notifications, document
-picker, hanzi writer), so **Expo Go does not work** and there is no web build.
+This is the only working way. The app uses native modules (document picker, sharing,
+hanzi writer), so **Expo Go does not work** and there is no web build.
 `npx expo run:android` builds a dev client and installs it; after that
 `npx expo start --dev-client` is enough to restart Metro.
 

@@ -167,12 +167,6 @@ export const T = {
     failed: "Näsazlyk ýüze çykdy. Gaýtadan synanyş.",
   },
 
-  // Локальные пуш-напоминания о streak
-  notifications: {
-    reminderTitle: "Uznuksyzlygyňy ýitirme! 🔥",
-    reminderBody: "Şu gün hytaý dilini birazajyk maşk et.",
-  },
-
   // Подписи для скринридеров (accessibilityLabel) на icon-only кнопках
   a11y: {
     back: "Yza gaýt",

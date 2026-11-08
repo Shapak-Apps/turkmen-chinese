@@ -38,7 +38,6 @@ export const SettingsSchema = z.object({
   strokeLeniency: z.enum(["easy", "medium", "hard"]).catch("medium"),
   hintThreshold: z.enum(["3", "5", "never"]).catch("3"),
   strokeMode: z.enum(["learn", "test"]).catch("learn"),
-  remindersEnabled: z.boolean().catch(true),
 });
 
 // exam_results

@@ -3,7 +3,6 @@ import RenameModal from "@/components/ui/RenameModal";
 import { Colors, FontFamily, Radius, Spacing } from "@/constants/theme";
 import { exportProgress, importProgress } from "@/lib/backup";
 import { haptics } from "@/lib/haptics";
-import { syncStreakReminder } from "@/lib/notifications";
 import { resetOnboarding } from "@/lib/onboarding";
 import {
   HintThreshold,
@@ -16,7 +15,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { T } from "@/lib/strings";
 import { router } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Switch, View } from "react-native";
+import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface Option<T extends string> {
@@ -132,31 +131,6 @@ export default function SettingsScreen() {
               options={modeOptions}
               value={settings.strokeMode}
               onChange={(v) => updateSetting("strokeMode", v)}
-            />
-          </View>
-
-          <ThemedText style={[styles.sectionTitle, { marginTop: 12 }]}>
-            Ýatlatmalar
-          </ThemedText>
-          <View style={styles.toggleRow}>
-            <View style={{ flex: 1, marginRight: 12 }}>
-              <ThemedText style={styles.settingLabel}>Gündelik ýatlatma</ThemedText>
-              <ThemedText style={styles.settingDescription}>
-                Her gün streagyňy dowam etmegi ýatladýar
-              </ThemedText>
-            </View>
-            <Switch
-              value={settings.remindersEnabled}
-              onValueChange={(v) => {
-                haptics.tap();
-                updateSetting("remindersEnabled", v);
-                void syncStreakReminder(v);
-              }}
-              trackColor={{
-                true: Colors.primaryAccentColor,
-                false: Colors.borderColorStrong,
-              }}
-              thumbColor={Colors.surfacePrimary}
             />
           </View>
 
@@ -341,16 +315,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   settingBlock: {
-    backgroundColor: Colors.surfacePrimary,
-    borderRadius: Radius.lg,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    padding: 16,
-    marginBottom: 14,
-  },
-  toggleRow: {
-    flexDirection: "row",
-    alignItems: "center",
     backgroundColor: Colors.surfacePrimary,
     borderRadius: Radius.lg,
     borderWidth: 1,

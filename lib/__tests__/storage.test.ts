@@ -78,18 +78,29 @@ describe("per-entry salvage", () => {
   it("app_settings: one invalid enum keeps the other fields", async () => {
     await AsyncStorage.setItem(
       "app_settings",
-      JSON.stringify({ strokeLeniency: "easy", hintThreshold: "99", remindersEnabled: false }),
+      JSON.stringify({ strokeLeniency: "easy", hintThreshold: "99", strokeMode: "test" }),
     );
     const s = await getValidated("app_settings", SettingsSchema, {
       strokeLeniency: "medium",
       hintThreshold: "3",
       strokeMode: "learn",
-      remindersEnabled: true,
     });
     expect(s.strokeLeniency).toBe("easy");
-    expect(s.remindersEnabled).toBe(false);
+    expect(s.strokeMode).toBe("test");
     expect(s.hintThreshold).toBe("3"); // salvaged per-field, not reset
-    expect(s.strokeMode).toBe("learn");
+  });
+
+  it("app_settings: remindersEnabled saved by 1.0.1 is dropped", async () => {
+    await AsyncStorage.setItem(
+      "app_settings",
+      JSON.stringify({ strokeLeniency: "hard", hintThreshold: "5", strokeMode: "learn", remindersEnabled: false }),
+    );
+    const s = await getValidated("app_settings", SettingsSchema, {
+      strokeLeniency: "medium",
+      hintThreshold: "3",
+      strokeMode: "learn",
+    });
+    expect(s).toEqual({ strokeLeniency: "hard", hintThreshold: "5", strokeMode: "learn" });
   });
 });
 

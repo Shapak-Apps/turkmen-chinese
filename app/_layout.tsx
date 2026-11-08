@@ -1,7 +1,6 @@
 import { Events, track } from "@/lib/analytics";
 import { initAnalytics } from "@/lib/analyticsProvider";
-import { syncStreakReminder } from "@/lib/notifications";
-import { getSettings } from "@/lib/settings";
+import { clearLegacyReminders } from "@/lib/notifications";
 import { checkAndResetIfNeeded } from "@/lib/streak";
 import { runMigrations } from "@/lib/storage/migrations";
 import {
@@ -50,7 +49,7 @@ export default function RootLayout() {
     initAnalytics();
     track(Events.AppOpen);
     void checkAndResetIfNeeded();
-    void getSettings().then((s) => syncStreakReminder(s.remindersEnabled));
+    void clearLegacyReminders();
   }, [migrated]);
 
   if ((!loaded && !error) || !migrated) {
