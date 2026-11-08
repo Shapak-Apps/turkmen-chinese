@@ -55,7 +55,15 @@
       "expo-av",
       "expo-notifications",
       "expo-localization",
-      "./plugins/withReleaseSigning.js"
+      "./plugins/withReleaseSigning.js",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableMinifyInReleaseBuilds": true
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
