@@ -22,6 +22,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "../themed-text";
 
 interface CharacterJson {
@@ -59,25 +61,29 @@ function WriterModal({
       transparent={false}
       onRequestClose={onClose}
     >
-      <View style={styles.modalContainer}>
-        <View style={styles.modalHeader}>
-          <Pressable onPress={onClose} hitSlop={20} style={styles.closeButton}>
-            <Ionicons name="close" size={26} color={Colors.textPrimary} />
-          </Pressable>
-          <View style={{ flex: 1 }} />
-        </View>
+      {/* A Modal is a separate native window on Android: gestures inside it
+          (the hanzi-writer quiz uses a Pan gesture) need their own root view. */}
+      <GestureHandlerRootView style={styles.modalRoot}>
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Pressable onPress={onClose} hitSlop={20} style={styles.closeButton}>
+              <Ionicons name="close" size={26} color={Colors.textPrimary} />
+            </Pressable>
+            <View style={{ flex: 1 }} />
+          </View>
 
-        {char && (
-          <WriterBody
-            key={char}
-            char={char}
-            leniency={leniency}
-            showHintAfterMisses={showHintAfterMisses}
-            alreadyDone={alreadyDone}
-            onComplete={onComplete}
-          />
-        )}
-      </View>
+          {char && (
+            <WriterBody
+              key={char}
+              char={char}
+              leniency={leniency}
+              showHintAfterMisses={showHintAfterMisses}
+              alreadyDone={alreadyDone}
+              onComplete={onComplete}
+            />
+          )}
+        </SafeAreaView>
+      </GestureHandlerRootView>
     </Modal>
   );
 }
@@ -455,6 +461,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
+  modalRoot: { flex: 1 },
   modalContainer: { flex: 1, backgroundColor: Colors.surfacePrimary },
   modalHeader: {
     flexDirection: "row",
