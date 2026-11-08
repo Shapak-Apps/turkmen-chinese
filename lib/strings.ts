@@ -160,7 +160,7 @@ export const T = {
   // Локальный бэкап прогресса (экспорт/импорт в файл)
   backup: {
     exportTitle: "Maglumatlary ätiýaçlandyr",
-    exportSubtitle: "XP, uznuksyzlyk we öňegidişligi faýla göçür",
+    exportSubtitle: "XP, üznüksizlik we öňegidişligi faýla göçür",
     importTitle: "Maglumatlary dikelt",
     importSubtitle: "Ýatda saklanan faýldan yzyna ýükle",
     importDone: "Dikeldildi. Programmany täzeden aç.",
